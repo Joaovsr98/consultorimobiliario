@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+/*
+  Tokens semanticos do tema. Cada utilitario (bg-brand, text-accent, etc.)
+  aponta para uma CSS variable definida em :root e sincronizada em runtime
+  por applyTheme() a partir de config/theme.ts. Nenhum hex nos componentes.
+*/
+@theme {
+  --color-brand: var(--brand-primary);
+  --color-accent: var(--brand-secondary);
+  --color-surface: var(--brand-surface);
+  --color-paper: var(--brand-paper);
+  --color-ink: var(--brand-ink);
+
+  --radius-brand: var(--brand-radius);
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+}
+
+/* Valores padrao (fallback sem JS). applyTheme() sobrescreve em runtime. */
+:root {
+  --brand-primary: #132238;
+  --brand-secondary: #b99555;
+  --brand-surface: #f5f1e8;
+  --brand-paper: #ffffff;
+  --brand-ink: #17202a;
+  --brand-radius: 18px;
+
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background-color: var(--brand-surface);
+  color: var(--brand-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Foco visivel e acessivel em toda a aplicacao. */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--brand-secondary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
