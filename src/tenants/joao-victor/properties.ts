@@ -23,7 +23,7 @@ export const properties: Property[] = [
       "Condominio fechado a 5 minutos do Metro Vila Sonia e do Parque Chacara do Jockey, com Shopping Taboao, Butanta Shopping e Raposo Shopp a 10 minutos, Colegio Itaca a 4 minutos, Hospital Leforte a 8 minutos e UniFECAF a 7 minutos.",
     features: ["Piscina", "Academia", "Playground", "Seguranca (condominio fechado)", "Pet friendly"],
     images: [],
-    featured: true,
+    featured: false,
   },
   {
     id: "vibra-estacao-vila-sonia",
@@ -83,7 +83,7 @@ export const properties: Property[] = [
       "/properties/vibra-estacao-vila-sonia/lifestyle-3.jpg",
       "/properties/vibra-estacao-vila-sonia/lifestyle-4.jpg",
     ],
-    featured: false,
+    featured: true,
   },
   {
     id: "vibra-estacao-campo-limpo",

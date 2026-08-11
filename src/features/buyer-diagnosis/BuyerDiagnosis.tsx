@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, MessageCircle, RotateCcw } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle2, MessageCircle, RotateCcw, ShieldCheck } from "lucide-react";
 import { Section } from "@/components/ui/Section";
 import { buttonClasses } from "@/lib/button-styles";
 import { cn } from "@/lib/utils";
@@ -34,7 +34,7 @@ function OptionButtons<T extends string>({
   onChange,
 }: OptionButtonsProps<T>) {
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-wrap gap-2.5">
       {options.map((option) => (
         <button
           key={option}
@@ -42,10 +42,10 @@ function OptionButtons<T extends string>({
           onClick={() => onChange(option)}
           aria-pressed={value === option}
           className={cn(
-            "flex-1 rounded-[calc(var(--radius-brand)/2)] border px-3 py-2.5 text-sm font-medium transition-colors",
+            "flex-1 rounded-image border px-4 py-3 text-sm font-medium transition-all",
             value === option
-              ? "border-brand bg-brand text-paper"
-              : "border-brand/15 bg-paper text-ink/70 hover:border-brand/30"
+              ? "border-brand bg-brand text-paper shadow-card"
+              : "border-brand/15 bg-surface text-ink/75 hover:border-brand/40 hover:bg-paper"
           )}
         >
           {labels[option]}
@@ -68,11 +68,11 @@ function ResponsePreview({ data }: { data: DiagnosisData }) {
   ];
 
   return (
-    <dl className="mt-6 grid grid-cols-2 gap-x-4 gap-y-2 text-left text-sm">
+    <dl className="mt-6 divide-y divide-brand/10 overflow-hidden rounded-image border border-brand/10 text-left text-sm">
       {rows.map(([label, value]) => (
-        <div key={label} className="contents">
+        <div key={label} className="flex items-center justify-between gap-4 bg-surface/50 px-4 py-2.5">
           <dt className="text-ink/50">{label}</dt>
-          <dd className="font-medium text-ink">{value}</dd>
+          <dd className="text-right font-medium text-ink">{value}</dd>
         </div>
       ))}
     </dl>
@@ -169,9 +169,12 @@ export function BuyerDiagnosis({
     const whatsapp = identity.contact.whatsapp;
 
     return (
-      <Section id={id} className="bg-paper">
-        <div className="mx-auto max-w-xl rounded-[var(--radius-brand)] border border-brand/10 bg-surface p-8 text-center">
-          <h2 className="font-display text-2xl font-semibold text-brand">
+      <Section id={id} className="bg-surface">
+        <div className="mx-auto max-w-xl rounded-card border border-brand/10 bg-paper p-8 text-center shadow-card sm:p-10">
+          <span className="mx-auto grid size-12 place-items-center rounded-full bg-accent/15 text-accent">
+            <CheckCircle2 className="size-6" aria-hidden />
+          </span>
+          <h2 className="mt-5 font-display text-2xl font-semibold tracking-tight text-brand">
             Encontramos opcoes que podem combinar com seu perfil.
           </h2>
           <p className="mt-3 text-ink/70">
@@ -227,33 +230,52 @@ export function BuyerDiagnosis({
   }
 
   return (
-    <Section id={id} className="bg-paper">
-      <div className="mx-auto max-w-3xl text-center">
-        <p className="text-sm font-semibold uppercase tracking-wide text-accent">{eyebrow}</p>
-        <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-brand sm:text-4xl">
-          {title}
-        </h2>
-        <p className="mt-3 text-ink/70">{description}</p>
-      </div>
-
-      <div className="relative mx-auto mt-10 max-w-2xl rounded-[var(--radius-brand)] border border-brand/10 bg-paper p-6 sm:p-8">
-        <div className="flex items-center justify-center gap-2">
-          {stepTitles.map((label, index) => (
-            <div key={label} className="flex items-center gap-2">
-              <span
-                className={cn(
-                  "grid size-7 place-items-center rounded-full text-xs font-semibold",
-                  index <= step ? "bg-brand text-paper" : "bg-brand/10 text-ink/50"
-                )}
-              >
-                {index + 1}
-              </span>
-              {index < stepTitles.length - 1 && (
-                <span className="h-px w-8 bg-brand/15" aria-hidden />
-              )}
-            </div>
-          ))}
+    <Section id={id} className="bg-surface">
+      <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start lg:gap-14">
+        <div className="lg:sticky lg:top-24">
+          <p className="text-sm font-semibold uppercase tracking-wide text-accent">{eyebrow}</p>
+          <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-brand sm:text-4xl">
+            {title}
+          </h2>
+          <p className="mt-4 text-ink/70">{description}</p>
+          <ul className="mt-8 grid gap-4">
+            {[
+              { icon: CheckCircle2, text: "Sem compromisso e sem custo" },
+              { icon: MessageCircle, text: "Direcionamento direto pelo WhatsApp" },
+              { icon: ShieldCheck, text: "Nenhuma analise de credito e feita neste site" },
+            ].map(({ icon: Icon, text }) => (
+              <li key={text} className="flex items-start gap-3 text-sm text-ink/75">
+                <Icon className="mt-0.5 size-5 shrink-0 text-accent" aria-hidden />
+                {text}
+              </li>
+            ))}
+          </ul>
         </div>
+
+        <div className="relative rounded-card border border-brand/10 bg-paper p-6 shadow-card sm:p-8">
+          <div className="flex items-center justify-center gap-2">
+            {stepTitles.map((label, index) => (
+              <div key={label} className="flex items-center gap-2">
+                <span
+                  className={cn(
+                    "grid size-7 place-items-center rounded-full text-xs font-semibold transition-colors",
+                    index <= step ? "bg-brand text-paper" : "bg-brand/10 text-ink/50"
+                  )}
+                >
+                  {index + 1}
+                </span>
+                {index < stepTitles.length - 1 && (
+                  <span
+                    className={cn(
+                      "h-px w-8 transition-colors",
+                      index < step ? "bg-brand" : "bg-brand/15"
+                    )}
+                    aria-hidden
+                  />
+                )}
+              </div>
+            ))}
+          </div>
         <p
           ref={stepHeadingRef}
           tabIndex={-1}
@@ -303,7 +325,7 @@ export function BuyerDiagnosis({
                     type="text"
                     placeholder="Ex.: Vila Sonia"
                     {...register("region")}
-                    className="mt-3 w-full rounded-[calc(var(--radius-brand)/2)] border border-brand/15 bg-paper px-3 py-2.5 text-sm text-ink outline-none placeholder:text-ink/40 focus-visible:border-brand"
+                    className="mt-3 w-full rounded-image border border-brand/15 bg-surface px-4 py-3 text-sm text-ink outline-none placeholder:text-ink/40 focus-visible:border-brand"
                   />
                   {errors.region && (
                     <p role="alert" className="mt-2 text-sm text-red-600">
@@ -343,7 +365,7 @@ export function BuyerDiagnosis({
                       type="number"
                       placeholder="Ex.: 6000"
                       {...register("income")}
-                      className="mt-3 w-full rounded-[calc(var(--radius-brand)/2)] border border-brand/15 bg-paper px-3 py-2.5 text-sm text-ink outline-none placeholder:text-ink/40 focus-visible:border-brand"
+                      className="mt-3 w-full rounded-image border border-brand/15 bg-surface px-4 py-3 text-sm text-ink outline-none placeholder:text-ink/40 focus-visible:border-brand"
                     />
                     {errors.income && (
                       <p role="alert" className="mt-2 text-sm text-red-600">
@@ -361,7 +383,7 @@ export function BuyerDiagnosis({
                       type="number"
                       placeholder="Ex.: 25000"
                       {...register("downPayment")}
-                      className="mt-3 w-full rounded-[calc(var(--radius-brand)/2)] border border-brand/15 bg-paper px-3 py-2.5 text-sm text-ink outline-none placeholder:text-ink/40 focus-visible:border-brand"
+                      className="mt-3 w-full rounded-image border border-brand/15 bg-surface px-4 py-3 text-sm text-ink outline-none placeholder:text-ink/40 focus-visible:border-brand"
                     />
                     {errors.downPayment && (
                       <p role="alert" className="mt-2 text-sm text-red-600">
@@ -433,6 +455,7 @@ export function BuyerDiagnosis({
             {isLastStep ? "Continuar no WhatsApp" : "Continuar"}
             <ArrowRight className="size-4" aria-hidden />
           </button>
+        </div>
         </div>
       </div>
     </Section>

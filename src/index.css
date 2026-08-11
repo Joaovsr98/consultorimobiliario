@@ -13,6 +13,21 @@
   --color-ink: var(--brand-ink);
 
   --radius-brand: var(--brand-radius);
+  /*
+    Radius de craft, independentes da marca. O radius-brand (18px) e generoso
+    demais para cards/imagens premium; estes sao mais contidos e estaveis
+    entre tenants. Geram utilitarios `rounded-card` e `rounded-image`.
+  */
+  --radius-card: 14px;
+  --radius-image: 12px;
+
+  /*
+    Elevacao. Sombras com vies azul-marinho (nao preto puro) — escolha, nao
+    default. Sutis por principio: premium != sombra pesada. Geram `shadow-card`
+    e `shadow-card-hover`.
+  */
+  --shadow-card: 0 1px 2px rgba(19, 34, 56, 0.04), 0 10px 26px -14px rgba(19, 34, 56, 0.16);
+  --shadow-card-hover: 0 2px 6px rgba(19, 34, 56, 0.06), 0 20px 44px -18px rgba(19, 34, 56, 0.26);
 
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Fraunces", Georgia, "Times New Roman", serif;
@@ -44,9 +59,30 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+/*
+  Tratamento base da tipografia de exibicao. Fraunces tem eixo optico (opsz):
+  deixar o navegador ajustar melhora o desenho das letras em titulos grandes.
+  `text-wrap: balance` evita linhas orfas — impacto vem de equilibrio e peso,
+  nao de tamanho. Componentes ainda controlam tamanho/tracking caso a caso.
+*/
+.font-display {
+  font-optical-sizing: auto;
+  text-wrap: balance;
+}
+
 /* Foco visivel e acessivel em toda a aplicacao. */
 :where(a, button, input, textarea, select, [tabindex]):focus-visible {
   outline: 2px solid var(--brand-secondary);
   outline-offset: 2px;
   border-radius: 4px;
+}
+
+/* Sem microinteracoes para quem prefere menos movimento. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
 }

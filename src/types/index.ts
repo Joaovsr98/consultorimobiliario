@@ -49,7 +49,7 @@ export type NavItem = {
   to: string;
 };
 
-export type PropertyStatus = "lancamento" | "em-obras" | "pronto";
+export type PropertyStatus = "breve-lancamento" | "lancamento" | "em-obras" | "pronto";
 
 export type Property = {
   id: string;

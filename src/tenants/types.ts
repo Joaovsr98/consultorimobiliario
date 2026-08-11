@@ -8,6 +8,21 @@ export type TenantNavigation = {
 };
 
 /**
+ * Conteudo da Hero (primeira dobra). Vive no tenant porque imagem e copy sao
+ * dados de marca — o componente Hero e compartilhado e nunca os crava.
+ *
+ * `image` ausente -> fundo solido de marca, nunca uma foto generica fingindo
+ * ser um empreendimento. `imageAlt` deve descrever o que a imagem realmente e,
+ * sem afirmar um empreendimento especifico quando ela for so atmosfera.
+ */
+export type HeroConfig = {
+  image?: string;
+  imageAlt?: string;
+  headline: string;
+  subtitle?: string;
+};
+
+/**
  * Canais de contato, separados por proposito. `whatsapp` e o UNICO campo que
  * o botao flutuante e a mensagem do diagnostico podem usar — nunca
  * inferido de `phone` (que pode ser 0800, central comercial, fixo, etc.).
@@ -45,6 +60,7 @@ export type IndividualTenant = {
   seo: SeoConfig;
   navigation: TenantNavigation;
   properties: Property[];
+  hero?: HeroConfig;
 };
 
 /**
@@ -128,6 +144,7 @@ export type AgencyTenant = {
   seo: SeoConfig;
   navigation: TenantNavigation;
   properties: Property[];
+  hero?: HeroConfig;
 };
 
 export type Tenant = IndividualTenant | AgencyTenant;
