@@ -1,6 +1,6 @@
 import type { Broker, NavItem, Property, SeoConfig, ThemeConfig } from "@/types";
 
-export type TenantId = "joao-victor" | "ajuda-imoveis";
+export type TenantId = "joao-victor" | "ajuda-imoveis" | "shelby";
 
 export type TenantNavigation = {
   main: NavItem[];
