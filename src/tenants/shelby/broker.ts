@@ -10,7 +10,6 @@ import type { Broker } from "@/types";
  *
  * A CONFIRMAR antes de ir ao ar:
  *  - `name` (nome civil completo)
- *  - `phone` (WhatsApp, formato 55DDDNUMERO)
  *  - `creci` (quando houver registro)
  *  - `city` / `serviceRegion`
  */
@@ -20,7 +19,7 @@ export const broker: Broker = {
   brandName: "Shelby House",
   role: "Consultor imobiliario",
   creci: "",
-  phone: "", // TODO: WhatsApp no formato 5511999999999 — CTAs ficam ocultos ate preencher
+  phone: "5511934510849",
   email: "",
   city: "Sao Paulo", // TODO: confirmar
   serviceRegion: "",
