@@ -20,18 +20,10 @@ const whatsapp = identity.contact.whatsapp;
 
 export function Header() {
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
   // Fecha o menu mobile ao trocar de rota.
   useEffect(() => setOpen(false), [location.pathname]);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
     cn(
@@ -40,14 +32,8 @@ export function Header() {
     );
 
   return (
-    <header
-      className={cn(
-        "sticky top-0 z-30 border-b transition-all duration-300",
-        scrolled
-          ? "border-white/40 bg-paper/55 shadow-[0_6px_24px_-10px_rgba(19,34,56,0.28)] backdrop-blur-xl backdrop-saturate-150 supports-[backdrop-filter]:bg-paper/50"
-          : "border-transparent bg-surface"
-      )}
-    >
+    <header className="sticky top-0 z-30 bg-transparent">
+
       <Container className="flex h-16 items-center justify-between gap-4 lg:h-18">
         <Link to="/" aria-label="Ir para a pagina inicial">
           <Logo />
