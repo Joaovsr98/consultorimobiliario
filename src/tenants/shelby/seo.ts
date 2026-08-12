@@ -8,6 +8,6 @@ export const seo: SeoConfig = {
   defaultTitle: `${broker.brandName} — Seu próximo imóvel comeca com uma orientacao segura`,
   defaultDescription:
     "Encontre imóveis compatíveis com seu perfil, simule possibilidades de compra e receba atendimento personalizado do inicio a entrega das chaves.",
-  baseUrl: "https://exemplo.com.br", // TODO: dominio real do Shelby
+  baseUrl: "https://corretor-shelby.vercel.app",
   locale: "pt-BR",
 };

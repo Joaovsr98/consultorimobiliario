@@ -21,6 +21,16 @@ export const properties: Property[] = [
     delivery: "2028",
     status: "lancamento",
     address: "Rua Caminho do Engenho, 584 - Vila Sônia, São Paulo - SP",
+    nearby: [
+      { place: "Metrô Vila Sônia (Linha 4-Amarela)", time: "5 min de ônibus" },
+      { place: "Parque Chácara do Jockey", time: "5 min a pé" },
+      { place: "Av. Pirajussara", time: "1 min a pé" },
+      { place: "Colégio Ítaca", time: "4 min" },
+      { place: "Assaí e Max Atacadista", time: "3 min" },
+      { place: "5 shoppings (Raposo, Taboão, Butantã, Jd. Sul e Morumbi Town)", time: "10 min" },
+      { place: "Hospitais da região (Family, Leforte e outros)", time: "10 min" },
+      { place: "UniFECAF", time: "7 min" },
+    ],
     description:
       "Condomínio fechado de 2 torres na Rua Caminho do Engenho, na Vila Sônia, a 5 minutos de ônibus do Metrô Vila Sônia (Linha 4-Amarela) e a 5 minutos a pé do Parque Chácara do Jockey. Área de lazer completa e unidades enquadradas no Programa Minha Casa, Minha Vida.",
     features: [
@@ -75,6 +85,9 @@ export const properties: Property[] = [
     priceFrom: 307800,
     delivery: "2028",
     status: "lancamento",
+    nearby: [
+      { place: "Estação Vila Sônia (Linha 4-Amarela)", time: "8 min a pé" },
+    ],
     description:
       "Condomínio fechado a 8 minutos a pé da Estação Vila Sônia (Linha 4-Amarela), com área de lazer completa e unidades enquadradas no Programa Minha Casa, Minha Vida.",
     features: [
@@ -136,6 +149,14 @@ export const properties: Property[] = [
     delivery: "2028",
     status: "lancamento",
     address: "Estrada de Itapecerica - Campo Limpo, São Paulo - SP",
+    nearby: [
+      { place: "Estação Campo Limpo (Linha 5-Lilás)" },
+      { place: "Estação Vila das Belezas (Linha 5-Lilás)" },
+      { place: "Shopping Campo Limpo" },
+      { place: "Hospital Campo Limpo" },
+      { place: "Sesc Campo Limpo" },
+      { place: "Roldão Atacadista" },
+    ],
     description:
       "Condomínio com 1 torre na Estrada de Itapecerica, na região de Campo Limpo, Zona Sul de São Paulo, próximo às Estações Campo Limpo e Vila das Belezas (Linha 5-Lilás) e ao Shopping Campo Limpo. Apartamentos de 1 e 2 quartos com opção de varanda, lazer de clube completo e unidades enquadradas no Programa Minha Casa, Minha Vida.",
     features: [
@@ -194,6 +215,11 @@ export const properties: Property[] = [
     priceFrom: 276000,
     delivery: "2028",
     status: "lancamento",
+    nearby: [
+      { place: "Estação da Linha 4-Amarela", time: "10 min a pé" },
+      { place: "Pinheiros", time: "10 min" },
+      { place: "Avenida Paulista", time: "15 min" },
+    ],
     description:
       "Condomínio residencial de 2 torres no Jardim Bonfiglioli, Zona Oeste de São Paulo, a 10 minutos a pé da Estação da Linha 4-Amarela — 10 minutos de Pinheiros e 15 da Avenida Paulista. Apartamentos de 2 dormitórios com opção de varanda, area de lazer completa e unidades enquadradas no Programa Minha Casa, Minha Vida.",
     features: [

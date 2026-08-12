@@ -69,6 +69,8 @@ export type Property = {
   status?: PropertyStatus;
   /** Endereço para o link do Google Maps. Opcional; sem ele, o mapa usa nome + bairro + cidade. */
   address?: string;
+  /** Pontos de interesse por perto (dados reais do material oficial). `time` é opcional. */
+  nearby?: { place: string; time?: string }[];
   description: string;
   features: string[];
   /** Caminhos de imagens autorizadas. */

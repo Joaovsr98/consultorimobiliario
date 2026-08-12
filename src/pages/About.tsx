@@ -36,12 +36,19 @@ export function About() {
           <p className="mt-1 text-sm text-ink/50">{broker.name}</p>
         )}
 
-        {identity.photo && (
+        {identity.photo ? (
           <img
             src={identity.photo}
             alt={identity.displayName}
             className="mt-8 aspect-[4/3] w-full rounded-[var(--radius-brand)] object-cover"
           />
+        ) : (
+          <div className="mt-8 flex aspect-[4/3] w-full flex-col items-center justify-center gap-3 rounded-[var(--radius-brand)] border border-dashed border-brand/20 bg-brand/[0.03]">
+            <span className="grid size-20 place-items-center rounded-full bg-brand/10 font-display text-3xl font-semibold text-brand">
+              {(broker?.preferredName ?? identity.displayName).charAt(0)}
+            </span>
+            <p className="text-sm text-ink/50">Foto profissional em breve</p>
+          </div>
         )}
 
         <p className="mt-8 text-lg leading-relaxed text-ink/80">

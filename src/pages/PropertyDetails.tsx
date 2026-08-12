@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, BedDouble, CalendarDays, MapPin, MessageCircle, Ruler, Tag } from "lucide-react";
+import { ArrowLeft, BedDouble, CalendarDays, Clock, MapPin, MessageCircle, Ruler, Tag } from "lucide-react";
 import { tenant, identity } from "@/tenants";
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
@@ -200,6 +200,30 @@ export function PropertyDetails() {
               referrerPolicy="no-referrer-when-downgrade"
             />
           </div>
+          {property.nearby && property.nearby.length > 0 && (
+            <div className="mt-6">
+              <h3 className="text-sm font-semibold uppercase tracking-wide text-ink/50">
+                O que tem por perto
+              </h3>
+              <ul className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
+                {property.nearby.map((item) => (
+                  <li
+                    key={item.place}
+                    className="flex items-center gap-3 rounded-card border border-brand/10 bg-paper p-3 text-sm shadow-card"
+                  >
+                    <MapPin className="size-4 shrink-0 text-accent" aria-hidden />
+                    <span className="flex-1 text-ink/80">{item.place}</span>
+                    {item.time && (
+                      <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-brand/5 px-2 py-0.5 text-xs font-medium text-brand">
+                        <Clock className="size-3" aria-hidden />
+                        {item.time}
+                      </span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
           {localizacao.length > 0 && (
             <div className="mt-5">
               <PropertyGallery images={localizacao} alt={`${property.name} — localização`} />
