@@ -42,9 +42,9 @@ export function Header() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-30 border-b transition-colors",
+        "sticky top-0 z-30 border-b transition-all duration-300",
         scrolled
-          ? "border-brand/10 bg-paper/85 backdrop-blur-md"
+          ? "border-white/40 bg-paper/55 shadow-[0_6px_24px_-10px_rgba(19,34,56,0.28)] backdrop-blur-xl backdrop-saturate-150 supports-[backdrop-filter]:bg-paper/50"
           : "border-transparent bg-surface"
       )}
     >
