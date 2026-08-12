@@ -27,3 +27,14 @@ dist-ssr
 .env
 .env.*
 !.env.example
+
+# Materiais-fonte de marketing (books, plantas, treinamentos, videos).
+# NAO versionar: alguns sao internos/confidenciais ("proibida a divulgacao
+# externa") e os arquivos sao pesados (books com centenas de MB). Apenas as
+# imagens curadas para a web vivem em public/properties/<slug>/.
+_materiais/
+# Rede de seguranca caso algum material seja solto na raiz do projeto:
+/*.pdf
+/*.mp4
+/*.jpeg
+/WhatsApp*
