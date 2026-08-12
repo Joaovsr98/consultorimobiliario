@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ArrowLeft, BedDouble, CalendarDays, MapPin, MessageCircle, Ruler, Tag } from "lucide-react";
 import { tenant, identity } from "@/tenants";
@@ -6,10 +7,33 @@ import { Container } from "@/components/ui/Container";
 import { buttonClasses } from "@/lib/button-styles";
 import { buildWhatsappLink } from "@/lib/whatsapp";
 import { Seo } from "@/components/shared/Seo";
-import { PropertyGallery } from "@/components/shared/PropertyGallery";
+import { PropertyGallery, type PropertyGalleryHandle } from "@/components/shared/PropertyGallery";
 import { StatusBadge } from "@/components/ui/StatusBadge";
 import { formatCurrency } from "@/lib/utils";
 import { NotFound } from "./NotFound";
+
+const STOPWORDS = new Set(["e", "de", "do", "da", "com", "a", "o", "para", "em"]);
+const normalize = (s: string) =>
+  s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+
+/** Casa um diferencial com a foto da galeria pelo nome do arquivo (maior sobreposicao de palavras). */
+function matchFeatureImage(feature: string, galeria: string[]): number {
+  const ftokens = normalize(feature)
+    .split(/[^a-z0-9]+/)
+    .filter((t) => t && !STOPWORDS.has(t));
+  let best = -1;
+  let bestScore = 0;
+  galeria.forEach((src, i) => {
+    const base = normalize(src.split("/").pop() ?? "").replace(/\.[a-z0-9]+$/, "");
+    const btokens = base.split(/[^a-z0-9]+/).filter(Boolean);
+    const score = ftokens.filter((t) => btokens.includes(t)).length;
+    if (score > bestScore) {
+      bestScore = score;
+      best = i;
+    }
+  });
+  return bestScore > 0 ? best : -1;
+}
 
 /** Separa as imagens por tipo pelo nome do arquivo (convencao atual dos assets). */
 function splitImages(images: string[]) {
@@ -21,6 +45,7 @@ function splitImages(images: string[]) {
 
 export function PropertyDetails() {
   const { slug } = useParams();
+  const galeriaRef = useRef<PropertyGalleryHandle>(null);
   const property = tenant.properties.find((p) => p.slug === slug);
 
   if (!property) return <NotFound />;
@@ -108,7 +133,7 @@ export function PropertyDetails() {
           <div className="mt-12">
             <h2 className="font-display text-2xl font-semibold text-brand">Galeria</h2>
             <div className="mt-5">
-              <PropertyGallery images={galeria} alt={property.name} />
+              <PropertyGallery ref={galeriaRef} images={galeria} alt={property.name} />
             </div>
           </div>
         )}
@@ -117,14 +142,30 @@ export function PropertyDetails() {
           <div className="mt-12">
             <h2 className="font-display text-2xl font-semibold text-brand">Diferenciais</h2>
             <ul className="mt-5 flex flex-wrap gap-2">
-              {property.features.map((feature) => (
-                <li
-                  key={feature}
-                  className="rounded-full border border-brand/10 bg-paper px-4 py-2 text-sm text-ink/80"
-                >
-                  {feature}
-                </li>
-              ))}
+              {property.features.map((feature) => {
+                const imgIndex = matchFeatureImage(feature, galeria);
+                if (imgIndex >= 0) {
+                  return (
+                    <li key={feature}>
+                      <button
+                        type="button"
+                        onClick={() => galeriaRef.current?.openAt(imgIndex)}
+                        className="rounded-full border border-brand/10 bg-paper px-4 py-2 text-sm text-ink/80 transition-colors hover:border-accent hover:bg-accent/10 hover:text-brand"
+                      >
+                        {feature}
+                      </button>
+                    </li>
+                  );
+                }
+                return (
+                  <li
+                    key={feature}
+                    className="rounded-full border border-brand/10 bg-paper px-4 py-2 text-sm text-ink/80"
+                  >
+                    {feature}
+                  </li>
+                );
+              })}
             </ul>
           </div>
         )}

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, Expand, X } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -6,6 +6,11 @@ import { cn } from "@/lib/utils";
 type PropertyGalleryProps = {
   images: string[];
   alt: string;
+};
+
+/** Controle imperativo para abrir o lightbox de fora (ex.: clique num diferencial). */
+export type PropertyGalleryHandle = {
+  openAt: (index: number) => void;
 };
 
 const GRID_PREVIEW_COUNT = 6;
@@ -17,8 +22,15 @@ const GRID_PREVIEW_COUNT = 6;
  * repetir o bug do wizard: uma transicao que so avanca quando a animacao de
  * saida termina trava se a aba nao estiver compondo frames.
  */
-export function PropertyGallery({ images, alt }: PropertyGalleryProps) {
+export const PropertyGallery = forwardRef<PropertyGalleryHandle, PropertyGalleryProps>(
+  function PropertyGallery({ images, alt }, ref) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  useImperativeHandle(ref, () => ({
+    openAt: (index: number) => {
+      if (index >= 0 && index < images.length) setOpenIndex(index);
+    },
+  }));
 
   const isOpen = openIndex !== null;
   const remaining = images.length - GRID_PREVIEW_COUNT;
@@ -139,4 +151,5 @@ export function PropertyGallery({ images, alt }: PropertyGalleryProps) {
       </AnimatePresence>
     </div>
   );
-}
+  }
+);
