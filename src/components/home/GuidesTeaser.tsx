@@ -16,7 +16,7 @@ export function GuidesTeaser() {
             Conteudos educativos
           </p>
           <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-brand sm:text-4xl">
-            Guias para comprar com seguranca
+            Guias para comprar com segurança
           </h2>
         </div>
         <Link to="/guias" className={buttonClasses("ghost", "md")}>

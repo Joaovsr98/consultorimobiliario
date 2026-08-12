@@ -8,8 +8,8 @@ import { Seo } from "@/components/shared/Seo";
 /**
  * Pagina "Sobre". So usa dado que ja existe em config/tenant — nada de foto,
  * depoimento ou registro profissional inventado. Assume o formato de
- * corretor individual (unico tenant com pagina Sobre construida ate agora);
- * uma imobiliaria (equipe/empresa) precisaria de uma versao propria desta
+ * corretor individual (único tenant com pagina Sobre construida ate agora);
+ * uma imobiliaria (equipe/empresa) precisaria de uma versao própria desta
  * pagina, ainda nao construida.
  */
 export function About() {
@@ -20,7 +20,7 @@ export function About() {
     <Section>
       <Seo
         title="Sobre"
-        description="Conheca a proposta de atendimento personalizado para quem busca um imovel compativel com sua realidade financeira."
+        description="Conheca a proposta de atendimento personalizado para quem busca um imóvel compatível com sua realidade financeira."
       />
 
       <div className="mx-auto max-w-2xl">
@@ -45,11 +45,11 @@ export function About() {
         )}
 
         <p className="mt-8 text-lg leading-relaxed text-ink/80">
-          Meu trabalho e ajudar voce a entender as opcoes disponiveis,
-          organizar as etapas da compra e encontrar um imovel compativel com a
-          sua realidade financeira. Nao acredito em empurrar decisao antes do
+          Meu trabalho e ajudar você a entender as opções disponíveis,
+          organizar as etapas da compra e encontrar um imóvel compatível com a
+          sua realidade financeira. Nao acredito em empurrar decisão antes do
           momento certo — acredito em explicar cada passo com clareza para que
-          voce decida com seguranca.
+          você decida com segurança.
         </p>
 
         <dl className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -58,7 +58,7 @@ export function About() {
               <MapPin className="mt-0.5 size-5 shrink-0 text-accent" aria-hidden />
               <div>
                 <dt className="text-xs uppercase tracking-wide text-ink/50">
-                  Regiao de atuacao
+                  Região de atuacao
                 </dt>
                 <dd className="mt-1 font-medium text-brand">{identity.serviceRegion}</dd>
               </div>
@@ -81,17 +81,17 @@ export function About() {
           <ul className="mt-4 space-y-3 text-ink/80">
             <li className="flex gap-3">
               <span className="text-accent">1.</span>
-              Entendemos juntos seu objetivo, sua regiao de interesse e sua
+              Entendemos juntos seu objetivo, sua região de interesse e sua
               realidade financeira.
             </li>
             <li className="flex gap-3">
               <span className="text-accent">2.</span>
-              Selecionamos opcoes compativeis com o que voce me contou — sem
-              empurrar imovel fora do seu perfil.
+              Selecionamos opções compatíveis com o que você me contou — sem
+              empurrar imóvel fora do seu perfil.
             </li>
             <li className="flex gap-3">
               <span className="text-accent">3.</span>
-              Acompanho voce nas visitas, na proposta e ate a entrega das
+              Acompanho você nas visitas, na proposta e ate a entrega das
               chaves.
             </li>
           </ul>

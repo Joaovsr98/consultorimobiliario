@@ -11,28 +11,28 @@ import type { AgencyCompany } from "../types";
  * de qual e o canal oficial de WhatsApp da empresa.
  */
 export const company: AgencyCompany = {
-  brandName: "Ajuda Imoveis",
+  brandName: "Ajuda Imóveis",
   legalName: "CONFIRMAR COM O CLIENTE",
   legalCreci: "35394-J",
   foundedAt: "Abril de 2020",
   positioning:
-    "Empresa voltada para apresentar solucoes na compra do seu imovel e fazer com que voce faca o melhor investimento.",
+    "Empresa voltada para apresentar soluções na compra do seu imóvel e fazer com que você faca o melhor investimento.",
   history: [
     "Fundacao em abril de 2020",
-    "Atua na compra de imoveis",
-    "Atua na venda de imoveis",
+    "Atua na compra de imóveis",
+    "Atua na venda de imóveis",
     "Atua com locacao",
-    "Atua com imoveis novos",
-    "Atua com imoveis usados",
+    "Atua com imóveis novos",
+    "Atua com imóveis usados",
   ],
   services: [
-    "Compra de imoveis",
-    "Venda de imoveis",
+    "Compra de imóveis",
+    "Venda de imóveis",
     "Locacao",
     "Simulacao de financiamento",
-    "Cadastro de imovel",
-    "Encomenda de imovel",
-    "Busca completa de imoveis",
+    "Cadastro de imóvel",
+    "Encomenda de imóvel",
+    "Busca completa de imóveis",
   ],
   contact: {
     // whatsapp ausente ate confirmacao do canal oficial.

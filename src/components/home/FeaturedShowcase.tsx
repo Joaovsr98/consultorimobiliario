@@ -104,7 +104,7 @@ export function FeaturedShowcase() {
       </div>
 
       <p className="mt-8 text-sm text-paper/50">
-        Valores e disponibilidade sujeitos a alteracao.
+        Valores e disponibilidade sujeitos a alteração.
       </p>
     </Section>
   );

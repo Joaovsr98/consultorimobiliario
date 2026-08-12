@@ -1,6 +1,6 @@
 import type { FaqItem } from "@/types";
 
-/** Perguntas frequentes. Conteudo educativo, sem promessas de aprovacao. */
+/** Perguntas frequentes. Conteúdo educativo, sem promessas de aprovação. */
 export const faq: FaqItem[] = [
   {
     question: "Preciso ter tudo definido para comecar o atendimento?",
@@ -10,12 +10,12 @@ export const faq: FaqItem[] = [
   {
     question: "O atendimento tem algum custo?",
     answer:
-      "A orientacao inicial e a simulacao de perfil sao sem compromisso. Voce decide os proximos passos com clareza.",
+      "A orientacao inicial e a simulação de perfil sao sem compromisso. Você decide os próximos passos com clareza.",
   },
   {
-    question: "Voces garantem a aprovacao do financiamento?",
+    question: "Vocês garantem a aprovação do financiamento?",
     answer:
-      "Nao existe garantia de aprovacao. A analise de credito e feita pela instituicao financeira. Nosso papel e organizar a documentacao e orientar cada etapa.",
+      "Nao existe garantia de aprovação. A análise de crédito e feita pela instituição financeira. Nosso papel e organizar a documentação e orientar cada etapa.",
   },
   {
     question: "Posso usar o FGTS na compra?",

@@ -39,7 +39,7 @@ export type ContactChannels = {
  * Formato normalizado que componentes compartilhados (Header, Footer, Logo,
  * WhatsApp, SEO) realmente consomem. Nunca leem `Broker` ou `AgencyCompany`
  * diretamente — so `SiteIdentity`, produzido pelo adaptador em identity.ts.
- * Apenas `displayName` e obrigatorio; o resto e opcional para nao forcar
+ * Apenas `displayName` e obrigatório; o resto e opcional para nao forcar
  * strings vazias quando o dado simplesmente nao existe.
  */
 export type SiteIdentity = {

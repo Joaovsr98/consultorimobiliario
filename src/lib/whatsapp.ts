@@ -10,5 +10,5 @@ export function buildWhatsappLink(phone: string, message?: string): string {
   return `${base}?text=${encodeURIComponent(message)}`;
 }
 
-/** Mensagem padrao de primeiro contato. */
-export const defaultWhatsappMessage = `Ola! Vim pelo site e gostaria de entender minhas opcoes de imovel.`;
+/** Mensagem padrão de primeiro contato. */
+export const defaultWhatsappMessage = `Olá! Vim pelo site e gostaria de entender minhas opções de imóvel.`;

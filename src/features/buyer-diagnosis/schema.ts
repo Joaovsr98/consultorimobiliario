@@ -6,14 +6,14 @@ import { z } from "zod";
  */
 export const diagnosisSchema = z.object({
   goal: z.enum(["morar", "investir"], {
-    message: "Selecione uma opcao",
+    message: "Selecione uma opção",
   }),
   region: z
     .string()
     .trim()
-    .min(2, "Informe a regiao de interesse"),
+    .min(2, "Informe a região de interesse"),
   bedrooms: z.enum(["1", "2", "3+"], {
-    message: "Selecione uma opcao",
+    message: "Selecione uma opção",
   }),
   income: z.coerce
     .number({ message: "Informe um valor" })
@@ -22,10 +22,10 @@ export const diagnosisSchema = z.object({
     .number({ message: "Informe um valor" })
     .min(0, "Informe um valor valido"),
   fgts: z.enum(["sim", "nao"], {
-    message: "Selecione uma opcao",
+    message: "Selecione uma opção",
   }),
   timeline: z.enum(["ate-3-meses", "ate-6-meses", "mais-de-6-meses"], {
-    message: "Selecione uma opcao",
+    message: "Selecione uma opção",
   }),
 });
 

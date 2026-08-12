@@ -11,7 +11,7 @@ import {
 
 /**
  * Monta a mensagem estruturada enviada ao corretor via WhatsApp, no formato
- * "Ola, {nome pelo qual prefere ser chamado}! Fiz o diagnostico no site."
+ * "Olá, {nome pelo qual prefere ser chamado}! Fiz o diagnostico no site."
  * seguido dos dados informados. Anexa a origem (UTM) quando disponivel na
  * sessao. Para tenants sem `preferredName` (ex.: uma imobiliaria), usa o
  * nome de exibicao normal.
@@ -21,14 +21,14 @@ export function buildDiagnosisMessage(data: DiagnosisData): string {
   const utmLine = getStoredUtmLine();
 
   const lines = [
-    `Ola, ${greetingName}! Fiz o diagnostico no site.`,
+    `Olá, ${greetingName}! Fiz o diagnostico no site.`,
     "",
     `Objetivo: ${goalLabels[data.goal]}`,
-    `Regiao: ${data.region}`,
+    `Região: ${data.region}`,
     `Renda familiar: ${formatCurrency(data.income)}`,
     `Entrada: ${formatCurrency(data.downPayment)}`,
     `FGTS: ${fgtsLabels[data.fgts]}`,
-    `Dormitorios: ${bedroomsLabels[data.bedrooms]}`,
+    `Dormitórios: ${bedroomsLabels[data.bedrooms]}`,
     `Prazo de compra: ${timelineLabels[data.timeline]}`,
     ...(utmLine ? ["", utmLine] : []),
   ];

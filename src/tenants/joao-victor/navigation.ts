@@ -1,9 +1,9 @@
 import type { NavItem } from "@/types";
 
-/** Navegacao principal (cabecalho). */
+/** Navegação principal (cabecalho). */
 export const mainNav: NavItem[] = [
-  { label: "Inicio", to: "/" },
-  { label: "Imoveis", to: "/imoveis" },
+  { label: "Início", to: "/" },
+  { label: "Imóveis", to: "/imoveis" },
   { label: "Sobre", to: "/sobre" },
   { label: "Guias", to: "/guias" },
   { label: "Contato", to: "/contato" },
@@ -12,15 +12,15 @@ export const mainNav: NavItem[] = [
 /** Links do rodape agrupados. */
 export const footerNav: { title: string; items: NavItem[] }[] = [
   {
-    title: "Navegacao",
+    title: "Navegação",
     items: [
-      { label: "Inicio", to: "/" },
-      { label: "Imoveis", to: "/imoveis" },
+      { label: "Início", to: "/" },
+      { label: "Imóveis", to: "/imoveis" },
       { label: "Sobre", to: "/sobre" },
     ],
   },
   {
-    title: "Conteudo",
+    title: "Conteúdo",
     items: [
       { label: "Guias", to: "/guias" },
       { label: "Contato", to: "/contato" },

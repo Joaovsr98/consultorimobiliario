@@ -39,8 +39,8 @@ export function GuideDetails() {
         </div>
 
         <p className="mt-8 text-sm text-ink/50">
-          Este conteudo e educativo e nao substitui a analise oficial da
-          instituicao financeira nem constitui garantia de aprovacao de credito.
+          Este conteudo e educativo e nao substitui a análise oficial da
+          instituição financeira nem constitui garantia de aprovação de crédito.
         </p>
 
         {identity.contact.whatsapp && (
@@ -51,7 +51,7 @@ export function GuideDetails() {
             className={buttonClasses("primary", "lg", "mt-6")}
           >
             <MessageCircle className="size-4" aria-hidden />
-            Tirar duvidas pelo WhatsApp
+            Tirar dúvidas pelo WhatsApp
           </a>
         )}
       </article>

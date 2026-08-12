@@ -34,8 +34,8 @@ export function AboutTeaser() {
             Uma orientacao pensada para o seu momento
           </h2>
           <p className="mt-4 max-w-xl text-ink/70">
-            Meu trabalho e ajudar voce a entender as opcoes disponiveis,
-            organizar as etapas da compra e encontrar um imovel compativel com
+            Meu trabalho e ajudar você a entender as opções disponíveis,
+            organizar as etapas da compra e encontrar um imóvel compatível com
             a sua realidade financeira.
           </p>
           {identity.serviceRegion && (

@@ -25,7 +25,7 @@ function resolveTenantId(value: unknown): TenantId {
 
 export const activeTenantId: TenantId = resolveTenantId(import.meta.env.VITE_TENANT_ID);
 
-/** Tenants disponiveis. O padrao continua "joao-victor" (ver resolveTenantId acima). */
+/** Tenants disponíveis. O padrão continua "joao-victor" (ver resolveTenantId acima). */
 const tenantsById: Partial<Record<TenantId, Tenant>> = {
   "joao-victor": joaoVictorTenant,
   "ajuda-imoveis": ajudaImoveisTenant,

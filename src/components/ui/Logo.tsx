@@ -10,7 +10,7 @@ type LogoProps = {
 
 /**
  * Marca do tenant ativo. Usa `identity.logo` (marca grafica) quando existir;
- * caso contrario mantem o simbolo padrao — NUNCA usa `identity.photo` (foto
+ * caso contrario mantem o simbolo padrão — NUNCA usa `identity.photo` (foto
  * profissional) como substituto automatico de logo, sao usos diferentes.
  */
 export function Logo({ className, tone = "brand" }: LogoProps) {

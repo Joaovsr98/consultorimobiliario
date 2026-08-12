@@ -3,7 +3,7 @@ import { Section } from "@/components/ui/Section";
 import { Seo } from "@/components/shared/Seo";
 
 /**
- * Politica de privacidade real, refletindo o que o site de fato faz hoje —
+ * Política de privacidade real, refletindo o que o site de fato faz hoje —
  * nao um texto generico de template. Atualizar sempre que o fluxo de dados
  * mudar (ex.: se um backend/CRM entrar em uma fase futura).
  */
@@ -12,7 +12,7 @@ export function Privacy() {
     <Section>
       <Seo
         title="Politica de privacidade"
-        description="Como os dados informados no site sao usados: nada e armazenado em servidor, o diagnostico do comprador so monta uma mensagem que voce mesmo envia pelo WhatsApp."
+        description="Como os dados informados no site sao usados: nada e armazenado em servidor, o diagnostico do comprador so monta uma mensagem que você mesmo envia pelo WhatsApp."
       />
 
       <article className="mx-auto max-w-2xl">
@@ -20,7 +20,7 @@ export function Privacy() {
           Privacidade
         </p>
         <h1 className="mt-3 font-display text-4xl font-semibold tracking-tight text-brand sm:text-5xl">
-          Politica de privacidade
+          Política de privacidade
         </h1>
         <p className="mt-4 text-sm text-ink/50">Ultima atualizacao: 07 de agosto de 2026.</p>
 
@@ -49,17 +49,17 @@ export function Privacy() {
             </h2>
             <p className="mt-3 leading-relaxed">
               O diagnostico do comprador (formulario em 3 passos) pede:
-              objetivo (morar ou investir), regiao de interesse, numero de
-              dormitorios, renda familiar aproximada, entrada disponivel, se
-              voce possui FGTS e o prazo de compra. Nao pedimos nome, CPF, RG,
+              objetivo (morar ou investir), região de interesse, numero de
+              dormitórios, renda familiar aproximada, entrada disponível, se
+              você possui FGTS e o prazo de compra. Nao pedimos nome, CPF, RG,
               comprovantes ou qualquer documento sensivel — em nenhum
               formulario deste site.
             </p>
             <p className="mt-3 leading-relaxed">
-              Se voce chegou por um link de campanha (ex.: Instagram, um
+              Se você chegou por um link de campanha (ex.: Instagram, um
               anuncio), guardamos temporariamente a origem desse link
               (utm_source/utm_medium/utm_campaign) no armazenamento local do
-              seu proprio navegador, so para identificar de onde veio o
+              seu próprio navegador, so para identificar de onde veio o
               contato.
             </p>
           </section>
@@ -71,10 +71,10 @@ export function Privacy() {
             <p className="mt-3 leading-relaxed">
               As respostas do diagnostico so servem para montar uma mensagem
               de texto. Antes de qualquer envio, essa mensagem e exibida para
-              voce revisar. Se voce clicar em "Continuar no WhatsApp", o seu
-              proprio navegador abre o WhatsApp com essa mensagem
-              pre-preenchida — e voce quem decide se envia. Nenhuma analise de
-              credito ou aprovacao de financiamento acontece neste site.
+              você revisar. Se você clicar em "Continuar no WhatsApp", o seu
+              próprio navegador abre o WhatsApp com essa mensagem
+              pre-preenchida — e você quem decide se envia. Nenhuma análise de
+              crédito ou aprovação de financiamento acontece neste site.
             </p>
           </section>
 
@@ -83,9 +83,9 @@ export function Privacy() {
               Onde esses dados ficam armazenados
             </h2>
             <p className="mt-3 leading-relaxed">
-              Nesta fase, o site nao tem banco de dados nem servidor proprio
+              Nesta fase, o site nao tem banco de dados nem servidor próprio
               guardando essas respostas. As respostas do diagnostico existem
-              apenas na pagina, no seu navegador, enquanto voce preenche o
+              apenas na pagina, no seu navegador, enquanto você preenche o
               formulario — nao sao enviadas a nenhum servidor nosso. A
               informacao de origem (UTM) fica no armazenamento local do
               navegador e e apagada quando essa sessao do navegador termina.
@@ -112,7 +112,7 @@ export function Privacy() {
             <p className="mt-3 leading-relaxed">
               Este site nao usa cookies de rastreamento nem ferramentas de
               analytics no momento. Se isso mudar no futuro, esta pagina sera
-              atualizada antes da mudanca entrar no ar.
+              atualizada antes da mudança entrar no ar.
             </p>
           </section>
 
@@ -122,17 +122,17 @@ export function Privacy() {
             </h2>
             <p className="mt-3 leading-relaxed">
               De acordo com a Lei Geral de Protecao de Dados (LGPD, Lei
-              13.709/2018), voce pode pedir esclarecimentos sobre como seus
+              13.709/2018), você pode pedir esclarecimentos sobre como seus
               dados sao tratados a qualquer momento pelo canal de contato
               informado acima. Como este site nao mantem banco de dados
-              proprio, a unica informacao que eventualmente fica registrada e
-              a conversa que voce mesmo iniciar pelo WhatsApp.
+              próprio, a única informacao que eventualmente fica registrada e
+              a conversa que você mesmo iniciar pelo WhatsApp.
             </p>
           </section>
 
           <section>
             <h2 className="font-display text-xl font-semibold text-brand">
-              Alteracoes nesta politica
+              Alteracoes nesta política
             </h2>
             <p className="mt-3 leading-relaxed">
               Se a forma como os dados sao tratados mudar — por exemplo, com a

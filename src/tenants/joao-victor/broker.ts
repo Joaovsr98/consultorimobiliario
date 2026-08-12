@@ -5,7 +5,7 @@ import type { Broker } from "@/types";
  * troque APENAS este arquivo — nenhum componente contem dados pessoais.
  *
  * Conformidade: enquanto nao houver registro, `creci` fica vazio e `role`
- * usa um termo neutro ("Consultor imobiliario"), nunca "corretor de imoveis".
+ * usa um termo neutro ("Consultor imobiliario"), nunca "corretor de imóveis".
  *
  * `email` vazio por opcao do cliente — o unico canal de contato e o WhatsApp;
  * componentes escondem o botao/link de e-mail quando este campo esta vazio.
@@ -19,10 +19,10 @@ export const broker: Broker = {
   brandName: "Bueno House",
   role: "Consultor imobiliario",
   creci: "",
-  phone: "5511953080670",
+  phone: "5511925272694",
   email: "",
-  city: "Sao Paulo",
-  serviceRegion: "Zona Oeste de Sao Paulo",
+  city: "São Paulo",
+  serviceRegion: "Zona Oeste de São Paulo",
   instagram: "",
   photo: "",
 };

@@ -4,19 +4,19 @@ import { cn } from "@/lib/utils";
 type PropertyImageProps = {
   /** Caminho da imagem autorizada. Vazio/ausente -> placeholder honesto. */
   src?: string;
-  /** Texto alternativo obrigatorio para acessibilidade. */
+  /** Texto alternativo obrigatório para acessibilidade. */
   alt: string;
-  /** Proporcao do quadro (CSS aspect-ratio). Padrao 4:3, padrao imobiliario. */
+  /** Proporcao do quadro (CSS aspect-ratio). Padrao 4:3, padrão imobiliario. */
   ratio?: string;
   /**
-   * Preenche um pai posicionado (absolute inset-0), sem aspect-ratio proprio —
+   * Preenche um pai posicionado (absolute inset-0), sem aspect-ratio próprio —
    * para fundos de Hero, onde a altura vem do container, nao da proporcao.
    */
   fill?: boolean;
   /** Posicao do recorte (object-position) — util quando a imagem e cortada. */
   objectPosition?: string;
   /**
-   * `lazy` (padrao) para imagens fora da primeira dobra; `eager` para a imagem
+   * `lazy` (padrão) para imagens fora da primeira dobra; `eager` para a imagem
    * critica de uma Hero. Nunca lazy no conteudo LCP.
    */
   loading?: "lazy" | "eager";
@@ -28,10 +28,10 @@ type PropertyImageProps = {
 };
 
 /**
- * Convencao unica de imagem de imovel. Garante:
+ * Convencao única de imagem de imóvel. Garante:
  * - proporcao estavel via aspect-ratio (zero CLS, sem width/height fixos);
  * - object-fit cover;
- * - lazy loading por padrao, ajustavel para conteudo critico;
+ * - lazy loading por padrão, ajustavel para conteudo critico;
  * - placeholder HONESTO quando nao ha imagem autorizada — nunca uma foto
  *   generica fingindo ser o empreendimento.
  *

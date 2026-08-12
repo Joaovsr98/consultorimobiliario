@@ -12,14 +12,14 @@ import { FinalCta } from "@/components/home/FinalCta";
 export function Home() {
   return (
     <>
-      <Seo title="Inicio" />
+      <Seo title="Início" />
 
       <Hero />
 
       <BuyerDiagnosis
         id="diagnostico"
         eyebrow="Busca guiada"
-        title="Encontre opcoes compativeis com o seu perfil"
+        title="Encontre opções compatíveis com o seu perfil"
         description="Responda em 3 passos rapidos e receba um direcionamento inicial pelo WhatsApp — sem compromisso."
       />
       <Opportunities />

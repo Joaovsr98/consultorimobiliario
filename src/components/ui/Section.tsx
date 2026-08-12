@@ -11,7 +11,7 @@ type SectionProps = {
   "aria-label"?: string;
 };
 
-/** Bloco vertical com espacamento padrao entre secoes. */
+/** Bloco vertical com espacamento padrão entre secoes. */
 export function Section({ children, className, bleed, id, ...rest }: SectionProps) {
   return (
     <section id={id} className={cn("py-16 sm:py-20 lg:py-24", className)} {...rest}>

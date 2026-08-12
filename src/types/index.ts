@@ -18,7 +18,7 @@ export type Broker = {
   phone: string;
   email: string;
   city: string;
-  /** Regiao de atuacao (ex.: "Zona Oeste de Sao Paulo"). */
+  /** Regiao de atuacao (ex.: "Zona Oeste de São Paulo"). */
   serviceRegion: string;
   /** Handle do Instagram sem @, ou string vazia. */
   instagram: string;
@@ -53,12 +53,12 @@ export type PropertyStatus = "breve-lancamento" | "lancamento" | "em-obras" | "p
 
 export type Property = {
   id: string;
-  /** Usado na rota /imoveis/:slug */
+  /** Usado na rota /imóveis/:slug */
   slug: string;
   name: string;
   neighborhood: string;
   city: string;
-  /** Ex.: "1 e 2 dormitorios" */
+  /** Ex.: "1 e 2 dormitórios" */
   bedrooms: string;
   /** Ex.: "27 a 41 m2" */
   area: string;
@@ -67,6 +67,8 @@ export type Property = {
   /** Ex.: "Dez/2027" */
   delivery?: string;
   status?: PropertyStatus;
+  /** Endereço para o link do Google Maps. Opcional; sem ele, o mapa usa nome + bairro + cidade. */
+  address?: string;
   description: string;
   features: string[];
   /** Caminhos de imagens autorizadas. */
@@ -82,7 +84,7 @@ export type FaqItem = {
 export type Testimonial = {
   id: string;
   name: string;
-  /** Contexto curto e autorizado (ex.: "Comprou o 1o imovel em 2025"). */
+  /** Contexto curto e autorizado (ex.: "Comprou o 1o imóvel em 2025"). */
   context: string;
   quote: string;
 };

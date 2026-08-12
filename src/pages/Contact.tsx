@@ -10,13 +10,13 @@ export function Contact() {
     <>
       <Seo
         title="Contato"
-        description="Faca o diagnostico do comprador ou fale direto pelo WhatsApp para conversar sobre o seu proximo imovel."
+        description="Faca o diagnostico do comprador ou fale direto pelo WhatsApp para conversar sobre o seu próximo imóvel."
       />
 
       <Section className="pb-0 text-center">
         <p className="text-sm font-semibold uppercase tracking-wide text-accent">Contato</p>
         <h1 className="mt-3 font-display text-4xl font-semibold tracking-tight text-brand sm:text-5xl">
-          Vamos conversar sobre o seu proximo imovel
+          Vamos conversar sobre o seu próximo imóvel
         </h1>
         <p className="mx-auto mt-4 max-w-xl text-lg text-ink/70">
           Faca o diagnostico abaixo para receber um direcionamento inicial, ou

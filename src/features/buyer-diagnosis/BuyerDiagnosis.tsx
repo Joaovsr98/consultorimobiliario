@@ -60,7 +60,7 @@ function ResponsePreview({ data }: { data: DiagnosisData }) {
   const rows: [string, string][] = [
     ["Objetivo", goalLabels[data.goal]],
     ["Regiao", data.region],
-    ["Dormitorios", bedroomsLabels[data.bedrooms]],
+    ["Dormitórios", bedroomsLabels[data.bedrooms]],
     ["Renda familiar", `R$ ${data.income.toLocaleString("pt-BR")}`],
     ["Entrada", `R$ ${data.downPayment.toLocaleString("pt-BR")}`],
     ["FGTS", fgtsLabels[data.fgts]],
@@ -89,13 +89,13 @@ type BuyerDiagnosisProps = {
 
 /**
  * Diagnostico do comprador em 3 passos (Objetivo, Onde e como, Financeiro).
- * Componente unico reaproveitado na Home e em /contato — evita manter duas
+ * Componente único reaproveitado na Home e em /contato — evita manter duas
  * implementacoes divergentes do mesmo formulario de captacao.
  */
 export function BuyerDiagnosis({
   id,
   eyebrow = "Diagnostico do comprador",
-  title = "Encontre opcoes compativeis com o seu perfil",
+  title = "Encontre opções compatíveis com o seu perfil",
   description = "Responda em 3 passos rapidos e receba um direcionamento inicial pelo WhatsApp — sem compromisso.",
 }: BuyerDiagnosisProps) {
   const [step, setStep] = useState(0);
@@ -175,10 +175,10 @@ export function BuyerDiagnosis({
             <CheckCircle2 className="size-6" aria-hidden />
           </span>
           <h2 className="mt-5 font-display text-2xl font-semibold tracking-tight text-brand">
-            Encontramos opcoes que podem combinar com seu perfil.
+            Encontramos opções que podem combinar com seu perfil.
           </h2>
           <p className="mt-3 text-ink/70">
-            A confirmacao depende da disponibilidade e da analise oficial.
+            A confirmacao depende da disponibilidade e da análise oficial.
           </p>
 
           <ResponsePreview data={submitted} />
@@ -188,7 +188,7 @@ export function BuyerDiagnosis({
               <p className="mt-6 text-xs text-ink/50">
                 Ao continuar, essas respostas serao organizadas em uma
                 mensagem para iniciar seu atendimento pelo WhatsApp. Nenhuma
-                analise de credito e realizada neste site.
+                análise de crédito e realizada neste site.
               </p>
               <a
                 href={buildWhatsappLink(whatsapp, buildDiagnosisMessage(submitted))}
@@ -202,7 +202,7 @@ export function BuyerDiagnosis({
             </>
           ) : (
             <p className="mt-6 text-ink/70">
-              O atendimento pelo WhatsApp ainda nao esta disponivel. Utilize os
+              O atendimento pelo WhatsApp ainda nao esta disponível. Utilize os
               canais de contato da empresa.
             </p>
           )}
@@ -242,7 +242,7 @@ export function BuyerDiagnosis({
             {[
               { icon: CheckCircle2, text: "Sem compromisso e sem custo" },
               { icon: MessageCircle, text: "Direcionamento direto pelo WhatsApp" },
-              { icon: ShieldCheck, text: "Nenhuma analise de credito e feita neste site" },
+              { icon: ShieldCheck, text: "Nenhuma análise de crédito e feita neste site" },
             ].map(({ icon: Icon, text }) => (
               <li key={text} className="flex items-start gap-3 text-sm text-ink/75">
                 <Icon className="mt-0.5 size-5 shrink-0 text-accent" aria-hidden />
@@ -296,7 +296,7 @@ export function BuyerDiagnosis({
             {step === 0 && (
               <fieldset>
                 <legend className="text-sm font-medium text-ink">
-                  Voce deseja morar ou investir?
+                  Você deseja morar ou investir?
                 </legend>
                 <div className="mt-3">
                   <OptionButtons
@@ -318,12 +318,12 @@ export function BuyerDiagnosis({
               <>
                 <div>
                   <label htmlFor="region" className="text-sm font-medium text-ink">
-                    Regiao de interesse
+                    Região de interesse
                   </label>
                   <input
                     id="region"
                     type="text"
-                    placeholder="Ex.: Vila Sonia"
+                    placeholder="Ex.: Vila Sônia"
                     {...register("region")}
                     className="mt-3 w-full rounded-image border border-brand/15 bg-surface px-4 py-3 text-sm text-ink outline-none placeholder:text-ink/40 focus-visible:border-brand"
                   />
@@ -335,7 +335,7 @@ export function BuyerDiagnosis({
                 </div>
 
                 <fieldset>
-                  <legend className="text-sm font-medium text-ink">Dormitorios</legend>
+                  <legend className="text-sm font-medium text-ink">Dormitórios</legend>
                   <div className="mt-3">
                     <OptionButtons
                       value={values.bedrooms}
@@ -376,7 +376,7 @@ export function BuyerDiagnosis({
 
                   <div>
                     <label htmlFor="downPayment" className="text-sm font-medium text-ink">
-                      Entrada disponivel (R$)
+                      Entrada disponível (R$)
                     </label>
                     <input
                       id="downPayment"

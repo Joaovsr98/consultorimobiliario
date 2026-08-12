@@ -11,7 +11,7 @@ type PropertyGalleryProps = {
 const GRID_PREVIEW_COUNT = 6;
 
 /**
- * Grade de fotos com lightbox. So renderiza quando ha imagens (o proprio
+ * Grade de fotos com lightbox. So renderiza quando ha imagens (o próprio
  * Property.images pode vir vazio, e isso e um estado normal, nao um erro).
  * O lightbox troca de imagem instantaneamente (sem animar a troca) para nao
  * repetir o bug do wizard: uma transicao que so avanca quando a animacao de

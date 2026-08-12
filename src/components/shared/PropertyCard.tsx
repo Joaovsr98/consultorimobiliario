@@ -20,7 +20,7 @@ type PropertyCardProps = {
  *
  * Principios (Lote 1): imagem como protagonista, poucos dados essenciais (nao
  * e ficha tecnica), preco so quando existe, um unico CTA. Preco fica sem
- * ressalva no card por densidade — a ressalva "valores sujeitos a alteracao"
+ * ressalva no card por densidade — a ressalva "valores sujeitos a alteração"
  * vive uma vez por secao/pagina, como ja acontece hoje.
  */
 export function PropertyCard({ property, priority = false }: PropertyCardProps) {

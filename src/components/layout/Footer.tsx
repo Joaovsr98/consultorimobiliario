@@ -25,8 +25,8 @@ export function Footer() {
         <div className="max-w-sm">
           <Logo tone="paper" />
           <p className="mt-4 text-sm leading-relaxed text-paper/70">
-            Atendimento personalizado para ajudar voce a entender as opcoes,
-            organizar as etapas da compra e encontrar um imovel compativel com a
+            Atendimento personalizado para ajudar você a entender as opções,
+            organizar as etapas da compra e encontrar um imóvel compatível com a
             sua realidade financeira.
           </p>
           <div className="mt-5 space-y-2 text-sm">

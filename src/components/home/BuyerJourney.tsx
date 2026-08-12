@@ -2,14 +2,14 @@ import { Section } from "@/components/ui/Section";
 
 const steps = [
   "Conhecemos seu perfil",
-  "Selecionamos as opcoes",
-  "Fazemos a simulacao",
+  "Selecionamos as opções",
+  "Fazemos a simulação",
   "Agendamos a visita",
   "Acompanhamos a proposta",
   "Seguimos ate as chaves",
 ];
 
-/** Jornada de compra em 6 etapas — reduz a inseguranca de quem nunca comprou imovel. */
+/** Jornada de compra em 6 etapas — reduz a inseguranca de quem nunca comprou imóvel. */
 export function BuyerJourney() {
   return (
     <Section className="bg-paper">

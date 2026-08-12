@@ -9,18 +9,18 @@ export function Properties() {
   return (
     <Section>
       <Seo
-        title="Imoveis"
+        title="Imóveis"
         description="Empreendimentos selecionados. Valores e disponibilidade sujeitos a alteracao."
       />
 
       <p className="text-sm font-semibold uppercase tracking-wide text-accent">
-        Imoveis
+        Imóveis
       </p>
       <h1 className="mt-3 font-display text-4xl font-semibold tracking-tight text-brand sm:text-5xl">
         Empreendimentos selecionados
       </h1>
       <p className="mt-4 max-w-2xl text-lg text-ink/70">
-        Valores e disponibilidade sujeitos a alteracao.
+        Valores e disponibilidade sujeitos a alteração.
       </p>
 
       <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

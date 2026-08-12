@@ -10,9 +10,9 @@ import { company } from "./company";
 export const seo: SeoConfig = {
   siteName: company.brandName,
   titleTemplate: `%s | ${company.brandName}`,
-  defaultTitle: `${company.brandName} — Compra, venda e locacao de imoveis em Sao Paulo`,
+  defaultTitle: `${company.brandName} — Compra, venda e locacao de imóveis em São Paulo`,
   defaultDescription:
-    "Solucoes para compra, venda e locacao de imoveis novos e usados, com atendimento durante todo o processo.",
+    "Solucoes para compra, venda e locacao de imóveis novos e usados, com atendimento durante todo o processo.",
   baseUrl: "https://exemplo.com.br",
   locale: "pt-BR",
 };

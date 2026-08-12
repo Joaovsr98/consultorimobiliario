@@ -29,7 +29,7 @@ export function Opportunities() {
           </h2>
         </div>
         <Link to="/imoveis" className={buttonClasses("ghost", "md")}>
-          Ver todos os imoveis
+          Ver todos os imóveis
           <ArrowRight className="size-4" aria-hidden />
         </Link>
       </div>
@@ -41,7 +41,7 @@ export function Opportunities() {
       </div>
 
       <p className="mt-6 text-sm text-ink/50">
-        Valores e disponibilidade sujeitos a alteracao.
+        Valores e disponibilidade sujeitos a alteração.
       </p>
     </Section>
   );

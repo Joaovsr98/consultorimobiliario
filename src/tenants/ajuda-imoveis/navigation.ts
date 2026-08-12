@@ -13,22 +13,22 @@ import type { NavItem } from "@/types";
 export type AgencyNavItem = NavItem & { enabled: boolean };
 
 export const mainNav: AgencyNavItem[] = [
-  { label: "Inicio", to: "/", enabled: false },
+  { label: "Início", to: "/", enabled: false },
   { label: "Comprar", to: "/comprar", enabled: false },
   { label: "Alugar", to: "/alugar", enabled: false },
   { label: "Lancamentos", to: "/lancamentos", enabled: false },
   { label: "Corretores", to: "/corretores", enabled: false },
   { label: "Unidades", to: "/unidades", enabled: false },
-  { label: "Anuncie seu imovel", to: "/anuncie", enabled: false },
+  { label: "Anuncie seu imóvel", to: "/anuncie", enabled: false },
   { label: "Sobre", to: "/sobre", enabled: false },
   { label: "Contato", to: "/contato", enabled: false },
 ];
 
 export const footerNav: { title: string; items: AgencyNavItem[] }[] = [
   {
-    title: "Navegacao",
+    title: "Navegação",
     items: [
-      { label: "Inicio", to: "/", enabled: false },
+      { label: "Início", to: "/", enabled: false },
       { label: "Comprar", to: "/comprar", enabled: false },
       { label: "Alugar", to: "/alugar", enabled: false },
     ],

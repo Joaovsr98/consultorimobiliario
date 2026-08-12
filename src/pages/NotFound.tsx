@@ -12,7 +12,7 @@ export function NotFound() {
         Pagina nao encontrada
       </h1>
       <p className="mx-auto mt-3 max-w-md text-ink/70">
-        O endereco que voce tentou acessar nao existe ou foi movido.
+        O endereço que você tentou acessar nao existe ou foi movido.
       </p>
       <div className="mt-8">
         <Link to="/" className={buttonClasses("primary", "lg")}>

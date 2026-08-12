@@ -9,16 +9,16 @@ export function Guides() {
     <Section>
       <Seo
         title="Guias"
-        description="Conteudos educativos sobre financiamento, FGTS, entrada, documentacao e a compra do primeiro imovel."
+        description="Conteudos educativos sobre financiamento, FGTS, entrada, documentação e a compra do primeiro imóvel."
       />
 
       <p className="text-sm font-semibold uppercase tracking-wide text-accent">Guias</p>
       <h1 className="mt-3 font-display text-4xl font-semibold tracking-tight text-brand sm:text-5xl">
-        Conteudos para comprar com seguranca
+        Conteudos para comprar com segurança
       </h1>
       <p className="mt-4 max-w-2xl text-lg text-ink/70">
         Guias sobre financiamento, uso do FGTS, entrada necessaria, composicao
-        de renda, documentacao e a compra do primeiro imovel.
+        de renda, documentação e a compra do primeiro imóvel.
       </p>
 
       <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

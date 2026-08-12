@@ -21,7 +21,7 @@ export const broker: Broker = {
   creci: "",
   phone: "5511934510849",
   email: "",
-  city: "Sao Paulo", // TODO: confirmar
+  city: "São Paulo", // TODO: confirmar
   serviceRegion: "",
   instagram: "",
   photo: "",

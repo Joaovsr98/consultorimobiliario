@@ -30,7 +30,7 @@ export function PropertyDetails() {
   const { galeria, plantas, localizacao } = splitImages(property.images);
 
   const facts = [
-    { icon: BedDouble, label: "Dormitorios", value: property.bedrooms },
+    { icon: BedDouble, label: "Dormitórios", value: property.bedrooms },
     { icon: Ruler, label: "Metragem", value: property.area },
     { icon: CalendarDays, label: "Entrega", value: property.delivery ?? "A definir" },
     ...(property.priceFrom !== undefined
@@ -39,8 +39,11 @@ export function PropertyDetails() {
   ];
 
   const visitLink = whatsapp
-    ? buildWhatsappLink(whatsapp, `Ola! Tenho interesse em agendar uma visita ao ${property.name}.`)
+    ? buildWhatsappLink(whatsapp, `Olá! Tenho interesse em agendar uma visita ao ${property.name}.`)
     : null;
+
+  const mapsQuery = property.address ?? `${property.name} ${property.neighborhood} ${property.city}`;
+  const mapsLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapsQuery)}`;
 
   return (
     <>
@@ -66,7 +69,7 @@ export function PropertyDetails() {
             className="inline-flex items-center gap-1.5 rounded-full bg-paper/85 px-3 py-1.5 text-sm font-medium text-brand backdrop-blur-sm transition-colors hover:bg-paper"
           >
             <ArrowLeft className="size-4" aria-hidden />
-            Voltar para imoveis
+            Voltar para imóveis
           </Link>
         </Container>
 
@@ -135,20 +138,30 @@ export function PropertyDetails() {
           </div>
         )}
 
-        {localizacao.length > 0 && (
-          <div className="mt-12">
-            <h2 className="font-display text-2xl font-semibold text-brand">Localizacao</h2>
+        <div className="mt-12">
+          <h2 className="font-display text-2xl font-semibold text-brand">Localização</h2>
+          <a
+            href={mapsLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 inline-flex items-center gap-2 rounded-full border border-brand/15 bg-paper px-4 py-2 text-sm font-medium text-brand shadow-card transition-colors hover:bg-brand hover:text-paper"
+          >
+            <MapPin className="size-4 text-accent" aria-hidden />
+            Ver no Google Maps
+          </a>
+          {property.address && <p className="mt-3 text-sm text-ink/60">{property.address}</p>}
+          {localizacao.length > 0 && (
             <div className="mt-5">
-              <PropertyGallery images={localizacao} alt={`${property.name} — localizacao`} />
+              <PropertyGallery images={localizacao} alt={`${property.name} — localização`} />
             </div>
-          </div>
-        )}
+          )}
+        </div>
 
-        <p className="mt-10 text-sm text-ink/50">Valores e disponibilidade sujeitos a alteracao.</p>
+        <p className="mt-10 text-sm text-ink/50">Valores e disponibilidade sujeitos a alteração.</p>
 
         {property.images.length === 0 && (
           <p className="mt-8 inline-block rounded-card border border-brand/10 bg-paper px-4 py-3 text-sm text-ink/60">
-            Fotos, plantas e localizacao detalhada deste empreendimento chegam em breve.
+            Fotos, plantas e localização detalhada deste empreendimento chegam em breve.
           </p>
         )}
       </Section>
@@ -160,7 +173,7 @@ export function PropertyDetails() {
             Quer conhecer o {property.name} de perto?
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-paper/70">
-            Agende uma visita e tire suas duvidas sobre valores, plantas e condicoes.
+            Agende uma visita e tire suas dúvidas sobre valores, plantas e condições.
           </p>
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
             {visitLink ? (
