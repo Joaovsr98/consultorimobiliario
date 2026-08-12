@@ -1,11 +1,13 @@
 import type { HeroConfig } from "../types";
 
 /**
- * Hero do Shelby. Sem imagem por enquanto -> a Hero cai para fundo solido de
- * marca (nao o placeholder "imagem em breve", esse e dos cards). Adicione uma
- * imagem/render AUTORIZADO quando houver, no formato do joao-victor/hero.ts.
+ * Hero do Shelby. Espelha o joao-victor por decisao do cliente — mesma imagem
+ * de marca (atmosfera, sem afirmar um empreendimento especifico). Troque
+ * quando o Shelby tiver material proprio.
  */
 export const hero: HeroConfig = {
+  image: "/properties/vibra-estacao-vila-sonia/fachada-torres.jpg",
+  imageAlt: "Edificios residenciais em Sao Paulo ao entardecer",
   headline: "Encontre um imovel para o seu proximo momento",
-  // image / imageAlt / subtitle: preencher quando houver material do Shelby.
+  subtitle: "Sao Paulo · Zona Oeste · Lancamentos",
 };
