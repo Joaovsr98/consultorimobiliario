@@ -150,6 +150,15 @@ export function PropertyDetails() {
             Ver no Google Maps
           </a>
           {property.address && <p className="mt-3 text-sm text-ink/60">{property.address}</p>}
+          <div className="mt-5 overflow-hidden rounded-card border border-brand/10 shadow-card">
+            <iframe
+              title={`Mapa de ${property.name}`}
+              src={`https://maps.google.com/maps?q=${encodeURIComponent(mapsQuery)}&z=15&output=embed`}
+              className="h-[320px] w-full sm:h-[440px]"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </div>
           {localizacao.length > 0 && (
             <div className="mt-5">
               <PropertyGallery images={localizacao} alt={`${property.name} — localização`} />
@@ -194,6 +203,29 @@ export function PropertyDetails() {
           </div>
         </div>
       </Section>
+
+      {/* Atalho flutuante de agendamento, empilhado acima do botao de WhatsApp */}
+      {visitLink ? (
+        <a
+          href={visitLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Agendar visita ao ${property.name}`}
+          className="fixed bottom-[5.5rem] right-5 z-40 inline-flex items-center gap-2 rounded-full bg-accent px-4 py-3 text-sm font-semibold text-brand shadow-lg shadow-black/15 transition-transform hover:scale-105 focus-visible:scale-105"
+        >
+          <CalendarDays className="size-5" aria-hidden />
+          <span className="hidden sm:inline">Agendar visita</span>
+        </a>
+      ) : (
+        <Link
+          to="/contato"
+          aria-label="Agendar visita"
+          className="fixed bottom-[5.5rem] right-5 z-40 inline-flex items-center gap-2 rounded-full bg-accent px-4 py-3 text-sm font-semibold text-brand shadow-lg shadow-black/15 transition-transform hover:scale-105 focus-visible:scale-105"
+        >
+          <CalendarDays className="size-5" aria-hidden />
+          <span className="hidden sm:inline">Agendar visita</span>
+        </Link>
+      )}
     </>
   );
 }
