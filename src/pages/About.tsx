@@ -37,11 +37,13 @@ export function About() {
         )}
 
         {identity.photo ? (
-          <img
-            src={identity.photo}
-            alt={identity.displayName}
-            className="mt-8 aspect-[4/3] w-full rounded-[var(--radius-brand)] object-cover"
-          />
+          <div className="mt-8 flex items-end justify-center overflow-hidden rounded-[var(--radius-brand)] bg-gradient-to-b from-surface to-brand/5 pt-6">
+            <img
+              src={identity.photo}
+              alt={identity.displayName}
+              className="max-h-[420px] w-auto object-contain drop-shadow-xl"
+            />
+          </div>
         ) : (
           <div className="mt-8 flex aspect-[4/3] w-full flex-col items-center justify-center gap-3 rounded-[var(--radius-brand)] border border-dashed border-brand/20 bg-brand/[0.03]">
             <span className="grid size-20 place-items-center rounded-full bg-brand/10 font-display text-3xl font-semibold text-brand">

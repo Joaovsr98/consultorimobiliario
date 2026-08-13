@@ -18,7 +18,7 @@ export function WhatsAppButton() {
         src="/consultor-bueno.png"
         alt=""
         aria-hidden
-        className="pointer-events-none hidden h-24 w-auto select-none drop-shadow-xl sm:block"
+        className="hidden h-24 w-auto origin-bottom cursor-pointer select-none drop-shadow-xl transition-transform duration-300 ease-out hover:scale-[1.35] motion-reduce:transition-none sm:block"
       />
       <a
         href={buildWhatsappLink(identity.contact.whatsapp, defaultWhatsappMessage)}

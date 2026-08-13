@@ -10,6 +10,7 @@ import { buildWhatsappLink } from "@/lib/whatsapp";
 import { identity } from "@/tenants";
 import {
   bedroomsLabels,
+  contactLabels,
   diagnosisSchema,
   fgtsLabels,
   goalLabels,
@@ -65,6 +66,7 @@ function ResponsePreview({ data }: { data: DiagnosisData }) {
     ["Entrada", `R$ ${data.downPayment.toLocaleString("pt-BR")}`],
     ["FGTS", fgtsLabels[data.fgts]],
     ["Forma de pagamento", timelineLabels[data.timeline]],
+    ["Prefere contato por", contactLabels[data.contact]],
   ];
 
   return (
@@ -423,6 +425,25 @@ export function BuyerDiagnosis({
                   {errors.timeline && (
                     <p role="alert" className="mt-2 text-sm text-red-600">
                       {errors.timeline.message}
+                    </p>
+                  )}
+                </fieldset>
+
+                <fieldset>
+                  <legend className="text-sm font-medium text-ink">
+                    Prefere receber o contato por ligação ou mensagem?
+                  </legend>
+                  <div className="mt-3">
+                    <OptionButtons
+                      value={values.contact}
+                      options={["ligacao", "mensagem"] as const}
+                      labels={contactLabels}
+                      onChange={(v) => setValue("contact", v, { shouldValidate: true })}
+                    />
+                  </div>
+                  {errors.contact && (
+                    <p role="alert" className="mt-2 text-sm text-red-600">
+                      {errors.contact.message}
                     </p>
                   )}
                 </fieldset>

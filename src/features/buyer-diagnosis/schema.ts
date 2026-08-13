@@ -27,6 +27,9 @@ export const diagnosisSchema = z.object({
   timeline: z.enum(["a-vista", "menos-240-meses", "mais-240-meses"], {
     message: "Selecione uma opção",
   }),
+  contact: z.enum(["ligacao", "mensagem"], {
+    message: "Selecione uma opção",
+  }),
 });
 
 export type DiagnosisData = z.infer<typeof diagnosisSchema>;
@@ -53,11 +56,16 @@ export const timelineLabels: Record<DiagnosisData["timeline"], string> = {
   "mais-240-meses": "Financiar em mais de 240 meses",
 };
 
+export const contactLabels: Record<DiagnosisData["contact"], string> = {
+  ligacao: "Ligação",
+  mensagem: "Mensagem",
+};
+
 /** Campos validados em cada passo do wizard. */
 export const stepFields: (keyof DiagnosisData)[][] = [
   ["goal"],
   ["region", "bedrooms"],
-  ["income", "downPayment", "fgts", "timeline"],
+  ["income", "downPayment", "fgts", "timeline", "contact"],
 ];
 
 export const stepTitles = ["Objetivo", "Onde e como", "Financeiro"];

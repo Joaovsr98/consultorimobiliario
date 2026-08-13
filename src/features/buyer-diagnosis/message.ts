@@ -3,6 +3,7 @@ import { formatCurrency } from "@/lib/utils";
 import { getStoredUtmLine } from "@/lib/tracking";
 import {
   bedroomsLabels,
+  contactLabels,
   fgtsLabels,
   goalLabels,
   timelineLabels,
@@ -30,6 +31,7 @@ export function buildDiagnosisMessage(data: DiagnosisData): string {
     `FGTS: ${fgtsLabels[data.fgts]}`,
     `Dormitórios: ${bedroomsLabels[data.bedrooms]}`,
     `Forma de pagamento: ${timelineLabels[data.timeline]}`,
+    `Prefere contato por: ${contactLabels[data.contact]}`,
     ...(utmLine ? ["", utmLine] : []),
   ];
 
