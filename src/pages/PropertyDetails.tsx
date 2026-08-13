@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ArrowLeft, BedDouble, CalendarDays, Clock, MapPin, MessageCircle, Ruler, Tag } from "lucide-react";
 import { tenant, identity } from "@/tenants";
@@ -9,7 +9,7 @@ import { buildWhatsappLink } from "@/lib/whatsapp";
 import { Seo } from "@/components/shared/Seo";
 import { PropertyGallery, type PropertyGalleryHandle } from "@/components/shared/PropertyGallery";
 import { StatusBadge } from "@/components/ui/StatusBadge";
-import { formatCurrency } from "@/lib/utils";
+import { cn, formatCurrency } from "@/lib/utils";
 import { NotFound } from "./NotFound";
 
 const STOPWORDS = new Set(["e", "de", "do", "da", "com", "a", "o", "para", "em"]);
@@ -46,6 +46,8 @@ function splitImages(images: string[]) {
 export function PropertyDetails() {
   const { slug } = useParams();
   const galeriaRef = useRef<PropertyGalleryHandle>(null);
+  const mapRef = useRef<HTMLDivElement>(null);
+  const [mapFocus, setMapFocus] = useState<string | null>(null);
   const property = tenant.properties.find((p) => p.slug === slug);
 
   if (!property) return <NotFound />;
@@ -67,8 +69,15 @@ export function PropertyDetails() {
     ? buildWhatsappLink(whatsapp, `Olá! Tenho interesse em agendar uma visita ao ${property.name}.`)
     : null;
 
-  const mapsQuery = property.address ?? `${property.name} ${property.neighborhood} ${property.city}`;
-  const mapsLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapsQuery)}`;
+  const propertyQuery = property.address ?? `${property.name} ${property.neighborhood} ${property.city}`;
+  const activeQuery = mapFocus ?? propertyQuery;
+  const mapsLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(activeQuery)}`;
+  const mapEmbedSrc = `https://maps.google.com/maps?q=${encodeURIComponent(activeQuery)}&z=15&output=embed`;
+
+  const focusOnMap = (place: string) => {
+    setMapFocus(`${place}, ${property.neighborhood}, ${property.city}`);
+    mapRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+  };
 
   return (
     <>
@@ -191,36 +200,58 @@ export function PropertyDetails() {
             Ver no Google Maps
           </a>
           {property.address && <p className="mt-3 text-sm text-ink/60">{property.address}</p>}
-          <div className="mt-5 overflow-hidden rounded-card border border-brand/10 shadow-card">
+          <div ref={mapRef} className="mt-5 overflow-hidden rounded-card border border-brand/10 shadow-card">
             <iframe
               title={`Mapa de ${property.name}`}
-              src={`https://maps.google.com/maps?q=${encodeURIComponent(mapsQuery)}&z=15&output=embed`}
+              src={mapEmbedSrc}
               className="h-[320px] w-full sm:h-[440px]"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             />
           </div>
+          {mapFocus && (
+            <button
+              type="button"
+              onClick={() => setMapFocus(null)}
+              className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-accent hover:text-brand"
+            >
+              <ArrowLeft className="size-4" aria-hidden />
+              Voltar ao empreendimento no mapa
+            </button>
+          )}
           {property.nearby && property.nearby.length > 0 && (
             <div className="mt-6">
               <h3 className="text-sm font-semibold uppercase tracking-wide text-ink/50">
-                O que tem por perto
+                O que tem por perto <span className="font-normal normal-case text-ink/40">— toque para ver no mapa</span>
               </h3>
               <ul className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
-                {property.nearby.map((item) => (
-                  <li
-                    key={item.place}
-                    className="flex items-center gap-3 rounded-card border border-brand/10 bg-paper p-3 text-sm shadow-card"
-                  >
-                    <MapPin className="size-4 shrink-0 text-accent" aria-hidden />
-                    <span className="flex-1 text-ink/80">{item.place}</span>
-                    {item.time && (
-                      <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-brand/5 px-2 py-0.5 text-xs font-medium text-brand">
-                        <Clock className="size-3" aria-hidden />
-                        {item.time}
-                      </span>
-                    )}
-                  </li>
-                ))}
+                {property.nearby.map((item) => {
+                  const isActive = mapFocus === `${item.place}, ${property.neighborhood}, ${property.city}`;
+                  return (
+                    <li key={item.place}>
+                      <button
+                        type="button"
+                        onClick={() => focusOnMap(item.place)}
+                        aria-pressed={isActive}
+                        className={cn(
+                          "flex w-full items-center gap-3 rounded-card border p-3 text-left text-sm shadow-card transition-colors",
+                          isActive
+                            ? "border-accent bg-accent/10"
+                            : "border-brand/10 bg-paper hover:border-accent hover:bg-accent/5"
+                        )}
+                      >
+                        <MapPin className="size-4 shrink-0 text-accent" aria-hidden />
+                        <span className="flex-1 text-ink/80">{item.place}</span>
+                        {item.time && (
+                          <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-brand/5 px-2 py-0.5 text-xs font-medium text-brand">
+                            <Clock className="size-3" aria-hidden />
+                            {item.time}
+                          </span>
+                        )}
+                      </button>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           )}
