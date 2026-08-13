@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, MapPin } from "lucide-react";
 import type { Property } from "@/types";
-import { formatCurrency } from "@/lib/utils";
+import { formatPriceFrom } from "@/lib/utils";
 import { PropertyImage } from "@/components/ui/PropertyImage";
 import { StatusBadge } from "@/components/ui/StatusBadge";
 
@@ -69,7 +69,7 @@ export function PropertyCard({ property, priority = false }: PropertyCardProps) 
             <p className="text-sm text-ink/60">
               A partir de{" "}
               <span className="font-display text-lg font-semibold text-brand">
-                {formatCurrency(property.priceFrom)}
+                {formatPriceFrom(property.priceFrom)}
               </span>
             </p>
           )}
