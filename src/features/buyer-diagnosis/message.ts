@@ -29,7 +29,7 @@ export function buildDiagnosisMessage(data: DiagnosisData): string {
     `Entrada: ${formatCurrency(data.downPayment)}`,
     `FGTS: ${fgtsLabels[data.fgts]}`,
     `Dormitórios: ${bedroomsLabels[data.bedrooms]}`,
-    `Prazo de compra: ${timelineLabels[data.timeline]}`,
+    `Forma de pagamento: ${timelineLabels[data.timeline]}`,
     ...(utmLine ? ["", utmLine] : []),
   ];
 

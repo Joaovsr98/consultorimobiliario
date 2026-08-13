@@ -1,40 +1,62 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, MessageCircle } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { tenant, identity } from "@/tenants";
 import { Container } from "@/components/ui/Container";
-import { PropertyImage } from "@/components/ui/PropertyImage";
 import { buttonClasses } from "@/lib/button-styles";
 import { buildWhatsappLink, defaultWhatsappMessage } from "@/lib/whatsapp";
+import { cn } from "@/lib/utils";
 
 /**
- * Hero da primeira dobra. Conteudo (imagem, headline, subtitle) vem de
+ * Hero da primeira dobra. Conteudo (imagens, headline, subtitle) vem de
  * `tenant.hero` — este componente e compartilhado e nao contem dado de marca.
  *
- * Imagem tratada como CRITICA (LCP): eager + fetchPriority alta, nunca lazy.
- * Quando o tenant nao tem imagem de Hero, cai para um fundo solido de marca —
- * nunca o placeholder "imagem em breve" (esse e dos cards).
+ * Suporta carrossel: quando `hero.images` tem 2+ itens, alterna entre elas com
+ * crossfade e auto-avanco (respeitando prefers-reduced-motion). A PRIMEIRA
+ * imagem e tratada como CRITICA (LCP): eager + fetchPriority alta.
  */
 export function Hero() {
   const hero = tenant.hero;
   const whatsapp = identity.contact.whatsapp;
   const reduce = useReducedMotion();
 
+  const slides = hero?.images?.length
+    ? hero.images
+    : hero?.image
+      ? [{ src: hero.image, alt: hero.imageAlt ?? "" }]
+      : [];
+
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    if (reduce || slides.length < 2) return;
+    const id = setInterval(() => setIndex((i) => (i + 1) % slides.length), 5500);
+    return () => clearInterval(id);
+  }, [reduce, slides.length]);
+
   if (!hero) return null;
 
   const rise = reduce ? {} : { initial: { opacity: 0, y: 18 }, animate: { opacity: 1, y: 0 } };
 
   return (
-    <section className="relative isolate flex min-h-[70vh] items-end overflow-hidden">
-      {hero.image ? (
-        <PropertyImage
-          fill
-          src={hero.image}
-          alt={hero.imageAlt ?? ""}
-          loading="eager"
-          fetchPriority="high"
-          objectPosition="center 30%"
-        />
+    <section className="relative isolate flex min-h-[82vh] items-end overflow-hidden">
+      {slides.length > 0 ? (
+        slides.map((slide, i) => (
+          <img
+            key={slide.src}
+            src={slide.src}
+            alt={i === index ? slide.alt : ""}
+            loading={i === 0 ? "eager" : "lazy"}
+            fetchPriority={i === 0 ? "high" : undefined}
+            aria-hidden={i !== index}
+            className={cn(
+              "absolute inset-0 size-full object-cover transition-opacity duration-1000 ease-out motion-reduce:transition-none",
+              i === index ? "opacity-100" : "opacity-0"
+            )}
+            style={{ objectPosition: "center 40%" }}
+          />
+        ))
       ) : (
         <div className="absolute inset-0 bg-brand" aria-hidden />
       )}
@@ -45,7 +67,7 @@ export function Hero() {
         aria-hidden
       />
 
-      <Container className="relative py-16 sm:py-20 lg:py-24">
+      <Container className="relative py-16 sm:py-20 lg:py-28">
         <motion.div {...rise} transition={{ duration: 0.6, ease: "easeOut" }} className="max-w-2xl">
           {hero.subtitle && (
             <p className="text-sm font-semibold uppercase tracking-[0.14em] text-paper/85">
@@ -75,6 +97,24 @@ export function Hero() {
           </div>
         </motion.div>
       </Container>
+
+      {slides.length > 1 && (
+        <div className="absolute bottom-5 left-1/2 z-10 flex -translate-x-1/2 gap-2">
+          {slides.map((slide, i) => (
+            <button
+              key={slide.src}
+              type="button"
+              onClick={() => setIndex(i)}
+              aria-label={`Ver foto ${i + 1}`}
+              aria-current={i === index}
+              className={cn(
+                "h-2 rounded-full transition-all",
+                i === index ? "w-6 bg-paper" : "w-2 bg-paper/50 hover:bg-paper/80"
+              )}
+            />
+          ))}
+        </div>
+      )}
     </section>
   );
 }

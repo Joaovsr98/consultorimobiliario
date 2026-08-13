@@ -24,7 +24,7 @@ export const diagnosisSchema = z.object({
   fgts: z.enum(["sim", "nao"], {
     message: "Selecione uma opção",
   }),
-  timeline: z.enum(["ate-3-meses", "ate-6-meses", "mais-de-6-meses"], {
+  timeline: z.enum(["a-vista", "menos-240-meses", "mais-240-meses"], {
     message: "Selecione uma opção",
   }),
 });
@@ -48,9 +48,9 @@ export const fgtsLabels: Record<DiagnosisData["fgts"], string> = {
 };
 
 export const timelineLabels: Record<DiagnosisData["timeline"], string> = {
-  "ate-3-meses": "Ate 3 meses",
-  "ate-6-meses": "Ate 6 meses",
-  "mais-de-6-meses": "Mais de 6 meses",
+  "a-vista": "À vista",
+  "menos-240-meses": "Financiar em menos de 240 meses",
+  "mais-240-meses": "Financiar em mais de 240 meses",
 };
 
 /** Campos validados em cada passo do wizard. */

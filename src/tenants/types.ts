@@ -18,6 +18,8 @@ export type TenantNavigation = {
 export type HeroConfig = {
   image?: string;
   imageAlt?: string;
+  /** Carrossel opcional. Se presente (2+ itens), o Hero rotaciona entre as imagens. */
+  images?: { src: string; alt: string }[];
   headline: string;
   subtitle?: string;
 };

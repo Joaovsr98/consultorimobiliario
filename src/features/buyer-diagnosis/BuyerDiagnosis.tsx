@@ -64,7 +64,7 @@ function ResponsePreview({ data }: { data: DiagnosisData }) {
     ["Renda familiar", `R$ ${data.income.toLocaleString("pt-BR")}`],
     ["Entrada", `R$ ${data.downPayment.toLocaleString("pt-BR")}`],
     ["FGTS", fgtsLabels[data.fgts]],
-    ["Prazo de compra", timelineLabels[data.timeline]],
+    ["Forma de pagamento", timelineLabels[data.timeline]],
   ];
 
   return (
@@ -411,11 +411,11 @@ export function BuyerDiagnosis({
                 </fieldset>
 
                 <fieldset>
-                  <legend className="text-sm font-medium text-ink">Prazo de compra</legend>
+                  <legend className="text-sm font-medium text-ink">Como pretende pagar?</legend>
                   <div className="mt-3">
                     <OptionButtons
                       value={values.timeline}
-                      options={["ate-3-meses", "ate-6-meses", "mais-de-6-meses"] as const}
+                      options={["a-vista", "menos-240-meses", "mais-240-meses"] as const}
                       labels={timelineLabels}
                       onChange={(v) => setValue("timeline", v, { shouldValidate: true })}
                     />
