@@ -24,5 +24,5 @@ export const broker: Broker = {
   city: "São Paulo",
   serviceRegion: "Zona Oeste de São Paulo",
   instagram: "",
-  photo: "",
+  photo: "/consultor-bueno-terno.jpg",
 };
