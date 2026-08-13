@@ -15,13 +15,15 @@ export function formatCurrency(value: number): string {
   }).format(value);
 }
 
-/** Preco "a partir de" arredondado para o milhar mais proximo (numeros inteiros e limpos). */
-export function formatPriceFrom(value: number): string {
-  return formatCurrency(Math.round(value / 1000) * 1000);
-}
-
 /** Metragem maxima (em m2) a partir do texto de area, ex.: "26,82 a 43,25 m2" -> 43. */
 export function maxAreaFromLabel(area: string): number {
   const nums = area.replace(/,/g, ".").match(/\d+(\.\d+)?/g)?.map(Number) ?? [];
   return nums.length ? Math.max(...nums) : 0;
+}
+
+/** Arredonda a metragem para numeros inteiros e usa "m²" (ex.: "26,82 a 43,25 m2" -> "27 a 43 m²"). */
+export function formatArea(area: string): string {
+  return area
+    .replace(/\d+,\d+/g, (n) => String(Math.round(parseFloat(n.replace(",", ".")))))
+    .replace(/\s*m2\b/i, " m²");
 }

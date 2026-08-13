@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, MapPin } from "lucide-react";
 import type { Property } from "@/types";
-import { formatPriceFrom } from "@/lib/utils";
+import { formatArea, formatCurrency } from "@/lib/utils";
 import { PropertyImage } from "@/components/ui/PropertyImage";
 import { StatusBadge } from "@/components/ui/StatusBadge";
 
@@ -26,7 +26,7 @@ type PropertyCardProps = {
 export function PropertyCard({ property, priority = false }: PropertyCardProps) {
   const essentials = [
     property.bedrooms,
-    property.area,
+    formatArea(property.area),
     property.delivery ? `Entrega ${property.delivery}` : null,
   ].filter(Boolean);
 
@@ -69,7 +69,7 @@ export function PropertyCard({ property, priority = false }: PropertyCardProps) 
             <p className="text-sm text-ink/60">
               A partir de{" "}
               <span className="font-display text-lg font-semibold text-brand">
-                {formatPriceFrom(property.priceFrom)}
+                {formatCurrency(property.priceFrom)}
               </span>
             </p>
           )}

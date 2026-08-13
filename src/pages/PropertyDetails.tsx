@@ -9,7 +9,7 @@ import { buildWhatsappLink } from "@/lib/whatsapp";
 import { Seo } from "@/components/shared/Seo";
 import { PropertyGallery, type PropertyGalleryHandle } from "@/components/shared/PropertyGallery";
 import { StatusBadge } from "@/components/ui/StatusBadge";
-import { cn, formatPriceFrom } from "@/lib/utils";
+import { cn, formatArea, formatCurrency } from "@/lib/utils";
 import { NotFound } from "./NotFound";
 
 const STOPWORDS = new Set(["e", "de", "do", "da", "com", "a", "o", "para", "em"]);
@@ -58,10 +58,10 @@ export function PropertyDetails() {
 
   const facts = [
     { icon: BedDouble, label: "Dormitórios", value: property.bedrooms },
-    { icon: Ruler, label: "Metragem", value: property.area },
+    { icon: Ruler, label: "Metragem", value: formatArea(property.area) },
     { icon: CalendarDays, label: "Entrega", value: property.delivery ?? "A definir" },
     ...(property.priceFrom !== undefined
-      ? [{ icon: Tag, label: "A partir de", value: formatPriceFrom(property.priceFrom) }]
+      ? [{ icon: Tag, label: "A partir de", value: formatCurrency(property.priceFrom) }]
       : []),
   ];
 
