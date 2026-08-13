@@ -71,15 +71,19 @@ export function PropertyDetails() {
 
   const propertyQuery =
     property.address ?? `${property.name}, ${property.neighborhood}, ${property.city}`;
+  // Coordenadas exatas fixam o pin melhor que o endereco; sem elas, cai no texto.
+  const originPoint = property.coords
+    ? `${property.coords.lat},${property.coords.lng}`
+    : propertyQuery;
   // Sem foco: mostra o empreendimento. Com foco num ponto: mostra a ROTA do
   // empreendimento ate o ponto — assim o empreendimento continua visivel e da
   // pra ter nocao da distancia.
   const mapEmbedSrc = mapFocus
-    ? `https://maps.google.com/maps?saddr=${encodeURIComponent(propertyQuery)}&daddr=${encodeURIComponent(mapFocus)}&output=embed`
-    : `https://maps.google.com/maps?q=${encodeURIComponent(propertyQuery)}&z=16&output=embed`;
+    ? `https://maps.google.com/maps?saddr=${encodeURIComponent(originPoint)}&daddr=${encodeURIComponent(mapFocus)}&output=embed`
+    : `https://maps.google.com/maps?q=${encodeURIComponent(originPoint)}&z=16&output=embed`;
   const mapsLink = mapFocus
-    ? `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(propertyQuery)}&destination=${encodeURIComponent(mapFocus)}`
-    : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(propertyQuery)}`;
+    ? `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(originPoint)}&destination=${encodeURIComponent(mapFocus)}`
+    : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(originPoint)}`;
 
   const focusOnMap = (place: string) => {
     setMapFocus(`${place}, ${property.neighborhood}, ${property.city}`);
