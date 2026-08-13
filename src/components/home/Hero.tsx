@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, MessageCircle } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, MessageCircle } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { tenant, identity } from "@/tenants";
 import { Container } from "@/components/ui/Container";
@@ -28,6 +28,7 @@ export function Hero() {
       : [];
 
   const [index, setIndex] = useState(0);
+  const go = (dir: number) => setIndex((i) => (i + dir + slides.length) % slides.length);
 
   useEffect(() => {
     if (reduce || slides.length < 2) return;
@@ -97,6 +98,27 @@ export function Hero() {
           </div>
         </motion.div>
       </Container>
+
+      {slides.length > 1 && (
+        <>
+          <button
+            type="button"
+            onClick={() => go(-1)}
+            aria-label="Foto anterior"
+            className="absolute left-3 top-1/2 z-10 grid size-10 -translate-y-1/2 place-items-center rounded-full bg-paper/15 text-paper backdrop-blur-sm transition-colors hover:bg-paper/30 sm:left-5"
+          >
+            <ChevronLeft className="size-5" aria-hidden />
+          </button>
+          <button
+            type="button"
+            onClick={() => go(1)}
+            aria-label="Próxima foto"
+            className="absolute right-3 top-1/2 z-10 grid size-10 -translate-y-1/2 place-items-center rounded-full bg-paper/15 text-paper backdrop-blur-sm transition-colors hover:bg-paper/30 sm:right-5"
+          >
+            <ChevronRight className="size-5" aria-hidden />
+          </button>
+        </>
+      )}
 
       {slides.length > 1 && (
         <div className="absolute bottom-5 left-1/2 z-10 flex -translate-x-1/2 gap-2">

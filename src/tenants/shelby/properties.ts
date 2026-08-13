@@ -148,7 +148,7 @@ export const properties: Property[] = [
     priceFrom: 254900,
     delivery: "2028",
     status: "lancamento",
-    address: "Estrada de Itapecerica - Campo Limpo, São Paulo - SP",
+    address: "Estrada de Itapecerica, Campo Limpo, São Paulo, SP",
     nearby: [
       { place: "Estação Campo Limpo (Linha 5-Lilás)" },
       { place: "Estação Vila das Belezas (Linha 5-Lilás)" },

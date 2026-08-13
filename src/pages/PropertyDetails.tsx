@@ -69,10 +69,17 @@ export function PropertyDetails() {
     ? buildWhatsappLink(whatsapp, `Olá! Tenho interesse em agendar uma visita ao ${property.name}.`)
     : null;
 
-  const propertyQuery = property.address ?? `${property.name} ${property.neighborhood} ${property.city}`;
-  const activeQuery = mapFocus ?? propertyQuery;
-  const mapsLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(activeQuery)}`;
-  const mapEmbedSrc = `https://maps.google.com/maps?q=${encodeURIComponent(activeQuery)}&z=15&output=embed`;
+  const propertyQuery =
+    property.address ?? `${property.name}, ${property.neighborhood}, ${property.city}`;
+  // Sem foco: mostra o empreendimento. Com foco num ponto: mostra a ROTA do
+  // empreendimento ate o ponto — assim o empreendimento continua visivel e da
+  // pra ter nocao da distancia.
+  const mapEmbedSrc = mapFocus
+    ? `https://maps.google.com/maps?saddr=${encodeURIComponent(propertyQuery)}&daddr=${encodeURIComponent(mapFocus)}&output=embed`
+    : `https://maps.google.com/maps?q=${encodeURIComponent(propertyQuery)}&z=16&output=embed`;
+  const mapsLink = mapFocus
+    ? `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(propertyQuery)}&destination=${encodeURIComponent(mapFocus)}`
+    : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(propertyQuery)}`;
 
   const focusOnMap = (place: string) => {
     setMapFocus(`${place}, ${property.neighborhood}, ${property.city}`);
@@ -197,7 +204,7 @@ export function PropertyDetails() {
             className="mt-4 inline-flex items-center gap-2 rounded-full border border-brand/15 bg-paper px-4 py-2 text-sm font-medium text-brand shadow-card transition-colors hover:bg-brand hover:text-paper"
           >
             <MapPin className="size-4 text-accent" aria-hidden />
-            Ver no Google Maps
+            {mapFocus ? "Ver rota no Google Maps" : "Ver no Google Maps"}
           </a>
           {property.address && <p className="mt-3 text-sm text-ink/60">{property.address}</p>}
           <div ref={mapRef} className="mt-5 overflow-hidden rounded-card border border-brand/10 shadow-card">
