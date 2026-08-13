@@ -24,5 +24,5 @@ export const broker: Broker = {
   city: "São Paulo", // TODO: confirmar
   serviceRegion: "",
   instagram: "",
-  photo: "",
+  photo: "/consultor-shelby-terno.jpg",
 };
