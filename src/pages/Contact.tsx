@@ -10,7 +10,7 @@ export function Contact() {
     <>
       <Seo
         title="Contato"
-        description="Faca o diagnostico do comprador ou fale direto pelo WhatsApp para conversar sobre o seu próximo imóvel."
+        description="Faça o diagnóstico do comprador ou fale direto pelo WhatsApp para conversar sobre o seu próximo imóvel."
       />
 
       <Section className="pb-0 text-center">
@@ -19,7 +19,7 @@ export function Contact() {
           Vamos conversar sobre o seu próximo imóvel
         </h1>
         <p className="mx-auto mt-4 max-w-xl text-lg text-ink/70">
-          Faca o diagnostico abaixo para receber um direcionamento inicial, ou
+          Faça o diagnóstico abaixo para receber um direcionamento inicial, ou
           fale diretamente pelos canais abaixo.
         </p>
         <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
@@ -42,9 +42,9 @@ export function Contact() {
       </Section>
 
       <BuyerDiagnosis
-        eyebrow="Diagnostico do comprador"
+        eyebrow="Diagnóstico do comprador"
         title="Vamos entender o seu momento de compra"
-        description="Responda em 3 passos rapidos para receber um direcionamento inicial pelo WhatsApp — sem compromisso."
+        description="Responda em 3 passos rápidos para receber um direcionamento inicial pelo WhatsApp — sem compromisso."
       />
     </>
   );

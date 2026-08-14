@@ -318,7 +318,7 @@ export function PropertyDetails() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`Agendar visita ao ${property.name}`}
-          className="fixed bottom-[5.5rem] right-5 z-40 inline-flex items-center gap-2 rounded-full bg-accent px-4 py-3 text-sm font-semibold text-brand shadow-lg shadow-black/15 transition-transform hover:scale-105 focus-visible:scale-105"
+          className="fixed bottom-[5.5rem] right-5 z-40 inline-flex items-center gap-2 rounded-full bg-accent px-4 py-3 text-sm font-semibold text-brand shadow-lg shadow-black/15 transition-transform hover:scale-105 focus-visible:scale-105 sm:bottom-40"
         >
           <CalendarDays className="size-5" aria-hidden />
           <span className="hidden sm:inline">Agendar visita</span>
@@ -327,7 +327,7 @@ export function PropertyDetails() {
         <Link
           to="/contato"
           aria-label="Agendar visita"
-          className="fixed bottom-[5.5rem] right-5 z-40 inline-flex items-center gap-2 rounded-full bg-accent px-4 py-3 text-sm font-semibold text-brand shadow-lg shadow-black/15 transition-transform hover:scale-105 focus-visible:scale-105"
+          className="fixed bottom-[5.5rem] right-5 z-40 inline-flex items-center gap-2 rounded-full bg-accent px-4 py-3 text-sm font-semibold text-brand shadow-lg shadow-black/15 transition-transform hover:scale-105 focus-visible:scale-105 sm:bottom-40"
         >
           <CalendarDays className="size-5" aria-hidden />
           <span className="hidden sm:inline">Agendar visita</span>

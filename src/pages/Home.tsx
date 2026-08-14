@@ -20,7 +20,7 @@ export function Home() {
         id="diagnostico"
         eyebrow="Busca guiada"
         title="Encontre opções compatíveis com o seu perfil"
-        description="Responda em 3 passos rapidos e receba um direcionamento inicial pelo WhatsApp — sem compromisso."
+        description="Responda em 3 passos rápidos e receba um direcionamento inicial pelo WhatsApp — sem compromisso."
       />
       <Opportunities />
       <FeaturedShowcase />
