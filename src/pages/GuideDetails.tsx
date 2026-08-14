@@ -39,7 +39,7 @@ export function GuideDetails() {
         </div>
 
         <p className="mt-8 text-sm text-ink/50">
-          Este conteudo e educativo e nao substitui a análise oficial da
+          Este conteúdo é educativo e não substitui a análise oficial da
           instituição financeira nem constitui garantia de aprovação de crédito.
         </p>
 

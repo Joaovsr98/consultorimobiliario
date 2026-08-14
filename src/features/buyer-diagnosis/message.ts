@@ -22,7 +22,7 @@ export function buildDiagnosisMessage(data: DiagnosisData): string {
   const utmLine = getStoredUtmLine();
 
   const lines = [
-    `Olá, ${greetingName}! Fiz o diagnostico no site.`,
+    `Olá, ${greetingName}! Fiz o diagnóstico no site.`,
     "",
     `Objetivo: ${goalLabels[data.goal]}`,
     `Região: ${data.region}`,

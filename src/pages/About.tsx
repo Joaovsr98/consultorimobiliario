@@ -54,9 +54,9 @@ export function About() {
         )}
 
         <p className="mt-8 text-lg leading-relaxed text-ink/80">
-          Meu trabalho e ajudar você a entender as opções disponíveis,
+          Meu trabalho é ajudar você a entender as opções disponíveis,
           organizar as etapas da compra e encontrar um imóvel compatível com a
-          sua realidade financeira. Nao acredito em empurrar decisão antes do
+          sua realidade financeira. Não acredito em empurrar decisão antes do
           momento certo — acredito em explicar cada passo com clareza para que
           você decida com segurança.
         </p>
@@ -67,7 +67,7 @@ export function About() {
               <MapPin className="mt-0.5 size-5 shrink-0 text-accent" aria-hidden />
               <div>
                 <dt className="text-xs uppercase tracking-wide text-ink/50">
-                  Região de atuacao
+                  Região de atuação
                 </dt>
                 <dd className="mt-1 font-medium text-brand">{identity.serviceRegion}</dd>
               </div>
@@ -79,7 +79,7 @@ export function About() {
             <div>
               <dt className="text-xs uppercase tracking-wide text-ink/50">Registro profissional</dt>
               <dd className="mt-1 font-medium text-brand">
-                {identity.registrationLabel ?? "Em regularizacao"}
+                {identity.registrationLabel ?? "Em regularização"}
               </dd>
             </div>
           </div>
@@ -100,7 +100,7 @@ export function About() {
             </li>
             <li className="flex gap-3">
               <span className="text-accent">3.</span>
-              Acompanho você nas visitas, na proposta e ate a entrega das
+              Acompanho você nas visitas, na proposta e até a entrega das
               chaves.
             </li>
           </ul>

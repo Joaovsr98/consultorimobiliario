@@ -6,7 +6,7 @@ const steps = [
   "Fazemos a simulação",
   "Agendamos a visita",
   "Acompanhamos a proposta",
-  "Seguimos ate as chaves",
+  "Seguimos até as chaves",
 ];
 
 /** Jornada de compra em 6 etapas — reduz a inseguranca de quem nunca comprou imóvel. */

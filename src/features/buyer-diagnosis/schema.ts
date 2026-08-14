@@ -17,10 +17,10 @@ export const diagnosisSchema = z.object({
   }),
   income: z.coerce
     .number({ message: "Informe um valor" })
-    .positive("Informe um valor valido"),
+    .positive("Informe um valor válido"),
   downPayment: z.coerce
     .number({ message: "Informe um valor" })
-    .min(0, "Informe um valor valido"),
+    .min(0, "Informe um valor válido"),
   fgts: z.enum(["sim", "nao"], {
     message: "Selecione uma opção",
   }),
@@ -40,14 +40,14 @@ export const goalLabels: Record<DiagnosisData["goal"], string> = {
 };
 
 export const bedroomsLabels: Record<DiagnosisData["bedrooms"], string> = {
-  "1": "1 dormitorio",
-  "2": "2 dormitorios",
-  "3+": "3 ou mais dormitorios",
+  "1": "1 dormitório",
+  "2": "2 dormitórios",
+  "3+": "3 ou mais dormitórios",
 };
 
 export const fgtsLabels: Record<DiagnosisData["fgts"], string> = {
   sim: "Sim",
-  nao: "Nao",
+  nao: "Não",
 };
 
 export const timelineLabels: Record<DiagnosisData["timeline"], string> = {

@@ -6,17 +6,17 @@ import { Seo } from "@/components/shared/Seo";
 export function NotFound() {
   return (
     <Section className="text-center">
-      <Seo title="Pagina nao encontrada" />
+      <Seo title="Página não encontrada" />
       <p className="font-display text-6xl font-semibold text-accent">404</p>
       <h1 className="mt-4 font-display text-3xl font-semibold text-brand">
-        Pagina nao encontrada
+        Página não encontrada
       </h1>
       <p className="mx-auto mt-3 max-w-md text-ink/70">
-        O endereço que você tentou acessar nao existe ou foi movido.
+        O endereço que você tentou acessar não existe ou foi movido.
       </p>
       <div className="mt-8">
         <Link to="/" className={buttonClasses("primary", "lg")}>
-          Voltar ao inicio
+          Voltar ao início
         </Link>
       </div>
     </Section>

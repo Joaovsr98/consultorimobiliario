@@ -60,7 +60,7 @@ function OptionButtons<T extends string>({
 function ResponsePreview({ data }: { data: DiagnosisData }) {
   const rows: [string, string][] = [
     ["Objetivo", goalLabels[data.goal]],
-    ["Regiao", data.region],
+    ["Região", data.region],
     ["Dormitórios", bedroomsLabels[data.bedrooms]],
     ["Renda familiar", `R$ ${data.income.toLocaleString("pt-BR")}`],
     ["Entrada", `R$ ${data.downPayment.toLocaleString("pt-BR")}`],
@@ -96,9 +96,9 @@ type BuyerDiagnosisProps = {
  */
 export function BuyerDiagnosis({
   id,
-  eyebrow = "Diagnostico do comprador",
+  eyebrow = "Diagnóstico do comprador",
   title = "Encontre opções compatíveis com o seu perfil",
-  description = "Responda em 3 passos rapidos e receba um direcionamento inicial pelo WhatsApp — sem compromisso.",
+  description = "Responda em 3 passos rápidos e receba um direcionamento inicial pelo WhatsApp — sem compromisso.",
 }: BuyerDiagnosisProps) {
   const [step, setStep] = useState(0);
   const [submitted, setSubmitted] = useState<DiagnosisData | null>(null);
@@ -180,7 +180,7 @@ export function BuyerDiagnosis({
             Encontramos opções que podem combinar com seu perfil.
           </h2>
           <p className="mt-3 text-ink/70">
-            A confirmacao depende da disponibilidade e da análise oficial.
+            A confirmação depende da disponibilidade e da análise oficial.
           </p>
 
           <ResponsePreview data={submitted} />
@@ -188,9 +188,9 @@ export function BuyerDiagnosis({
           {whatsapp ? (
             <>
               <p className="mt-6 text-xs text-ink/50">
-                Ao continuar, essas respostas serao organizadas em uma
+                Ao continuar, essas respostas serão organizadas em uma
                 mensagem para iniciar seu atendimento pelo WhatsApp. Nenhuma
-                análise de crédito e realizada neste site.
+                análise de crédito é realizada neste site.
               </p>
               <a
                 href={buildWhatsappLink(whatsapp, buildDiagnosisMessage(submitted))}
@@ -204,7 +204,7 @@ export function BuyerDiagnosis({
             </>
           ) : (
             <p className="mt-6 text-ink/70">
-              O atendimento pelo WhatsApp ainda nao esta disponível. Utilize os
+              O atendimento pelo WhatsApp ainda não está disponível. Utilize os
               canais de contato da empresa.
             </p>
           )}
@@ -223,7 +223,7 @@ export function BuyerDiagnosis({
               className={buttonClasses("ghost", "sm", "ml-2")}
             >
               <RotateCcw className="size-3.5" aria-hidden />
-              Recomecar
+              Recomeçar
             </button>
           </div>
         </div>

@@ -211,7 +211,7 @@ export const properties: Property[] = [
     neighborhood: "Jardim Bonfiglioli",
     city: "São Paulo",
     bedrooms: "2 dormitórios",
-    area: "31 a 34 m2",
+    area: "32 a 42 m2",
     priceFrom: 276000,
     delivery: "2028",
     status: "lancamento",
