@@ -18,7 +18,7 @@ const OG_BY_TENANT: Record<
     title: "Bueno House — Lançamentos em São Paulo com atendimento personalizado",
     description:
       "Encontre imóveis compatíveis com seu perfil e receba atendimento personalizado do início à entrega das chaves.",
-    url: "https://corretorbr.vercel.app",
+    url: "https://consultorimobiliario.vercel.app",
   },
   shelby: {
     siteName: "Shelby House",
