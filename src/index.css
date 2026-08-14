@@ -77,6 +77,28 @@ body {
   border-radius: 4px;
 }
 
+/*
+  Mascote com vida: flutuar leve e continuo + uma balancadinha (aceno) uma vez
+  por ciclo. `transform-origin: bottom` mantem os pes no lugar. Fica no wrapper
+  para nao conflitar com o zoom (scale) do hover, que vive na propria imagem.
+*/
+@keyframes mascot-idle {
+  0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+  18% { transform: translateY(-6px) translateX(0) rotate(0deg); }
+  34% { transform: translateY(0) translateX(0) rotate(0deg); }
+  /* Inclina/cutuca em direcao ao botao do WhatsApp (a direita) — como quem
+     chama a atencao pra la, ja que o mascote nao tem braco livre para apontar. */
+  48% { transform: translateY(0) translateX(4px) rotate(6deg); }
+  58% { transform: translateY(0) translateX(1px) rotate(2deg); }
+  68% { transform: translateY(0) translateX(4px) rotate(6deg); }
+  82% { transform: translateY(0) translateX(0) rotate(0deg); }
+}
+.mascot-idle {
+  animation: mascot-idle 5s ease-in-out infinite;
+  transform-origin: bottom center;
+  will-change: transform;
+}
+
 /* Sem microinteracoes para quem prefere menos movimento. */
 @media (prefers-reduced-motion: reduce) {
   *,

@@ -14,12 +14,16 @@ export function WhatsAppButton() {
 
   return (
     <div className="fixed bottom-5 right-5 z-30 flex items-end gap-1">
-      <img
-        src="/consultor-bueno.png"
-        alt=""
-        aria-hidden
-        className="hidden h-24 w-auto origin-bottom cursor-pointer select-none drop-shadow-xl transition-transform duration-300 ease-out hover:scale-[1.35] motion-reduce:transition-none sm:block"
-      />
+      {/* Wrapper anima (flutua/acena); a imagem faz o zoom no hover. Pausa a
+          animacao no hover para o zoom ficar limpo. */}
+      <span className="mascot-idle hidden origin-bottom hover:[animation-play-state:paused] sm:block">
+        <img
+          src="/consultor-bueno.png"
+          alt=""
+          aria-hidden
+          className="h-24 w-auto origin-bottom cursor-pointer select-none drop-shadow-xl transition-transform duration-300 ease-out hover:scale-[1.35] motion-reduce:transition-none"
+        />
+      </span>
       <a
         href={buildWhatsappLink(identity.contact.whatsapp, defaultWhatsappMessage)}
         target="_blank"
