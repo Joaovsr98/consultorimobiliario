@@ -40,3 +40,6 @@ _materiais/
 /*.jpg
 /*.png
 /WhatsApp*
+
+# Arquivo pessoal do cliente, nao versionar
+/Biblioteca_Prompts_Especialistas.xlsx
