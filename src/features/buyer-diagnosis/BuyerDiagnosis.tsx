@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, CheckCircle2, MessageCircle, RotateCcw, ShieldCheck } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, CheckCircle2, Home, MessageCircle, RotateCcw, ShieldCheck, TrendingUp } from "lucide-react";
 import { Section } from "@/components/ui/Section";
 import { buttonClasses } from "@/lib/button-styles";
 import { cn } from "@/lib/utils";
@@ -13,6 +13,7 @@ import {
   contactLabels,
   diagnosisSchema,
   fgtsLabels,
+  goalDescriptions,
   goalLabels,
   stepFields,
   stepTitles,
@@ -20,6 +21,65 @@ import {
   type DiagnosisData,
 } from "./schema";
 import { buildDiagnosisMessage } from "./message";
+
+const goalIcons: Record<DiagnosisData["goal"], typeof Home> = {
+  morar: Home,
+  investir: TrendingUp,
+};
+
+/**
+ * Cards de escolha do objetivo (passo 1). Diferente dos pills de opcao, cada
+ * objetivo ganha icone, titulo e subtitulo — transmite atendimento consultivo,
+ * nao um formulario. Selecionado: borda navy, fundo suave e selo dourado.
+ */
+function GoalCards({
+  value,
+  onChange,
+}: {
+  value: DiagnosisData["goal"] | undefined;
+  onChange: (value: DiagnosisData["goal"]) => void;
+}) {
+  return (
+    <div className="grid gap-3 sm:grid-cols-2">
+      {(["morar", "investir"] as const).map((goal) => {
+        const Icon = goalIcons[goal];
+        const selected = value === goal;
+        return (
+          <button
+            key={goal}
+            type="button"
+            onClick={() => onChange(goal)}
+            aria-pressed={selected}
+            className={cn(
+              "group relative flex flex-col items-start gap-3 rounded-image border p-5 text-left transition-all duration-200",
+              selected
+                ? "-translate-y-0.5 border-brand bg-brand/[0.04] shadow-card"
+                : "border-brand/15 bg-surface hover:-translate-y-0.5 hover:border-brand/40 hover:bg-paper hover:shadow-card"
+            )}
+          >
+            {selected && (
+              <span className="absolute right-3 top-3 grid size-5 place-items-center rounded-full bg-accent text-paper">
+                <Check className="size-3" strokeWidth={3} aria-hidden />
+              </span>
+            )}
+            <span
+              className={cn(
+                "grid size-10 place-items-center rounded-full transition-colors",
+                selected ? "bg-brand text-paper" : "bg-brand/10 text-brand"
+              )}
+            >
+              <Icon className="size-5" aria-hidden />
+            </span>
+            <span className="font-display text-base font-semibold text-brand">
+              {goalLabels[goal]}
+            </span>
+            <span className="text-sm leading-snug text-ink/60">{goalDescriptions[goal]}</span>
+          </button>
+        );
+      })}
+    </div>
+  );
+}
 
 type OptionButtonsProps<T extends string> = {
   value: T | undefined;
@@ -254,22 +314,50 @@ export function BuyerDiagnosis({
           </ul>
         </div>
 
-        <div className="relative rounded-card border border-brand/10 bg-paper p-6 shadow-card sm:p-8">
-          <div className="flex items-center justify-center gap-2">
+        <div className="relative overflow-hidden rounded-[20px] border border-brand/[0.08] bg-gradient-to-br from-paper to-surface/40 p-6 shadow-[0_24px_60px_-20px_rgba(19,34,56,0.18),0_4px_12px_-4px_rgba(19,34,56,0.06)] sm:p-8">
+          {/* Fio dourado no topo — detalhe premium, sem exagero */}
+          <span
+            className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-accent/40 via-accent to-accent/40"
+            aria-hidden
+          />
+
+          <div className="text-center">
+            <p className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-accent">
+              Consultoria personalizada
+            </p>
+            <p className="mt-1.5 text-xs text-ink/45">Responda 3 perguntas · menos de 1 minuto</p>
+          </div>
+
+          {/* Progresso com etapas nomeadas */}
+          <div className="mt-6 flex items-start justify-center gap-1.5">
             {stepTitles.map((label, index) => (
-              <div key={label} className="flex items-center gap-2">
-                <span
-                  className={cn(
-                    "grid size-7 place-items-center rounded-full text-xs font-semibold transition-colors",
-                    index <= step ? "bg-brand text-paper" : "bg-brand/10 text-ink/50"
-                  )}
-                >
-                  {index + 1}
-                </span>
+              <div key={label} className="flex flex-1 items-start gap-1.5">
+                <div className="flex flex-1 flex-col items-center gap-1.5">
+                  <span
+                    className={cn(
+                      "grid size-8 place-items-center rounded-full text-xs font-semibold tabular-nums transition-colors",
+                      index < step
+                        ? "bg-brand text-paper"
+                        : index === step
+                          ? "bg-brand text-paper ring-4 ring-brand/10"
+                          : "bg-brand/10 text-ink/45"
+                    )}
+                  >
+                    {index < step ? <Check className="size-4" strokeWidth={3} aria-hidden /> : `0${index + 1}`}
+                  </span>
+                  <span
+                    className={cn(
+                      "text-[0.7rem] font-medium transition-colors",
+                      index <= step ? "text-brand" : "text-ink/40"
+                    )}
+                  >
+                    {label}
+                  </span>
+                </div>
                 {index < stepTitles.length - 1 && (
                   <span
                     className={cn(
-                      "h-px w-8 transition-colors",
+                      "mt-4 h-px flex-1 transition-colors",
                       index < step ? "bg-brand" : "bg-brand/15"
                     )}
                     aria-hidden
@@ -281,7 +369,7 @@ export function BuyerDiagnosis({
         <p
           ref={stepHeadingRef}
           tabIndex={-1}
-          className="mt-3 text-center text-xs font-medium uppercase tracking-wide text-ink/40 outline-none"
+          className="sr-only outline-none"
         >
           Passo {step + 1} de {stepTitles.length} &middot; {stepTitles[step]}
         </p>
@@ -297,14 +385,10 @@ export function BuyerDiagnosis({
           >
             {step === 0 && (
               <fieldset>
-                <legend className="text-sm font-medium text-ink">
-                  Você deseja morar ou investir?
-                </legend>
+                <legend className="text-sm font-medium text-ink">Qual é o seu objetivo?</legend>
                 <div className="mt-3">
-                  <OptionButtons
+                  <GoalCards
                     value={values.goal}
-                    options={["morar", "investir"] as const}
-                    labels={goalLabels}
                     onChange={(v) => setValue("goal", v, { shouldValidate: true })}
                   />
                 </div>
@@ -452,30 +536,39 @@ export function BuyerDiagnosis({
           </motion.div>
         </AnimatePresence>
 
-        <div className="mt-8 flex items-center justify-between border-t border-brand/10 pt-6">
-          <button
-            type="button"
-            onClick={handleBack}
-            disabled={step === 0}
-            className={cn(
-              buttonClasses("ghost", "md"),
-              step === 0 && "pointer-events-none opacity-0"
+        <div className="mt-8 border-t border-brand/10 pt-6">
+          <div className={cn("flex items-center gap-3", step === 0 ? "justify-end" : "justify-between")}>
+            {step > 0 && (
+              <button
+                type="button"
+                onClick={handleBack}
+                className={buttonClasses("ghost", "md")}
+              >
+                <ArrowLeft className="size-4" aria-hidden />
+                Voltar
+              </button>
             )}
-          >
-            <ArrowLeft className="size-4" aria-hidden />
-            Voltar
-          </button>
 
-          <button
-            type="button"
-            onClick={handleNext}
-            disabled={isNavigating}
-            aria-busy={isNavigating}
-            className={cn(buttonClasses("primary", "md"), isNavigating && "opacity-70")}
-          >
-            {isLastStep ? "Continuar no WhatsApp" : "Continuar"}
-            <ArrowRight className="size-4" aria-hidden />
-          </button>
+            <button
+              type="button"
+              onClick={handleNext}
+              disabled={isNavigating}
+              aria-busy={isNavigating}
+              className={cn(
+                buttonClasses("primary", "md"),
+                step === 0 && "w-full sm:w-auto",
+                isNavigating && "opacity-70"
+              )}
+            >
+              {isLastStep ? "Receber opções pelo WhatsApp" : "Continuar minha busca"}
+              <ArrowRight className="size-4" aria-hidden />
+            </button>
+          </div>
+
+          <p className="mt-5 flex items-center justify-center gap-1.5 text-center text-xs text-ink/45">
+            <ShieldCheck className="size-3.5 shrink-0 text-accent" aria-hidden />
+            Atendimento personalizado e sem custo — seus dados servem apenas para o atendimento.
+          </p>
         </div>
         </div>
       </div>

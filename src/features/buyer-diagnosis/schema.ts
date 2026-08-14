@@ -35,8 +35,14 @@ export const diagnosisSchema = z.object({
 export type DiagnosisData = z.infer<typeof diagnosisSchema>;
 
 export const goalLabels: Record<DiagnosisData["goal"], string> = {
-  morar: "Morar",
-  investir: "Investir",
+  morar: "Quero morar",
+  investir: "Quero investir",
+};
+
+/** Subtitulo de apoio de cada objetivo, exibido nos cards de escolha do passo 1. */
+export const goalDescriptions: Record<DiagnosisData["goal"], string> = {
+  morar: "Encontre seu novo lar em São Paulo",
+  investir: "Busque oportunidades com potencial",
 };
 
 export const bedroomsLabels: Record<DiagnosisData["bedrooms"], string> = {
@@ -68,4 +74,4 @@ export const stepFields: (keyof DiagnosisData)[][] = [
   ["income", "downPayment", "fgts", "timeline", "contact"],
 ];
 
-export const stepTitles = ["Objetivo", "Onde e como", "Financeiro"];
+export const stepTitles = ["Perfil", "Preferências", "Financeiro"];
