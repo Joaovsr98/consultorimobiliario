@@ -26,6 +26,21 @@ export function Seo({ title, description }: SeoProps) {
       })();
 
     meta.setAttribute("content", description ?? seo.defaultDescription);
+
+    // Canonical por pagina — atualiza na navegacao SPA. Evita a home e as rotas
+    // serem tratadas como conteudo duplicado por parametros/variacoes de URL.
+    if (seo.baseUrl) {
+      const canonical =
+        document.querySelector<HTMLLinkElement>('link[rel="canonical"]') ??
+        (() => {
+          const el = document.createElement("link");
+          el.setAttribute("rel", "canonical");
+          document.head.appendChild(el);
+          return el;
+        })();
+      const path = window.location.pathname.replace(/\/+$/, "") || "/";
+      canonical.setAttribute("href", `${seo.baseUrl.replace(/\/+$/, "")}${path === "/" ? "/" : path}`);
+    }
   }, [title, description]);
 
   return null;

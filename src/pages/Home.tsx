@@ -12,7 +12,10 @@ import { FinalCta } from "@/components/home/FinalCta";
 export function Home() {
   return (
     <>
-      <Seo title="Início" />
+      <Seo
+        title="Apartamentos em São Paulo"
+        description="Apartamentos e lançamentos em São Paulo, inclusive próximos ao metrô e no Minha Casa Minha Vida. Atendimento imobiliário personalizado do início à entrega das chaves."
+      />
 
       <Hero />
 
