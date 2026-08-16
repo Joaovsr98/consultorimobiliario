@@ -90,7 +90,26 @@ function buildSitemap(baseUrl: string): string {
 }
 
 function buildRobots(baseUrl: string): string {
-  return `User-agent: *\nAllow: /\n\nSitemap: ${baseUrl}/sitemap.xml\n`;
+  // Liberamos explicitamente os robos de IA/assistentes — queremos aparecer nas
+  // respostas do ChatGPT, Perplexity, Gemini, Copilot e Apple Intelligence.
+  // (Google-Extended e Applebot-Extended controlam o USO em IA; liberar = opt-in.)
+  const aiAgents = [
+    "GPTBot",
+    "OAI-SearchBot",
+    "ChatGPT-User",
+    "PerplexityBot",
+    "Perplexity-User",
+    "ClaudeBot",
+    "anthropic-ai",
+    "Claude-Web",
+    "Google-Extended",
+    "Applebot-Extended",
+    "Amazonbot",
+    "CCBot",
+    "Bytespider",
+  ];
+  const aiBlocks = aiAgents.map((ua) => `User-agent: ${ua}\nAllow: /`).join("\n\n");
+  return `User-agent: *\nAllow: /\n\n${aiBlocks}\n\nSitemap: ${baseUrl}/sitemap.xml\n`;
 }
 
 function buildJsonLd(data: TenantSeo): string {

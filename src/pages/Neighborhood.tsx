@@ -4,6 +4,7 @@ import { tenant, identity } from "@/tenants";
 import { getNeighborhoodBySlug } from "@/data/neighborhoods";
 import { Section } from "@/components/ui/Section";
 import { Seo } from "@/components/shared/Seo";
+import { JsonLd } from "@/components/shared/JsonLd";
 import { PropertyCard } from "@/components/shared/PropertyCard";
 import { buttonClasses } from "@/lib/button-styles";
 import { buildWhatsappLink, defaultWhatsappMessage } from "@/lib/whatsapp";
@@ -23,9 +24,20 @@ export function Neighborhood() {
   const properties = tenant.properties.filter((p) => p.neighborhood === data.neighborhood);
   const whatsapp = identity.contact.whatsapp;
 
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: data.faq.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: { "@type": "Answer", text: item.answer },
+    })),
+  };
+
   return (
     <>
       <Seo title={data.metaTitle} description={data.metaDescription} />
+      <JsonLd id="faq-jsonld" data={faqJsonLd} />
 
       <Section className="pb-0">
         <p className="flex items-center gap-1.5 text-sm font-semibold uppercase tracking-wide text-accent">
