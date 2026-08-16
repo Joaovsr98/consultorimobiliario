@@ -74,6 +74,98 @@ export const neighborhoods: NeighborhoodPage[] = [
       },
     ],
   },
+  {
+    slug: "apartamentos-campo-limpo",
+    neighborhood: "Campo Limpo",
+    city: "São Paulo",
+    metaTitle: "Apartamentos em Campo Limpo, São Paulo",
+    metaDescription:
+      "Apartamentos e lançamentos em Campo Limpo, Zona Sul de São Paulo — perto das Estações Campo Limpo e Vila das Belezas (Linha 5-Lilás), com opções no Minha Casa Minha Vida.",
+    h1: "Apartamentos à venda em Campo Limpo, São Paulo",
+    intro: [
+      "Campo Limpo é uma região da Zona Sul de São Paulo atendida pela Linha 5-Lilás do metrô, com as Estações Campo Limpo e Vila das Belezas. A Linha 5 conecta a região a Santo Amaro e à Chácara Klabin, com integração a outras linhas do metrô — o que facilita bastante o dia a dia de quem depende do transporte público.",
+      "É uma área com comércio forte, shopping, hospital e opções de lazer no próprio bairro. Abaixo estão os lançamentos que atendemos em Campo Limpo, com valores e condições, além de um resumo do que a região oferece.",
+    ],
+    transport: [
+      "Estações Campo Limpo e Vila das Belezas (Linha 5-Lilás), que liga a região a Santo Amaro e à Chácara Klabin, com integração a outras linhas.",
+      "Boa oferta de linhas de ônibus municipais atendendo o bairro e o entorno.",
+      "Acesso pela Estrada de Itapecerica, uma das principais vias da região.",
+    ],
+    highlights: [
+      "Shopping Campo Limpo, com lojas, serviços e cinema.",
+      "Hospital Campo Limpo e Sesc Campo Limpo, referências de saúde e lazer na região.",
+      "Comércio de rua variado e atacadistas para as compras do dia a dia.",
+      "Região consolidada, com boa oferta de escolas e serviços.",
+    ],
+    buyerProfile: [
+      "Quem busca o primeiro imóvel e quer aproveitar as condições do Programa Minha Casa Minha Vida.",
+      "Quem usa a Linha 5-Lilás no dia a dia e quer morar perto do metrô.",
+      "Quem investe pensando em locação, aproveitando a demanda por moradia perto de metrô, shopping e hospital.",
+    ],
+    faq: [
+      {
+        question: "Tem apartamento no Minha Casa Minha Vida em Campo Limpo?",
+        answer:
+          "Sim. O lançamento que atendemos em Campo Limpo tem unidades enquadradas no Programa Minha Casa Minha Vida. As condições dependem do seu perfil e das regras vigentes — avaliamos isso no diagnóstico gratuito.",
+      },
+      {
+        question: "Qual linha de metrô atende Campo Limpo?",
+        answer:
+          "A Linha 5-Lilás, com as Estações Campo Limpo e Vila das Belezas. Ela conecta a região a Santo Amaro e à Chácara Klabin, com integração a outras linhas.",
+      },
+      {
+        question: "O bairro tem shopping e hospital por perto?",
+        answer:
+          "Sim. Campo Limpo conta com o Shopping Campo Limpo, o Hospital Campo Limpo e o Sesc Campo Limpo, além de comércio de rua variado.",
+      },
+    ],
+  },
+  {
+    slug: "apartamentos-jardim-bonfiglioli",
+    neighborhood: "Jardim Bonfiglioli",
+    city: "São Paulo",
+    metaTitle: "Apartamentos no Jardim Bonfiglioli, São Paulo",
+    metaDescription:
+      "Apartamentos e lançamentos no Jardim Bonfiglioli, Zona Oeste de São Paulo — perto de estação da Linha 4-Amarela, com acesso rápido a Pinheiros e Paulista e opções no Minha Casa Minha Vida.",
+    h1: "Apartamentos à venda no Jardim Bonfiglioli, São Paulo",
+    intro: [
+      "O Jardim Bonfiglioli é um bairro residencial da Zona Oeste de São Paulo, na região do Butantã, próximo de uma estação da Linha 4-Amarela do metrô. Isso dá acesso rápido a Pinheiros e à Avenida Paulista sem baldeação — uma vantagem para quem trabalha nesses polos.",
+      "É uma área tranquila e bem localizada, perto da USP e do comércio do Butantã. Abaixo estão os lançamentos que atendemos no Jardim Bonfiglioli, com valores e condições, além de um resumo do que a região oferece.",
+    ],
+    transport: [
+      "Estação da Linha 4-Amarela a cerca de 10 minutos a pé, com ligação direta a Pinheiros, Faria Lima e Paulista.",
+      "Proximidade da Rodovia Raposo Tavares e da Marginal Pinheiros para quem se locomove de carro.",
+      "Diversas linhas de ônibus atendendo o Butantã e o entorno.",
+    ],
+    highlights: [
+      "Proximidade da USP e do comércio consolidado do Butantã.",
+      "Cerca de 10 minutos de Pinheiros e 15 da Avenida Paulista pela Linha 4-Amarela.",
+      "Bairro residencial e tranquilo, prático para quem quer sossego perto do metrô.",
+      "Boa oferta de escolas, serviços e áreas verdes na região.",
+    ],
+    buyerProfile: [
+      "Quem trabalha em Pinheiros, na Faria Lima ou na Paulista e quer reduzir o tempo de deslocamento.",
+      "Quem busca o primeiro imóvel e quer aproveitar as condições do Programa Minha Casa Minha Vida.",
+      "Quem investe pensando em locação, aproveitando a proximidade do metrô e da USP.",
+    ],
+    faq: [
+      {
+        question: "Tem apartamento no Minha Casa Minha Vida no Jardim Bonfiglioli?",
+        answer:
+          "Sim. O lançamento que atendemos no Jardim Bonfiglioli tem unidades enquadradas no Programa Minha Casa Minha Vida. As condições dependem do seu perfil e das regras vigentes — avaliamos isso no diagnóstico gratuito.",
+      },
+      {
+        question: "Qual linha de metrô atende o Jardim Bonfiglioli?",
+        answer:
+          "A Linha 4-Amarela, com uma estação a cerca de 10 minutos a pé. De lá dá para chegar a Pinheiros, Faria Lima e Paulista sem baldeação.",
+      },
+      {
+        question: "Dá para chegar à Paulista de metrô?",
+        answer:
+          "Sim. Pela Linha 4-Amarela é possível chegar à região da Paulista sem trocar de linha, em torno de 15 minutos a partir do bairro.",
+      },
+    ],
+  },
 ];
 
 export function getNeighborhoodBySlug(slug: string): NeighborhoodPage | undefined {

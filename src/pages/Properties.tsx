@@ -84,7 +84,7 @@ export function Properties() {
                 to={`/${n.slug}`}
                 className="rounded-full border border-brand/15 bg-paper px-4 py-2 text-sm font-medium text-brand transition-colors hover:border-brand/40 hover:bg-surface"
               >
-                Apartamentos na {n.neighborhood}
+                Apartamentos em {n.neighborhood}
               </Link>
             ))}
           </div>

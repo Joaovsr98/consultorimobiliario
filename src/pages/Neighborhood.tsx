@@ -45,7 +45,7 @@ export function Neighborhood() {
       {properties.length > 0 && (
         <Section>
           <h2 className="font-display text-2xl font-semibold text-brand sm:text-3xl">
-            Empreendimentos na {data.neighborhood}
+            Empreendimentos em {data.neighborhood}
           </h2>
           <p className="mt-2 text-ink/60">
             Valores e disponibilidade sujeitos a alteração.
@@ -119,7 +119,7 @@ export function Neighborhood() {
             className={buttonClasses("primary", "lg", "mt-10")}
           >
             <MessageCircle className="size-4" aria-hidden />
-            Falar sobre imóveis na {data.neighborhood}
+            Falar sobre imóveis em {data.neighborhood}
           </a>
         )}
       </Section>

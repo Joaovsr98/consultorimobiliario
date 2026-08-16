@@ -63,7 +63,11 @@ const GUIDE_SLUGS = [
 ];
 const STATIC_ROUTES = ["/", "/imoveis", "/sobre", "/guias", "/contato", "/privacidade"];
 /** Landing pages de bairro — manter em sincronia com data/neighborhoods.ts. */
-const NEIGHBORHOOD_SLUGS = ["apartamentos-vila-sonia"];
+const NEIGHBORHOOD_SLUGS = [
+  "apartamentos-vila-sonia",
+  "apartamentos-campo-limpo",
+  "apartamentos-jardim-bonfiglioli",
+];
 
 function sitePaths(): string[] {
   return [
