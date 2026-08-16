@@ -62,10 +62,13 @@ const GUIDE_SLUGS = [
   "como-funciona-a-compra-do-primeiro-imovel",
 ];
 const STATIC_ROUTES = ["/", "/imoveis", "/sobre", "/guias", "/contato", "/privacidade"];
+/** Landing pages de bairro — manter em sincronia com data/neighborhoods.ts. */
+const NEIGHBORHOOD_SLUGS = ["apartamentos-vila-sonia"];
 
 function sitePaths(): string[] {
   return [
     ...STATIC_ROUTES,
+    ...NEIGHBORHOOD_SLUGS.map((s) => `/${s}`),
     ...PROPERTY_SLUGS.map((s) => `/imoveis/${s}`),
     ...GUIDE_SLUGS.map((s) => `/guias/${s}`),
   ];

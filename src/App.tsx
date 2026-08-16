@@ -17,6 +17,9 @@ const GuideDetails = lazy(() =>
   import("@/pages/GuideDetails").then((m) => ({ default: m.GuideDetails }))
 );
 const Contact = lazy(() => import("@/pages/Contact").then((m) => ({ default: m.Contact })));
+const Neighborhood = lazy(() =>
+  import("@/pages/Neighborhood").then((m) => ({ default: m.Neighborhood }))
+);
 const Privacy = lazy(() => import("@/pages/Privacy").then((m) => ({ default: m.Privacy })));
 const NotFound = lazy(() => import("@/pages/NotFound").then((m) => ({ default: m.NotFound })));
 
@@ -38,6 +41,8 @@ export function App() {
             <Route path="guias/:slug" element={<GuideDetails />} />
             <Route path="contato" element={<Contact />} />
             <Route path="privacidade" element={<Privacy />} />
+            {/* Landing pages de bairro (SEO local): /apartamentos-<bairro> */}
+            <Route path=":neighborhoodSlug" element={<Neighborhood />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

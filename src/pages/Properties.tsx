@@ -1,8 +1,10 @@
+import { Link } from "react-router-dom";
 import { tenant } from "@/tenants";
 import type { Property } from "@/types";
 import { Section } from "@/components/ui/Section";
 import { Seo } from "@/components/shared/Seo";
 import { PropertyCard } from "@/components/shared/PropertyCard";
+import { neighborhoods } from "@/data/neighborhoods";
 import { maxAreaFromLabel } from "@/lib/utils";
 
 const { properties } = tenant;
@@ -68,6 +70,26 @@ export function Properties() {
           </div>
         ))}
       </div>
+
+      {neighborhoods.length > 0 && (
+        <div className="mt-16 border-t border-brand/10 pt-8">
+          <h2 className="font-display text-xl font-semibold text-brand">Busca por região</h2>
+          <p className="mt-2 text-sm text-ink/60">
+            Veja apartamentos e o que a região oferece, bairro a bairro.
+          </p>
+          <div className="mt-4 flex flex-wrap gap-2.5">
+            {neighborhoods.map((n) => (
+              <Link
+                key={n.slug}
+                to={`/${n.slug}`}
+                className="rounded-full border border-brand/15 bg-paper px-4 py-2 text-sm font-medium text-brand transition-colors hover:border-brand/40 hover:bg-surface"
+              >
+                Apartamentos na {n.neighborhood}
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
     </Section>
   );
 }
