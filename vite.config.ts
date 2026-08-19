@@ -139,15 +139,29 @@ function buildPages(data: TenantSeo, properties: Prop[]): Page[] {
     .join("");
   const pages: Page[] = [];
 
-  // Home
+  // Home — conteudo em prosa suficiente para extratores de leitura (IA) e SEO.
+  const regioesTexto = neighborhoods
+    .map((n) => esc(n.neighborhood))
+    .join(", ")
+    .replace(/, ([^,]*)$/, " e $1");
   pages.push({
     path: "/",
     title: t("Apartamentos em São Paulo"),
     description:
       "Apartamentos e lançamentos em São Paulo, inclusive próximos ao metrô e no Minha Casa Minha Vida. Atendimento imobiliário personalizado do início à entrega das chaves.",
-    body: `<h1>Apartamentos e lançamentos em São Paulo</h1><p>${esc(
-      data.description
-    )}</p><nav><ul><li><a href="/imoveis">Imóveis</a></li>${neighborhoodLinks}<li><a href="/guias">Guias</a></li><li><a href="/sobre">Sobre</a></li><li><a href="/contato">Contato</a></li></ul></nav>`,
+    body: `<h1>Apartamentos e lançamentos em São Paulo</h1>
+<p>A ${esc(
+      S
+    )} ajuda você a encontrar um apartamento em São Paulo compatível com o seu perfil e a sua realidade financeira. Trabalhamos com lançamentos bem localizados, muitos próximos a estações de metrô e com unidades enquadradas no Programa Minha Casa Minha Vida.</p>
+<p>O atendimento é personalizado do início à entrega das chaves: entendemos o seu objetivo (morar ou investir), a região de interesse e o seu orçamento, selecionamos opções que fazem sentido para você e acompanhamos cada etapa — simulação, visita, proposta e documentação. Sem empurrar imóvel fora do seu perfil.</p>
+<h2>Empreendimentos</h2>
+<ul>${properties.map(propItem).join("")}</ul>
+<h2>Regiões atendidas</h2>
+<p>Atuamos principalmente na Zona Oeste e na Zona Sul de São Paulo, com páginas dedicadas para ${regioesTexto}. Em cada uma você encontra os empreendimentos disponíveis, o transporte da região e o que há por perto.</p>
+<ul>${neighborhoodLinks}</ul>
+<h2>Como funciona o atendimento</h2>
+<ol><li>Entendemos juntos seu objetivo, sua região de interesse e sua realidade financeira.</li><li>Selecionamos opções compatíveis com o que você me contou — sem empurrar imóvel fora do seu perfil.</li><li>Acompanho você nas visitas, na proposta e até a entrega das chaves.</li></ol>
+<p>Veja também nossos <a href="/guias">guias sobre financiamento, FGTS e entrada</a>, conheça a <a href="/sobre">proposta de atendimento</a> ou <a href="/contato">fale pelo WhatsApp</a>.</p>`,
   });
 
   // /imoveis
@@ -167,7 +181,9 @@ function buildPages(data: TenantSeo, properties: Prop[]): Page[] {
     title: t("Sobre"),
     description:
       "Atendimento imobiliário personalizado para encontrar um imóvel compatível com a sua realidade financeira.",
-    body: `<h1>${esc(S)}</h1><p>Meu trabalho é ajudar você a entender as opções disponíveis, organizar as etapas da compra e encontrar um imóvel compatível com a sua realidade financeira, com clareza em cada passo.</p>`,
+    body: `<h1>${esc(
+      S
+    )}</h1><p>Meu trabalho é ajudar você a entender as opções disponíveis, organizar as etapas da compra e encontrar um imóvel compatível com a sua realidade financeira. Não acredito em empurrar decisão antes do momento certo — acredito em explicar cada passo com clareza para que você decida com segurança.</p><p>Atuo com lançamentos na Zona Oeste e na Zona Sul de São Paulo, muitos próximos a estações de metrô e com unidades no Programa Minha Casa Minha Vida.</p><h2>Como funciona o atendimento</h2><ol><li>Entendemos juntos seu objetivo, sua região de interesse e sua realidade financeira.</li><li>Selecionamos opções compatíveis com o seu perfil.</li><li>Acompanho você nas visitas, na proposta e até a entrega das chaves.</li></ol>`,
   });
 
   // /contato
@@ -176,7 +192,7 @@ function buildPages(data: TenantSeo, properties: Prop[]): Page[] {
     title: t("Contato"),
     description:
       "Faça o diagnóstico do comprador ou fale direto pelo WhatsApp para conversar sobre o seu próximo imóvel.",
-    body: `<h1>Vamos conversar sobre o seu próximo imóvel</h1><p>Faça o diagnóstico do comprador ou fale direto pelo WhatsApp para receber um direcionamento inicial, sem compromisso.</p>`,
+    body: `<h1>Vamos conversar sobre o seu próximo imóvel</h1><p>Faça o diagnóstico do comprador ou fale direto pelo WhatsApp para receber um direcionamento inicial, sem compromisso. Em poucos passos você informa seu objetivo, a região de interesse e a sua realidade financeira, e eu retorno com opções compatíveis com o seu perfil.</p><p>O atendimento é personalizado e acompanha você da simulação até a entrega das chaves, com clareza em cada etapa.</p>`,
   });
 
   // /privacidade
