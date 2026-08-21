@@ -14,7 +14,7 @@ const items = [
 
 export function Differentials() {
   return (
-    <Section className="bg-surface py-10 sm:py-12 lg:py-14">
+    <Section className="bg-surface pt-14 pb-12 sm:pt-16 sm:pb-14">
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {items.map(({ icon: Icon, title, text }) => (
           <div key={title} className="flex flex-col items-start gap-3">

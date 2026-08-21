@@ -41,7 +41,7 @@ export function Hero() {
   const rise = reduce ? {} : { initial: { opacity: 0, y: 18 }, animate: { opacity: 1, y: 0 } };
 
   return (
-    <section className="relative isolate flex min-h-[82vh] items-end overflow-hidden">
+    <section className="relative isolate flex min-h-[82vh] items-center overflow-hidden">
       {slides.length > 0 ? (
         slides.map((slide, i) => (
           <img
@@ -84,7 +84,7 @@ export function Hero() {
             {hero.headline}
           </h1>
           {hero.description && (
-            <p className="mt-5 max-w-xl text-lg leading-relaxed text-paper/85">
+            <p className="mt-5 max-w-md text-lg leading-relaxed text-paper/85">
               {hero.description}
             </p>
           )}
