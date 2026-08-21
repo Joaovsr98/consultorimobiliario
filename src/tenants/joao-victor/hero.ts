@@ -25,8 +25,8 @@ export const hero: HeroConfig = {
       alt: "Área de churrasqueira e convivência ao ar livre em condomínio",
     },
   ],
-  headline: "Encontre o imóvel ideal para você",
+  headline: "O lugar certo para o seu novo começo",
   subtitle: "Bueno House · Imóveis em São Paulo",
   description:
-    "Apartamentos selecionados, condições facilitadas e atendimento personalizado da nossa equipe em São Paulo.",
+    "Encontre o imóvel ideal com condições facilitadas e o atendimento da Bueno House.",
 };

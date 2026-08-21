@@ -7,13 +7,14 @@ import type { ThemeConfig } from "@/types";
  *
  * Para re-tematizar para outro corretor, troque apenas as cores abaixo.
  */
+// Paleta oficial da marca Bueno House (brand board).
 export const theme: ThemeConfig = {
   colors: {
-    primary: "#132238", // azul-marinho
-    secondary: "#B99555", // dourado discreto
-    surface: "#F5F1E8", // areia clara
+    primary: "#0D1B2A", // navy da marca
+    secondary: "#D4AF37", // dourado da marca
+    surface: "#F5F5F5", // off-white da marca
     paper: "#FFFFFF", // branco
-    ink: "#17202A", // grafite
+    ink: "#0D1B2A", // texto em navy profundo
   },
   radius: "18px",
 };

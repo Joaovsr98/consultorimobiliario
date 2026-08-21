@@ -1,5 +1,6 @@
 import { Seo } from "@/components/shared/Seo";
 import { Hero } from "@/components/home/Hero";
+import { Differentials } from "@/components/home/Differentials";
 import { BuyerDiagnosis } from "@/features/buyer-diagnosis/BuyerDiagnosis";
 import { Opportunities } from "@/components/home/Opportunities";
 import { FeaturedShowcase } from "@/components/home/FeaturedShowcase";
@@ -18,6 +19,8 @@ export function Home() {
       />
 
       <Hero />
+
+      <Differentials />
 
       <BuyerDiagnosis
         id="diagnostico"
