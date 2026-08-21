@@ -1,12 +1,18 @@
 import { getStoredUtm } from "./tracking";
+import { getConsent, onConsentChange, type ConsentPrefs } from "./consent";
 
 /**
- * Camada de analytics centralizada — GA4 + Meta Pixel. Os IDs vêm de variáveis
- * de ambiente (VITE_GA4_ID, VITE_META_PIXEL_ID). Sem ID => no-op seguro: nada
- * carrega e nenhum evento dispara. Nunca ha ID hardcoded.
+ * Camada de analytics centralizada — GA4 + Meta Pixel — governada por
+ * CONSENTIMENTO (LGPD / Google Consent Mode v2). Os IDs vêm de variáveis de
+ * ambiente (VITE_GA4_ID, VITE_META_PIXEL_ID). Sem ID => no-op seguro.
  *
- * Todo evento carrega internamente contexto do imóvel + UTMs (dado de
- * analytics) — isso NUNCA aparece na mensagem do WhatsApp.
+ * Regras:
+ * - Padrão negado: nada carrega até o visitante autorizar a categoria.
+ * - GA4 só inicializa com `analytics` concedido; Meta Pixel com `marketing`.
+ * - Consent Mode v2: analytics_storage (analytics) e ad_storage/ad_user_data/
+ *   ad_personalization (marketing).
+ * - Eventos carregam SÓ dados de contexto (imóvel + UTM) — NUNCA PII
+ *   (nome, telefone, e-mail ou texto digitado pelo lead).
  */
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -39,19 +45,34 @@ export type EventParams = {
   [key: string]: string | number | undefined;
 };
 
-// Eventos mapeados para eventos padrao do Meta Pixel (melhor otimizacao de
-// campanha); os demais vao como custom com o mesmo nome.
 const PIXEL_STANDARD: Partial<Record<AnalyticsEvent, string>> = {
   whatsapp_click: "Contact",
   diagnosis_submit: "Lead",
 };
 
-function initGa4(id: string) {
+function updateConsentMode(prefs: ConsentPrefs) {
+  if (!window.gtag) return;
+  window.gtag("consent", "update", {
+    analytics_storage: prefs.analytics ? "granted" : "denied",
+    ad_storage: prefs.marketing ? "granted" : "denied",
+    ad_user_data: prefs.marketing ? "granted" : "denied",
+    ad_personalization: prefs.marketing ? "granted" : "denied",
+  });
+}
+
+function initGa4(id: string, prefs: ConsentPrefs) {
   window.dataLayer = window.dataLayer || [];
   window.gtag = function gtag() {
     // eslint-disable-next-line prefer-rest-params
     window.dataLayer!.push(arguments);
   };
+  // Consent Mode v2: default negado antes de qualquer coisa.
+  window.gtag("consent", "default", {
+    analytics_storage: "denied",
+    ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied",
+  });
   const s = document.createElement("script");
   s.async = true;
   s.src = `https://www.googletagmanager.com/gtag/js?id=${id}`;
@@ -59,10 +80,10 @@ function initGa4(id: string) {
   window.gtag("js", new Date());
   window.gtag("config", id);
   ga4Ready = true;
+  updateConsentMode(prefs);
 }
 
 function initPixel(id: string) {
-  /* Snippet oficial do Meta Pixel, adaptado. */
   const n: any = (window.fbq = function () {
     // eslint-disable-next-line prefer-rest-params
     n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
@@ -81,11 +102,23 @@ function initPixel(id: string) {
   pixelReady = true;
 }
 
-/** Inicializa GA4 e/ou Meta Pixel se os IDs existirem. Idempotente. */
+/** Aplica a preferência de consentimento: carrega/atualiza GA4 e Pixel. */
+function applyConsent(prefs: ConsentPrefs) {
+  if (GA4_ID) {
+    if (prefs.analytics && !ga4Ready) initGa4(GA4_ID, prefs);
+    else if (ga4Ready) updateConsentMode(prefs);
+  }
+  if (PIXEL_ID && prefs.marketing && !pixelReady) initPixel(PIXEL_ID);
+}
+
+/**
+ * Inicializa a camada de analytics ligada ao consentimento. Se o visitante já
+ * havia decidido, aplica a escolha; e passa a reagir a mudanças futuras.
+ */
 export function initAnalytics(): void {
   if (typeof window === "undefined") return;
-  if (GA4_ID && !ga4Ready) initGa4(GA4_ID);
-  if (PIXEL_ID && !pixelReady) initPixel(PIXEL_ID);
+  applyConsent(getConsent());
+  onConsentChange(applyConsent);
 }
 
 function cleanParams(params: EventParams): EventParams {
@@ -102,12 +135,16 @@ function cleanParams(params: EventParams): EventParams {
   return merged;
 }
 
-/** Dispara um evento para GA4 e Meta Pixel (quando ativos). No-op se nenhum ID. */
+/**
+ * Dispara um evento. Gated por consentimento em runtime: GA4 só recebe com
+ * `analytics`; Meta Pixel só com `marketing`. No-op se nada estiver ativo.
+ */
 export function trackEvent(name: AnalyticsEvent, params: EventParams = {}): void {
   if (!ga4Ready && !pixelReady) return;
+  const prefs = getConsent();
   const payload = cleanParams(params);
-  if (ga4Ready && window.gtag) window.gtag("event", name, payload);
-  if (pixelReady && window.fbq) {
+  if (ga4Ready && prefs.analytics && window.gtag) window.gtag("event", name, payload);
+  if (pixelReady && prefs.marketing && window.fbq) {
     const std = PIXEL_STANDARD[name];
     if (std) window.fbq("track", std, payload);
     window.fbq("trackCustom", name, payload);

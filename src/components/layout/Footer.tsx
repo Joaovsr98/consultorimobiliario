@@ -3,6 +3,7 @@ import { Instagram, Mail, MapPin, MessageCircle } from "lucide-react";
 import type { NavItem } from "@/types";
 import { tenant, identity } from "@/tenants";
 import { buildWhatsappLink, defaultWhatsappMessage } from "@/lib/whatsapp";
+import { openConsentSettings } from "@/lib/consent";
 import { Container } from "@/components/ui/Container";
 import { Logo } from "@/components/ui/Logo";
 
@@ -72,6 +73,14 @@ export function Footer() {
           <p>
             &copy; {year} {identity.displayName}. Todos os direitos reservados.
             {identity.registrationLabel ? ` ${identity.registrationLabel}.` : ""}
+            {" · "}
+            <button
+              type="button"
+              onClick={openConsentSettings}
+              className="underline transition-colors hover:text-paper"
+            >
+              Preferências de cookies
+            </button>
           </p>
           <div className="flex items-center gap-4">
             {contact.instagram && (

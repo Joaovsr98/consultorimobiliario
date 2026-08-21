@@ -3,6 +3,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { WhatsAppButton } from "@/components/shared/WhatsAppButton";
+import { ConsentBanner } from "@/components/shared/ConsentBanner";
 
 /** Shell da aplicacao: cabecalho, conteudo da rota, rodape e WhatsApp fixo. */
 export function Layout() {
@@ -27,6 +28,7 @@ export function Layout() {
       </main>
       <Footer />
       <WhatsAppButton />
+      <ConsentBanner />
     </div>
   );
 }

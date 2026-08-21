@@ -22,7 +22,7 @@ export function Privacy() {
         <h1 className="mt-3 font-display text-4xl font-semibold tracking-tight text-brand sm:text-5xl">
           Política de privacidade
         </h1>
-        <p className="mt-4 text-sm text-ink/50">Última atualização: 07 de agosto de 2026.</p>
+        <p className="mt-4 text-sm text-ink/50">Última atualização: 21 de agosto de 2026.</p>
 
         <div className="mt-8 space-y-8 text-ink/80">
           <section>
@@ -107,12 +107,48 @@ export function Privacy() {
 
           <section>
             <h2 className="font-display text-xl font-semibold text-brand">
-              Cookies e rastreamento
+              Cookies e tecnologias de medição
             </h2>
             <p className="mt-3 leading-relaxed">
-              Este site não usa cookies de rastreamento nem ferramentas de
-              analytics no momento. Se isso mudar no futuro, esta página será
-              atualizada antes da mudança entrar no ar.
+              Usamos cookies e armazenamento local <strong>estritamente
+              necessários</strong> ao funcionamento do site (por exemplo, guardar
+              a origem de um link de campanha e a sua própria escolha de
+              consentimento). Esses não dependem de autorização.
+            </p>
+            <p className="mt-3 leading-relaxed">
+              Mediante o seu <strong>consentimento</strong>, também utilizamos
+              ferramentas de medição e marketing, que só são carregadas depois de
+              você autorizar a categoria correspondente:
+            </p>
+            <ul className="mt-3 list-disc space-y-2 pl-5 leading-relaxed">
+              <li>
+                <strong>Análise de uso — Google Analytics 4:</strong> mede
+                páginas visitadas, origem do tráfego e desempenho do site, para
+                melhorarmos a experiência. Categoria: <em>análise</em>.
+              </li>
+              <li>
+                <strong>Marketing — Meta Pixel:</strong> mede o resultado de
+                anúncios no Instagram/Facebook (ex.: quantas pessoas chegaram a um
+                imóvel ou iniciaram um contato). Categoria: <em>marketing</em>.
+              </li>
+            </ul>
+            <p className="mt-3 leading-relaxed">
+              O padrão é <strong>negado</strong>: nada de análise ou marketing é
+              ativado antes da sua escolha. Trabalhamos no modelo de consentimento
+              do Google (Consent Mode), controlando os estados
+              <em> analytics_storage</em>, <em>ad_storage</em>,
+              <em> ad_user_data</em> e <em>ad_personalization</em>.
+            </p>
+            <p className="mt-3 leading-relaxed">
+              Esses eventos registram apenas dados de contexto — qual imóvel foi
+              visto e a origem da campanha (UTM). <strong>Nunca</strong> enviamos
+              a essas ferramentas o seu nome, telefone, e-mail ou o texto que você
+              digita no diagnóstico ou no WhatsApp.
+            </p>
+            <p className="mt-3 leading-relaxed">
+              Você pode alterar a sua decisão a qualquer momento em
+              <strong> “Preferências de cookies”</strong>, no rodapé de qualquer
+              página.
             </p>
           </section>
 
