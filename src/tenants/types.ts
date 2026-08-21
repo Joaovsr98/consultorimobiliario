@@ -54,6 +54,8 @@ export type SiteIdentity = {
   /** Marca institucional (imobiliaria). Distinto de `photo` (pessoa fisica). */
   logo?: string;
   photo?: string;
+  /** Mascote/figura decorativa junto ao botao de WhatsApp. */
+  mascot?: string;
   /** Rotulo do CTA de WhatsApp (institucional vs. pessoal). */
   whatsappCta: string;
   contact: ContactChannels;

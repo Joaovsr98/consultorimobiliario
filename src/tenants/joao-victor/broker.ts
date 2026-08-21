@@ -31,5 +31,7 @@ export const broker: Broker = {
   photo: "",
   // Simbolo da marca (predio dourado). O wordmark "Bueno Imóveis" e texto.
   logo: "/logo-bueno-mark.png",
+  // Mascote/figura amigavel exibida junto ao botao de WhatsApp.
+  mascot: "/consultor-bueno.png",
   whatsappCta: "Fale com minha equipe",
 };

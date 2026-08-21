@@ -10,6 +10,7 @@ function brokerToIdentity(broker: Broker): SiteIdentity {
     serviceRegion: broker.serviceRegion || undefined,
     photo: broker.photo || undefined,
     logo: broker.logo || undefined,
+    mascot: broker.mascot || undefined,
     whatsappCta: broker.whatsappCta || "Falar pelo WhatsApp",
     contact: {
       phone: broker.phone || undefined,
