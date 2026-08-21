@@ -367,6 +367,11 @@ export function PropertyDetails() {
               </Link>
             )}
           </div>
+          <p className="mt-6 text-xs text-paper/55">
+            {identity.displayName}
+            {identity.registrationLabel ? ` · ${identity.registrationLabel}` : ""} · Valores e
+            disponibilidade sujeitos a alteração.
+          </p>
         </div>
       </Section>
 
