@@ -1,11 +1,12 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, BedDouble, CalendarDays, Clock, MapPin, MessageCircle, Ruler, Tag } from "lucide-react";
+import { ArrowLeft, BedDouble, CalendarDays, Clock, MapPin, MessageCircle, Ruler, Tag, TrainFront } from "lucide-react";
 import { tenant, identity } from "@/tenants";
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { buttonClasses } from "@/lib/button-styles";
-import { buildWhatsappLink } from "@/lib/whatsapp";
+import { buildWhatsappLink, propertyWhatsappMessage } from "@/lib/whatsapp";
+import { trackEvent } from "@/lib/analytics";
 import { Seo } from "@/components/shared/Seo";
 import { PropertyGallery, type PropertyGalleryHandle } from "@/components/shared/PropertyGallery";
 import { StatusBadge } from "@/components/ui/StatusBadge";
@@ -50,11 +51,32 @@ export function PropertyDetails() {
   const [mapFocus, setMapFocus] = useState<string | null>(null);
   const property = tenant.properties.find((p) => p.slug === slug);
 
+  // Evento de visualizacao do imovel (analytics; contexto interno, nunca no WhatsApp).
+  useEffect(() => {
+    if (!property) return;
+    trackEvent("property_view", {
+      property_id: property.id,
+      property_name: property.name,
+      property_slug: property.slug,
+    });
+  }, [property]);
+
   if (!property) return <NotFound />;
 
   const whatsapp = identity.contact.whatsapp;
   const heroImage = property.images[0];
   const { galeria, plantas, localizacao } = splitImages(property.images);
+
+  // Proximidade do metro — SO quando existir no dado do empreendimento (nao inventar).
+  const metroNearby = property.nearby?.find((n) => /metr[ôo]|esta[çc][ãa]o/i.test(n.place));
+
+  /** Contexto do imovel para os eventos de analytics. */
+  const eventCtx = {
+    property_id: property.id,
+    property_name: property.name,
+    property_slug: property.slug,
+  };
+  const onWhatsappClick = (location: string) => trackEvent("whatsapp_click", { ...eventCtx, location });
 
   const facts = [
     { icon: BedDouble, label: "Dormitórios", value: property.bedrooms },
@@ -65,9 +87,10 @@ export function PropertyDetails() {
       : []),
   ];
 
-  const visitLink = whatsapp
-    ? buildWhatsappLink(whatsapp, `Olá! Tenho interesse em agendar uma visita ao ${property.name}.`)
+  const contactLink = whatsapp
+    ? buildWhatsappLink(whatsapp, propertyWhatsappMessage(property.name))
     : null;
+  const ctaLabel = identity.whatsappCta;
 
   const propertyQuery =
     property.address ?? `${property.name}, ${property.neighborhood}, ${property.city}`;
@@ -127,6 +150,41 @@ export function PropertyDetails() {
             <MapPin className="size-4 shrink-0 text-accent" aria-hidden />
             {property.neighborhood}, {property.city}
           </p>
+
+          {/* Essencial na 1a dobra: preco (quando valido) + dorm + metragem */}
+          <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-1.5 text-paper">
+            {property.priceFrom !== undefined && (
+              <span className="text-sm">
+                A partir de{" "}
+                <span className="font-display text-xl font-semibold text-accent">
+                  {formatCurrency(property.priceFrom)}
+                </span>
+              </span>
+            )}
+            <span className="text-sm text-paper/85">{property.bedrooms}</span>
+            <span className="text-sm text-paper/85">{formatArea(property.area)}</span>
+          </div>
+
+          {metroNearby && (
+            <p className="mt-2 flex items-center gap-1.5 text-sm text-paper/85">
+              <TrainFront className="size-4 shrink-0 text-accent" aria-hidden />
+              {metroNearby.place}
+              {metroNearby.time ? ` · ${metroNearby.time}` : ""}
+            </p>
+          )}
+
+          {contactLink && (
+            <a
+              href={contactLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => onWhatsappClick("property_hero")}
+              className={buttonClasses("secondary", "md", "mt-5")}
+            >
+              <MessageCircle className="size-4" aria-hidden />
+              {ctaLabel}
+            </a>
+          )}
         </Container>
       </section>
 
@@ -282,56 +340,86 @@ export function PropertyDetails() {
         )}
       </Section>
 
-      {/* Fecho comercial: agendar visita */}
+      {/* Fecho comercial */}
       <Section className="bg-brand text-paper">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="font-display text-3xl font-semibold text-paper sm:text-4xl">
-            Quer conhecer o {property.name} de perto?
+            Interessado no {property.name}?
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-paper/70">
-            Agende uma visita e tire suas dúvidas sobre valores, plantas e condições.
+            Fale com nossa equipe e receba valores, plantas e as condições disponíveis.
           </p>
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-            {visitLink ? (
+            {contactLink ? (
               <a
-                href={visitLink}
+                href={contactLink}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => onWhatsappClick("property_bottom")}
                 className={buttonClasses("secondary", "lg")}
               >
                 <MessageCircle className="size-4" aria-hidden />
-                Agendar visita
+                {ctaLabel}
               </a>
             ) : (
               <Link to="/contato" className={buttonClasses("secondary", "lg")}>
-                Agendar visita
+                {ctaLabel}
               </Link>
             )}
           </div>
         </div>
       </Section>
 
-      {/* Atalho flutuante de agendamento, empilhado acima do botao de WhatsApp */}
-      {visitLink ? (
-        <a
-          href={visitLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`Agendar visita ao ${property.name}`}
-          className="fixed bottom-[5.5rem] right-5 z-40 inline-flex items-center gap-2 rounded-full bg-accent px-4 py-3 text-sm font-semibold text-brand shadow-lg shadow-black/15 transition-transform hover:scale-105 focus-visible:scale-105 sm:bottom-40"
-        >
-          <CalendarDays className="size-5" aria-hidden />
-          <span className="hidden sm:inline">Agendar visita</span>
-        </a>
-      ) : (
-        <Link
-          to="/contato"
-          aria-label="Agendar visita"
-          className="fixed bottom-[5.5rem] right-5 z-40 inline-flex items-center gap-2 rounded-full bg-accent px-4 py-3 text-sm font-semibold text-brand shadow-lg shadow-black/15 transition-transform hover:scale-105 focus-visible:scale-105 sm:bottom-40"
-        >
-          <CalendarDays className="size-5" aria-hidden />
-          <span className="hidden sm:inline">Agendar visita</span>
-        </Link>
+      {/* Conversao UNICA na pagina do imovel (o WhatsApp global fica oculto aqui,
+          ver WhatsAppButton.tsx): barra fixa no mobile + pill flutuante no desktop. */}
+      {contactLink && (
+        <>
+          {/* Mobile: barra inferior fixa, com preco + CTA */}
+          <div className="fixed inset-x-0 bottom-0 z-40 border-t border-brand/10 bg-paper/95 px-4 py-3 shadow-[0_-6px_24px_-8px_rgba(13,27,42,0.25)] backdrop-blur sm:hidden">
+            <div className="flex items-center gap-3">
+              <div className="min-w-0">
+                {property.priceFrom !== undefined ? (
+                  <>
+                    <p className="text-[0.7rem] uppercase tracking-wide text-ink/50">A partir de</p>
+                    <p className="font-display text-base font-semibold leading-tight text-brand">
+                      {formatCurrency(property.priceFrom)}
+                    </p>
+                  </>
+                ) : (
+                  <p className="truncate font-display text-sm font-semibold text-brand">
+                    {property.name}
+                  </p>
+                )}
+              </div>
+              <a
+                href={contactLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => onWhatsappClick("property_sticky_mobile")}
+                className={cn(buttonClasses("primary", "md"), "ml-auto shrink-0")}
+              >
+                <MessageCircle className="size-4" aria-hidden />
+                {ctaLabel}
+              </a>
+            </div>
+          </div>
+
+          {/* Desktop: pill flutuante de WhatsApp, contextual */}
+          <a
+            href={contactLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => onWhatsappClick("property_float_desktop")}
+            aria-label={ctaLabel}
+            className="fixed bottom-5 right-5 z-40 hidden items-center gap-2 rounded-full bg-[#25D366] px-4 py-3 text-sm font-medium text-white shadow-lg shadow-black/15 transition-transform hover:scale-105 focus-visible:scale-105 sm:inline-flex"
+          >
+            <MessageCircle className="size-5" aria-hidden />
+            {ctaLabel}
+          </a>
+
+          {/* Espaco para a barra fixa nao cobrir o rodape no mobile */}
+          <div className="h-20 sm:hidden" aria-hidden />
+        </>
       )}
     </>
   );

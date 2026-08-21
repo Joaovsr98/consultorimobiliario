@@ -1,6 +1,5 @@
 import { tenant, identity } from "@/tenants";
 import { formatCurrency } from "@/lib/utils";
-import { getStoredUtmLine } from "@/lib/tracking";
 import {
   bedroomsLabels,
   contactLabels,
@@ -19,8 +18,9 @@ import {
  */
 export function buildDiagnosisMessage(data: DiagnosisData): string {
   const greetingName = tenant.kind === "individual" ? tenant.broker.preferredName : identity.displayName;
-  const utmLine = getStoredUtmLine();
 
+  // Mensagem 100% limpa — sem UTM nem codigo tecnico. A origem (UTM) e
+  // registrada apenas via analytics, nunca no texto enviado ao cliente.
   const lines = [
     `Olá, ${greetingName}! Fiz o diagnóstico no site.`,
     "",
@@ -32,7 +32,6 @@ export function buildDiagnosisMessage(data: DiagnosisData): string {
     `Dormitórios: ${bedroomsLabels[data.bedrooms]}`,
     `Forma de pagamento: ${timelineLabels[data.timeline]}`,
     `Prefere contato por: ${contactLabels[data.contact]}`,
-    ...(utmLine ? ["", utmLine] : []),
   ];
 
   return lines.join("\n");

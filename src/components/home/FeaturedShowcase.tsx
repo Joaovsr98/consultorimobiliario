@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, BedDouble, CalendarDays, MapPin, Ruler } from "lucide-react";
-import { tenant } from "@/tenants";
+import { tenant, identity } from "@/tenants";
 import { Section } from "@/components/ui/Section";
 import { PropertyImage } from "@/components/ui/PropertyImage";
 import { StatusBadge } from "@/components/ui/StatusBadge";
@@ -97,7 +97,7 @@ export function FeaturedShowcase() {
               to="/contato"
               className={buttonClasses("outline", "lg", "border-paper/40 text-paper hover:bg-paper/10")}
             >
-              Agendar visita
+              {identity.whatsappCta}
             </Link>
           </div>
         </div>

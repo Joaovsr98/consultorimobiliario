@@ -7,6 +7,7 @@ import { Section } from "@/components/ui/Section";
 import { buttonClasses } from "@/lib/button-styles";
 import { cn } from "@/lib/utils";
 import { buildWhatsappLink } from "@/lib/whatsapp";
+import { trackEvent } from "@/lib/analytics";
 import { identity } from "@/tenants";
 import {
   bedroomsLabels,
@@ -164,6 +165,7 @@ export function BuyerDiagnosis({
   const [submitted, setSubmitted] = useState<DiagnosisData | null>(null);
   const [isNavigating, setIsNavigating] = useState(false);
   const isNavigatingRef = useRef(false);
+  const startedRef = useRef(false);
   const stepHeadingRef = useRef<HTMLParagraphElement>(null);
 
   const {
@@ -198,12 +200,20 @@ export function BuyerDiagnosis({
     if (isNavigatingRef.current) return;
     isNavigatingRef.current = true;
     setIsNavigating(true);
+    // Inicio da simulacao — dispara uma unica vez, no primeiro avanco.
+    if (!startedRef.current) {
+      startedRef.current = true;
+      trackEvent("simulation_start");
+    }
     try {
       const valid = await trigger(stepFields[step]);
       if (!valid) return;
 
       if (isLastStep) {
-        handleSubmit((data) => setSubmitted(data))();
+        handleSubmit((data) => {
+          setSubmitted(data);
+          trackEvent("diagnosis_submit", { contact: data.contact, goal: data.goal });
+        })();
       } else {
         setStep((s) => s + 1);
       }
@@ -256,6 +266,7 @@ export function BuyerDiagnosis({
                 href={buildWhatsappLink(whatsapp, buildDiagnosisMessage(submitted))}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackEvent("whatsapp_click", { location: "diagnosis" })}
                 className={buttonClasses("primary", "lg", "mt-4")}
               >
                 <MessageCircle className="size-4" aria-hidden />
