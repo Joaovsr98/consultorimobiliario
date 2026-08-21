@@ -63,32 +63,80 @@ export type MatchResult = {
   exact: boolean;
   /** Quais filtros foram afrouxados para achar alternativas (para explicar ao usuário). */
   relaxed: string[];
+  /** true quando NÃO há nada dentro do orçamento, mas há opções acima da faixa. */
+  overBudgetAvailable?: boolean;
+  /** true quando estas opções estão ACIMA da faixa informada (só via ação do usuário). */
+  aboveBudget?: boolean;
 };
 
+const RELAX_LABEL: Record<string, string> = {
+  region: "região",
+  dorm: "dormitórios",
+  priceBand: "faixa de preço",
+};
+
+/** Afrouxa, na ordem dada, apenas as chaves indicadas — mantendo as demais (ex.: o preço). */
+function relaxInOrder(
+  props: Property[],
+  base: PropertyFilters,
+  order: (keyof PropertyFilters)[]
+): MatchResult {
+  let cur: PropertyFilters = { ...base };
+  const relaxed: string[] = [];
+  for (const key of order) {
+    if (!cur[key]) continue;
+    cur = { ...cur, [key]: undefined };
+    relaxed.push(RELAX_LABEL[key]);
+    const r = filterProperties(props, cur);
+    if (r.length > 0) return { properties: sortByPrice(r), exact: false, relaxed };
+  }
+  return { properties: [], exact: false, relaxed };
+}
+
 /**
- * Busca guiada: tenta a correspondência exata; se não houver, afrouxa os
- * filtros nesta ordem (preço → dormitórios → região) e explica o que mudou.
+ * Busca guiada. O ORÇAMENTO é restrição FORTE: nunca mostramos automaticamente
+ * um imóvel acima da faixa informada. Ordem:
+ *  1. correspondência exata;
+ *  2. mantendo a faixa de preço, procurar em regiões próximas;
+ *  3. mantendo a faixa, flexibilizar dormitórios (avisando);
+ *  4. se nada couber no orçamento, sinalizar que existem opções acima da faixa
+ *     — que só aparecem por ação explícita do usuário (ver `expandAboveBudget`).
  * Nunca inventa imóvel — só reordena/relaxa o que existe no catálogo.
  */
 export function matchProperties(props: Property[], f: PropertyFilters): MatchResult {
   const exact = filterProperties(props, f);
   if (exact.length > 0) return { properties: sortByPrice(exact), exact: true, relaxed: [] };
 
-  const relaxed: string[] = [];
-  let cur: PropertyFilters = { ...f };
-  const steps: [keyof PropertyFilters, string][] = [
-    ["priceBand", "faixa de preço"],
-    ["dorm", "dormitórios"],
-    ["region", "região"],
-  ];
-  for (const [key, label] of steps) {
-    if (!cur[key]) continue;
-    cur = { ...cur, [key]: undefined };
-    relaxed.push(label);
-    const r = filterProperties(props, cur);
-    if (r.length > 0) return { properties: sortByPrice(r), exact: false, relaxed };
+  // Sem faixa informada => orçamento não é restrição; relaxa região e depois dormitórios.
+  if (!f.priceBand) {
+    const r = relaxInOrder(props, f, ["region", "dorm"]);
+    if (r.properties.length > 0) return r;
+    return { properties: sortByPrice(props), exact: false, relaxed: ["todos os filtros"] };
   }
-  return { properties: sortByPrice(props), exact: false, relaxed: ["todos os filtros"] };
+
+  // Faixa informada = restrição FORTE. Mantém o preço; relaxa região e depois dormitórios.
+  const within = relaxInOrder(props, f, ["region", "dorm"]);
+  if (within.properties.length > 0) return within;
+
+  // Nada dentro do orçamento. Há opções acima da faixa (ignorando o preço)?
+  const overBudget = filterProperties(props, { region: f.region, dorm: f.dorm });
+  return { properties: [], exact: false, relaxed: [], overBudgetAvailable: overBudget.length > 0 };
+}
+
+/**
+ * Expansão ACIMA da faixa — só chamada por ação explícita do usuário
+ * ("Ver opções acima dessa faixa"). Ignora o preço, casa por região/dormitórios
+ * (relaxando se preciso) e marca tudo como acima do orçamento informado.
+ */
+export function expandAboveBudget(props: Property[], f: PropertyFilters): MatchResult {
+  const base: PropertyFilters = { region: f.region, dorm: f.dorm };
+  const exact = filterProperties(props, base);
+  if (exact.length > 0) {
+    return { properties: sortByPrice(exact), exact: false, relaxed: ["faixa de preço"], aboveBudget: true };
+  }
+  const r = relaxInOrder(props, base, ["region", "dorm"]);
+  const list = r.properties.length > 0 ? r.properties : sortByPrice(props);
+  return { properties: list, exact: false, relaxed: ["faixa de preço", ...r.relaxed], aboveBudget: true };
 }
 
 function sortByPrice(list: Property[]): Property[] {

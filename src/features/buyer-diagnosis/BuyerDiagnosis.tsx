@@ -10,9 +10,11 @@ import { buildWhatsappLink } from "@/lib/whatsapp";
 import { trackEvent } from "@/lib/analytics";
 import {
   PRICE_BANDS,
+  expandAboveBudget,
   matchProperties,
   regionsOf,
   type MatchResult,
+  type PropertyFilters,
 } from "@/lib/property-filters";
 import {
   ANY,
@@ -141,12 +143,14 @@ export function BuyerDiagnosis({
   const canStep0 = Boolean(data.goal && data.bedrooms);
   const canStep1 = Boolean(data.region && data.priceBand);
 
+  const searchFilters: PropertyFilters = {
+    region: data.region === ANY ? undefined : data.region,
+    dorm: data.bedrooms === "tanto-faz" ? undefined : data.bedrooms,
+    priceBand: data.priceBand === ANY ? undefined : data.priceBand,
+  };
+
   const runSearch = () => {
-    const match = matchProperties(properties, {
-      region: data.region === ANY ? undefined : data.region,
-      dorm: data.bedrooms === "tanto-faz" ? undefined : data.bedrooms,
-      priceBand: data.priceBand === ANY ? undefined : data.priceBand,
-    });
+    const match = matchProperties(properties, searchFilters);
     setResult(match);
     trackEvent("diagnosis_submit", { goal: data.goal, results: match.properties.length });
   };
@@ -173,6 +177,35 @@ export function BuyerDiagnosis({
   // ---------- Tela de RESULTADO ----------
   if (result) {
     const matches = result.properties;
+    const hasMatches = matches.length > 0;
+
+    let heading: string;
+    let subtext: string | null = null;
+    if (!hasMatches) {
+      heading = "Não encontramos opções nessa faixa";
+      subtext =
+        "Não encontramos empreendimentos dentro da sua faixa de valor com esses filtros. Nossa equipe pode buscar mais alternativas para você.";
+    } else if (result.aboveBudget) {
+      heading =
+        matches.length === 1
+          ? "1 opção acima da faixa que você informou"
+          : `${matches.length} opções acima da faixa que você informou`;
+      subtext = "Atenção: estas opções estão acima da faixa de valor que você escolheu.";
+    } else if (result.exact) {
+      heading =
+        matches.length === 1
+          ? "Encontramos 1 empreendimento para o seu perfil"
+          : `Encontramos ${matches.length} empreendimentos para o seu perfil`;
+    } else {
+      const parts: string[] = [];
+      if (result.relaxed.includes("região")) parts.push("em regiões próximas");
+      if (result.relaxed.includes("dormitórios")) parts.push("com outra opção de dormitórios");
+      heading = "Veja opções próximas dentro da sua faixa";
+      subtext = `Não encontramos uma opção exata, mas dentro da sua faixa de valor encontramos ${matches.length} ${
+        matches.length === 1 ? "apartamento" : "apartamentos"
+      }${parts.length ? " " + parts.join(" e ") : ""}.`;
+    }
+
     return (
       <Section id={id} className="bg-surface">
         <div className="mx-auto max-w-4xl">
@@ -181,44 +214,52 @@ export function BuyerDiagnosis({
             Resultado da busca
           </div>
           <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-brand sm:text-4xl">
-            {result.exact
-              ? matches.length === 1
-                ? "Encontramos 1 empreendimento para o seu perfil"
-                : `Encontramos ${matches.length} empreendimentos para o seu perfil`
-              : "Veja opções próximas ao que você procura"}
+            {heading}
           </h2>
-          {!result.exact && (
-            <p className="mt-3 max-w-2xl text-ink/70">
-              Não encontramos correspondência exata, então mostramos as opções mais próximas
-              {result.relaxed.length > 0 && result.relaxed[0] !== "todos os filtros"
-                ? ` (flexibilizamos: ${result.relaxed.join(", ")})`
-                : ""}
-              . A equipe pode buscar mais alternativas para você.
-            </p>
+          {subtext && <p className="mt-3 max-w-2xl text-ink/70">{subtext}</p>}
+
+          {hasMatches ? (
+            <>
+              <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {matches.map((property, i) => (
+                  <PropertyCard key={property.id} property={property} priority={i === 0} />
+                ))}
+              </div>
+
+              {/* Contexto opcional para a equipe — não é análise de crédito. */}
+              <div className="mt-10 rounded-card border border-brand/10 bg-paper p-5 shadow-card">
+                <p className="text-sm font-medium text-ink">
+                  Como pretende pagar? <span className="font-normal text-ink/50">(opcional)</span>
+                </p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {PAYMENT_ORDER.map((p) => (
+                    <Chip key={p} active={data.payment === p} onClick={() => set("payment", p)}>
+                      {paymentLabels[p]}
+                    </Chip>
+                  ))}
+                </div>
+                <p className="mt-3 text-xs text-ink/45">
+                  Estimativa para orientar o atendimento — não é aprovação de financiamento.
+                </p>
+              </div>
+            </>
+          ) : (
+            result.overBudgetAvailable && (
+              <div className="mt-8 rounded-card border border-brand/10 bg-paper p-6 text-center shadow-card">
+                <p className="text-ink/70">
+                  Existem empreendimentos que atendem sua região e dormitórios, mas acima da faixa de
+                  valor que você informou.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setResult(expandAboveBudget(properties, searchFilters))}
+                  className={cn(buttonClasses("outline", "md"), "mt-4")}
+                >
+                  Ver opções acima dessa faixa
+                </button>
+              </div>
+            )
           )}
-
-          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {matches.map((property, i) => (
-              <PropertyCard key={property.id} property={property} priority={i === 0} />
-            ))}
-          </div>
-
-          {/* Contexto opcional para a equipe — não é análise de crédito. */}
-          <div className="mt-10 rounded-card border border-brand/10 bg-paper p-5 shadow-card">
-            <p className="text-sm font-medium text-ink">
-              Como pretende pagar? <span className="font-normal text-ink/50">(opcional)</span>
-            </p>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {PAYMENT_ORDER.map((p) => (
-                <Chip key={p} active={data.payment === p} onClick={() => set("payment", p)}>
-                  {paymentLabels[p]}
-                </Chip>
-              ))}
-            </div>
-            <p className="mt-3 text-xs text-ink/45">
-              Estimativa para orientar o atendimento — não é aprovação de financiamento.
-            </p>
-          </div>
 
           <div className="mt-8 flex flex-col items-center gap-3 text-center">
             {whatsapp ? (
@@ -235,11 +276,7 @@ export function BuyerDiagnosis({
             ) : (
               <p className="text-ink/70">Utilize os canais de contato da empresa.</p>
             )}
-            <button
-              type="button"
-              onClick={restart}
-              className={buttonClasses("ghost", "sm")}
-            >
+            <button type="button" onClick={restart} className={buttonClasses("ghost", "sm")}>
               <RotateCcw className="size-3.5" aria-hidden />
               Refazer busca
             </button>
