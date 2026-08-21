@@ -2,7 +2,7 @@ import { ShieldCheck, Tag, Train, Users } from "lucide-react";
 import { Section } from "@/components/ui/Section";
 
 /**
- * Faixa de diferenciais da marca Bueno House (brand board). Conteudo fixo,
+ * Faixa de diferenciais da marca Bueno Imóveis (brand board). Conteudo fixo,
  * alinhado a identidade — reforca posicionamento logo apos o hero.
  */
 const items = [

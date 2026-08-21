@@ -27,8 +27,8 @@ type TenantSeo = {
 
 const OG_BY_TENANT: Record<string, TenantSeo> = {
   "joao-victor": {
-    siteName: "Bueno House",
-    title: "Bueno House — Lançamentos em São Paulo com atendimento personalizado",
+    siteName: "Bueno Imóveis",
+    title: "Bueno Imóveis — Lançamentos em São Paulo com atendimento personalizado",
     description:
       "Encontre imóveis compatíveis com seu perfil e receba atendimento personalizado do início à entrega das chaves.",
     url: "https://consultorimobiliario.vercel.app",

@@ -7,7 +7,7 @@ import type { ThemeConfig } from "@/types";
  *
  * Para re-tematizar para outro corretor, troque apenas as cores abaixo.
  */
-// Paleta oficial da marca Bueno House (brand board).
+// Paleta oficial da marca Bueno Imóveis (brand board).
 export const theme: ThemeConfig = {
   colors: {
     primary: "#0D1B2A", // navy da marca

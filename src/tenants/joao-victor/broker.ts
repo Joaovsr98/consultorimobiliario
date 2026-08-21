@@ -15,11 +15,11 @@ import type { Broker } from "@/types";
  */
 export const broker: Broker = {
   // Comunicacao institucional (equipe), nao pessoal: o site fala como
-  // "Bueno House". Responsavel tecnico: Thiago (CRECI 194198-F). O nome civil
+  // "Bueno Imóveis". Responsavel tecnico: Thiago (CRECI 194198-F). O nome civil
   // do responsavel nao e exibido no site — usado apenas se exigido legalmente.
-  name: "Bueno House",
+  name: "Bueno Imóveis",
   preferredName: "Bueno",
-  brandName: "Bueno House",
+  brandName: "Bueno Imóveis",
   role: "Consultoria imobiliária em São Paulo",
   creci: "194198-F",
   phone: "5511925272694",

@@ -26,7 +26,7 @@ export const hero: HeroConfig = {
     },
   ],
   headline: "O lugar certo para o seu novo começo",
-  subtitle: "Bueno House · Imóveis em São Paulo",
+  subtitle: "Bueno Imóveis · São Paulo",
   description:
-    "Encontre o imóvel ideal com condições facilitadas e o atendimento da Bueno House.",
+    "Encontre o imóvel ideal com condições facilitadas e o atendimento da Bueno Imóveis.",
 };
