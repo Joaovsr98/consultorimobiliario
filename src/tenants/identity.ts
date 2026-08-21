@@ -9,6 +9,7 @@ function brokerToIdentity(broker: Broker): SiteIdentity {
     registrationLabel: broker.creci ? `CRECI ${broker.creci}` : undefined,
     serviceRegion: broker.serviceRegion || undefined,
     photo: broker.photo || undefined,
+    logo: broker.logo || undefined,
     whatsappCta: broker.whatsappCta || "Falar pelo WhatsApp",
     contact: {
       phone: broker.phone || undefined,

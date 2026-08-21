@@ -16,21 +16,26 @@ type LogoProps = {
 export function Logo({ className, tone = "brand" }: LogoProps) {
   return (
     <span className={cn("inline-flex items-center gap-2.5", className)}>
-      <span
-        className={cn(
-          "grid size-9 place-items-center overflow-hidden rounded-[calc(var(--radius-brand)/2)]",
-          tone === "paper" ? "bg-paper/10 text-paper" : "bg-brand text-paper"
-        )}
-      >
-        {identity.logo ? (
-          <img src={identity.logo} alt={identity.displayName} className="size-full object-cover" />
-        ) : (
+      {identity.logo ? (
+        <img
+          src={identity.logo}
+          alt=""
+          aria-hidden
+          className="h-9 w-auto object-contain sm:h-10"
+        />
+      ) : (
+        <span
+          className={cn(
+            "grid size-9 place-items-center overflow-hidden rounded-[calc(var(--radius-brand)/2)]",
+            tone === "paper" ? "bg-paper/10 text-paper" : "bg-brand text-paper"
+          )}
+        >
           <Home className="size-5" aria-hidden />
-        )}
-      </span>
+        </span>
+      )}
       <span
         className={cn(
-          "font-display text-lg font-semibold tracking-tight",
+          "font-display text-lg font-semibold uppercase tracking-tight",
           tone === "paper" ? "text-paper" : "text-brand"
         )}
       >

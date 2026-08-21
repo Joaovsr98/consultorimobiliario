@@ -29,5 +29,7 @@ export const broker: Broker = {
   instagram: "",
   // Sem foto/retrato pessoal — a marca e institucional (equipe).
   photo: "",
+  // Simbolo da marca (predio dourado). O wordmark "Bueno Imóveis" e texto.
+  logo: "/logo-bueno-mark.png",
   whatsappCta: "Fale com minha equipe",
 };

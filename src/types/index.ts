@@ -24,6 +24,8 @@ export type Broker = {
   instagram: string;
   /** Caminho da foto profissional. Vazio enquanto nao autorizada. */
   photo: string;
+  /** Simbolo/logo grafico da marca (PNG/SVG com fundo transparente). Opcional. */
+  logo?: string;
   /**
    * Texto do CTA de WhatsApp (ex.: "Falar pelo WhatsApp" para atendimento
    * pessoal, "Fale com minha equipe" para comunicacao institucional). Ausente
