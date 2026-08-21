@@ -3,16 +3,26 @@ import { getConsent, onConsentChange, type ConsentPrefs } from "./consent";
 
 /**
  * Camada de analytics centralizada — GA4 + Meta Pixel — governada por
- * CONSENTIMENTO (LGPD / Google Consent Mode v2). Os IDs vêm de variáveis de
- * ambiente (VITE_GA4_ID, VITE_META_PIXEL_ID). Sem ID => no-op seguro.
+ * CONSENTIMENTO no modelo Google Consent Mode v2 em BASIC MODE (modo básico).
+ * Os IDs vêm de variáveis de ambiente (VITE_GA4_ID, VITE_META_PIXEL_ID). Sem
+ * ID => no-op seguro.
  *
- * Regras:
- * - Padrão negado: nada carrega até o visitante autorizar a categoria.
- * - GA4 só inicializa com `analytics` concedido; Meta Pixel com `marketing`.
- * - Consent Mode v2: analytics_storage (analytics) e ad_storage/ad_user_data/
- *   ad_personalization (marketing).
- * - Eventos carregam SÓ dados de contexto (imóvel + UTM) — NUNCA PII
- *   (nome, telefone, e-mail ou texto digitado pelo lead).
+ * Basic Mode (deliberado — NÃO migrar para Advanced Mode agora):
+ * - As tags do GA4 e do Meta Pixel ficam BLOQUEADAS até a interação com o
+ *   banner; nada é carregado antes do consentimento.
+ * - Consentimento NEGADO por padrão.
+ * - Ao Aceitar, inicializa a categoria correspondente (analytics -> GA4;
+ *   marketing -> Meta Pixel).
+ * - Ao Recusar, nenhum dado é transmitido.
+ * - Preferência persistente e alterável (ver lib/consent.ts).
+ * - No Advanced Mode as tags carregariam antes, com estado negado, enviando
+ *   sinais sem cookies — NÃO é o caso aqui.
+ *
+ * Mapa Consent Mode v2: analytics_storage (analytics) e ad_storage,
+ * ad_user_data, ad_personalization (marketing).
+ *
+ * Eventos carregam SÓ dados de contexto (imóvel + UTM) — NUNCA PII (nome,
+ * telefone, e-mail ou texto digitado pelo lead).
  */
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
