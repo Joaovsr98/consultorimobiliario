@@ -62,9 +62,14 @@ export function Hero() {
         <div className="absolute inset-0 bg-brand" aria-hidden />
       )}
 
-      {/* Gradiente para legibilidade do texto sobre a imagem. */}
+      {/* Gradientes para legibilidade e aparencia premium: vertical (base) +
+          horizontal navy da esquerda (onde vive o texto) para a direita. */}
       <div
         className="absolute inset-0 bg-gradient-to-t from-brand/90 via-brand/45 to-brand/10"
+        aria-hidden
+      />
+      <div
+        className="absolute inset-0 bg-gradient-to-r from-brand/85 via-brand/45 to-transparent"
         aria-hidden
       />
 

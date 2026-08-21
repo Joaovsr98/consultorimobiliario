@@ -23,6 +23,10 @@ type TenantSeo = {
   telephone: string;
   areaServed: string;
   creci: string;
+  /** Caminho (relativo ao dominio) da arte de compartilhamento 1200x630. */
+  ogImage: string;
+  /** Caminho do favicon PNG. Vazio mantem o favicon.svg padrao. */
+  favicon: string;
 };
 
 const OG_BY_TENANT: Record<string, TenantSeo> = {
@@ -35,6 +39,8 @@ const OG_BY_TENANT: Record<string, TenantSeo> = {
     telephone: "+5511925272694",
     areaServed: "São Paulo, SP",
     creci: "194198-F",
+    ogImage: "/og-bueno.jpg",
+    favicon: "/favicon-bueno.png",
   },
   shelby: {
     siteName: "Shelby House",
@@ -45,6 +51,8 @@ const OG_BY_TENANT: Record<string, TenantSeo> = {
     telephone: "+5511934510849",
     areaServed: "São Paulo, SP",
     creci: "",
+    ogImage: "/properties/vibra-estacao-vila-sonia/fachada-torres.jpg",
+    favicon: "",
   },
 };
 
@@ -306,7 +314,7 @@ function buildJsonLd(data: TenantSeo): string {
     "@type": "RealEstateAgent",
     name: data.siteName,
     url: data.url,
-    image: `${data.url}/properties/vibra-estacao-vila-sonia/fachada-torres.jpg`,
+    image: `${data.url}${data.ogImage}`,
     telephone: data.telephone,
     areaServed: data.areaServed,
     description: data.description,
@@ -321,7 +329,7 @@ function buildJsonLd(data: TenantSeo): string {
 function seoPlugin(tenantId: string): Plugin {
   const data = OG_BY_TENANT[tenantId] ?? OG_BY_TENANT["joao-victor"];
   const properties = tenantId === "shelby" ? propsShelby : propsJoaoVictor;
-  const image = `${data.url}/properties/vibra-estacao-vila-sonia/fachada-torres.jpg`;
+  const image = `${data.url}${data.ogImage}`;
   const tags = [
     `<meta property="og:type" content="website" />`,
     `<meta property="og:site_name" content="${data.siteName}" />`,
@@ -339,13 +347,20 @@ function seoPlugin(tenantId: string): Plugin {
   return {
     name: "inject-seo",
     transformIndexHtml(html: string) {
-      return html
+      let out = html
         .replace(/<title>[\s\S]*?<\/title>/, `<title>${data.siteName}</title>`)
         .replace(
           /<meta\s+name="description"[\s\S]*?\/>/,
           `<meta name="description" content="${data.description}" />`
         )
         .replace("</head>", `    ${tags}\n  </head>`);
+      if (data.favicon) {
+        out = out.replace(
+          /<link rel="icon"[^>]*\/>/,
+          `<link rel="icon" type="image/png" href="${data.favicon}" />`
+        );
+      }
+      return out;
     },
     generateBundle() {
       this.emitFile({ type: "asset", fileName: "robots.txt", source: buildRobots(data.url) });

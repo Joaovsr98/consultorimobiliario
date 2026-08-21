@@ -51,7 +51,7 @@ export function GuideDetails() {
             className={buttonClasses("primary", "lg", "mt-6")}
           >
             <MessageCircle className="size-4" aria-hidden />
-            Tirar dúvidas pelo WhatsApp
+            {identity.whatsappCta}
           </a>
         )}
       </article>

@@ -131,7 +131,7 @@ export function Neighborhood() {
             className={buttonClasses("primary", "lg", "mt-10")}
           >
             <MessageCircle className="size-4" aria-hidden />
-            Falar sobre imóveis em {data.neighborhood}
+            {identity.whatsappCta}
           </a>
         )}
       </Section>
