@@ -22,6 +22,8 @@ export type HeroConfig = {
   images?: { src: string; alt: string }[];
   headline: string;
   subtitle?: string;
+  /** Frase de apoio abaixo do headline (opcional). */
+  description?: string;
 };
 
 /**
@@ -52,6 +54,8 @@ export type SiteIdentity = {
   /** Marca institucional (imobiliaria). Distinto de `photo` (pessoa fisica). */
   logo?: string;
   photo?: string;
+  /** Rotulo do CTA de WhatsApp (institucional vs. pessoal). */
+  whatsappCta: string;
   contact: ContactChannels;
 };
 

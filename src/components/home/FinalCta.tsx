@@ -13,7 +13,7 @@ export function FinalCta() {
           Pronto para dar o próximo passo?
         </h2>
         <p className="mx-auto mt-3 max-w-xl text-paper/70">
-          Fale agora e receba uma orientacao inicial sem compromisso sobre o seu
+          Fale agora e receba uma orientação inicial sem compromisso sobre o seu
           momento de compra.
         </p>
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
@@ -25,7 +25,7 @@ export function FinalCta() {
               className={buttonClasses("secondary", "lg")}
             >
               <MessageCircle className="size-4" aria-hidden />
-              Falar pelo WhatsApp
+              {identity.whatsappCta}
             </a>
           )}
           <a href="/#diagnostico" className={buttonClasses("ghost", "lg", "text-paper hover:bg-paper/10")}>

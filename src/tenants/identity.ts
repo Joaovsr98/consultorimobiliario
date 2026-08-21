@@ -9,6 +9,7 @@ function brokerToIdentity(broker: Broker): SiteIdentity {
     registrationLabel: broker.creci ? `CRECI ${broker.creci}` : undefined,
     serviceRegion: broker.serviceRegion || undefined,
     photo: broker.photo || undefined,
+    whatsappCta: broker.whatsappCta || "Falar pelo WhatsApp",
     contact: {
       phone: broker.phone || undefined,
       // Ate aqui, o unico telefone do corretor E o canal de WhatsApp.
@@ -31,6 +32,7 @@ function companyToIdentity(company: AgencyCompany): SiteIdentity {
     displayName: company.brandName,
     tagline: company.positioning || undefined,
     registrationLabel: company.legalCreci ? `CRECI ${company.legalCreci}` : undefined,
+    whatsappCta: "Fale com nossa equipe",
     contact: {
       phone: company.contact.phone,
       whatsapp: company.contact.whatsapp,

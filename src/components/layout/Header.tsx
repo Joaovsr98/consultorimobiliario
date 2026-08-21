@@ -69,7 +69,7 @@ export function Header() {
               rel="noopener noreferrer"
               className={buttonClasses("primary", "sm")}
             >
-              Falar pelo WhatsApp
+              {identity.whatsappCta}
             </a>
           </div>
         )}
@@ -118,7 +118,7 @@ export function Header() {
                   rel="noopener noreferrer"
                   className={buttonClasses("primary", "md", "mt-2 w-full")}
                 >
-                  Falar pelo WhatsApp
+                  {identity.whatsappCta}
                 </a>
               )}
             </Container>

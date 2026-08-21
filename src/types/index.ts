@@ -24,6 +24,12 @@ export type Broker = {
   instagram: string;
   /** Caminho da foto profissional. Vazio enquanto nao autorizada. */
   photo: string;
+  /**
+   * Texto do CTA de WhatsApp (ex.: "Falar pelo WhatsApp" para atendimento
+   * pessoal, "Fale com minha equipe" para comunicacao institucional). Ausente
+   * usa o padrao "Falar pelo WhatsApp".
+   */
+  whatsappCta?: string;
 };
 
 export type ThemeConfig = {

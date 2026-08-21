@@ -78,6 +78,11 @@ export function Hero() {
           <h1 className="mt-4 font-display text-4xl font-semibold leading-[1.08] tracking-tight text-paper sm:text-5xl lg:text-6xl">
             {hero.headline}
           </h1>
+          {hero.description && (
+            <p className="mt-5 max-w-xl text-lg leading-relaxed text-paper/85">
+              {hero.description}
+            </p>
+          )}
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link to="/imoveis" className={buttonClasses("secondary", "lg")}>
@@ -92,7 +97,7 @@ export function Hero() {
                 className={buttonClasses("outline", "lg", "border-paper/40 text-paper hover:bg-paper/10")}
               >
                 <MessageCircle className="size-4" aria-hidden />
-                Falar pelo WhatsApp
+                {identity.whatsappCta}
               </a>
             )}
           </div>

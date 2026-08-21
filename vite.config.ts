@@ -22,6 +22,7 @@ type TenantSeo = {
   url: string;
   telephone: string;
   areaServed: string;
+  creci: string;
 };
 
 const OG_BY_TENANT: Record<string, TenantSeo> = {
@@ -33,6 +34,7 @@ const OG_BY_TENANT: Record<string, TenantSeo> = {
     url: "https://consultorimobiliario.vercel.app",
     telephone: "+5511925272694",
     areaServed: "São Paulo, SP",
+    creci: "194198-F",
   },
   shelby: {
     siteName: "Shelby House",
@@ -42,6 +44,7 @@ const OG_BY_TENANT: Record<string, TenantSeo> = {
     url: "https://corretor-shelby.vercel.app",
     telephone: "+5511934510849",
     areaServed: "São Paulo, SP",
+    creci: "",
   },
 };
 
@@ -160,7 +163,7 @@ function buildPages(data: TenantSeo, properties: Prop[]): Page[] {
 <p>Atuamos principalmente na Zona Oeste e na Zona Sul de São Paulo, com páginas dedicadas para ${regioesTexto}. Em cada uma você encontra os empreendimentos disponíveis, o transporte da região e o que há por perto.</p>
 <ul>${neighborhoodLinks}</ul>
 <h2>Como funciona o atendimento</h2>
-<ol><li>Entendemos juntos seu objetivo, sua região de interesse e sua realidade financeira.</li><li>Selecionamos opções compatíveis com o que você me contou — sem empurrar imóvel fora do seu perfil.</li><li>Acompanho você nas visitas, na proposta e até a entrega das chaves.</li></ol>
+<ol><li>Entendemos juntos seu objetivo, sua região de interesse e sua realidade financeira.</li><li>Selecionamos opções compatíveis com o que você nos contou — sem empurrar imóvel fora do seu perfil.</li><li>Acompanhamos você nas visitas, na proposta e até a entrega das chaves.</li></ol>
 <p>Veja também nossos <a href="/guias">guias sobre financiamento, FGTS e entrada</a>, conheça a <a href="/sobre">proposta de atendimento</a> ou <a href="/contato">fale pelo WhatsApp</a>.</p>`,
   });
 
@@ -181,9 +184,9 @@ function buildPages(data: TenantSeo, properties: Prop[]): Page[] {
     title: t("Sobre"),
     description:
       "Atendimento imobiliário personalizado para encontrar um imóvel compatível com a sua realidade financeira.",
-    body: `<h1>${esc(
-      S
-    )}</h1><p>Meu trabalho é ajudar você a entender as opções disponíveis, organizar as etapas da compra e encontrar um imóvel compatível com a sua realidade financeira. Não acredito em empurrar decisão antes do momento certo — acredito em explicar cada passo com clareza para que você decida com segurança.</p><p>Atuo com lançamentos na Zona Oeste e na Zona Sul de São Paulo, muitos próximos a estações de metrô e com unidades no Programa Minha Casa Minha Vida.</p><h2>Como funciona o atendimento</h2><ol><li>Entendemos juntos seu objetivo, sua região de interesse e sua realidade financeira.</li><li>Selecionamos opções compatíveis com o seu perfil.</li><li>Acompanho você nas visitas, na proposta e até a entrega das chaves.</li></ol>`,
+    body: `<h1>${esc(S)}</h1>${
+      data.creci ? `<p>CRECI ${esc(data.creci)}</p>` : ""
+    }<p>Nosso trabalho é ajudar você a entender as opções disponíveis, organizar as etapas da compra e encontrar um imóvel compatível com a sua realidade financeira. Não acreditamos em empurrar decisão antes do momento certo — acreditamos em explicar cada passo com clareza para que você decida com segurança.</p><p>Atuamos com lançamentos na Zona Oeste e na Zona Sul de São Paulo, muitos próximos a estações de metrô e com unidades no Programa Minha Casa Minha Vida.</p><h2>Como funciona o atendimento</h2><ol><li>Entendemos juntos seu objetivo, sua região de interesse e sua realidade financeira.</li><li>Selecionamos opções compatíveis com o seu perfil.</li><li>Acompanhamos você nas visitas, na proposta e até a entrega das chaves.</li></ol>`,
   });
 
   // /contato

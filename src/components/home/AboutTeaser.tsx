@@ -33,15 +33,15 @@ export function AboutTeaser() {
             </p>
           )}
           <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-brand sm:text-4xl">
-            Uma orientacao pensada para o seu momento
+            Uma orientação pensada para o seu momento
           </h2>
           <p className="mt-4 max-w-xl text-ink/70">
-            Meu trabalho e ajudar você a entender as opções disponíveis,
+            Nosso trabalho é ajudar você a entender as opções disponíveis,
             organizar as etapas da compra e encontrar um imóvel compatível com
             a sua realidade financeira.
           </p>
           {identity.serviceRegion && (
-            <p className="mt-2 text-sm text-ink/50">Atuacao em {identity.serviceRegion}.</p>
+            <p className="mt-2 text-sm text-ink/50">Atuação em {identity.serviceRegion}.</p>
           )}
           <Link
             to="/sobre"

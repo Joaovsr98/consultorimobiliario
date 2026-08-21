@@ -30,7 +30,7 @@ export function Contact() {
               rel="noopener noreferrer"
               className={buttonClasses("outline", "md")}
             >
-              Falar direto pelo WhatsApp
+              {identity.whatsappCta}
             </a>
           )}
           {identity.contact.email && (

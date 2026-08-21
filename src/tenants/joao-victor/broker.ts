@@ -14,15 +14,20 @@ import type { Broker } from "@/types";
  * para uso futuro — ainda nao ligado a nenhum componente.
  */
 export const broker: Broker = {
-  name: "Joao Victor dos Santos Rodrigues",
+  // Comunicacao institucional (equipe), nao pessoal: o site fala como
+  // "Bueno House". Responsavel tecnico: Thiago (CRECI 194198-F). O nome civil
+  // do responsavel nao e exibido no site — usado apenas se exigido legalmente.
+  name: "Bueno House",
   preferredName: "Bueno",
   brandName: "Bueno House",
-  role: "Consultor imobiliario",
-  creci: "",
+  role: "Consultoria imobiliária em São Paulo",
+  creci: "194198-F",
   phone: "5511925272694",
   email: "",
   city: "São Paulo",
-  serviceRegion: "Zona Oeste de São Paulo",
+  serviceRegion: "São Paulo",
   instagram: "",
-  photo: "/consultor-bueno-terno.jpg",
+  // Sem foto/retrato pessoal — a marca e institucional (equipe).
+  photo: "",
+  whatsappCta: "Fale com minha equipe",
 };

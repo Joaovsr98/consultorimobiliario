@@ -25,6 +25,8 @@ export const hero: HeroConfig = {
       alt: "Área de churrasqueira e convivência ao ar livre em condomínio",
     },
   ],
-  headline: "Encontre um imóvel para o seu próximo momento",
-  subtitle: "São Paulo · Zona Oeste · Lançamentos",
+  headline: "Encontre o imóvel ideal para você",
+  subtitle: "Bueno House · Imóveis em São Paulo",
+  description:
+    "Apartamentos selecionados, condições facilitadas e atendimento personalizado da nossa equipe em São Paulo.",
 };
