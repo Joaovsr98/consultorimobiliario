@@ -1,44 +1,70 @@
-import { useEffect, useRef, useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { AnimatePresence, motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, Check, CheckCircle2, Home, MessageCircle, RotateCcw, ShieldCheck, TrendingUp } from "lucide-react";
+import { useMemo, useRef, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { ArrowLeft, ArrowRight, Check, Home, MessageCircle, RotateCcw, Search, TrendingUp } from "lucide-react";
+import { tenant, identity } from "@/tenants";
 import { Section } from "@/components/ui/Section";
+import { PropertyCard } from "@/components/shared/PropertyCard";
 import { buttonClasses } from "@/lib/button-styles";
 import { cn } from "@/lib/utils";
 import { buildWhatsappLink } from "@/lib/whatsapp";
 import { trackEvent } from "@/lib/analytics";
-import { identity } from "@/tenants";
 import {
-  bedroomsLabels,
-  contactLabels,
-  diagnosisSchema,
-  fgtsLabels,
+  PRICE_BANDS,
+  matchProperties,
+  regionsOf,
+  type MatchResult,
+} from "@/lib/property-filters";
+import {
+  ANY,
+  bedroomChoiceLabels,
   goalDescriptions,
   goalLabels,
-  stepFields,
+  paymentLabels,
   stepTitles,
-  timelineLabels,
-  type DiagnosisData,
+  type BedroomChoice,
+  type Goal,
+  type GuidedSearchData,
+  type PaymentChoice,
 } from "./schema";
-import { buildDiagnosisMessage } from "./message";
+import { buildGuidedMessage } from "./message";
 
-const goalIcons: Record<DiagnosisData["goal"], typeof Home> = {
-  morar: Home,
-  investir: TrendingUp,
-};
+const goalIcons: Record<Goal, typeof Home> = { morar: Home, investir: TrendingUp };
+const BEDROOM_ORDER: BedroomChoice[] = ["1", "2", "3+", "tanto-faz"];
+const PAYMENT_ORDER: PaymentChoice[] = ["a-vista", "financiar", "nao-sei"];
 
-/**
- * Cards de escolha do objetivo (passo 1). Diferente dos pills de opcao, cada
- * objetivo ganha icone, titulo e subtitulo — transmite atendimento consultivo,
- * nao um formulario. Selecionado: borda navy, fundo suave e selo dourado.
- */
+function Chip({
+  active,
+  onClick,
+  children,
+}: {
+  active: boolean;
+  onClick: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-pressed={active}
+      className={cn(
+        "rounded-full border px-4 py-2 text-sm font-medium transition-colors",
+        active
+          ? "border-brand bg-brand text-paper"
+          : "border-brand/15 bg-surface text-ink/75 hover:border-brand/40 hover:text-brand"
+      )}
+    >
+      {children}
+    </button>
+  );
+}
+
+/** Cards de escolha do objetivo (ícone + título + subtítulo). */
 function GoalCards({
   value,
   onChange,
 }: {
-  value: DiagnosisData["goal"] | undefined;
-  onChange: (value: DiagnosisData["goal"]) => void;
+  value: Goal | undefined;
+  onChange: (v: Goal) => void;
 }) {
   return (
     <div className="grid gap-3 sm:grid-cols-2">
@@ -71,9 +97,7 @@ function GoalCards({
             >
               <Icon className="size-5" aria-hidden />
             </span>
-            <span className="font-display text-base font-semibold text-brand">
-              {goalLabels[goal]}
-            </span>
+            <span className="font-display text-base font-semibold text-brand">{goalLabels[goal]}</span>
             <span className="text-sm leading-snug text-ink/60">{goalDescriptions[goal]}</span>
           </button>
         );
@@ -82,225 +106,152 @@ function GoalCards({
   );
 }
 
-type OptionButtonsProps<T extends string> = {
-  value: T | undefined;
-  options: readonly T[];
-  labels: Record<T, string>;
-  onChange: (value: T) => void;
-};
-
-function OptionButtons<T extends string>({
-  value,
-  options,
-  labels,
-  onChange,
-}: OptionButtonsProps<T>) {
-  return (
-    <div className="flex flex-wrap gap-2.5">
-      {options.map((option) => (
-        <button
-          key={option}
-          type="button"
-          onClick={() => onChange(option)}
-          aria-pressed={value === option}
-          className={cn(
-            "flex-1 rounded-image border px-4 py-3 text-sm font-medium transition-all",
-            value === option
-              ? "border-brand bg-brand text-paper shadow-card"
-              : "border-brand/15 bg-surface text-ink/75 hover:border-brand/40 hover:bg-paper"
-          )}
-        >
-          {labels[option]}
-        </button>
-      ))}
-    </div>
-  );
-}
-
-/** Resumo legivel dos dados que serao enviados — mesma informacao da mensagem, em lista. */
-function ResponsePreview({ data }: { data: DiagnosisData }) {
-  const rows: [string, string][] = [
-    ["Objetivo", goalLabels[data.goal]],
-    ["Região", data.region],
-    ["Dormitórios", bedroomsLabels[data.bedrooms]],
-    ["Renda familiar", `R$ ${data.income.toLocaleString("pt-BR")}`],
-    ["Entrada", `R$ ${data.downPayment.toLocaleString("pt-BR")}`],
-    ["FGTS", fgtsLabels[data.fgts]],
-    ["Forma de pagamento", timelineLabels[data.timeline]],
-    ["Prefere contato por", contactLabels[data.contact]],
-  ];
-
-  return (
-    <dl className="mt-6 divide-y divide-brand/10 overflow-hidden rounded-image border border-brand/10 text-left text-sm">
-      {rows.map(([label, value]) => (
-        <div key={label} className="flex items-center justify-between gap-4 bg-surface/50 px-4 py-2.5">
-          <dt className="text-ink/50">{label}</dt>
-          <dd className="text-right font-medium text-ink">{value}</dd>
-        </div>
-      ))}
-    </dl>
-  );
-}
-
 type BuyerDiagnosisProps = {
   id?: string;
-  /** Titulo e texto de apoio, para reaproveitar o mesmo wizard em paginas diferentes. */
   eyebrow?: string;
   title?: string;
   description?: string;
 };
 
 /**
- * Diagnostico do comprador em 3 passos (Objetivo, Onde e como, Financeiro).
- * Componente único reaproveitado na Home e em /contato — evita manter duas
- * implementacoes divergentes do mesmo formulario de captacao.
+ * Busca guiada em 2 passos (Perfil, Preferências) que termina mostrando os
+ * EMPREENDIMENTOS COMPATÍVEIS do catálogo (fonte única lib/property-filters) e
+ * um CTA "Fale com minha equipe" com mensagem limpa e contextual. Reaproveitado
+ * na Home e em /contato.
  */
 export function BuyerDiagnosis({
   id,
-  eyebrow = "Diagnóstico do comprador",
+  eyebrow = "Busca guiada",
   title = "Encontre opções compatíveis com o seu perfil",
-  description = "Responda em 3 passos rápidos e receba um direcionamento inicial pelo WhatsApp — sem compromisso.",
+  description = "Responda 2 perguntas rápidas e veja os empreendimentos que combinam com você — sem compromisso.",
 }: BuyerDiagnosisProps) {
+  const properties = tenant.properties;
+  const regions = useMemo(() => regionsOf(properties), [properties]);
+  const whatsapp = identity.contact.whatsapp;
+  const reduce = useReducedMotion();
+
   const [step, setStep] = useState(0);
-  const [submitted, setSubmitted] = useState<DiagnosisData | null>(null);
-  const [isNavigating, setIsNavigating] = useState(false);
-  const isNavigatingRef = useRef(false);
+  const [data, setData] = useState<GuidedSearchData>({});
+  const [result, setResult] = useState<MatchResult | null>(null);
   const startedRef = useRef(false);
-  const stepHeadingRef = useRef<HTMLParagraphElement>(null);
 
-  const {
-    register,
-    trigger,
-    watch,
-    setValue,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<DiagnosisData>({
-    resolver: zodResolver(diagnosisSchema),
-    mode: "onChange",
-  });
+  const set = <K extends keyof GuidedSearchData>(key: K, value: GuidedSearchData[K]) =>
+    setData((d) => ({ ...d, [key]: value }));
 
-  const values = watch();
-  const isLastStep = step === stepFields.length - 1;
+  const canStep0 = Boolean(data.goal && data.bedrooms);
+  const canStep1 = Boolean(data.region && data.priceBand);
 
-  // Move o foco para o cabecalho do passo atual, para quem navega por teclado
-  // ou leitor de tela perceber a troca de conteudo (o foco nao acompanha
-  // sozinho, ja que o botao "Continuar" nao se move).
-  useEffect(() => {
-    stepHeadingRef.current?.focus();
-  }, [step]);
+  const runSearch = () => {
+    const match = matchProperties(properties, {
+      region: data.region === ANY ? undefined : data.region,
+      dorm: data.bedrooms === "tanto-faz" ? undefined : data.bedrooms,
+      priceBand: data.priceBand === ANY ? undefined : data.priceBand,
+    });
+    setResult(match);
+    trackEvent("diagnosis_submit", { goal: data.goal, results: match.properties.length });
+  };
 
-  async function handleNext() {
-    // Trava contra clique duplo/rapido. Precisa ser um ref, nao state: dois
-    // cliques disparados na mesma tarefa sincrona (ex.: clique duplo real)
-    // ainda leriam o `isNavigating` da ultima render via closure, ja que
-    // setState nao atualiza o valor imediatamente — a trava de estado sozinha
-    // NAO bloqueia essa corrida. O ref muda na hora, entao o segundo clique
-    // ve o valor atualizado de verdade.
-    if (isNavigatingRef.current) return;
-    isNavigatingRef.current = true;
-    setIsNavigating(true);
-    // Inicio da simulacao — dispara uma unica vez, no primeiro avanco.
+  const handleNext = () => {
     if (!startedRef.current) {
       startedRef.current = true;
       trackEvent("simulation_start");
     }
-    try {
-      const valid = await trigger(stepFields[step]);
-      if (!valid) return;
-
-      if (isLastStep) {
-        handleSubmit((data) => {
-          setSubmitted(data);
-          trackEvent("diagnosis_submit", { contact: data.contact, goal: data.goal });
-        })();
-      } else {
-        setStep((s) => s + 1);
-      }
-    } finally {
-      isNavigatingRef.current = false;
-      setIsNavigating(false);
+    if (step === 0) {
+      if (canStep0) setStep(1);
+    } else if (canStep1) {
+      runSearch();
     }
-  }
+  };
 
-  function handleBack() {
-    setStep((s) => Math.max(0, s - 1));
-  }
-
-  function handleEdit() {
-    setSubmitted(null);
-    setStep(stepFields.length - 1);
-  }
-
-  function handleRestart() {
-    setSubmitted(null);
+  const restart = () => {
+    setResult(null);
     setStep(0);
-  }
+    setData({});
+    startedRef.current = false;
+  };
 
-  if (submitted) {
-    const whatsapp = identity.contact.whatsapp;
-
+  // ---------- Tela de RESULTADO ----------
+  if (result) {
+    const matches = result.properties;
     return (
       <Section id={id} className="bg-surface">
-        <div className="mx-auto max-w-xl rounded-card border border-brand/10 bg-paper p-8 text-center shadow-card sm:p-10">
-          <span className="mx-auto grid size-12 place-items-center rounded-full bg-accent/15 text-accent">
-            <CheckCircle2 className="size-6" aria-hidden />
-          </span>
-          <h2 className="mt-5 font-display text-2xl font-semibold tracking-tight text-brand">
-            Encontramos opções que podem combinar com seu perfil.
+        <div className="mx-auto max-w-4xl">
+          <div className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-accent">
+            <Search className="size-4" aria-hidden />
+            Resultado da busca
+          </div>
+          <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-brand sm:text-4xl">
+            {result.exact
+              ? matches.length === 1
+                ? "Encontramos 1 empreendimento para o seu perfil"
+                : `Encontramos ${matches.length} empreendimentos para o seu perfil`
+              : "Veja opções próximas ao que você procura"}
           </h2>
-          <p className="mt-3 text-ink/70">
-            A confirmação depende da disponibilidade e da análise oficial.
-          </p>
-
-          <ResponsePreview data={submitted} />
-
-          {whatsapp ? (
-            <>
-              <p className="mt-6 text-xs text-ink/50">
-                Ao continuar, essas respostas serão organizadas em uma
-                mensagem para iniciar seu atendimento pelo WhatsApp. Nenhuma
-                análise de crédito é realizada neste site.
-              </p>
-              <a
-                href={buildWhatsappLink(whatsapp, buildDiagnosisMessage(submitted))}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => trackEvent("whatsapp_click", { location: "diagnosis" })}
-                className={buttonClasses("primary", "lg", "mt-4")}
-              >
-                <MessageCircle className="size-4" aria-hidden />
-                Continuar no WhatsApp
-              </a>
-            </>
-          ) : (
-            <p className="mt-6 text-ink/70">
-              O atendimento pelo WhatsApp ainda não está disponível. Utilize os
-              canais de contato da empresa.
+          {!result.exact && (
+            <p className="mt-3 max-w-2xl text-ink/70">
+              Não encontramos correspondência exata, então mostramos as opções mais próximas
+              {result.relaxed.length > 0 && result.relaxed[0] !== "todos os filtros"
+                ? ` (flexibilizamos: ${result.relaxed.join(", ")})`
+                : ""}
+              . A equipe pode buscar mais alternativas para você.
             </p>
           )}
 
-          <div className="mt-4">
+          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {matches.map((property, i) => (
+              <PropertyCard key={property.id} property={property} priority={i === 0} />
+            ))}
+          </div>
+
+          {/* Contexto opcional para a equipe — não é análise de crédito. */}
+          <div className="mt-10 rounded-card border border-brand/10 bg-paper p-5 shadow-card">
+            <p className="text-sm font-medium text-ink">
+              Como pretende pagar? <span className="font-normal text-ink/50">(opcional)</span>
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {PAYMENT_ORDER.map((p) => (
+                <Chip key={p} active={data.payment === p} onClick={() => set("payment", p)}>
+                  {paymentLabels[p]}
+                </Chip>
+              ))}
+            </div>
+            <p className="mt-3 text-xs text-ink/45">
+              Estimativa para orientar o atendimento — não é aprovação de financiamento.
+            </p>
+          </div>
+
+          <div className="mt-8 flex flex-col items-center gap-3 text-center">
+            {whatsapp ? (
+              <a
+                href={buildWhatsappLink(whatsapp, buildGuidedMessage(data, matches))}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackEvent("whatsapp_click", { location: "guided_result" })}
+                className={buttonClasses("primary", "lg")}
+              >
+                <MessageCircle className="size-4" aria-hidden />
+                {identity.whatsappCta}
+              </a>
+            ) : (
+              <p className="text-ink/70">Utilize os canais de contato da empresa.</p>
+            )}
             <button
               type="button"
-              onClick={handleEdit}
+              onClick={restart}
               className={buttonClasses("ghost", "sm")}
             >
-              Editar respostas
-            </button>
-            <button
-              type="button"
-              onClick={handleRestart}
-              className={buttonClasses("ghost", "sm", "ml-2")}
-            >
               <RotateCcw className="size-3.5" aria-hidden />
-              Recomeçar
+              Refazer busca
             </button>
           </div>
         </div>
       </Section>
     );
   }
+
+  // ---------- WIZARD ----------
+  const rise = reduce ? {} : { initial: { opacity: 0, x: 12 }, animate: { opacity: 1, x: 0 } };
+  const canProceed = step === 0 ? canStep0 : canStep1;
 
   return (
     <Section id={id} className="bg-surface">
@@ -311,36 +262,21 @@ export function BuyerDiagnosis({
             {title}
           </h2>
           <p className="mt-4 text-ink/70">{description}</p>
-          <ul className="mt-8 grid gap-4">
-            {[
-              { icon: CheckCircle2, text: "Sem compromisso e sem custo" },
-              { icon: MessageCircle, text: "Direcionamento direto pelo WhatsApp" },
-              { icon: ShieldCheck, text: "Nenhuma análise de crédito e feita neste site" },
-            ].map(({ icon: Icon, text }) => (
-              <li key={text} className="flex items-start gap-3 text-sm text-ink/75">
-                <Icon className="mt-0.5 size-5 shrink-0 text-accent" aria-hidden />
-                {text}
-              </li>
-            ))}
+          <ul className="mt-8 grid gap-3 text-sm text-ink/70">
+            <li>• Sem compromisso e sem custo</li>
+            <li>• Mostramos os empreendimentos que combinam com você</li>
+            <li>• O contato acontece no WhatsApp, quando você quiser</li>
           </ul>
         </div>
 
         <div className="relative overflow-hidden rounded-[20px] border border-brand/[0.08] bg-gradient-to-br from-paper to-surface/40 p-6 shadow-[0_24px_60px_-20px_rgba(19,34,56,0.18),0_4px_12px_-4px_rgba(19,34,56,0.06)] sm:p-8">
-          {/* Fio dourado no topo — detalhe premium, sem exagero */}
           <span
             className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-accent/40 via-accent to-accent/40"
             aria-hidden
           />
 
-          <div className="text-center">
-            <p className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-accent">
-              Consultoria personalizada
-            </p>
-            <p className="mt-1.5 text-xs text-ink/45">Responda 3 perguntas · menos de 1 minuto</p>
-          </div>
-
-          {/* Progresso com etapas nomeadas */}
-          <div className="mt-6 flex items-start justify-center gap-1.5">
+          {/* Progresso */}
+          <div className="flex items-start justify-center gap-1.5">
             {stepTitles.map((label, index) => (
               <div key={label} className="flex flex-1 items-start gap-1.5">
                 <div className="flex flex-1 flex-col items-center gap-1.5">
@@ -377,210 +313,99 @@ export function BuyerDiagnosis({
               </div>
             ))}
           </div>
-        <p
-          ref={stepHeadingRef}
-          tabIndex={-1}
-          className="sr-only outline-none"
-        >
-          Passo {step + 1} de {stepTitles.length} &middot; {stepTitles[step]}
-        </p>
 
-        <AnimatePresence initial={false}>
-          <motion.div
-            key={step}
-            initial={{ opacity: 0, x: 12 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -12, position: "absolute" }}
-            transition={{ duration: 0.2 }}
-            className="mt-8 grid gap-6"
-          >
-            {step === 0 && (
-              <fieldset>
-                <legend className="text-sm font-medium text-ink">Qual é o seu objetivo?</legend>
-                <div className="mt-3">
-                  <GoalCards
-                    value={values.goal}
-                    onChange={(v) => setValue("goal", v, { shouldValidate: true })}
-                  />
-                </div>
-                {errors.goal && (
-                  <p role="alert" className="mt-2 text-sm text-red-600">
-                    {errors.goal.message}
-                  </p>
-                )}
-              </fieldset>
-            )}
+          <AnimatePresence initial={false} mode="wait">
+            <motion.div
+              key={step}
+              {...rise}
+              exit={reduce ? undefined : { opacity: 0, x: -12 }}
+              transition={{ duration: 0.2 }}
+              className="mt-8 grid gap-6"
+            >
+              {step === 0 && (
+                <>
+                  <fieldset>
+                    <legend className="text-sm font-medium text-ink">Qual é o seu objetivo?</legend>
+                    <div className="mt-3">
+                      <GoalCards value={data.goal} onChange={(v) => set("goal", v)} />
+                    </div>
+                  </fieldset>
+                  <fieldset>
+                    <legend className="text-sm font-medium text-ink">Quantos dormitórios?</legend>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {BEDROOM_ORDER.map((b) => (
+                        <Chip key={b} active={data.bedrooms === b} onClick={() => set("bedrooms", b)}>
+                          {bedroomChoiceLabels[b]}
+                        </Chip>
+                      ))}
+                    </div>
+                  </fieldset>
+                </>
+              )}
 
-            {step === 1 && (
-              <>
-                <div>
-                  <label htmlFor="region" className="text-sm font-medium text-ink">
-                    Região de interesse
-                  </label>
-                  <input
-                    id="region"
-                    type="text"
-                    placeholder="Ex.: Vila Sônia"
-                    {...register("region")}
-                    className="mt-3 w-full rounded-image border border-brand/15 bg-surface px-4 py-3 text-sm text-ink outline-none placeholder:text-ink/40 focus-visible:border-brand"
-                  />
-                  {errors.region && (
-                    <p role="alert" className="mt-2 text-sm text-red-600">
-                      {errors.region.message}
-                    </p>
-                  )}
-                </div>
+              {step === 1 && (
+                <>
+                  <fieldset>
+                    <legend className="text-sm font-medium text-ink">Região de interesse</legend>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      <Chip active={data.region === ANY} onClick={() => set("region", ANY)}>
+                        Sem preferência
+                      </Chip>
+                      {regions.map((r) => (
+                        <Chip key={r} active={data.region === r} onClick={() => set("region", r)}>
+                          {r}
+                        </Chip>
+                      ))}
+                    </div>
+                  </fieldset>
+                  <fieldset>
+                    <legend className="text-sm font-medium text-ink">Faixa de valor</legend>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      <Chip active={data.priceBand === ANY} onClick={() => set("priceBand", ANY)}>
+                        Sem preferência
+                      </Chip>
+                      {PRICE_BANDS.map((b) => (
+                        <Chip
+                          key={b.id}
+                          active={data.priceBand === b.id}
+                          onClick={() => set("priceBand", b.id)}
+                        >
+                          {b.label}
+                        </Chip>
+                      ))}
+                    </div>
+                  </fieldset>
+                </>
+              )}
+            </motion.div>
+          </AnimatePresence>
 
-                <fieldset>
-                  <legend className="text-sm font-medium text-ink">Dormitórios</legend>
-                  <div className="mt-3">
-                    <OptionButtons
-                      value={values.bedrooms}
-                      options={["1", "2", "3+"] as const}
-                      labels={bedroomsLabels}
-                      onChange={(v) => setValue("bedrooms", v, { shouldValidate: true })}
-                    />
-                  </div>
-                  {errors.bedrooms && (
-                    <p role="alert" className="mt-2 text-sm text-red-600">
-                      {errors.bedrooms.message}
-                    </p>
-                  )}
-                </fieldset>
-              </>
-            )}
-
-            {step === 2 && (
-              <>
-                <div className="grid gap-6 sm:grid-cols-2">
-                  <div>
-                    <label htmlFor="income" className="text-sm font-medium text-ink">
-                      Renda familiar aproximada (R$)
-                    </label>
-                    <input
-                      id="income"
-                      type="number"
-                      placeholder="Ex.: 6000"
-                      {...register("income")}
-                      className="mt-3 w-full rounded-image border border-brand/15 bg-surface px-4 py-3 text-sm text-ink outline-none placeholder:text-ink/40 focus-visible:border-brand"
-                    />
-                    {errors.income && (
-                      <p role="alert" className="mt-2 text-sm text-red-600">
-                        {errors.income.message}
-                      </p>
-                    )}
-                  </div>
-
-                  <div>
-                    <label htmlFor="downPayment" className="text-sm font-medium text-ink">
-                      Entrada disponível (R$)
-                    </label>
-                    <input
-                      id="downPayment"
-                      type="number"
-                      placeholder="Ex.: 25000"
-                      {...register("downPayment")}
-                      className="mt-3 w-full rounded-image border border-brand/15 bg-surface px-4 py-3 text-sm text-ink outline-none placeholder:text-ink/40 focus-visible:border-brand"
-                    />
-                    {errors.downPayment && (
-                      <p role="alert" className="mt-2 text-sm text-red-600">
-                        {errors.downPayment.message}
-                      </p>
-                    )}
-                  </div>
-                </div>
-
-                <fieldset>
-                  <legend className="text-sm font-medium text-ink">Possui FGTS?</legend>
-                  <div className="mt-3">
-                    <OptionButtons
-                      value={values.fgts}
-                      options={["sim", "nao"] as const}
-                      labels={fgtsLabels}
-                      onChange={(v) => setValue("fgts", v, { shouldValidate: true })}
-                    />
-                  </div>
-                  {errors.fgts && (
-                    <p role="alert" className="mt-2 text-sm text-red-600">
-                      {errors.fgts.message}
-                    </p>
-                  )}
-                </fieldset>
-
-                <fieldset>
-                  <legend className="text-sm font-medium text-ink">Como pretende pagar?</legend>
-                  <div className="mt-3">
-                    <OptionButtons
-                      value={values.timeline}
-                      options={["a-vista", "menos-240-meses", "mais-240-meses"] as const}
-                      labels={timelineLabels}
-                      onChange={(v) => setValue("timeline", v, { shouldValidate: true })}
-                    />
-                  </div>
-                  {errors.timeline && (
-                    <p role="alert" className="mt-2 text-sm text-red-600">
-                      {errors.timeline.message}
-                    </p>
-                  )}
-                </fieldset>
-
-                <fieldset>
-                  <legend className="text-sm font-medium text-ink">
-                    Prefere receber o contato por ligação ou mensagem?
-                  </legend>
-                  <div className="mt-3">
-                    <OptionButtons
-                      value={values.contact}
-                      options={["ligacao", "mensagem"] as const}
-                      labels={contactLabels}
-                      onChange={(v) => setValue("contact", v, { shouldValidate: true })}
-                    />
-                  </div>
-                  {errors.contact && (
-                    <p role="alert" className="mt-2 text-sm text-red-600">
-                      {errors.contact.message}
-                    </p>
-                  )}
-                </fieldset>
-              </>
-            )}
-          </motion.div>
-        </AnimatePresence>
-
-        <div className="mt-8 border-t border-brand/10 pt-6">
-          <div className={cn("flex items-center gap-3", step === 0 ? "justify-end" : "justify-between")}>
-            {step > 0 && (
+          <div className="mt-8 border-t border-brand/10 pt-6">
+            <div className={cn("flex items-center gap-3", step === 0 ? "justify-end" : "justify-between")}>
+              {step > 0 && (
+                <button type="button" onClick={() => setStep(0)} className={buttonClasses("ghost", "md")}>
+                  <ArrowLeft className="size-4" aria-hidden />
+                  Voltar
+                </button>
+              )}
               <button
                 type="button"
-                onClick={handleBack}
-                className={buttonClasses("ghost", "md")}
+                onClick={handleNext}
+                disabled={!canProceed}
+                className={cn(
+                  buttonClasses("primary", "md"),
+                  step === 0 && "w-full sm:w-auto",
+                  !canProceed && "cursor-not-allowed opacity-50"
+                )}
               >
-                <ArrowLeft className="size-4" aria-hidden />
-                Voltar
+                {step === 0 ? "Continuar" : "Ver opções"}
+                <ArrowRight className="size-4" aria-hidden />
               </button>
-            )}
-
-            <button
-              type="button"
-              onClick={handleNext}
-              disabled={isNavigating}
-              aria-busy={isNavigating}
-              className={cn(
-                buttonClasses("primary", "md"),
-                step === 0 && "w-full sm:w-auto",
-                isNavigating && "opacity-70"
-              )}
-            >
-              {isLastStep ? "Receber opções pelo WhatsApp" : "Continuar minha busca"}
-              <ArrowRight className="size-4" aria-hidden />
-            </button>
+            </div>
+            <p className="mt-5 text-center text-xs text-ink/45">
+              Sem compromisso — não pedimos CPF, renda exata nem documentos.
+            </p>
           </div>
-
-          <p className="mt-5 flex items-center justify-center gap-1.5 text-center text-xs text-ink/45">
-            <ShieldCheck className="size-3.5 shrink-0 text-accent" aria-hidden />
-            Atendimento personalizado e sem custo — seus dados servem apenas para o atendimento.
-          </p>
-        </div>
         </div>
       </div>
     </Section>

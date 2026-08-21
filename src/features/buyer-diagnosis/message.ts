@@ -1,38 +1,37 @@
-import { tenant, identity } from "@/tenants";
-import { formatCurrency } from "@/lib/utils";
+import type { Property } from "@/types";
+import { priceBandLabel } from "@/lib/property-filters";
 import {
-  bedroomsLabels,
-  contactLabels,
-  fgtsLabels,
+  ANY,
+  bedroomChoiceLabels,
   goalLabels,
-  timelineLabels,
-  type DiagnosisData,
+  paymentLabels,
+  type GuidedSearchData,
 } from "./schema";
 
 /**
- * Monta a mensagem estruturada enviada ao corretor via WhatsApp, no formato
- * "Olá, {nome pelo qual prefere ser chamado}! Fiz o diagnostico no site."
- * seguido dos dados informados. Anexa a origem (UTM) quando disponivel na
- * sessao. Para tenants sem `preferredName` (ex.: uma imobiliaria), usa o
- * nome de exibicao normal.
+ * Monta a mensagem do WhatsApp da busca guiada. Limpa e contextual: resume o
+ * perfil e cita os empreendimentos compatíveis (do catálogo). NUNCA inclui UTM,
+ * código técnico ou dado pessoal (CPF/renda/telefone/e-mail).
  */
-export function buildDiagnosisMessage(data: DiagnosisData): string {
-  const greetingName = tenant.kind === "individual" ? tenant.broker.preferredName : identity.displayName;
-
-  // Mensagem 100% limpa — sem UTM nem codigo tecnico. A origem (UTM) e
-  // registrada apenas via analytics, nunca no texto enviado ao cliente.
-  const lines = [
-    `Olá, ${greetingName}! Fiz o diagnóstico no site.`,
+export function buildGuidedMessage(data: GuidedSearchData, matches: Property[]): string {
+  const lines: string[] = [
+    "Olá! Fiz a busca de imóveis no site da Bueno Imóveis e gostaria de conhecer as opções que combinam com o meu perfil.",
     "",
-    `Objetivo: ${goalLabels[data.goal]}`,
-    `Região: ${data.region}`,
-    `Renda familiar: ${formatCurrency(data.income)}`,
-    `Entrada: ${formatCurrency(data.downPayment)}`,
-    `FGTS: ${fgtsLabels[data.fgts]}`,
-    `Dormitórios: ${bedroomsLabels[data.bedrooms]}`,
-    `Forma de pagamento: ${timelineLabels[data.timeline]}`,
-    `Prefere contato por: ${contactLabels[data.contact]}`,
   ];
+
+  if (data.goal) lines.push(`Objetivo: ${goalLabels[data.goal]}`);
+  if (data.bedrooms && data.bedrooms !== "tanto-faz")
+    lines.push(`Dormitórios: ${bedroomChoiceLabels[data.bedrooms]}`);
+  if (data.region && data.region !== ANY) lines.push(`Região: ${data.region}`);
+  if (data.priceBand && data.priceBand !== ANY)
+    lines.push(`Faixa de valor: ${priceBandLabel(data.priceBand)}`);
+  if (data.payment) lines.push(`Pagamento: ${paymentLabels[data.payment]}`);
+
+  // Cita os empreendimentos quando há de 1 a 3 compatíveis (contexto forte
+  // para a equipe, sem poluir a mensagem quando o resultado é amplo).
+  if (matches.length > 0 && matches.length <= 3) {
+    lines.push("", `Empreendimentos de interesse: ${matches.map((m) => m.name).join(", ")}.`);
+  }
 
   return lines.join("\n");
 }

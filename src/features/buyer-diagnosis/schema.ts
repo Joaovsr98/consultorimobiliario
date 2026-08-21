@@ -1,77 +1,48 @@
-import { z } from "zod";
-
 /**
- * Diagnostico do comprador. Os 3 passos cobrem exatamente os campos usados
- * na mensagem final para o WhatsApp — nenhum campo e coletado sem uso.
+ * Busca guiada — perguntas mínimas e úteis, todas por card/botão (nada de
+ * formulário bancário). NÃO pedimos CPF, RG, renda exata, telefone ou e-mail:
+ * primeiro ajudamos o usuário a ver opções; o contato acontece no WhatsApp.
+ *
+ * O matching de imóveis usa a fonte única em lib/property-filters (região +
+ * dormitórios + faixa de preço). `goal` e `payment` são contexto para a equipe,
+ * não filtram o catálogo.
  */
-export const diagnosisSchema = z.object({
-  goal: z.enum(["morar", "investir"], {
-    message: "Selecione uma opção",
-  }),
-  region: z
-    .string()
-    .trim()
-    .min(2, "Informe a região de interesse"),
-  bedrooms: z.enum(["1", "2", "3+"], {
-    message: "Selecione uma opção",
-  }),
-  income: z.coerce
-    .number({ message: "Informe um valor" })
-    .positive("Informe um valor válido"),
-  downPayment: z.coerce
-    .number({ message: "Informe um valor" })
-    .min(0, "Informe um valor válido"),
-  fgts: z.enum(["sim", "nao"], {
-    message: "Selecione uma opção",
-  }),
-  timeline: z.enum(["a-vista", "menos-240-meses", "mais-240-meses"], {
-    message: "Selecione uma opção",
-  }),
-  contact: z.enum(["ligacao", "mensagem"], {
-    message: "Selecione uma opção",
-  }),
-});
 
-export type DiagnosisData = z.infer<typeof diagnosisSchema>;
-
-export const goalLabels: Record<DiagnosisData["goal"], string> = {
+export type Goal = "morar" | "investir";
+export const goalLabels: Record<Goal, string> = {
   morar: "Quero morar",
   investir: "Quero investir",
 };
-
-/** Subtitulo de apoio de cada objetivo, exibido nos cards de escolha do passo 1. */
-export const goalDescriptions: Record<DiagnosisData["goal"], string> = {
+export const goalDescriptions: Record<Goal, string> = {
   morar: "Encontre seu novo lar em São Paulo",
   investir: "Busque oportunidades com potencial",
 };
 
-export const bedroomsLabels: Record<DiagnosisData["bedrooms"], string> = {
-  "1": "1 dormitório",
-  "2": "2 dormitórios",
-  "3+": "3 ou mais dormitórios",
+export type BedroomChoice = "1" | "2" | "3+" | "tanto-faz";
+export const bedroomChoiceLabels: Record<BedroomChoice, string> = {
+  "1": "1 dorm.",
+  "2": "2 dorm.",
+  "3+": "3+ dorm.",
+  "tanto-faz": "Tanto faz",
 };
 
-export const fgtsLabels: Record<DiagnosisData["fgts"], string> = {
-  sim: "Sim",
-  nao: "Não",
-};
-
-export const timelineLabels: Record<DiagnosisData["timeline"], string> = {
+/** Como pretende pagar — contexto opcional para a equipe (não é análise de crédito). */
+export type PaymentChoice = "a-vista" | "financiar" | "nao-sei";
+export const paymentLabels: Record<PaymentChoice, string> = {
   "a-vista": "À vista",
-  "menos-240-meses": "Financiar em menos de 240 meses",
-  "mais-240-meses": "Financiar em mais de 240 meses",
+  financiar: "Financiar",
+  "nao-sei": "Ainda não sei",
 };
 
-export const contactLabels: Record<DiagnosisData["contact"], string> = {
-  ligacao: "Ligação",
-  mensagem: "Mensagem",
+/** Valor sentinela de "sem preferência" para região e faixa de preço. */
+export const ANY = "sem-preferencia";
+
+export type GuidedSearchData = {
+  goal?: Goal;
+  bedrooms?: BedroomChoice;
+  region?: string; // bairro do catálogo ou ANY
+  priceBand?: string; // PriceBandId ou ANY
+  payment?: PaymentChoice; // opcional
 };
 
-/** Campos validados em cada passo do wizard. */
-export const stepFields: (keyof DiagnosisData)[][] = [
-  ["goal"],
-  ["region", "bedrooms"],
-  ["income", "downPayment", "fgts", "timeline", "contact"],
-];
-
-export const stepTitles = ["Perfil", "Preferências", "Financeiro"];
+export const stepTitles = ["Perfil", "Preferências"];

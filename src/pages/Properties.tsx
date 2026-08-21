@@ -7,6 +7,12 @@ import { Seo } from "@/components/shared/Seo";
 import { PropertyCard } from "@/components/shared/PropertyCard";
 import { neighborhoods } from "@/data/neighborhoods";
 import { cn, maxAreaFromLabel } from "@/lib/utils";
+import {
+  DORM_OPTIONS,
+  PRICE_BANDS,
+  filterProperties,
+  regionsOf,
+} from "@/lib/property-filters";
 
 const { properties } = tenant;
 
@@ -27,24 +33,6 @@ function groupByArea(list: Property[]) {
       .sort((a, b) => (a.priceFrom ?? Infinity) - (b.priceFrom ?? Infinity)),
   })).filter((g) => g.items.length > 0);
 }
-
-/** Um empreendimento "cobre" a opção de dormitório? Ex.: "1 e 2 dormitórios" cobre 1 e 2. */
-function bedroomsCovers(bedrooms: string, option: string): boolean {
-  const nums = (bedrooms.match(/\d+/g) ?? []).map(Number);
-  return option === "3+" ? nums.some((n) => n >= 3) : nums.includes(Number(option));
-}
-
-const DORM_OPTIONS = [
-  { id: "1", label: "1 dorm." },
-  { id: "2", label: "2 dorm." },
-  { id: "3+", label: "3+ dorm." },
-];
-
-const PRICE_BANDS = [
-  { id: "ate-260", label: "Até R$ 260 mil", test: (p: number) => p <= 260_000 },
-  { id: "260-300", label: "R$ 260–300 mil", test: (p: number) => p > 260_000 && p <= 300_000 },
-  { id: "acima-300", label: "Acima de R$ 300 mil", test: (p: number) => p > 300_000 },
-];
 
 function Chip({
   active,
@@ -90,23 +78,15 @@ function FilterRow({
 }
 
 export function Properties() {
-  const regions = useMemo(
-    () => Array.from(new Set(properties.map((p) => p.neighborhood))),
-    []
-  );
+  const regions = useMemo(() => regionsOf(properties), []);
   const [regiao, setRegiao] = useState("");
   const [dorm, setDorm] = useState("");
   const [preco, setPreco] = useState("");
 
-  const filtered = properties.filter((p) => {
-    if (regiao && p.neighborhood !== regiao) return false;
-    if (dorm && !bedroomsCovers(p.bedrooms, dorm)) return false;
-    if (preco) {
-      if (p.priceFrom === undefined) return false;
-      const band = PRICE_BANDS.find((b) => b.id === preco);
-      if (band && !band.test(p.priceFrom)) return false;
-    }
-    return true;
+  const filtered = filterProperties(properties, {
+    region: regiao || undefined,
+    dorm: dorm || undefined,
+    priceBand: preco || undefined,
   });
 
   const groups = groupByArea(filtered);
