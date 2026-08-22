@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, BedDouble, CalendarDays, Clock, MapPin, MessageCircle, Ruler, Tag, TrainFront } from "lucide-react";
+import { ArrowLeft, BedDouble, Building2, CalendarDays, Clock, MapPin, MessageCircle, Ruler, Tag, TrainFront } from "lucide-react";
 import { tenant, identity } from "@/tenants";
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
@@ -81,6 +81,9 @@ export function PropertyDetails() {
   const facts = [
     { icon: BedDouble, label: "Dormitórios", value: property.bedrooms },
     { icon: Ruler, label: "Metragem", value: formatArea(property.area) },
+    ...(property.developer
+      ? [{ icon: Building2, label: "Construtora", value: property.developer }]
+      : []),
     { icon: CalendarDays, label: "Entrega", value: property.delivery ?? "A definir" },
     ...(property.priceFrom !== undefined
       ? [{ icon: Tag, label: "A partir de", value: formatCurrency(property.priceFrom) }]
@@ -331,7 +334,11 @@ export function PropertyDetails() {
           )}
         </div>
 
-        <p className="mt-10 text-sm text-ink/50">Valores e disponibilidade sujeitos a alteração.</p>
+        <p className="mt-10 text-sm text-ink/50">
+          {property.priceRef
+            ? `Valores de referência de ${property.priceRef}, sujeitos a alteração. Disponibilidade sujeita a confirmação.`
+            : "Valores e disponibilidade sujeitos a alteração."}
+        </p>
 
         {property.images.length === 0 && (
           <p className="mt-8 inline-block rounded-card border border-brand/10 bg-paper px-4 py-3 text-sm text-ink/60">

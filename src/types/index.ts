@@ -74,6 +74,10 @@ export type Property = {
   area: string;
   /** Preco "a partir de". Opcional e sempre acompanhado de ressalva de atualizacao. */
   priceFrom?: number;
+  /** Mes/ano de referencia da tabela de precos (ex.: "ago/2026"). Exibido junto a ressalva. */
+  priceRef?: string;
+  /** Construtora/incorporadora do empreendimento (ex.: "Vibra"). Opcional. */
+  developer?: string;
   /** Ex.: "Dez/2027" */
   delivery?: string;
   status?: PropertyStatus;
