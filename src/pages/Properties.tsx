@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import { ChevronDown, SlidersHorizontal } from "lucide-react";
 import { tenant } from "@/tenants";
 import type { Property } from "@/types";
 import { Section } from "@/components/ui/Section";
@@ -49,7 +50,7 @@ function Chip({
       onClick={onClick}
       aria-pressed={active}
       className={cn(
-        "rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors",
+        "inline-flex min-h-[2.75rem] items-center rounded-full border px-4 py-2 text-sm font-medium transition-colors",
         active
           ? "border-brand bg-brand text-paper"
           : "border-brand/15 bg-paper text-ink/75 hover:border-brand/40 hover:text-brand"
@@ -89,6 +90,7 @@ export function Properties() {
     priceBand: preco || undefined,
   });
 
+  const [filtersOpen, setFiltersOpen] = useState(false);
   const groups = groupByArea(filtered);
   const hasFilters = Boolean(regiao || dorm || preco);
   const clear = () => {
@@ -96,6 +98,14 @@ export function Properties() {
     setDorm("");
     setPreco("");
   };
+  const activeSummary =
+    [
+      regiao,
+      DORM_OPTIONS.find((d) => d.id === dorm)?.label,
+      PRICE_BANDS.find((b) => b.id === preco)?.label,
+    ]
+      .filter(Boolean)
+      .join(" · ") || "Todos os imóveis";
   let cardIndex = 0;
 
   return (
@@ -115,8 +125,38 @@ export function Properties() {
       </p>
 
       {/* Filtros */}
-      <div className="mt-8 space-y-4 rounded-card border border-brand/10 bg-paper p-5 shadow-card">
-        <FilterRow label="Região">
+      <div className="mt-8">
+        {/* Mobile: botão que abre os filtros + resumo dos filtros ativos */}
+        <button
+          type="button"
+          onClick={() => setFiltersOpen((o) => !o)}
+          aria-expanded={filtersOpen}
+          className="flex w-full items-center justify-between rounded-card border border-brand/15 bg-paper px-4 py-3 text-left shadow-card sm:hidden"
+        >
+          <span className="flex items-center gap-2 font-medium text-brand">
+            <SlidersHorizontal className="size-4 text-accent" aria-hidden />
+            Filtrar imóveis
+          </span>
+          <span className="flex items-center gap-2 text-sm text-ink/55">
+            {filtered.length}
+            <ChevronDown
+              className={cn("size-4 transition-transform", filtersOpen && "rotate-180")}
+              aria-hidden
+            />
+          </span>
+        </button>
+        {!filtersOpen && (
+          <p className="mt-2 px-1 text-sm text-ink/60 sm:hidden">{activeSummary}</p>
+        )}
+
+        {/* Controles: sempre no desktop; no mobile só quando aberto */}
+        <div
+          className={cn(
+            "mt-3 space-y-4 rounded-card border border-brand/10 bg-paper p-5 shadow-card sm:mt-0 sm:block",
+            filtersOpen ? "block" : "hidden"
+          )}
+        >
+          <FilterRow label="Região">
           <Chip active={regiao === ""} onClick={() => setRegiao("")}>
             Todas
           </Chip>
@@ -163,6 +203,7 @@ export function Properties() {
               Limpar filtros
             </button>
           )}
+          </div>
         </div>
       </div>
 

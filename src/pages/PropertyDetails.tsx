@@ -380,7 +380,7 @@ export function PropertyDetails() {
       {contactLink && (
         <>
           {/* Mobile: barra inferior fixa, com preco + CTA */}
-          <div className="fixed inset-x-0 bottom-0 z-40 border-t border-brand/10 bg-paper/95 px-4 py-3 shadow-[0_-6px_24px_-8px_rgba(13,27,42,0.25)] backdrop-blur sm:hidden">
+          <div className="fixed inset-x-0 bottom-0 z-40 border-t border-brand/10 bg-paper/95 px-4 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] shadow-[0_-6px_24px_-8px_rgba(13,27,42,0.25)] backdrop-blur sm:hidden">
             <div className="flex items-center gap-3">
               <div className="min-w-0">
                 {property.priceFrom !== undefined ? (
@@ -416,14 +416,11 @@ export function PropertyDetails() {
             rel="noopener noreferrer"
             onClick={() => onWhatsappClick("property_float_desktop")}
             aria-label={ctaLabel}
-            className="fixed bottom-5 right-5 z-40 hidden items-center gap-2 rounded-full bg-[#25D366] px-4 py-3 text-sm font-medium text-white shadow-lg shadow-black/15 transition-transform hover:scale-105 focus-visible:scale-105 sm:inline-flex"
+            className="fixed bottom-[calc(1.25rem+env(safe-area-inset-bottom))] right-5 z-40 hidden items-center gap-2 rounded-full bg-[#25D366] px-4 py-3 text-sm font-medium text-white shadow-lg shadow-black/15 transition-transform hover:scale-105 focus-visible:scale-105 sm:inline-flex"
           >
             <MessageCircle className="size-5" aria-hidden />
             {ctaLabel}
           </a>
-
-          {/* Espaco para a barra fixa nao cobrir o rodape no mobile */}
-          <div className="h-20 sm:hidden" aria-hidden />
         </>
       )}
     </>

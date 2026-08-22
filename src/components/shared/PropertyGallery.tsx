@@ -83,7 +83,7 @@ export const PropertyGallery = forwardRef<PropertyGalleryHandle, PropertyGallery
                 </span>
               )}
               {index === 0 && (
-                <span className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-full bg-brand/80 px-3 py-1.5 text-xs font-medium text-paper opacity-0 transition-opacity group-hover:opacity-100">
+                <span className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-full bg-brand/80 px-3 py-1.5 text-xs font-medium text-paper opacity-100 transition-opacity sm:opacity-0 sm:group-hover:opacity-100">
                   <Expand className="size-3.5" aria-hidden />
                   Ampliar
                 </span>

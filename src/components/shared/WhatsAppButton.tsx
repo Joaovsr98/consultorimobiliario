@@ -17,7 +17,7 @@ export function WhatsAppButton() {
   if (!identity.contact.whatsapp || onPropertyDetail) return null;
 
   return (
-    <div className="fixed bottom-5 right-5 z-30 flex items-end gap-1">
+    <div className="fixed bottom-[calc(1.25rem+env(safe-area-inset-bottom))] right-5 z-30 flex items-end gap-1">
       {identity.mascot && (
         // Mascote decorativo. Anima (flutua/cutuca em direção ao botão) e pausa
         // no hover, quando o zoom da própria imagem entra.

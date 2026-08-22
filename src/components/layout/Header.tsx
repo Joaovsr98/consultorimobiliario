@@ -42,7 +42,7 @@ export function Header() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-30 border-b transition-colors",
+        "sticky top-0 z-30 border-b pt-[env(safe-area-inset-top)] transition-colors",
         scrolled
           ? "border-brand/10 bg-paper/85 backdrop-blur-md"
           : "border-transparent bg-surface"

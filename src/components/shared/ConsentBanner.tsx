@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { ShieldCheck } from "lucide-react";
 import { buttonClasses } from "@/lib/button-styles";
 import { cn } from "@/lib/utils";
@@ -19,6 +19,10 @@ import {
  * ligam conforme a escolha. Cookies estritamente necessários não passam aqui.
  */
 export function ConsentBanner() {
+  const { pathname } = useLocation();
+  // Na página de imóvel (mobile) há a barra fixa de conversão; o banner fica
+  // ACIMA dela, sem cobrir o CTA.
+  const onPropertyDetail = /^\/imoveis\/[^/]+$/.test(pathname);
   const [open, setOpen] = useState(false);
   const [managing, setManaging] = useState(false);
   const [prefs, setPrefs] = useState<ConsentPrefs>(getConsent());
@@ -43,8 +47,15 @@ export function ConsentBanner() {
   };
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-50 px-4 pb-4">
-      <div className="mx-auto max-w-3xl rounded-card border border-brand/15 bg-paper p-5 shadow-[0_-8px_40px_-12px_rgba(13,27,42,0.35)] sm:p-6">
+    <div
+      className={cn(
+        "fixed inset-x-0 z-50 px-4",
+        onPropertyDetail
+          ? "bottom-[calc(4.75rem+env(safe-area-inset-bottom))] pb-2 sm:bottom-0 sm:pb-[calc(1rem+env(safe-area-inset-bottom))]"
+          : "bottom-0 pb-[calc(1rem+env(safe-area-inset-bottom))]"
+      )}
+    >
+      <div className="mx-auto max-w-3xl rounded-card border border-brand/15 bg-paper p-4 shadow-[0_-8px_40px_-12px_rgba(13,27,42,0.35)] sm:p-6">
         <div className="flex items-start gap-3">
           <ShieldCheck className="mt-0.5 size-5 shrink-0 text-accent" aria-hidden />
           <div className="min-w-0">
@@ -80,39 +91,43 @@ export function ConsentBanner() {
           </div>
         )}
 
-        <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-end">
+        <div className="mt-4">
           {managing ? (
-            <button
-              type="button"
-              onClick={() => decide(prefs)}
-              className={buttonClasses("primary", "md")}
-            >
-              Salvar preferências
-            </button>
+            <div className="flex justify-end">
+              <button
+                type="button"
+                onClick={() => decide(prefs)}
+                className={cn(buttonClasses("primary", "md"), "w-full sm:w-auto")}
+              >
+                Salvar preferências
+              </button>
+            </div>
           ) : (
-            <>
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-end">
+              <div className="flex gap-2 sm:order-2">
+                <button
+                  type="button"
+                  onClick={() => decide(DENIED)}
+                  className={cn(buttonClasses("outline", "md"), "flex-1 sm:flex-none")}
+                >
+                  Recusar
+                </button>
+                <button
+                  type="button"
+                  onClick={() => decide(GRANTED)}
+                  className={cn(buttonClasses("primary", "md"), "flex-1 sm:flex-none")}
+                >
+                  Aceitar
+                </button>
+              </div>
               <button
                 type="button"
                 onClick={() => setManaging(true)}
-                className={cn(buttonClasses("ghost", "md"), "sm:mr-auto")}
+                className={cn(buttonClasses("ghost", "sm"), "sm:order-1 sm:mr-auto")}
               >
                 Gerenciar preferências
               </button>
-              <button
-                type="button"
-                onClick={() => decide(DENIED)}
-                className={buttonClasses("outline", "md")}
-              >
-                Recusar
-              </button>
-              <button
-                type="button"
-                onClick={() => decide(GRANTED)}
-                className={buttonClasses("primary", "md")}
-              >
-                Aceitar
-              </button>
-            </>
+            </div>
           )}
         </div>
       </div>

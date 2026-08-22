@@ -49,7 +49,7 @@ function Chip({
       onClick={onClick}
       aria-pressed={active}
       className={cn(
-        "rounded-full border px-4 py-2 text-sm font-medium transition-colors",
+        "inline-flex min-h-[2.75rem] items-center rounded-full border px-4 py-2 text-sm font-medium transition-colors",
         active
           ? "border-brand bg-brand text-paper"
           : "border-brand/15 bg-surface text-ink/75 hover:border-brand/40 hover:text-brand"
