@@ -226,12 +226,12 @@ export const properties: Property[] = [
     status: "lancamento",
     address: "Rua Azem Abdalla, 571 - Jardim Bonfiglioli, São Paulo - SP",
     nearby: [
-      { place: "Estação da Linha 4-Amarela", time: "10 min a pé" },
+      { place: "Estação Butantã (Linha 4-Amarela)", time: "10 min a pé" },
       { place: "Pinheiros", time: "10 min" },
       { place: "Avenida Paulista", time: "15 min" },
     ],
     description:
-      "Condomínio residencial de 2 torres no Jardim Bonfiglioli, Zona Oeste de São Paulo, a 10 minutos a pé da Estação da Linha 4-Amarela — 10 minutos de Pinheiros e 15 da Avenida Paulista. Apartamentos de 2 dormitórios com opção de varanda, area de lazer completa e unidades enquadradas no Programa Minha Casa, Minha Vida.",
+      "Condomínio residencial de 2 torres no Jardim Bonfiglioli, Zona Oeste de São Paulo, a 10 minutos a pé da Estação Butantã (Linha 4-Amarela) — 10 minutos de Pinheiros e 15 da Avenida Paulista. Apartamentos de 2 dormitórios com opção de varanda, area de lazer completa e unidades enquadradas no Programa Minha Casa, Minha Vida.",
     features: [
       "Piscina",
       "Solário",
