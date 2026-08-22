@@ -91,6 +91,10 @@ export const properties: Property[] = [
     address: "Rua Dias Vieira, 420 - Vila Sônia, São Paulo - SP",
     nearby: [
       { place: "Estação Vila Sônia (Linha 4-Amarela)", time: "8 min a pé" },
+      { place: "Assaí Atacadista Francisco Morato" },
+      { place: "Shopping Butantã" },
+      { place: "Parque Villa-Lobos" },
+      { place: "Shopping Eldorado" },
     ],
     description:
       "Condomínio fechado a 8 minutos a pé da Estação Vila Sônia (Linha 4-Amarela), com área de lazer completa e unidades enquadradas no Programa Minha Casa, Minha Vida.",
