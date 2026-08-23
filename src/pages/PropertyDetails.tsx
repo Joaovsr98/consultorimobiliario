@@ -251,6 +251,23 @@ export function PropertyDetails() {
           </div>
         )}
 
+        {property.specs && property.specs.length > 0 && (
+          <div className="mt-12">
+            <h2 className="font-display text-2xl font-semibold text-brand">Ficha técnica</h2>
+            <dl className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+              {property.specs.map((spec) => (
+                <div
+                  key={spec.label}
+                  className="rounded-card border border-brand/10 bg-paper p-4 shadow-card"
+                >
+                  <dt className="text-xs uppercase tracking-wide text-ink/50">{spec.label}</dt>
+                  <dd className="mt-1 font-display text-lg font-semibold text-brand">{spec.value}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        )}
+
         {plantas.length > 0 && (
           <div className="mt-12">
             <h2 className="font-display text-2xl font-semibold text-brand">Plantas</h2>

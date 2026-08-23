@@ -87,6 +87,8 @@ export type Property = {
   coords?: { lat: number; lng: number };
   /** Pontos de interesse por perto (dados reais do material oficial). `time` é opcional. */
   nearby?: { place: string; time?: string }[];
+  /** Ficha técnica (dados do material oficial: torres, unidades, pavimentos, etc.). Exibida quando presente. */
+  specs?: { label: string; value: string }[];
   description: string;
   features: string[];
   /** Caminhos de imagens autorizadas. */
