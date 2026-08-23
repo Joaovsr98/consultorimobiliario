@@ -19,7 +19,7 @@ export const properties: Property[] = [
     priceFrom: 242100,
     priceRef: "ago/2026",
     developer: "Vibra",
-    delivery: "2028",
+    delivery: "Nov/2028",
     status: "lancamento",
     address: "Rua Caminho do Engenho, 584 - Vila Sônia, São Paulo - SP",
     nearby: [
@@ -86,7 +86,7 @@ export const properties: Property[] = [
     priceFrom: 307800,
     priceRef: "ago/2026",
     developer: "Vibra",
-    delivery: "2028",
+    delivery: "Mai/2028",
     status: "lancamento",
     address: "Rua Dias Vieira, 420 - Vila Sônia, São Paulo - SP",
     specs: [
@@ -168,7 +168,7 @@ export const properties: Property[] = [
     priceFrom: 254900,
     priceRef: "ago/2026",
     developer: "Vibra",
-    delivery: "2028",
+    delivery: "Abr/2028",
     status: "lancamento",
     address: "Estrada de Itapecerica, 2369 - Jardim Germânia/Vila Maracanã, São Paulo, SP",
     coords: { lat: -23.6506, lng: -46.756 },
@@ -238,7 +238,7 @@ export const properties: Property[] = [
     priceFrom: 276000,
     priceRef: "ago/2026",
     developer: "Vibra",
-    delivery: "2028",
+    delivery: "Nov/2028",
     status: "lancamento",
     address: "Rua Azem Abdalla, 571 - Jardim Bonfiglioli, São Paulo - SP",
     nearby: [
@@ -297,6 +297,7 @@ export const properties: Property[] = [
     bedrooms: "1 e 2 dormitórios",
     area: "26,82 a 44,28 m2",
     developer: "Vibra",
+    delivery: "Set/2027",
     status: "lancamento",
     address: "Av. das Nações Unidas, 19047 - Santo Amaro, São Paulo - SP",
     specs: [
