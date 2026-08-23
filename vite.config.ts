@@ -61,6 +61,7 @@ const PROPERTY_SLUGS = [
   "vibra-estacao-vila-sonia",
   "vibra-estacao-campo-limpo",
   "vibra-jardim-bonfiglioli",
+  "vibra-nacoes-unidas",
 ];
 const GUIDE_SLUGS = guides.map((g) => g.slug);
 const NEIGHBORHOOD_SLUGS = neighborhoods.map((n) => n.slug);
