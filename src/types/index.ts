@@ -76,6 +76,10 @@ export type Property = {
   priceFrom?: number;
   /** Mes/ano de referencia da tabela de precos (ex.: "ago/2026"). Exibido junto a ressalva. */
   priceRef?: string;
+  /** Rotulo de preco quando nao ha valor numerico (ex.: "Sob consulta", tipico de alto padrao/lancamento). */
+  priceLabel?: string;
+  /** URL de tour virtual 360 do empreendimento (ex.: piperz/tour3d). Opcional. */
+  tourUrl?: string;
   /** Construtora/incorporadora do empreendimento (ex.: "Vibra"). Opcional. */
   developer?: string;
   /** Ex.: "Dez/2027" */

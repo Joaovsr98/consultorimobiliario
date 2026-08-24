@@ -8,6 +8,7 @@ import { neighborhoods } from "./src/data/neighborhoods";
 import { guides } from "./src/data/guides";
 import { properties as propsJoaoVictor } from "./src/tenants/joao-victor/properties";
 import { properties as propsShelby } from "./src/tenants/shelby/properties";
+import { properties as propsBritto } from "./src/tenants/britto/properties";
 
 /**
  * Metadados de SEO por tenant, injetados no HTML/emitidos como arquivos em
@@ -54,31 +55,53 @@ const OG_BY_TENANT: Record<string, TenantSeo> = {
     ogImage: "/properties/vibra-estacao-vila-sonia/fachada-torres.jpg",
     favicon: "",
   },
+  britto: {
+    siteName: "Britto",
+    title: "Britto — Alto padrão EXTO em São Paulo",
+    description:
+      "Empreendimentos de alto padrão da EXTO Incorporadora nos bairros mais desejados de São Paulo, com curadoria e atendimento pessoal do Britto.",
+    url: "https://britto-exto.vercel.app",
+    telephone: "+5511995804240",
+    areaServed: "São Paulo, SP",
+    creci: "104954",
+    ogImage: "/properties/legacy-guedala/fachada.jpg",
+    favicon: "",
+  },
 };
 
-const PROPERTY_SLUGS = [
-  "vibra-parque-vila-sonia",
-  "vibra-estacao-vila-sonia",
-  "vibra-estacao-campo-limpo",
-  "vibra-jardim-bonfiglioli",
-  "vibra-nacoes-unidas",
-];
+/**
+ * Perfil de conteudo por tenant. `premium` (alto padrao, EXTO) troca a prosa
+ * MCMV por linguagem de alto padrao e NAO gera as paginas de bairro do Vibra.
+ */
+type ContentProfile = "mcmv" | "premium";
+type TenantContent = {
+  properties: Prop[];
+  includeNeighborhoods: boolean;
+  includeGuides: boolean;
+  profile: ContentProfile;
+};
+const CONTENT_BY_TENANT: Record<string, TenantContent> = {
+  "joao-victor": { properties: propsJoaoVictor, includeNeighborhoods: true, includeGuides: true, profile: "mcmv" },
+  shelby: { properties: propsShelby, includeNeighborhoods: true, includeGuides: true, profile: "mcmv" },
+  britto: { properties: propsBritto, includeNeighborhoods: false, includeGuides: true, profile: "premium" },
+};
+
 const GUIDE_SLUGS = guides.map((g) => g.slug);
 const NEIGHBORHOOD_SLUGS = neighborhoods.map((n) => n.slug);
 const STATIC_ROUTES = ["/", "/imoveis", "/sobre", "/guias", "/contato", "/privacidade"];
 
-function sitePaths(): string[] {
+function sitePaths(cfg: TenantContent): string[] {
   return [
     ...STATIC_ROUTES,
-    ...NEIGHBORHOOD_SLUGS.map((s) => `/${s}`),
-    ...PROPERTY_SLUGS.map((s) => `/imoveis/${s}`),
-    ...GUIDE_SLUGS.map((s) => `/guias/${s}`),
+    ...(cfg.includeNeighborhoods ? NEIGHBORHOOD_SLUGS.map((s) => `/${s}`) : []),
+    ...cfg.properties.map((p) => `/imoveis/${p.slug}`),
+    ...(cfg.includeGuides ? GUIDE_SLUGS.map((s) => `/guias/${s}`) : []),
   ];
 }
 
-function buildSitemap(baseUrl: string): string {
+function buildSitemap(baseUrl: string, cfg: TenantContent): string {
   const today = new Date().toISOString().slice(0, 10);
-  const urls = sitePaths()
+  const urls = sitePaths(cfg)
     .map(
       (path) =>
         `  <url>\n    <loc>${baseUrl}${path === "/" ? "/" : path}</loc>\n    <lastmod>${today}</lastmod>\n  </url>`
@@ -133,9 +156,9 @@ function ul(items: string[]): string {
 }
 
 function propItem(p: Prop): string {
-  const bits = [p.bedrooms, fmtArea(p.area), p.priceFrom !== undefined ? `a partir de ${fmtBRL(p.priceFrom)}` : ""]
-    .filter(Boolean)
-    .join(" · ");
+  const price =
+    p.priceFrom !== undefined ? `a partir de ${fmtBRL(p.priceFrom)}` : p.priceLabel ?? "";
+  const bits = [p.bedrooms, fmtArea(p.area), price].filter(Boolean).join(" · ");
   return `<li><a href="/imoveis/${p.slug}"><strong>${esc(p.name)}</strong></a> — ${esc(
     `${p.neighborhood}, ${p.city}`
   )} · ${esc(bits)}</li>`;
@@ -143,28 +166,47 @@ function propItem(p: Prop): string {
 
 type Page = { path: string; title: string; description: string; body: string; jsonld?: unknown };
 
-function buildPages(data: TenantSeo, properties: Prop[]): Page[] {
+function buildPages(data: TenantSeo, cfg: TenantContent): Page[] {
+  const properties = cfg.properties;
+  const premium = cfg.profile === "premium";
   const S = data.siteName;
   const t = (title: string) => `${title} | ${S}`;
-  const neighborhoodLinks = neighborhoods
-    .map((n) => `<li><a href="/${n.slug}">Apartamentos em ${esc(n.neighborhood)}</a></li>`)
-    .join("");
+  const neighborhoodLinks = cfg.includeNeighborhoods
+    ? neighborhoods
+        .map((n) => `<li><a href="/${n.slug}">Apartamentos em ${esc(n.neighborhood)}</a></li>`)
+        .join("")
+    : "";
   const pages: Page[] = [];
 
   // Home — conteudo em prosa suficiente para extratores de leitura (IA) e SEO.
-  const regioesTexto = neighborhoods
-    .map((n) => esc(n.neighborhood))
-    .join(", ")
-    .replace(/, ([^,]*)$/, " e $1");
-  pages.push({
-    path: "/",
-    title: t("Apartamentos em São Paulo"),
-    description:
-      "Apartamentos e lançamentos em São Paulo, inclusive próximos ao metrô e no Minha Casa Minha Vida. Atendimento imobiliário personalizado do início à entrega das chaves.",
-    body: `<h1>Apartamentos e lançamentos em São Paulo</h1>
+  if (premium) {
+    pages.push({
+      path: "/",
+      title: t("Alto padrão em São Paulo"),
+      description: data.description,
+      body: `<h1>Empreendimentos de alto padrão em São Paulo</h1>
 <p>A ${esc(
-      S
-    )} ajuda você a encontrar um apartamento em São Paulo compatível com o seu perfil e a sua realidade financeira. Trabalhamos com lançamentos bem localizados, muitos próximos a estações de metrô e com unidades enquadradas no Programa Minha Casa Minha Vida.</p>
+        S
+      )} apresenta uma curadoria de empreendimentos de alto padrão da EXTO Incorporadora nos bairros mais desejados de São Paulo — Cidade Jardim, Jardim Guedala, Pacaembu e regiões nobres. Projetos de arquitetura assinada, acabamento de altíssimo padrão e localizações que se valorizam com o tempo.</p>
+<p>O atendimento é pessoal e discreto, do primeiro contato à entrega das chaves: entendemos o seu momento, apresentamos os empreendimentos que fazem sentido para o seu perfil e acompanhamos cada etapa da aquisição.</p>
+<h2>Empreendimentos</h2>
+<ul>${properties.map(propItem).join("")}</ul>
+<p>Conheça a <a href="/sobre">proposta de atendimento</a> ou <a href="/contato">fale pelo WhatsApp</a>.</p>`,
+    });
+  } else {
+    const regioesTexto = neighborhoods
+      .map((n) => esc(n.neighborhood))
+      .join(", ")
+      .replace(/, ([^,]*)$/, " e $1");
+    pages.push({
+      path: "/",
+      title: t("Apartamentos em São Paulo"),
+      description:
+        "Apartamentos e lançamentos em São Paulo, inclusive próximos ao metrô e no Minha Casa Minha Vida. Atendimento imobiliário personalizado do início à entrega das chaves.",
+      body: `<h1>Apartamentos e lançamentos em São Paulo</h1>
+<p>A ${esc(
+        S
+      )} ajuda você a encontrar um apartamento em São Paulo compatível com o seu perfil e a sua realidade financeira. Trabalhamos com lançamentos bem localizados, muitos próximos a estações de metrô e com unidades enquadradas no Programa Minha Casa Minha Vida.</p>
 <p>O atendimento é personalizado do início à entrega das chaves: entendemos o seu objetivo (morar ou investir), a região de interesse e o seu orçamento, selecionamos opções que fazem sentido para você e acompanhamos cada etapa — simulação, visita, proposta e documentação. Sem empurrar imóvel fora do seu perfil.</p>
 <h2>Empreendimentos</h2>
 <ul>${properties.map(propItem).join("")}</ul>
@@ -174,7 +216,8 @@ function buildPages(data: TenantSeo, properties: Prop[]): Page[] {
 <h2>Como funciona o atendimento</h2>
 <ol><li>Entendemos juntos seu objetivo, sua região de interesse e sua realidade financeira.</li><li>Selecionamos opções compatíveis com o que você nos contou — sem empurrar imóvel fora do seu perfil.</li><li>Acompanhamos você nas visitas, na proposta e até a entrega das chaves.</li></ol>
 <p>Veja também nossos <a href="/guias">guias sobre financiamento, FGTS e entrada</a>, conheça a <a href="/sobre">proposta de atendimento</a> ou <a href="/contato">fale pelo WhatsApp</a>.</p>`,
-  });
+    });
+  }
 
   // /imoveis
   pages.push({
@@ -184,7 +227,7 @@ function buildPages(data: TenantSeo, properties: Prop[]): Page[] {
       "Empreendimentos selecionados, organizados por metragem. Valores e disponibilidade sujeitos a alteração.",
     body: `<h1>Empreendimentos selecionados</h1><p>Organizados por metragem para você comparar de um jeito rápido. Valores e disponibilidade sujeitos a alteração.</p><ul>${properties
       .map(propItem)
-      .join("")}</ul><h2>Busca por região</h2><ul>${neighborhoodLinks}</ul>`,
+      .join("")}</ul>${cfg.includeNeighborhoods ? `<h2>Busca por região</h2><ul>${neighborhoodLinks}</ul>` : ""}`,
   });
 
   // /sobre
@@ -193,9 +236,15 @@ function buildPages(data: TenantSeo, properties: Prop[]): Page[] {
     title: t("Sobre"),
     description:
       "Atendimento imobiliário personalizado para encontrar um imóvel compatível com a sua realidade financeira.",
-    body: `<h1>${esc(S)}</h1>${
-      data.creci ? `<p>CRECI ${esc(data.creci)}</p>` : ""
-    }<p>Nosso trabalho é ajudar você a entender as opções disponíveis, organizar as etapas da compra e encontrar um imóvel compatível com a sua realidade financeira. Não acreditamos em empurrar decisão antes do momento certo — acreditamos em explicar cada passo com clareza para que você decida com segurança.</p><p>Atuamos com lançamentos na Zona Oeste e na Zona Sul de São Paulo, muitos próximos a estações de metrô e com unidades no Programa Minha Casa Minha Vida.</p><h2>Como funciona o atendimento</h2><ol><li>Entendemos juntos seu objetivo, sua região de interesse e sua realidade financeira.</li><li>Selecionamos opções compatíveis com o seu perfil.</li><li>Acompanhamos você nas visitas, na proposta e até a entrega das chaves.</li></ol>`,
+    body: premium
+      ? `<h1>${esc(S)}</h1>${
+          data.creci ? `<p>CRECI ${esc(data.creci)}</p>` : ""
+        }<p>A ${esc(
+          S
+        )} é uma curadoria de empreendimentos de alto padrão da EXTO Incorporadora em São Paulo. Nosso trabalho é apresentar, com discrição e atenção aos detalhes, os projetos que fazem sentido para o seu momento — em endereços nobres, com arquitetura assinada e acabamento de altíssimo padrão.</p><p>O atendimento é pessoal do primeiro contato à entrega das chaves, com acompanhamento de cada etapa da aquisição.</p><h2>Como funciona o atendimento</h2><ol><li>Entendemos o seu momento e as suas preferências.</li><li>Apresentamos os empreendimentos EXTO compatíveis com o seu perfil.</li><li>Acompanhamos você nas visitas, na proposta e até a entrega das chaves.</li></ol>`
+      : `<h1>${esc(S)}</h1>${
+          data.creci ? `<p>CRECI ${esc(data.creci)}</p>` : ""
+        }<p>Nosso trabalho é ajudar você a entender as opções disponíveis, organizar as etapas da compra e encontrar um imóvel compatível com a sua realidade financeira. Não acreditamos em empurrar decisão antes do momento certo — acreditamos em explicar cada passo com clareza para que você decida com segurança.</p><p>Atuamos com lançamentos na Zona Oeste e na Zona Sul de São Paulo, muitos próximos a estações de metrô e com unidades no Programa Minha Casa Minha Vida.</p><h2>Como funciona o atendimento</h2><ol><li>Entendemos juntos seu objetivo, sua região de interesse e sua realidade financeira.</li><li>Selecionamos opções compatíveis com o seu perfil.</li><li>Acompanhamos você nas visitas, na proposta e até a entrega das chaves.</li></ol>`,
   });
 
   // /contato
@@ -216,7 +265,8 @@ function buildPages(data: TenantSeo, properties: Prop[]): Page[] {
     body: `<h1>Política de privacidade</h1><p>Como os dados informados no site são usados: nada é armazenado em servidor; o diagnóstico do comprador só monta uma mensagem de WhatsApp que você mesmo revisa e envia.</p>`,
   });
 
-  // Paginas de bairro
+  // Paginas de bairro (apenas tenants com atuacao por bairro — nao no premium)
+  if (cfg.includeNeighborhoods)
   for (const n of neighborhoods) {
     const props = properties.filter((p) => p.neighborhood === n.neighborhood);
     const propList = props.length ? `<h2>Empreendimentos em ${esc(n.neighborhood)}</h2><ul>${props.map(propItem).join("")}</ul>` : "";
@@ -250,7 +300,11 @@ function buildPages(data: TenantSeo, properties: Prop[]): Page[] {
       p.bedrooms,
       `${fmtArea(p.area)}`,
       p.delivery ? `Entrega ${p.delivery}` : "",
-      p.priceFrom !== undefined ? `A partir de ${fmtBRL(p.priceFrom)}` : "",
+      p.priceFrom !== undefined
+        ? `A partir de ${fmtBRL(p.priceFrom)}`
+        : p.priceLabel
+          ? p.priceLabel
+          : "",
     ].filter(Boolean);
     pages.push({
       path: `/imoveis/${p.slug}`,
@@ -262,25 +316,27 @@ function buildPages(data: TenantSeo, properties: Prop[]): Page[] {
     });
   }
 
-  // Guias (indice)
-  pages.push({
-    path: "/guias",
-    title: t("Guias"),
-    description:
-      "Conteúdos educativos sobre financiamento, FGTS, entrada, documentação e a compra do primeiro imóvel.",
-    body: `<h1>Conteúdos para comprar com segurança</h1><ul>${guides
-      .map((g) => `<li><a href="/guias/${g.slug}"><strong>${esc(g.title)}</strong></a> — ${esc(g.summary)}</li>`)
-      .join("")}</ul>`,
-  });
-
-  // Guias (detalhe)
-  for (const g of guides) {
+  if (cfg.includeGuides) {
+    // Guias (indice)
     pages.push({
-      path: `/guias/${g.slug}`,
-      title: t(g.title),
-      description: g.summary,
-      body: `<h1>${esc(g.title)}</h1>${g.content.map((p) => `<p>${esc(p)}</p>`).join("")}`,
+      path: "/guias",
+      title: t("Guias"),
+      description:
+        "Conteúdos educativos sobre financiamento, FGTS, entrada, documentação e a compra do primeiro imóvel.",
+      body: `<h1>Conteúdos para comprar com segurança</h1><ul>${guides
+        .map((g) => `<li><a href="/guias/${g.slug}"><strong>${esc(g.title)}</strong></a> — ${esc(g.summary)}</li>`)
+        .join("")}</ul>`,
     });
+
+    // Guias (detalhe)
+    for (const g of guides) {
+      pages.push({
+        path: `/guias/${g.slug}`,
+        title: t(g.title),
+        description: g.summary,
+        body: `<h1>${esc(g.title)}</h1>${g.content.map((p) => `<p>${esc(p)}</p>`).join("")}`,
+      });
+    }
   }
 
   return pages;
@@ -329,7 +385,7 @@ function buildJsonLd(data: TenantSeo): string {
  */
 function seoPlugin(tenantId: string): Plugin {
   const data = OG_BY_TENANT[tenantId] ?? OG_BY_TENANT["joao-victor"];
-  const properties = tenantId === "shelby" ? propsShelby : propsJoaoVictor;
+  const cfg = CONTENT_BY_TENANT[tenantId] ?? CONTENT_BY_TENANT["joao-victor"];
   const image = `${data.url}${data.ogImage}`;
   const tags = [
     `<meta property="og:type" content="website" />`,
@@ -365,7 +421,7 @@ function seoPlugin(tenantId: string): Plugin {
     },
     generateBundle() {
       this.emitFile({ type: "asset", fileName: "robots.txt", source: buildRobots(data.url) });
-      this.emitFile({ type: "asset", fileName: "sitemap.xml", source: buildSitemap(data.url) });
+      this.emitFile({ type: "asset", fileName: "sitemap.xml", source: buildSitemap(data.url, cfg) });
     },
     // writeBundle roda DEPOIS do index.html ser escrito no disco — assim
     // lemos o HTML base ja pronto e geramos o de cada rota com seguranca.
@@ -373,7 +429,7 @@ function seoPlugin(tenantId: string): Plugin {
       const dir = options.dir;
       if (!dir) return;
       const base = await readFile(join(dir, "index.html"), "utf8");
-      for (const page of buildPages(data, properties)) {
+      for (const page of buildPages(data, cfg)) {
         const html = renderPageHtml(base, page, data, image);
         const outPath = page.path === "/" ? join(dir, "index.html") : join(dir, page.path.slice(1), "index.html");
         await mkdir(dirname(outPath), { recursive: true });

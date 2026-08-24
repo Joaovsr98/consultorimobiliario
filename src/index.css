@@ -42,8 +42,26 @@
   --brand-paper: #ffffff;
   --brand-ink: #0d1b2a;
   --brand-radius: 18px;
+  /* Cor do texto sobre o destaque (botao secondary). Padrao: escuro (marca),
+     que funciona com destaques claros (ex.: dourado do Bueno). Tenants com
+     destaque escuro sobrescrevem para claro (ver britto abaixo). */
+  --brand-on-accent: var(--brand-primary);
 
   color-scheme: light;
+}
+
+/*
+  Tenant britto (foco EXTO / alto padrao): titulos em serifada elegante
+  (Cormorant Garamond). Escopo por data-tenant (definido em main.tsx) — nao
+  afeta os demais tenants, que seguem em Montserrat.
+*/
+:root[data-tenant="britto"] {
+  --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  /* Destaque grafite escuro -> texto claro sobre o botao secondary. */
+  --brand-on-accent: var(--brand-paper);
+}
+:root[data-tenant="britto"] .font-display {
+  letter-spacing: -0.01em;
 }
 
 html {

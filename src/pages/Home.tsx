@@ -9,14 +9,31 @@ import { AboutTeaser } from "@/components/home/AboutTeaser";
 import { GuidesTeaser } from "@/components/home/GuidesTeaser";
 import { HomeFaq } from "@/components/home/HomeFaq";
 import { FinalCta } from "@/components/home/FinalCta";
+import { tenant } from "@/tenants";
+
+const DEFAULT_META = {
+  title: "Apartamentos em São Paulo",
+  description:
+    "Apartamentos e lançamentos em São Paulo, inclusive próximos ao metrô e no Minha Casa Minha Vida. Atendimento imobiliário personalizado do início à entrega das chaves.",
+};
+const DEFAULT_GUIDED = {
+  eyebrow: "Busca guiada",
+  title: "Encontre opções compatíveis com o seu perfil",
+  description:
+    "Responda em 3 passos rápidos e receba um direcionamento inicial pelo WhatsApp — sem compromisso.",
+};
 
 export function Home() {
+  const home = tenant.kind === "individual" ? tenant.home : undefined;
+  const meta = {
+    title: home?.metaTitle ?? DEFAULT_META.title,
+    description: home?.metaDescription ?? DEFAULT_META.description,
+  };
+  const guided = home?.guided ?? DEFAULT_GUIDED;
+
   return (
     <>
-      <Seo
-        title="Apartamentos em São Paulo"
-        description="Apartamentos e lançamentos em São Paulo, inclusive próximos ao metrô e no Minha Casa Minha Vida. Atendimento imobiliário personalizado do início à entrega das chaves."
-      />
+      <Seo title={meta.title} description={meta.description} />
 
       <Hero />
 
@@ -24,9 +41,9 @@ export function Home() {
 
       <BuyerDiagnosis
         id="diagnostico"
-        eyebrow="Busca guiada"
-        title="Encontre opções compatíveis com o seu perfil"
-        description="Responda em 3 passos rápidos e receba um direcionamento inicial pelo WhatsApp — sem compromisso."
+        eyebrow={guided.eyebrow}
+        title={guided.title}
+        description={guided.description}
       />
       <Opportunities />
       <FeaturedShowcase />

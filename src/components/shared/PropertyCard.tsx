@@ -65,14 +65,18 @@ export function PropertyCard({ property, priority = false }: PropertyCardProps) 
         )}
 
         <div className="mt-4 flex flex-1 flex-col justify-end gap-3">
-          {property.priceFrom !== undefined && (
+          {property.priceFrom !== undefined ? (
             <p className="text-sm text-ink/60">
               A partir de{" "}
               <span className="font-display text-lg font-semibold text-brand">
                 {formatCurrency(property.priceFrom)}
               </span>
             </p>
-          )}
+          ) : property.priceLabel ? (
+            <p className="font-display text-lg font-semibold text-brand">
+              {property.priceLabel}
+            </p>
+          ) : null}
 
           <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand">
             Conhecer empreendimento

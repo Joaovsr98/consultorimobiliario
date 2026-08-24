@@ -8,7 +8,7 @@ export const buttonBase =
 
 export const buttonVariants: Record<ButtonVariant, string> = {
   primary: "bg-brand text-paper hover:bg-brand/90",
-  secondary: "bg-accent text-brand hover:bg-accent/90",
+  secondary: "bg-accent text-[color:var(--brand-on-accent)] hover:bg-accent/90",
   outline: "border border-brand/25 text-brand hover:bg-brand/5",
   ghost: "text-brand hover:bg-brand/5",
 };

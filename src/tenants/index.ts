@@ -3,6 +3,7 @@ import { getIdentity } from "./identity";
 import { joaoVictorTenant } from "./joao-victor";
 import { ajudaImoveisTenant } from "./ajuda-imoveis";
 import { shelbyTenant } from "./shelby";
+import { brittoTenant } from "./britto";
 
 /**
  * Seleciona o tenant ativo via VITE_TENANT_ID (definida por deploy na
@@ -10,7 +11,12 @@ import { shelbyTenant } from "./shelby";
  * ausente cai em "joao-victor" — nunca ativa uma configuracao por acaso.
  */
 function resolveTenantId(value: unknown): TenantId {
-  if (value === "joao-victor" || value === "ajuda-imoveis" || value === "shelby") {
+  if (
+    value === "joao-victor" ||
+    value === "ajuda-imoveis" ||
+    value === "shelby" ||
+    value === "britto"
+  ) {
     return value;
   }
 
@@ -30,6 +36,7 @@ const tenantsById: Partial<Record<TenantId, Tenant>> = {
   "joao-victor": joaoVictorTenant,
   "ajuda-imoveis": ajudaImoveisTenant,
   shelby: shelbyTenant,
+  britto: brittoTenant,
 };
 
 export const tenant: Tenant = tenantsById[activeTenantId] ?? joaoVictorTenant;

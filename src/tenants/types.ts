@@ -1,6 +1,6 @@
 import type { Broker, NavItem, Property, SeoConfig, ThemeConfig } from "@/types";
 
-export type TenantId = "joao-victor" | "ajuda-imoveis" | "shelby";
+export type TenantId = "joao-victor" | "ajuda-imoveis" | "shelby" | "britto";
 
 export type TenantNavigation = {
   main: NavItem[];
@@ -61,6 +61,29 @@ export type SiteIdentity = {
   contact: ContactChannels;
 };
 
+/** Icones permitidos nos diferenciais (mapeados para lucide no componente). */
+export type DifferentialIcon =
+  | "train"
+  | "tag"
+  | "users"
+  | "shield"
+  | "map"
+  | "gem"
+  | "pen"
+  | "sparkles"
+  | "key";
+
+/**
+ * Conteudo editavel da Home por tenant. Ausente -> os componentes usam o texto
+ * padrao (econômico, do joao-victor), sem regressao para os demais tenants.
+ */
+export type HomeContent = {
+  metaTitle?: string;
+  metaDescription?: string;
+  differentials?: { icon: DifferentialIcon; title: string; text: string }[];
+  guided?: { eyebrow: string; title: string; description: string };
+};
+
 export type IndividualTenant = {
   kind: "individual";
   broker: Broker;
@@ -69,6 +92,7 @@ export type IndividualTenant = {
   navigation: TenantNavigation;
   properties: Property[];
   hero?: HeroConfig;
+  home?: HomeContent;
 };
 
 /**

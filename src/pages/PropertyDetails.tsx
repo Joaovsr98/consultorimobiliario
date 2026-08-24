@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, BedDouble, Building2, CalendarDays, Clock, MapPin, MessageCircle, Ruler, Tag, TrainFront } from "lucide-react";
+import { ArrowLeft, BedDouble, Building2, CalendarDays, Clock, MapPin, MessageCircle, Rotate3d, Ruler, Tag, TrainFront } from "lucide-react";
 import { tenant, identity } from "@/tenants";
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
@@ -87,7 +87,9 @@ export function PropertyDetails() {
     { icon: CalendarDays, label: "Entrega", value: property.delivery ?? "A definir" },
     ...(property.priceFrom !== undefined
       ? [{ icon: Tag, label: "A partir de", value: formatCurrency(property.priceFrom) }]
-      : []),
+      : property.priceLabel
+        ? [{ icon: Tag, label: "Valores", value: property.priceLabel }]
+        : []),
   ];
 
   const contactLink = whatsapp
@@ -156,14 +158,18 @@ export function PropertyDetails() {
 
           {/* Essencial na 1a dobra: preco (quando valido) + dorm + metragem */}
           <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-1.5 text-paper">
-            {property.priceFrom !== undefined && (
+            {property.priceFrom !== undefined ? (
               <span className="text-sm">
                 A partir de{" "}
                 <span className="font-display text-xl font-semibold text-accent">
                   {formatCurrency(property.priceFrom)}
                 </span>
               </span>
-            )}
+            ) : property.priceLabel ? (
+              <span className="font-display text-xl font-semibold text-accent">
+                {property.priceLabel}
+              </span>
+            ) : null}
             <span className="text-sm text-paper/85">{property.bedrooms}</span>
             <span className="text-sm text-paper/85">{formatArea(property.area)}</span>
           </div>
@@ -209,6 +215,19 @@ export function PropertyDetails() {
         </dl>
 
         <p className="mt-10 max-w-3xl text-lg leading-relaxed text-ink/75">{property.description}</p>
+
+        {property.tourUrl && (
+          <a
+            href={property.tourUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => onWhatsappClick("property_tour")}
+            className={buttonClasses("outline", "md", "mt-6")}
+          >
+            <Rotate3d className="size-4 text-accent" aria-hidden />
+            Fazer tour virtual 360°
+          </a>
+        )}
 
         {galeria.length > 0 && (
           <div className="mt-12">
