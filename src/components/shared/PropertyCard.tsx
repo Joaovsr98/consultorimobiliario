@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, MapPin } from "lucide-react";
+import { ArrowRight, MapPin, Rotate3d } from "lucide-react";
 import type { Property } from "@/types";
 import { formatArea, formatCurrency } from "@/lib/utils";
 import { PropertyImage } from "@/components/ui/PropertyImage";
@@ -47,6 +47,12 @@ export function PropertyCard({ property, priority = false }: PropertyCardProps) 
         />
         {property.status && (
           <StatusBadge status={property.status} className="absolute left-3 top-3" />
+        )}
+        {property.tourUrl && (
+          <span className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full bg-brand/85 px-2.5 py-1 text-xs font-semibold text-paper shadow-card backdrop-blur-sm">
+            <Rotate3d className="size-3.5" aria-hidden />
+            Tour 360°
+          </span>
         )}
       </div>
 
