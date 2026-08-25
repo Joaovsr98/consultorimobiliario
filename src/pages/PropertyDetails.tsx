@@ -11,38 +11,8 @@ import { Seo } from "@/components/shared/Seo";
 import { PropertyGallery, type PropertyGalleryHandle } from "@/components/shared/PropertyGallery";
 import { StatusBadge } from "@/components/ui/StatusBadge";
 import { cn, formatArea, formatCurrency } from "@/lib/utils";
+import { matchFeatureImage, splitImages } from "@/lib/property-media";
 import { NotFound } from "./NotFound";
-
-const STOPWORDS = new Set(["e", "de", "do", "da", "com", "a", "o", "para", "em"]);
-const normalize = (s: string) =>
-  s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
-
-/** Casa um diferencial com a foto da galeria pelo nome do arquivo (maior sobreposicao de palavras). */
-function matchFeatureImage(feature: string, galeria: string[]): number {
-  const ftokens = normalize(feature)
-    .split(/[^a-z0-9]+/)
-    .filter((t) => t && !STOPWORDS.has(t));
-  let best = -1;
-  let bestScore = 0;
-  galeria.forEach((src, i) => {
-    const base = normalize(src.split("/").pop() ?? "").replace(/\.[a-z0-9]+$/, "");
-    const btokens = base.split(/[^a-z0-9]+/).filter(Boolean);
-    const score = ftokens.filter((t) => btokens.includes(t)).length;
-    if (score > bestScore) {
-      bestScore = score;
-      best = i;
-    }
-  });
-  return bestScore > 0 ? best : -1;
-}
-
-/** Separa as imagens por tipo pelo nome do arquivo (convencao atual dos assets). */
-function splitImages(images: string[]) {
-  const plantas = images.filter((s) => s.includes("/planta"));
-  const localizacao = images.filter((s) => /mapa-localizacao|foto-aerea|implantacao/.test(s));
-  const galeria = images.filter((s) => !plantas.includes(s) && !localizacao.includes(s));
-  return { galeria, plantas, localizacao };
-}
 
 export function PropertyDetails() {
   const { slug } = useParams();

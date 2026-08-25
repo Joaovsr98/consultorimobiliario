@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, BedDouble, CalendarDays, MapPin, Ruler } from "lucide-react";
 import { tenant, identity } from "@/tenants";
@@ -5,7 +6,8 @@ import { Section } from "@/components/ui/Section";
 import { PropertyImage } from "@/components/ui/PropertyImage";
 import { StatusBadge } from "@/components/ui/StatusBadge";
 import { buttonClasses } from "@/lib/button-styles";
-import { formatArea, formatCurrency } from "@/lib/utils";
+import { cn, formatArea, formatCurrency } from "@/lib/utils";
+import { matchFeatureImage, splitImages } from "@/lib/property-media";
 
 /**
  * Empreendimento em destaque — experiencia imersiva de produto, em fundo
@@ -18,6 +20,9 @@ import { formatArea, formatCurrency } from "@/lib/utils";
  */
 export function FeaturedShowcase() {
   const property = tenant.properties.find((p) => p.featured);
+  const { galeria } = property ? splitImages(property.images) : { galeria: [] as string[] };
+  const defaultImage = property?.showcaseImage ?? property?.images[0];
+  const [activeImage, setActiveImage] = useState<string | undefined>(undefined);
   if (!property) return null;
 
   const facts = [
@@ -36,10 +41,10 @@ export function FeaturedShowcase() {
       <div className="mt-8 grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-12">
         <div className="relative">
           <PropertyImage
-            src={property.showcaseImage ?? property.images[0]}
+            src={activeImage ?? defaultImage}
             alt={property.name}
             ratio="4 / 3"
-            imgClassName="rounded-image"
+            imgClassName="rounded-image transition-opacity duration-300"
           />
           {property.status && (
             <StatusBadge status={property.status} className="absolute left-4 top-4" />
@@ -80,16 +85,43 @@ export function FeaturedShowcase() {
           ) : null}
 
           {differentials.length > 0 && (
-            <ul className="mt-6 flex flex-wrap gap-2">
-              {differentials.map((item) => (
-                <li
-                  key={item}
-                  className="rounded-full border border-paper/20 px-3 py-1.5 text-sm text-paper/80"
-                >
-                  {item}
-                </li>
-              ))}
-            </ul>
+            <>
+              <ul className="mt-6 flex flex-wrap gap-2">
+                {differentials.map((item) => {
+                  const idx = matchFeatureImage(item, galeria);
+                  const src = idx >= 0 ? galeria[idx] : undefined;
+                  const isActive = src !== undefined && (activeImage ?? defaultImage) === src;
+                  if (!src) {
+                    return (
+                      <li
+                        key={item}
+                        className="rounded-full border border-paper/20 px-3 py-1.5 text-sm text-paper/80"
+                      >
+                        {item}
+                      </li>
+                    );
+                  }
+                  return (
+                    <li key={item}>
+                      <button
+                        type="button"
+                        onClick={() => setActiveImage(src)}
+                        aria-pressed={isActive}
+                        className={cn(
+                          "rounded-full border px-3 py-1.5 text-sm transition-colors",
+                          isActive
+                            ? "border-paper bg-paper/15 text-paper"
+                            : "border-paper/20 text-paper/80 hover:border-paper/50 hover:text-paper"
+                        )}
+                      >
+                        {item}
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+              <p className="mt-2 text-xs text-paper/40">Toque em um item para ver a imagem.</p>
+            </>
           )}
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
