@@ -66,14 +66,18 @@ export function FeaturedShowcase() {
             ))}
           </dl>
 
-          {property.priceFrom !== undefined && (
+          {property.priceFrom !== undefined ? (
             <p className="mt-6 text-sm text-paper/70">
               A partir de{" "}
               <span className="font-display text-2xl font-semibold text-paper">
                 {formatCurrency(property.priceFrom)}
               </span>
             </p>
-          )}
+          ) : property.priceLabel ? (
+            <p className="mt-6 font-display text-2xl font-semibold text-paper">
+              {property.priceLabel}
+            </p>
+          ) : null}
 
           {differentials.length > 0 && (
             <ul className="mt-6 flex flex-wrap gap-2">

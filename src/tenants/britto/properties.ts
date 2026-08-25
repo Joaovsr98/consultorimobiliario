@@ -8,6 +8,8 @@ import type { Property } from "@/types";
  * entregas e ficha confirmados pelo cliente/material.
  */
 export const properties: Property[] = [
+  // NOTA: o DESTAQUE é o primeiro `featured: true` do array (FeaturedShowcase
+  // usa `.find(p => p.featured)`). Hoje o destaque é o Château Jardin Lumière.
   {
     id: "chateau-jardin-harmonie",
     slug: "chateau-jardin-harmonie",
@@ -80,7 +82,7 @@ export const properties: Property[] = [
       "/properties/chateau-jardin-harmonie/aerea-duas-fases.jpg",
       "/properties/chateau-jardin-harmonie/aerea-lazer.jpg",
     ],
-    featured: true,
+    featured: false,
   },
   {
     id: "chateau-jardin-lumiere",
@@ -223,7 +225,7 @@ export const properties: Property[] = [
       "/properties/legacy-guedala/pet.jpg",
       "/properties/legacy-guedala/mapa-localizacao.jpg",
     ],
-    featured: true,
+    featured: false,
   },
   {
     id: "palm-collection-pacaembu",
@@ -282,6 +284,6 @@ export const properties: Property[] = [
       "/properties/palm-collection-pacaembu/brinquedoteca.jpg",
       "/properties/palm-collection-pacaembu/espaco-pet.jpg",
     ],
-    featured: true,
+    featured: false,
   },
 ];
