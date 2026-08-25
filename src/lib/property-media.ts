@@ -9,16 +9,24 @@ const STOPWORDS = new Set(["e", "de", "do", "da", "com", "a", "o", "para", "em"]
 const normalize = (s: string) =>
   s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
 
+/** Unifica variantes de grafia entre o diferencial e o nome do arquivo. */
+const SYNONYMS: Record<string, string> = { paddle: "padel", tenis: "tennis" };
+const canon = (t: string) => SYNONYMS[t] ?? t;
+
+const tokensOf = (s: string) =>
+  normalize(s)
+    .split(/[^a-z0-9]+/)
+    .filter((t) => t && !STOPWORDS.has(t))
+    .map(canon);
+
 /** Casa um diferencial com a foto da galeria (maior sobreposicao de palavras). Retorna -1 se nao houver. */
 export function matchFeatureImage(feature: string, galeria: string[]): number {
-  const ftokens = normalize(feature)
-    .split(/[^a-z0-9]+/)
-    .filter((t) => t && !STOPWORDS.has(t));
+  const ftokens = tokensOf(feature);
   let best = -1;
   let bestScore = 0;
   galeria.forEach((src, i) => {
-    const base = normalize(src.split("/").pop() ?? "").replace(/\.[a-z0-9]+$/, "");
-    const btokens = base.split(/[^a-z0-9]+/).filter(Boolean);
+    const base = (src.split("/").pop() ?? "").replace(/\.[a-z0-9]+$/, "");
+    const btokens = tokensOf(base);
     const score = ftokens.filter((t) => btokens.includes(t)).length;
     if (score > bestScore) {
       bestScore = score;

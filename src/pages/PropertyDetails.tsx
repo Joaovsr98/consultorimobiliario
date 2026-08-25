@@ -49,7 +49,11 @@ export function PropertyDetails() {
   const onWhatsappClick = (location: string) => trackEvent("whatsapp_click", { ...eventCtx, location });
 
   const facts = [
-    { icon: BedDouble, label: "Dormitórios", value: property.bedrooms },
+    {
+      icon: BedDouble,
+      label: /su[íi]te/i.test(property.bedrooms) ? "Suítes" : "Dormitórios",
+      value: property.bedrooms,
+    },
     { icon: Ruler, label: "Metragem", value: formatArea(property.area) },
     ...(property.developer
       ? [{ icon: Building2, label: "Construtora", value: property.developer }]
@@ -110,7 +114,7 @@ export function PropertyDetails() {
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-brand/90 via-brand/45 to-brand/20" aria-hidden />
 
-        <Container className="absolute inset-x-0 top-4">
+        <Container className="absolute inset-x-0 top-4 flex items-center justify-between gap-3">
           <Link
             to="/imoveis"
             className="inline-flex items-center gap-1.5 rounded-full bg-paper/85 px-3 py-1.5 text-sm font-medium text-brand backdrop-blur-sm transition-colors hover:bg-paper"
@@ -118,6 +122,26 @@ export function PropertyDetails() {
             <ArrowLeft className="size-4" aria-hidden />
             Voltar para imóveis
           </Link>
+
+          {property.tourUrl && (
+            <a
+              href={property.tourUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => onWhatsappClick("property_tour")}
+              className="group relative inline-flex shrink-0 items-center gap-2 rounded-full bg-paper px-4 py-2.5 text-sm font-semibold text-brand shadow-lg shadow-black/25 transition-transform hover:scale-105 focus-visible:scale-105"
+            >
+              <span className="absolute -right-1.5 -top-1.5 flex size-5">
+                <span className="absolute inline-flex size-full animate-ping rounded-full bg-[color:var(--brand-accent-on-brand)] opacity-75" />
+                <span className="relative inline-flex size-5 items-center justify-center rounded-full bg-[color:var(--brand-accent-on-brand)] text-[0.5rem] font-bold text-brand">
+                  360
+                </span>
+              </span>
+              <Rotate3d className="size-4" aria-hidden />
+              <span className="hidden sm:inline">Tour virtual</span>
+              <span className="sm:hidden">Tour</span>
+            </a>
+          )}
         </Container>
 
         <Container className="relative py-10">
@@ -189,28 +213,6 @@ export function PropertyDetails() {
         </dl>
 
         <p className="mt-10 max-w-3xl text-lg leading-relaxed text-ink/75">{property.description}</p>
-
-        {property.tourUrl && (
-          <a
-            href={property.tourUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => onWhatsappClick("property_tour")}
-            className={cn(
-              buttonClasses("secondary", "lg", "mt-6"),
-              "relative shadow-card ring-1 ring-brand/10"
-            )}
-          >
-            <span className="absolute -right-1.5 -top-1.5 flex size-4">
-              <span className="absolute inline-flex size-full animate-ping rounded-full bg-[color:var(--brand-secondary)] opacity-60" />
-              <span className="relative inline-flex size-4 items-center justify-center rounded-full bg-[color:var(--brand-secondary)] text-[0.55rem] font-bold text-[color:var(--brand-on-accent)]">
-                360
-              </span>
-            </span>
-            <Rotate3d className="size-5" aria-hidden />
-            Fazer tour virtual 360°
-          </a>
-        )}
 
         {galeria.length > 0 && (
           <div className="mt-12">

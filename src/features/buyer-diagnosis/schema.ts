@@ -39,7 +39,8 @@ export const ANY = "sem-preferencia";
 
 export type GuidedSearchData = {
   goal?: Goal;
-  bedrooms?: BedroomChoice;
+  /** id da opção de quartos/suítes ("1","2","3","3+","4+","tanto-faz"). */
+  bedrooms?: string;
   region?: string; // bairro do catálogo ou ANY
   priceBand?: string; // PriceBandId ou ANY
   payment?: PaymentChoice; // opcional

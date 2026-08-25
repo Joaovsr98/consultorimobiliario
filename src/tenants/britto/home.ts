@@ -37,6 +37,8 @@ export const home: HomeContent = {
     description:
       "Conte um pouco sobre o seu estilo de vida e receba uma seleção de imóveis EXTO que combinam com você e a sua família — com toda a discrição.",
   },
+  // Alto padrão: por SUÍTES e sem faixa de valor (tudo "Sob consulta").
+  search: { unit: "suites", askPrice: false },
   about: {
     intro: [
       "Morar bem é sentir que cada detalhe foi pensado para você. Selecionamos imóveis EXTO para quem valoriza conforto, arquitetura, privacidade, localização e qualidade de vida.",

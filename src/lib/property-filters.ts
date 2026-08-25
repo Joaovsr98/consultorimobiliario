@@ -25,10 +25,17 @@ export function priceBandLabel(id: string): string {
   return PRICE_BANDS.find((b) => b.id === id)?.label ?? id;
 }
 
-/** Um empreendimento "cobre" a opção de dormitório? Ex.: "1 e 2 dormitórios" cobre 1 e 2. */
+/**
+ * Um empreendimento "cobre" a opção de quartos/suítes? Ex.: "1 e 2 dormitórios"
+ * cobre 1 e 2; "4 suítes" cobre 4 e 4+. Opções "N+" casam com N ou mais.
+ */
 export function bedroomsCovers(bedrooms: string, option: string): boolean {
   const nums = (bedrooms.match(/\d+/g) ?? []).map(Number);
-  return option === "3+" ? nums.some((n) => n >= 3) : nums.includes(Number(option));
+  if (option.endsWith("+")) {
+    const min = Number(option.slice(0, -1));
+    return nums.some((n) => n >= min);
+  }
+  return nums.includes(Number(option));
 }
 
 /** Regiões (bairros) distintas presentes no catálogo. */

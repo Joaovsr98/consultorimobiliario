@@ -82,6 +82,12 @@ export type HomeContent = {
   metaDescription?: string;
   differentials?: { icon: DifferentialIcon; title: string; text: string }[];
   guided?: { eyebrow: string; title: string; description: string };
+  /**
+   * Config da busca guiada. `unit` troca dormitórios<->suítes; `askPrice` liga/
+   * desliga a pergunta de faixa de valor (alto padrão = "Sob consulta", sem faixa).
+   * Ausente -> dormitórios + faixa de preço (padrão econômico).
+   */
+  search?: { unit: "dormitorios" | "suites"; askPrice: boolean };
   /** Copy da pagina Sobre. Ausente -> texto padrao (econômico) do componente. */
   about?: { intro: string[]; steps: string[] };
 };

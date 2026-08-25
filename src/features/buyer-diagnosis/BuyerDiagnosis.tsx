@@ -18,12 +18,10 @@ import {
 } from "@/lib/property-filters";
 import {
   ANY,
-  bedroomChoiceLabels,
   goalDescriptions,
   goalLabels,
   paymentLabels,
   stepTitles,
-  type BedroomChoice,
   type Goal,
   type GuidedSearchData,
   type PaymentChoice,
@@ -31,8 +29,19 @@ import {
 import { buildGuidedMessage } from "./message";
 
 const goalIcons: Record<Goal, typeof Home> = { morar: Home, investir: TrendingUp };
-const BEDROOM_ORDER: BedroomChoice[] = ["1", "2", "3+", "tanto-faz"];
 const PAYMENT_ORDER: PaymentChoice[] = ["a-vista", "financiar", "nao-sei"];
+
+const BEDROOM_OPTIONS_DORM = [
+  { id: "1", label: "1 dorm." },
+  { id: "2", label: "2 dorm." },
+  { id: "3+", label: "3+ dorm." },
+  { id: "tanto-faz", label: "Tanto faz" },
+];
+const BEDROOM_OPTIONS_SUITES = [
+  { id: "2", label: "2 suítes" },
+  { id: "3", label: "3 suítes" },
+  { id: "4+", label: "4+ suítes" },
+];
 
 function Chip({
   active,
@@ -132,6 +141,13 @@ export function BuyerDiagnosis({
   const whatsapp = identity.contact.whatsapp;
   const reduce = useReducedMotion();
 
+  // Config por tenant: dormitórios<->suítes e se pergunta faixa de valor.
+  const search = tenant.kind === "individual" ? tenant.home?.search : undefined;
+  const unit = search?.unit ?? "dormitorios";
+  const askPrice = search?.askPrice ?? true;
+  const bedroomOptions = unit === "suites" ? BEDROOM_OPTIONS_SUITES : BEDROOM_OPTIONS_DORM;
+  const bedroomLegend = unit === "suites" ? "Quantas suítes?" : "Quantos dormitórios?";
+
   const [step, setStep] = useState(0);
   const [data, setData] = useState<GuidedSearchData>({});
   const [result, setResult] = useState<MatchResult | null>(null);
@@ -141,7 +157,7 @@ export function BuyerDiagnosis({
     setData((d) => ({ ...d, [key]: value }));
 
   const canStep0 = Boolean(data.goal && data.bedrooms);
-  const canStep1 = Boolean(data.region && data.priceBand);
+  const canStep1 = askPrice ? Boolean(data.region && data.priceBand) : Boolean(data.region);
 
   const searchFilters: PropertyFilters = {
     region: data.region === ANY ? undefined : data.region,
@@ -199,10 +215,12 @@ export function BuyerDiagnosis({
     } else {
       const parts: string[] = [];
       if (result.relaxed.includes("região")) parts.push("em regiões próximas");
-      if (result.relaxed.includes("dormitórios")) parts.push("com outra opção de dormitórios");
-      heading = "Veja opções próximas dentro da sua faixa";
-      subtext = `Não encontramos uma opção exata, mas dentro da sua faixa de valor encontramos ${matches.length} ${
-        matches.length === 1 ? "apartamento" : "apartamentos"
+      if (result.relaxed.includes("dormitórios"))
+        parts.push(unit === "suites" ? "com outra opção de suítes" : "com outra opção de dormitórios");
+      heading = askPrice ? "Veja opções próximas dentro da sua faixa" : "Veja opções próximas ao seu perfil";
+      const faixa = askPrice ? "dentro da sua faixa de valor " : "";
+      subtext = `Não encontramos uma opção exata, mas ${faixa}encontramos ${matches.length} ${
+        matches.length === 1 ? "empreendimento" : "empreendimentos"
       }${parts.length ? " " + parts.join(" e ") : ""}.`;
     }
 
@@ -368,11 +386,15 @@ export function BuyerDiagnosis({
                     </div>
                   </fieldset>
                   <fieldset>
-                    <legend className="text-sm font-medium text-ink">Quantos dormitórios?</legend>
+                    <legend className="text-sm font-medium text-ink">{bedroomLegend}</legend>
                     <div className="mt-3 flex flex-wrap gap-2">
-                      {BEDROOM_ORDER.map((b) => (
-                        <Chip key={b} active={data.bedrooms === b} onClick={() => set("bedrooms", b)}>
-                          {bedroomChoiceLabels[b]}
+                      {bedroomOptions.map((b) => (
+                        <Chip
+                          key={b.id}
+                          active={data.bedrooms === b.id}
+                          onClick={() => set("bedrooms", b.id)}
+                        >
+                          {b.label}
                         </Chip>
                       ))}
                     </div>
@@ -395,23 +417,25 @@ export function BuyerDiagnosis({
                       ))}
                     </div>
                   </fieldset>
-                  <fieldset>
-                    <legend className="text-sm font-medium text-ink">Faixa de valor</legend>
-                    <div className="mt-3 flex flex-wrap gap-2">
-                      <Chip active={data.priceBand === ANY} onClick={() => set("priceBand", ANY)}>
-                        Sem preferência
-                      </Chip>
-                      {PRICE_BANDS.map((b) => (
-                        <Chip
-                          key={b.id}
-                          active={data.priceBand === b.id}
-                          onClick={() => set("priceBand", b.id)}
-                        >
-                          {b.label}
+                  {askPrice && (
+                    <fieldset>
+                      <legend className="text-sm font-medium text-ink">Faixa de valor</legend>
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        <Chip active={data.priceBand === ANY} onClick={() => set("priceBand", ANY)}>
+                          Sem preferência
                         </Chip>
-                      ))}
-                    </div>
-                  </fieldset>
+                        {PRICE_BANDS.map((b) => (
+                          <Chip
+                            key={b.id}
+                            active={data.priceBand === b.id}
+                            onClick={() => set("priceBand", b.id)}
+                          >
+                            {b.label}
+                          </Chip>
+                        ))}
+                      </div>
+                    </fieldset>
+                  )}
                 </>
               )}
             </motion.div>
