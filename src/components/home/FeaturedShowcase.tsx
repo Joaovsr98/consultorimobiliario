@@ -5,7 +5,7 @@ import { Section } from "@/components/ui/Section";
 import { PropertyImage } from "@/components/ui/PropertyImage";
 import { StatusBadge } from "@/components/ui/StatusBadge";
 import { buttonClasses } from "@/lib/button-styles";
-import { formatCurrency } from "@/lib/utils";
+import { formatArea, formatCurrency } from "@/lib/utils";
 
 /**
  * Empreendimento em destaque — experiencia imersiva de produto, em fundo
@@ -22,7 +22,7 @@ export function FeaturedShowcase() {
 
   const facts = [
     { icon: BedDouble, label: property.bedrooms },
-    { icon: Ruler, label: property.area },
+    { icon: Ruler, label: formatArea(property.area) },
     ...(property.delivery ? [{ icon: CalendarDays, label: `Entrega ${property.delivery}` }] : []),
   ];
   const differentials = property.features.slice(0, 6);
