@@ -97,6 +97,8 @@ export type Property = {
   features: string[];
   /** Caminhos de imagens autorizadas. */
   images: string[];
+  /** Imagem para a vitrine de destaque (FeaturedShowcase). Ausente usa images[0]. */
+  showcaseImage?: string;
   featured: boolean;
 };
 

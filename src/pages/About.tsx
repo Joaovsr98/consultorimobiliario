@@ -1,9 +1,18 @@
 import { MapPin, MessageCircle, ShieldCheck } from "lucide-react";
-import { identity } from "@/tenants";
+import { identity, tenant } from "@/tenants";
 import { Section } from "@/components/ui/Section";
 import { buttonClasses } from "@/lib/button-styles";
 import { buildWhatsappLink, defaultWhatsappMessage } from "@/lib/whatsapp";
 import { Seo } from "@/components/shared/Seo";
+
+const DEFAULT_INTRO = [
+  "Nosso trabalho é ajudar você a entender as opções disponíveis, organizar as etapas da compra e encontrar um imóvel compatível com a sua realidade financeira. Não acreditamos em empurrar decisão antes do momento certo — acreditamos em explicar cada passo com clareza para que você decida com segurança.",
+];
+const DEFAULT_STEPS = [
+  "Entendemos juntos seu objetivo, sua região de interesse e sua realidade financeira.",
+  "Selecionamos opções compatíveis com o que você nos contou — sem empurrar imóvel fora do seu perfil.",
+  "Acompanhamos você nas visitas, na proposta e até a entrega das chaves.",
+];
 
 /**
  * Pagina "Sobre" — comunicacao INSTITUCIONAL (equipe), nao pessoal. Fala como
@@ -12,6 +21,9 @@ import { Seo } from "@/components/shared/Seo";
  */
 export function About() {
   const whatsapp = identity.contact.whatsapp;
+  const about = tenant.kind === "individual" ? tenant.home?.about : undefined;
+  const intro = about?.intro?.length ? about.intro : DEFAULT_INTRO;
+  const steps = about?.steps?.length ? about.steps : DEFAULT_STEPS;
 
   return (
     <Section>
@@ -33,13 +45,11 @@ export function About() {
           <p className="mt-2 text-sm font-medium text-ink/60">{identity.registrationLabel}</p>
         )}
 
-        <p className="mt-8 text-lg leading-relaxed text-ink/80">
-          Nosso trabalho é ajudar você a entender as opções disponíveis,
-          organizar as etapas da compra e encontrar um imóvel compatível com a
-          sua realidade financeira. Não acreditamos em empurrar decisão antes do
-          momento certo — acreditamos em explicar cada passo com clareza para que
-          você decida com segurança.
-        </p>
+        <div className="mt-8 space-y-4 text-lg leading-relaxed text-ink/80">
+          {intro.map((p) => (
+            <p key={p}>{p}</p>
+          ))}
+        </div>
 
         <dl className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2">
           {identity.serviceRegion && (
@@ -68,21 +78,12 @@ export function About() {
         <div className="mt-10 rounded-[var(--radius-brand)] border border-brand/10 bg-paper p-6">
           <h2 className="font-display text-xl font-semibold text-brand">Como funciona o atendimento</h2>
           <ul className="mt-4 space-y-3 text-ink/80">
-            <li className="flex gap-3">
-              <span className="text-accent">1.</span>
-              Entendemos juntos seu objetivo, sua região de interesse e sua
-              realidade financeira.
-            </li>
-            <li className="flex gap-3">
-              <span className="text-accent">2.</span>
-              Selecionamos opções compatíveis com o que você nos contou — sem
-              empurrar imóvel fora do seu perfil.
-            </li>
-            <li className="flex gap-3">
-              <span className="text-accent">3.</span>
-              Acompanhamos você nas visitas, na proposta e até a entrega das
-              chaves.
-            </li>
+            {steps.map((step, i) => (
+              <li key={step} className="flex gap-3">
+                <span className="text-accent">{i + 1}.</span>
+                {step}
+              </li>
+            ))}
           </ul>
         </div>
 

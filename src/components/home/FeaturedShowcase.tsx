@@ -36,7 +36,7 @@ export function FeaturedShowcase() {
       <div className="mt-8 grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-12">
         <div className="relative">
           <PropertyImage
-            src={property.images[0]}
+            src={property.showcaseImage ?? property.images[0]}
             alt={property.name}
             ratio="4 / 3"
             imgClassName="rounded-image"

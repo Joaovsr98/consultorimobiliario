@@ -37,4 +37,16 @@ export const home: HomeContent = {
     description:
       "Conte um pouco sobre o seu estilo de vida e receba uma seleção de imóveis EXTO que combinam com você e a sua família — com toda a discrição.",
   },
+  about: {
+    intro: [
+      "Morar bem é sentir que cada detalhe foi pensado para você. Selecionamos imóveis EXTO para quem valoriza conforto, arquitetura, privacidade, localização e qualidade de vida.",
+      "O atendimento é personalizado e cuidadoso, buscando compreender o seu estilo de vida para apresentar imóveis que realmente façam sentido para você e a sua família. Mais do que encontrar um endereço, o objetivo é encontrar um espaço onde você possa viver com tranquilidade, receber bem, criar memórias e aproveitar cada momento com mais conforto.",
+      "Seu próximo lar começa com uma escolha bem feita.",
+    ],
+    steps: [
+      "Entendemos o seu estilo de vida e as suas preferências.",
+      "Apresentamos os empreendimentos EXTO que combinam com você e a sua família.",
+      "Acompanhamos você nas visitas, na proposta e até a entrega das chaves.",
+    ],
+  },
 };

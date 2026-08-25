@@ -56,6 +56,7 @@ export const properties: Property[] = [
       "Mini market",
       "Concierge / courrier",
     ],
+    showcaseImage: "/properties/chateau-jardin-lumiere/vista-area-do-lazer.jpg",
     images: [
       "/properties/chateau-jardin-lumiere/fachada.jpg",
       "/properties/chateau-jardin-lumiere/fachada-com-aplicacao-de-molduras-e-textura.jpg",

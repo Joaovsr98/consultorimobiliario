@@ -82,6 +82,8 @@ export type HomeContent = {
   metaDescription?: string;
   differentials?: { icon: DifferentialIcon; title: string; text: string }[];
   guided?: { eyebrow: string; title: string; description: string };
+  /** Copy da pagina Sobre. Ausente -> texto padrao (econômico) do componente. */
+  about?: { intro: string[]; steps: string[] };
 };
 
 export type IndividualTenant = {
