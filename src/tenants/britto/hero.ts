@@ -24,8 +24,8 @@ export const hero: HeroConfig = {
       alt: "Vista aérea do Legacy Guedala, torre residencial no Jardim Guedala",
     },
   ],
-  headline: "O endereço certo para o seu próximo capítulo",
-  subtitle: "São Paulo · Alto padrão · EXTO Incorporadora",
+  headline: "Morar bem é sentir que cada detalhe foi pensado para você",
+  subtitle: "Consultoria de imóveis EXTO · Alto padrão em São Paulo",
   description:
-    "Empreendimentos da EXTO nos bairros mais desejados de São Paulo, com a curadoria e o atendimento pessoal do Britto.",
+    "Selecionamos imóveis EXTO para quem valoriza conforto, arquitetura, privacidade, localização e qualidade de vida.",
 };

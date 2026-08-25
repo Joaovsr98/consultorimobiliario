@@ -1,40 +1,40 @@
 import type { HomeContent } from "../types";
 
 /**
- * Conteudo da Home do Britto — linguagem de ALTO PADRAO (EXTO). Substitui a
- * copy econômica (MCMV/metrô) do padrao compartilhado. Nada inventado sobre
- * empreendimentos: fala da curadoria e do atendimento, nao de dados de imovel.
+ * Conteudo da Home do Britto — alto padrao (EXTO), com foco em conforto,
+ * experiencia e qualidade de vida. Nada inventado sobre empreendimentos:
+ * fala da curadoria e do atendimento, nao de dados de imovel.
  */
 export const home: HomeContent = {
   metaTitle: "Alto padrão em São Paulo",
   metaDescription:
-    "Empreendimentos de alto padrão da EXTO Incorporadora nos bairros mais desejados de São Paulo, com curadoria e atendimento pessoal do Britto.",
+    "Consultoria de imóveis EXTO de alto padrão em São Paulo — conforto, arquitetura, privacidade, localização e qualidade de vida, com atendimento personalizado do Britto.",
   differentials: [
     {
-      icon: "map",
-      title: "Localização nobre",
-      text: "Endereços nos bairros mais desejados de São Paulo — Pacaembu, Perdizes, Cidade Jardim, Moema e Ibirapuera.",
+      icon: "sparkles",
+      title: "Conforto e bem-estar",
+      text: "Espaços pensados para viver com tranquilidade, receber bem e criar memórias com a sua família.",
     },
     {
       icon: "pen",
-      title: "Projeto assinado",
-      text: "Arquitetura e acabamento de alto padrão da EXTO, com atenção a cada detalhe.",
+      title: "Arquitetura assinada",
+      text: "Projetos EXTO com design, materiais nobres e acabamento de altíssimo padrão.",
     },
     {
-      icon: "gem",
-      title: "Curadoria EXTO",
-      text: "Uma seleção de empreendimentos com a solidez de quase quatro décadas de incorporação.",
+      icon: "map",
+      title: "Localização nobre",
+      text: "Endereços nos bairros mais desejados de São Paulo, com privacidade e conveniência.",
     },
     {
-      icon: "sparkles",
-      title: "Atendimento exclusivo",
-      text: "Acompanhamento pessoal do Britto, com discrição, do primeiro contato à entrega das chaves.",
+      icon: "users",
+      title: "Atendimento personalizado",
+      text: "Entendemos o seu estilo de vida para apresentar imóveis que realmente fazem sentido para você.",
     },
   ],
   guided: {
     eyebrow: "Curadoria personalizada",
-    title: "Encontre o endereço à altura do seu próximo momento",
+    title: "Seu próximo lar começa com uma escolha bem feita",
     description:
-      "Conte seu perfil em poucos passos e receba uma seleção de empreendimentos EXTO pelo WhatsApp — com toda a discrição.",
+      "Conte um pouco sobre o seu estilo de vida e receba uma seleção de imóveis EXTO que combinam com você e a sua família — com toda a discrição.",
   },
 };

@@ -184,14 +184,14 @@ function buildPages(data: TenantSeo, cfg: TenantContent): Page[] {
       path: "/",
       title: t("Alto padrão em São Paulo"),
       description: data.description,
-      body: `<h1>Empreendimentos de alto padrão em São Paulo</h1>
-<p>A ${esc(
+      body: `<h1>Alto padrão em São Paulo</h1>
+<p>Morar bem é sentir que cada detalhe foi pensado para você. A ${esc(
         S
-      )} apresenta uma curadoria de empreendimentos de alto padrão da EXTO Incorporadora nos bairros mais desejados de São Paulo — Cidade Jardim, Jardim Guedala, Pacaembu e regiões nobres. Projetos de arquitetura assinada, acabamento de altíssimo padrão e localizações que se valorizam com o tempo.</p>
-<p>O atendimento é pessoal e discreto, do primeiro contato à entrega das chaves: entendemos o seu momento, apresentamos os empreendimentos que fazem sentido para o seu perfil e acompanhamos cada etapa da aquisição.</p>
+      )} seleciona imóveis de alto padrão da EXTO Incorporadora para quem valoriza conforto, arquitetura, privacidade, localização e qualidade de vida, nos bairros mais desejados de São Paulo — Cidade Jardim, Jardim Guedala, Pacaembu e regiões nobres.</p>
+<p>O atendimento é personalizado e cuidadoso: buscamos compreender o seu estilo de vida para apresentar imóveis que realmente façam sentido para você e a sua família. Mais do que encontrar um endereço, o objetivo é encontrar um espaço onde você possa viver com tranquilidade, receber bem, criar memórias e aproveitar cada momento com mais conforto.</p>
 <h2>Empreendimentos</h2>
 <ul>${properties.map(propItem).join("")}</ul>
-<p>Conheça a <a href="/sobre">proposta de atendimento</a> ou <a href="/contato">fale pelo WhatsApp</a>.</p>`,
+<p>Seu próximo lar começa com uma escolha bem feita. Conheça a <a href="/sobre">proposta de atendimento</a> ou <a href="/contato">fale pelo WhatsApp</a>.</p>`,
     });
   } else {
     const regioesTexto = neighborhoods
@@ -239,9 +239,9 @@ function buildPages(data: TenantSeo, cfg: TenantContent): Page[] {
     body: premium
       ? `<h1>${esc(S)}</h1>${
           data.creci ? `<p>CRECI ${esc(data.creci)}</p>` : ""
-        }<p>A ${esc(
+        }<p>Morar bem é sentir que cada detalhe foi pensado para você. A ${esc(
           S
-        )} é uma curadoria de empreendimentos de alto padrão da EXTO Incorporadora em São Paulo. Nosso trabalho é apresentar, com discrição e atenção aos detalhes, os projetos que fazem sentido para o seu momento — em endereços nobres, com arquitetura assinada e acabamento de altíssimo padrão.</p><p>O atendimento é pessoal do primeiro contato à entrega das chaves, com acompanhamento de cada etapa da aquisição.</p><h2>Como funciona o atendimento</h2><ol><li>Entendemos o seu momento e as suas preferências.</li><li>Apresentamos os empreendimentos EXTO compatíveis com o seu perfil.</li><li>Acompanhamos você nas visitas, na proposta e até a entrega das chaves.</li></ol>`
+        )} seleciona imóveis de alto padrão da EXTO Incorporadora para quem valoriza conforto, arquitetura, privacidade, localização e qualidade de vida.</p><p>O atendimento é personalizado e cuidadoso, buscando compreender o seu estilo de vida para apresentar imóveis que realmente façam sentido para você e a sua família. Mais do que encontrar um endereço, o objetivo é encontrar um espaço onde você possa viver com tranquilidade, receber bem, criar memórias e aproveitar cada momento com mais conforto.</p><h2>Como funciona o atendimento</h2><ol><li>Entendemos o seu estilo de vida e as suas preferências.</li><li>Apresentamos os empreendimentos EXTO que combinam com você e a sua família.</li><li>Acompanhamos você nas visitas, na proposta e até a entrega das chaves.</li></ol><p>Seu próximo lar começa com uma escolha bem feita.</p>`
       : `<h1>${esc(S)}</h1>${
           data.creci ? `<p>CRECI ${esc(data.creci)}</p>` : ""
         }<p>Nosso trabalho é ajudar você a entender as opções disponíveis, organizar as etapas da compra e encontrar um imóvel compatível com a sua realidade financeira. Não acreditamos em empurrar decisão antes do momento certo — acreditamos em explicar cada passo com clareza para que você decida com segurança.</p><p>Atuamos com lançamentos na Zona Oeste e na Zona Sul de São Paulo, muitos próximos a estações de metrô e com unidades no Programa Minha Casa Minha Vida.</p><h2>Como funciona o atendimento</h2><ol><li>Entendemos juntos seu objetivo, sua região de interesse e sua realidade financeira.</li><li>Selecionamos opções compatíveis com o seu perfil.</li><li>Acompanhamos você nas visitas, na proposta e até a entrega das chaves.</li></ol>`,
