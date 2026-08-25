@@ -23,6 +23,7 @@ export const properties: Property[] = [
     delivery: "Abr/2029",
     status: "lancamento",
     address: "Rua Ministro Nelson Hungria, 400 - São Paulo - SP",
+    coords: { lat: -23.61566, lng: -46.7051 },
     specs: [
       { label: "Suítes", value: "4" },
       { label: "Fase", value: "Lumière" },
@@ -101,6 +102,7 @@ export const properties: Property[] = [
     delivery: "Abr/2029",
     status: "lancamento",
     address: "Rua Ministro Nelson Hungria, 400 - São Paulo - SP",
+    coords: { lat: -23.61566, lng: -46.7051 },
     specs: [
       { label: "Suítes", value: "4" },
       { label: "Fase", value: "Harmonie" },
@@ -175,6 +177,10 @@ export const properties: Property[] = [
     delivery: "2027",
     status: "lancamento",
     address: "Rua Carlos Lima Morel, 115 - Jardim Guedala, São Paulo - SP",
+    // Coordenadas reais da Rua Carlos Lima Morel (via OpenStreetMap) — fixam o
+    // pin com precisao. A rua fica em Cidade Jardim/Morumbi, por isso anexar o
+    // bairro "Jardim Guedala" quebrava o mapa.
+    coords: { lat: -23.58499, lng: -46.71716 },
     tourUrl: "https://tour3d.piperz.io/RJuQUvyDW2p",
     specs: [
       { label: "Suítes", value: "3" },
@@ -183,11 +189,11 @@ export const properties: Property[] = [
       { label: "Arquitetura", value: "Dina Melaragno" },
     ],
     nearby: [
-      { place: "Estação São Paulo-Morumbi (Metrô Linha 4-Amarela)" },
+      { place: "Estação São Paulo-Morumbi" },
       { place: "Hospital Israelita Albert Einstein" },
-      { place: "Av. Prof. Francisco Morato" },
-      { place: "Av. Jorge João Saad" },
-      { place: "Av. Morumbi" },
+      { place: "Avenida Professor Francisco Morato" },
+      { place: "Avenida Jorge João Saad" },
+      { place: "Avenida Morumbi" },
       { place: "Marginal Pinheiros" },
     ],
     description:

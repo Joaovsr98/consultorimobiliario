@@ -83,8 +83,12 @@ export function PropertyDetails() {
     ? `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(originPoint)}&destination=${encodeURIComponent(mapFocus)}`
     : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(originPoint)}`;
 
+  // Query dos pontos "por perto": NAO usar o bairro do empreendimento — muitos
+  // ficam em outro bairro (ex.: Einstein no Morumbi, nao no Jardim Guedala), e o
+  // sufixo de bairro errado jogava o pin pro lugar errado. Cidade + estado basta.
+  const placeQuery = (place: string) => `${place}, ${property.city}, SP`;
   const focusOnMap = (place: string) => {
-    setMapFocus(`${place}, ${property.neighborhood}, ${property.city}`);
+    setMapFocus(placeQuery(place));
     mapRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
   };
 
@@ -192,9 +196,18 @@ export function PropertyDetails() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => onWhatsappClick("property_tour")}
-            className={buttonClasses("outline", "md", "mt-6")}
+            className={cn(
+              buttonClasses("secondary", "lg", "mt-6"),
+              "relative shadow-card ring-1 ring-brand/10"
+            )}
           >
-            <Rotate3d className="size-4 text-accent" aria-hidden />
+            <span className="absolute -right-1.5 -top-1.5 flex size-4">
+              <span className="absolute inline-flex size-full animate-ping rounded-full bg-[color:var(--brand-secondary)] opacity-60" />
+              <span className="relative inline-flex size-4 items-center justify-center rounded-full bg-[color:var(--brand-secondary)] text-[0.55rem] font-bold text-[color:var(--brand-on-accent)]">
+                360
+              </span>
+            </span>
+            <Rotate3d className="size-5" aria-hidden />
             Fazer tour virtual 360°
           </a>
         )}
@@ -304,7 +317,7 @@ export function PropertyDetails() {
               </h3>
               <ul className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
                 {property.nearby.map((item) => {
-                  const isActive = mapFocus === `${item.place}, ${property.neighborhood}, ${property.city}`;
+                  const isActive = mapFocus === placeQuery(item.place);
                   return (
                     <li key={item.place}>
                       <button
