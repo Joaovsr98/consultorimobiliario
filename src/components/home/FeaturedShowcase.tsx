@@ -29,7 +29,7 @@ export function FeaturedShowcase() {
 
   return (
     <Section className="bg-brand text-paper">
-      <p className="text-sm font-semibold uppercase tracking-wide text-accent">
+      <p className="text-sm font-semibold uppercase tracking-wide text-[color:var(--brand-accent-on-brand)]">
         Empreendimento em destaque
       </p>
 
@@ -51,7 +51,7 @@ export function FeaturedShowcase() {
             {property.name}
           </h2>
           <p className="mt-2 flex items-center gap-1.5 text-sm text-paper/70">
-            <MapPin className="size-4 shrink-0 text-accent" aria-hidden />
+            <MapPin className="size-4 shrink-0 text-[color:var(--brand-accent-on-brand)]" aria-hidden />
             {property.neighborhood}, {property.city}
           </p>
 
@@ -60,7 +60,7 @@ export function FeaturedShowcase() {
           <dl className="mt-6 flex flex-wrap gap-x-8 gap-y-3">
             {facts.map((fact) => (
               <div key={fact.label} className="flex items-center gap-2">
-                <fact.icon className="size-4 text-accent" aria-hidden />
+                <fact.icon className="size-4 text-[color:var(--brand-accent-on-brand)]" aria-hidden />
                 <dd className="text-sm font-medium text-paper">{fact.label}</dd>
               </div>
             ))}

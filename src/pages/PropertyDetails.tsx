@@ -152,7 +152,7 @@ export function PropertyDetails() {
             {property.name}
           </h1>
           <p className="mt-2 flex items-center gap-1.5 text-paper/80">
-            <MapPin className="size-4 shrink-0 text-accent" aria-hidden />
+            <MapPin className="size-4 shrink-0 text-[color:var(--brand-accent-on-brand)]" aria-hidden />
             {property.neighborhood}, {property.city}
           </p>
 
@@ -161,12 +161,12 @@ export function PropertyDetails() {
             {property.priceFrom !== undefined ? (
               <span className="text-sm">
                 A partir de{" "}
-                <span className="font-display text-xl font-semibold text-accent">
+                <span className="font-display text-xl font-semibold text-[color:var(--brand-accent-on-brand)]">
                   {formatCurrency(property.priceFrom)}
                 </span>
               </span>
             ) : property.priceLabel ? (
-              <span className="font-display text-xl font-semibold text-accent">
+              <span className="font-display text-xl font-semibold text-[color:var(--brand-accent-on-brand)]">
                 {property.priceLabel}
               </span>
             ) : null}
@@ -176,7 +176,7 @@ export function PropertyDetails() {
 
           {metroNearby && (
             <p className="mt-2 flex items-center gap-1.5 text-sm text-paper/85">
-              <TrainFront className="size-4 shrink-0 text-accent" aria-hidden />
+              <TrainFront className="size-4 shrink-0 text-[color:var(--brand-accent-on-brand)]" aria-hidden />
               {metroNearby.place}
               {metroNearby.time ? ` · ${metroNearby.time}` : ""}
             </p>

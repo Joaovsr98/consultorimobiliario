@@ -37,6 +37,8 @@ export function Home() {
 
       <Hero />
 
+      <FeaturedShowcase />
+
       <Differentials />
 
       <BuyerDiagnosis
@@ -46,7 +48,6 @@ export function Home() {
         description={guided.description}
       />
       <Opportunities />
-      <FeaturedShowcase />
       <BuyerJourney />
       <AboutTeaser />
       <GuidesTeaser />
