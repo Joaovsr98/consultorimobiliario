@@ -5,6 +5,7 @@ import { seo } from "./seo";
 import { mainNav, footerNav } from "./navigation";
 import { properties } from "./properties";
 import { hero } from "./hero";
+import { home } from "./home";
 
 export const joaoVictorTenant: IndividualTenant = {
   kind: "individual",
@@ -14,4 +15,5 @@ export const joaoVictorTenant: IndividualTenant = {
   navigation: { main: mainNav, footer: footerNav },
   properties,
   hero,
+  home,
 };

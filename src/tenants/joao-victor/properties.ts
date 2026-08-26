@@ -1,4 +1,5 @@
 import type { Property } from "@/types";
+import { properties as extoProperties } from "../britto/properties";
 
 /**
  * Empreendimentos. Dados separados do codigo — esta lista podera vir de um
@@ -6,8 +7,11 @@ import type { Property } from "@/types";
  *
  * Regras: sem precos fixos sem data de atualizacao (usar ressalva na UI),
  * sem imagens nao autorizadas, sem dados inventados.
+ *
+ * O Bueno vende Vibra (MCMV) E os empreendimentos EXTO (alto padrao) — os EXTO
+ * vem da fonte unica do tenant britto (`extoProperties`), sem duplicar dados.
  */
-export const properties: Property[] = [
+const vibraProperties: Property[] = [
   {
     id: "vibra-vila-sonia",
     slug: "vibra-parque-vila-sonia",
@@ -390,3 +394,6 @@ export const properties: Property[] = [
     featured: false,
   },
 ];
+
+/** Catálogo do Bueno: Vibra + EXTO disponíveis no mesmo site. */
+export const properties: Property[] = [...vibraProperties, ...extoProperties];

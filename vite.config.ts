@@ -209,11 +209,11 @@ function buildPages(data: TenantSeo, cfg: TenantContent): Page[] {
       path: "/",
       title: t("Apartamentos em São Paulo"),
       description:
-        "Apartamentos e lançamentos em São Paulo, inclusive próximos ao metrô e no Minha Casa Minha Vida. Atendimento imobiliário personalizado do início à entrega das chaves.",
+        "Apartamentos e lançamentos em São Paulo — do Minha Casa Minha Vida ao alto padrão. Atendimento imobiliário personalizado do início à entrega das chaves.",
       body: `<h1>Apartamentos e lançamentos em São Paulo</h1>
 <p>A ${esc(
         S
-      )} ajuda você a encontrar um apartamento em São Paulo compatível com o seu perfil e a sua realidade financeira. Trabalhamos com lançamentos bem localizados, muitos próximos a estações de metrô e com unidades enquadradas no Programa Minha Casa Minha Vida.</p>
+      )} ajuda você a encontrar um apartamento em São Paulo compatível com o seu perfil — de lançamentos do Programa Minha Casa Minha Vida a empreendimentos de alto padrão. Trabalhamos com projetos bem localizados, muitos próximos a estações de metrô e em regiões valorizadas da cidade.</p>
 <p>O atendimento é personalizado do início à entrega das chaves: entendemos o seu objetivo (morar ou investir), a região de interesse e o seu orçamento, selecionamos opções que fazem sentido para você e acompanhamos cada etapa — simulação, visita, proposta e documentação. Sem empurrar imóvel fora do seu perfil.</p>
 <h2>Empreendimentos</h2>
 <ul>${properties.map(propItem).join("")}</ul>

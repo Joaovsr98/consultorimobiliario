@@ -17,16 +17,28 @@ export const hero: HeroConfig = {
       alt: "Piscina de um condomínio residencial em São Paulo em dia de céu azul",
     },
     {
+      src: "/properties/chateau-jardin-lumiere/vista-area-do-lazer.jpg",
+      alt: "Vista aérea do lazer de um empreendimento de alto padrão na Cidade Jardim",
+    },
+    {
       src: "/properties/vibra-estacao-campo-limpo/rooftop.jpg",
       alt: "Rooftop com espreguiçadeiras e vista da cidade de São Paulo",
+    },
+    {
+      src: "/properties/palm-collection-pacaembu/piscina.jpg",
+      alt: "Piscina com raia de 20m de um residencial de alto padrão no Pacaembu",
     },
     {
       src: "/properties/vibra-parque-vila-sonia/churrasqueira.jpg",
       alt: "Área de churrasqueira e convivência ao ar livre em condomínio",
     },
+    {
+      src: "/properties/legacy-guedala/voo-de-passaro.jpg",
+      alt: "Vista aérea de uma torre residencial de alto padrão no Jardim Guedala",
+    },
   ],
   headline: "O lugar certo para o seu novo começo",
   subtitle: "Bueno Imóveis · São Paulo",
   description:
-    "Encontre o imóvel ideal com condições facilitadas e o atendimento da Bueno Imóveis.",
+    "Do primeiro apartamento ao alto padrão — encontre o imóvel ideal em São Paulo com o atendimento da Bueno Imóveis.",
 };
