@@ -82,7 +82,7 @@ export const properties: Property[] = [
     neighborhood: "Vila Sônia",
     city: "São Paulo",
     bedrooms: "2 dormitórios",
-    area: "43,25 a 49,92 m2",
+    area: "37 a 49,92 m2",
     priceFrom: 345400,
     priceRef: "ago/2026",
     developer: "Vibra",
@@ -90,6 +90,7 @@ export const properties: Property[] = [
     status: "lancamento",
     address: "Rua Dias Vieira, 420 - Vila Sônia, São Paulo - SP",
     specs: [
+      { label: "Plantas", value: "Tipo (37–43 m²) e Garden (~50 m²)" },
       { label: "Torres", value: "1" },
       { label: "Total de unidades", value: "623" },
       { label: "Pavimentos", value: "Térreo + 22 pavimentos" },
@@ -299,7 +300,8 @@ export const properties: Property[] = [
     developer: "Vibra",
     delivery: "Set/2027",
     status: "lancamento",
-    address: "Av. das Nações Unidas, 19047 - Santo Amaro, São Paulo - SP",
+    address: "Avenida das Nações Unidas, 19847 - Jardim Promissão, São Paulo - SP",
+    coords: { lat: -23.65932, lng: -46.71379 },
     specs: [
       { label: "Torres", value: "1" },
       { label: "Total de unidades", value: "392" },
