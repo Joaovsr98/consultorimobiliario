@@ -94,7 +94,6 @@ export const properties: Property[] = [
       { label: "Torres", value: "1" },
       { label: "Total de unidades", value: "623" },
       { label: "Pavimentos", value: "Térreo + 22 pavimentos" },
-      { label: "Elevadores", value: "1" },
     ],
     nearby: [
       { place: "Estação Vila Sônia (Linha 4-Amarela)" },
