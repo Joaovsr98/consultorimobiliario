@@ -22,6 +22,12 @@ export const properties: Property[] = [
     delivery: "Nov/2028",
     status: "lancamento",
     address: "Rua Caminho do Engenho, 584 - Vila Sônia, São Paulo - SP",
+    specs: [
+      { label: "Torres", value: "2" },
+      { label: "Total de unidades", value: "552" },
+      { label: "Pavimentos", value: "Térreo + 1º + 21 pavimentos-tipo" },
+      { label: "Elevadores", value: "6 (3 por torre)" },
+    ],
     nearby: [
       { place: "Metrô Vila Sônia (Linha 4-Amarela)" },
       { place: "Parque Chácara do Jockey" },
@@ -173,6 +179,12 @@ export const properties: Property[] = [
     status: "lancamento",
     address: "Estrada de Itapecerica, 2369 - Jardim Germânia/Vila Maracanã, São Paulo, SP",
     coords: { lat: -23.6506, lng: -46.756 },
+    specs: [
+      { label: "Torres", value: "1" },
+      { label: "Total de unidades", value: "482" },
+      { label: "Pavimentos", value: "Térreo + 23 pavimentos" },
+      { label: "Elevadores", value: "6" },
+    ],
     nearby: [
       { place: "Estação Campo Limpo (Linha 5-Lilás)" },
       { place: "Estação Vila das Belezas (Linha 5-Lilás)" },
@@ -242,6 +254,12 @@ export const properties: Property[] = [
     delivery: "Nov/2028",
     status: "lancamento",
     address: "Rua Azem Abdalla, 571 - Jardim Bonfiglioli, São Paulo - SP",
+    specs: [
+      { label: "Torres", value: "2" },
+      { label: "Total de unidades", value: "465" },
+      { label: "Pavimentos", value: "Térreo + 16 pavimentos-tipo" },
+      { label: "Elevadores", value: "7 (Torre A: 3 · Torre B: 4)" },
+    ],
     nearby: [
       { place: "Estação Butantã (Linha 4-Amarela)" },
       { place: "Pinheiros" },
