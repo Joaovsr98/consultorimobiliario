@@ -2,13 +2,13 @@ import type { Property } from "@/types";
 import { properties as extoProperties } from "../britto/properties";
 
 /**
- * Empreendimentos. Dados separados do codigo — esta lista podera vir de um
+ * Empreendimentos. Dados separados do codigo, esta lista podera vir de um
  * CMS/painel na Fase 4 sem alterar componentes.
  *
  * Regras: sem precos fixos sem data de atualizacao (usar ressalva na UI),
  * sem imagens nao autorizadas, sem dados inventados.
  *
- * O Bueno vende Vibra (MCMV) E os empreendimentos EXTO (alto padrao) — os EXTO
+ * O Bueno vende Vibra (MCMV) E os empreendimentos EXTO (alto padrao), os EXTO
  * vem da fonte unica do tenant britto (`extoProperties`), sem duplicar dados.
  */
 /** Apenas os empreendimentos Vibra (usados pelo Shelby, que não vende EXTO). */
@@ -102,7 +102,7 @@ export const vibraProperties: Property[] = [
     status: "lancamento",
     address: "Rua Dias Vieira, 420 - Vila Sônia, São Paulo - SP",
     specs: [
-      { label: "Plantas", value: "Tipo (37–43 m²) e Garden (~50 m²)" },
+      { label: "Plantas", value: "Tipo (37 a 43 m²) e Garden (~50 m²)" },
       { label: "Torres", value: "2" },
       { label: "Total de unidades", value: "623" },
       { label: "Pavimentos", value: "Térreo + 22 pavimentos" },
@@ -275,7 +275,7 @@ export const vibraProperties: Property[] = [
       { place: "Avenida Paulista" },
     ],
     description:
-      "Condomínio residencial de 2 torres no Jardim Bonfiglioli, Zona Oeste de São Paulo, a 10 minutos a pé da Estação Butantã (Linha 4-Amarela) — 10 minutos de Pinheiros e 15 da Avenida Paulista. Apartamentos de 2 dormitórios com opção de varanda, area de lazer completa e unidades enquadradas no Programa Minha Casa, Minha Vida.",
+      "Condomínio residencial de 2 torres no Jardim Bonfiglioli, Zona Oeste de São Paulo, a 10 minutos a pé da Estação Butantã (Linha 4-Amarela), 10 minutos de Pinheiros e 15 da Avenida Paulista. Apartamentos de 2 dormitórios com opção de varanda, area de lazer completa e unidades enquadradas no Programa Minha Casa, Minha Vida.",
     features: [
       "Piscina",
       "Solário",

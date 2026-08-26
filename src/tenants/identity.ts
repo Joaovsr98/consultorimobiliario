@@ -24,7 +24,7 @@ function brokerToIdentity(broker: Broker): SiteIdentity {
 
 /**
  * Adapta uma imobiliaria para o formato normalizado. Depende SOMENTE de
- * `company` — a equipe (`team`) nunca alimenta a identidade global do site.
+ * `company`, a equipe (`team`) nunca alimenta a identidade global do site.
  * Cada corretor e resolvido no contexto próprio (pagina/atendimento), nao
  * aqui. `whatsapp` fica ausente ate o canal oficial ser confirmado; nao se
  * infere a partir de telefones institucionais genericos (0800, central etc.).

@@ -2,12 +2,12 @@ import { getStoredUtm } from "./tracking";
 import { getConsent, onConsentChange, type ConsentPrefs } from "./consent";
 
 /**
- * Camada de analytics centralizada — GA4 + Meta Pixel — governada por
+ * Camada de analytics centralizada, GA4 + Meta Pixel, governada por
  * CONSENTIMENTO no modelo Google Consent Mode v2 em BASIC MODE (modo básico).
  * Os IDs vêm de variáveis de ambiente (VITE_GA4_ID, VITE_META_PIXEL_ID). Sem
  * ID => no-op seguro.
  *
- * Basic Mode (deliberado — NÃO migrar para Advanced Mode agora):
+ * Basic Mode (deliberado, NÃO migrar para Advanced Mode agora):
  * - As tags do GA4 e do Meta Pixel ficam BLOQUEADAS até a interação com o
  *   banner; nada é carregado antes do consentimento.
  * - Consentimento NEGADO por padrão.
@@ -16,12 +16,12 @@ import { getConsent, onConsentChange, type ConsentPrefs } from "./consent";
  * - Ao Recusar, nenhum dado é transmitido.
  * - Preferência persistente e alterável (ver lib/consent.ts).
  * - No Advanced Mode as tags carregariam antes, com estado negado, enviando
- *   sinais sem cookies — NÃO é o caso aqui.
+ *   sinais sem cookies, NÃO é o caso aqui.
  *
  * Mapa Consent Mode v2: analytics_storage (analytics) e ad_storage,
  * ad_user_data, ad_personalization (marketing).
  *
- * Eventos carregam SÓ dados de contexto (imóvel + UTM) — NUNCA PII (nome,
+ * Eventos carregam SÓ dados de contexto (imóvel + UTM), NUNCA PII (nome,
  * telefone, e-mail ou texto digitado pelo lead).
  */
 

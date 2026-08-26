@@ -5,7 +5,7 @@ import { broker } from "./broker";
 export const seo: SeoConfig = {
   siteName: broker.brandName,
   titleTemplate: `%s | ${broker.brandName}`,
-  defaultTitle: `${broker.brandName} — Alto padrão EXTO em São Paulo`,
+  defaultTitle: `${broker.brandName}, Alto padrão EXTO em São Paulo`,
   defaultDescription:
     "Empreendimentos de alto padrão da EXTO Incorporadora nos bairros mais desejados de São Paulo, com atendimento pessoal do início à entrega das chaves.",
   baseUrl: "https://britto-exto.vercel.app",

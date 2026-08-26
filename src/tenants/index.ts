@@ -8,7 +8,7 @@ import { brittoTenant } from "./britto";
 /**
  * Seleciona o tenant ativo via VITE_TENANT_ID (definida por deploy na
  * Vercel, sem exigir commit para trocar de cliente). Valor invalido ou
- * ausente cai em "joao-victor" — nunca ativa uma configuracao por acaso.
+ * ausente cai em "joao-victor", nunca ativa uma configuracao por acaso.
  */
 function resolveTenantId(value: unknown): TenantId {
   if (

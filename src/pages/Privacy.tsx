@@ -3,7 +3,7 @@ import { Section } from "@/components/ui/Section";
 import { Seo } from "@/components/shared/Seo";
 
 /**
- * Política de privacidade real, refletindo o que o site de fato faz hoje —
+ * Política de privacidade real, refletindo o que o site de fato faz hoje, 
  * não um texto genérico de template. Atualizar sempre que o fluxo de dados
  * mudar (ex.: se um backend/CRM entrar em uma fase futura).
  */
@@ -52,7 +52,7 @@ export function Privacy() {
               objetivo (morar ou investir), região de interesse, número de
               dormitórios, renda familiar aproximada, entrada disponível, se
               você possui FGTS e o prazo de compra. Não pedimos nome, CPF, RG,
-              comprovantes ou qualquer documento sensível — em nenhum
+              comprovantes ou qualquer documento sensível, em nenhum
               formulário deste site.
             </p>
             <p className="mt-3 leading-relaxed">
@@ -73,7 +73,7 @@ export function Privacy() {
               de texto. Antes de qualquer envio, essa mensagem é exibida para
               você revisar. Se você clicar em "Continuar no WhatsApp", o seu
               próprio navegador abre o WhatsApp com essa mensagem
-              pré-preenchida — e você quem decide se envia. Nenhuma análise de
+              pré-preenchida, e você quem decide se envia. Nenhuma análise de
               crédito ou aprovação de financiamento acontece neste site.
             </p>
           </section>
@@ -86,7 +86,7 @@ export function Privacy() {
               Nesta fase, o site não tem banco de dados nem servidor próprio
               guardando essas respostas. As respostas do diagnóstico existem
               apenas na página, no seu navegador, enquanto você preenche o
-              formulário — não são enviadas a nenhum servidor nosso. A
+              formulário, não são enviadas a nenhum servidor nosso. A
               informação de origem (UTM) fica no armazenamento local do
               navegador e é apagada quando essa sessão do navegador termina.
             </p>
@@ -122,12 +122,12 @@ export function Privacy() {
             </p>
             <ul className="mt-3 list-disc space-y-2 pl-5 leading-relaxed">
               <li>
-                <strong>Análise de uso — Google Analytics 4:</strong> mede
+                <strong>Análise de uso, Google Analytics 4:</strong> mede
                 páginas visitadas, origem do tráfego e desempenho do site, para
                 melhorarmos a experiência. Categoria: <em>análise</em>.
               </li>
               <li>
-                <strong>Marketing — Meta Pixel:</strong> mede o resultado de
+                <strong>Marketing, Meta Pixel:</strong> mede o resultado de
                 anúncios no Instagram/Facebook (ex.: quantas pessoas chegaram a um
                 imóvel ou iniciaram um contato). Categoria: <em>marketing</em>.
               </li>
@@ -140,7 +140,7 @@ export function Privacy() {
               <em> ad_user_data</em> e <em>ad_personalization</em>.
             </p>
             <p className="mt-3 leading-relaxed">
-              Esses eventos registram apenas dados de contexto — qual imóvel foi
+              Esses eventos registram apenas dados de contexto, qual imóvel foi
               visto e a origem da campanha (UTM). <strong>Nunca</strong> enviamos
               a essas ferramentas o seu nome, telefone, e-mail ou o texto que você
               digita no diagnóstico ou no WhatsApp.
@@ -171,8 +171,8 @@ export function Privacy() {
               Alterações nesta política
             </h2>
             <p className="mt-3 leading-relaxed">
-              Se a forma como os dados são tratados mudar — por exemplo, com a
-              entrada de um sistema de gestão de leads em uma fase futura —
+              Se a forma como os dados são tratados mudar, por exemplo, com a
+              entrada de um sistema de gestão de leads em uma fase futura, 
               esta página será atualizada e a data no topo será revisada.
             </p>
           </section>

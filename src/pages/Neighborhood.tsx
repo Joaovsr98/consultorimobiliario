@@ -13,7 +13,7 @@ import { NotFound } from "./NotFound";
 /**
  * Landing page de bairro (SEO local). Conteudo unico vem de data/neighborhoods,
  * e os imoveis do bairro sao filtrados do tenant ativo por `neighborhood`.
- * Mesma pagina serve todos os bairros — o que muda e o dado, nao o layout.
+ * Mesma pagina serve todos os bairros, o que muda e o dado, nao o layout.
  */
 export function Neighborhood() {
   const { neighborhoodSlug } = useParams();

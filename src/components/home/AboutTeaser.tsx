@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 
 /**
  * Teaser da pagina "Sobre", com a proposta orientada ao cliente.
- * A foto so ocupa espaco quando `identity.photo` existir — evitamos um
+ * A foto so ocupa espaco quando `identity.photo` existir, evitamos um
  * placeholder vazio que sinalizaria "incompleto" em vez de "premium".
  */
 export function AboutTeaser() {

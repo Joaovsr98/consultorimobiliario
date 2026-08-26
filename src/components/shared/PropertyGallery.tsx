@@ -74,7 +74,7 @@ export const PropertyGallery = forwardRef<PropertyGalleryHandle, PropertyGallery
             >
               <img
                 src={src}
-                alt={`${alt} — foto ${index + 1}`}
+                alt={`${alt}, foto ${index + 1}`}
                 loading={index === 0 ? "eager" : "lazy"}
                 className="size-full object-cover transition-transform duration-300 group-hover:scale-105"
               />
@@ -137,7 +137,7 @@ export const PropertyGallery = forwardRef<PropertyGalleryHandle, PropertyGallery
 
             <img
               src={images[openIndex!]}
-              alt={`${alt} — foto ${openIndex! + 1}`}
+              alt={`${alt}, foto ${openIndex! + 1}`}
               onClick={(e) => e.stopPropagation()}
               className="max-h-[85vh] max-w-full rounded-[var(--radius-brand)] object-contain"
             />

@@ -5,7 +5,7 @@ import { broker } from "./broker";
 export const seo: SeoConfig = {
   siteName: broker.brandName,
   titleTemplate: `%s | ${broker.brandName}`,
-  defaultTitle: `${broker.brandName} — Seu próximo imóvel começa com uma orientação segura`,
+  defaultTitle: `${broker.brandName}, Seu próximo imóvel começa com uma orientação segura`,
   defaultDescription:
     "Encontre imóveis compatíveis com seu perfil, simule possibilidades de compra e receba atendimento personalizado do início à entrega das chaves.",
   baseUrl: "https://consultorimobiliario.vercel.app",

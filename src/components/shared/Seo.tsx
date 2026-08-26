@@ -10,7 +10,7 @@ type SeoProps = {
 
 /**
  * Define title e meta description da pagina, a partir do tenant ativo.
- * Leve o suficiente para a Fase 2 — sem dependencia externa.
+ * Leve o suficiente para a Fase 2, sem dependencia externa.
  */
 export function Seo({ title, description }: SeoProps) {
   useEffect(() => {
@@ -27,7 +27,7 @@ export function Seo({ title, description }: SeoProps) {
 
     meta.setAttribute("content", description ?? seo.defaultDescription);
 
-    // Canonical por pagina — atualiza na navegacao SPA. Evita a home e as rotas
+    // Canonical por pagina, atualiza na navegacao SPA. Evita a home e as rotas
     // serem tratadas como conteudo duplicado por parametros/variacoes de URL.
     if (seo.baseUrl) {
       const canonical =

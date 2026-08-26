@@ -1,14 +1,14 @@
 import type { HomeContent } from "../types";
 
 /**
- * Conteudo da Home do Britto — alto padrao (EXTO), com foco em conforto,
+ * Conteudo da Home do Britto, alto padrao (EXTO), com foco em conforto,
  * experiencia e qualidade de vida. Nada inventado sobre empreendimentos:
  * fala da curadoria e do atendimento, nao de dados de imovel.
  */
 export const home: HomeContent = {
   metaTitle: "Alto padrão em São Paulo",
   metaDescription:
-    "Consultoria de imóveis EXTO de alto padrão em São Paulo — conforto, arquitetura, privacidade, localização e qualidade de vida, com atendimento personalizado do Britto.",
+    "Consultoria de imóveis EXTO de alto padrão em São Paulo, conforto, arquitetura, privacidade, localização e qualidade de vida, com atendimento personalizado do Britto.",
   differentials: [
     {
       icon: "sparkles",
@@ -35,7 +35,7 @@ export const home: HomeContent = {
     eyebrow: "Curadoria personalizada",
     title: "Seu próximo lar começa com uma escolha bem feita",
     description:
-      "Conte um pouco sobre o seu estilo de vida e receba uma seleção de imóveis EXTO que combinam com você e a sua família — com toda a discrição.",
+      "Conte um pouco sobre o seu estilo de vida e receba uma seleção de imóveis EXTO que combinam com você e a sua família, com toda a discrição.",
   },
   // Alto padrão: por SUÍTES e sem faixa de valor (tudo "Sob consulta").
   search: { unit: "suites", askPrice: false },

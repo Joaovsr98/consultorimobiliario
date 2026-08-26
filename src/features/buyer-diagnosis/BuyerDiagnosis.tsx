@@ -134,7 +134,7 @@ export function BuyerDiagnosis({
   id,
   eyebrow = "Busca guiada",
   title = "Encontre opções compatíveis com o seu perfil",
-  description = "Responda 2 perguntas rápidas e veja os empreendimentos que combinam com você — sem compromisso.",
+  description = "Responda 2 perguntas rápidas e veja os empreendimentos que combinam com você, sem compromisso.",
 }: BuyerDiagnosisProps) {
   const properties = tenant.properties;
   const regions = useMemo(() => regionsOf(properties), [properties]);
@@ -244,7 +244,7 @@ export function BuyerDiagnosis({
                 ))}
               </div>
 
-              {/* Contexto opcional para a equipe — não é análise de crédito. */}
+              {/* Contexto opcional para a equipe, não é análise de crédito. */}
               <div className="mt-10 rounded-card border border-brand/10 bg-paper p-5 shadow-card">
                 <p className="text-sm font-medium text-ink">
                   Como pretende pagar? <span className="font-normal text-ink/50">(opcional)</span>
@@ -257,7 +257,7 @@ export function BuyerDiagnosis({
                   ))}
                 </div>
                 <p className="mt-3 text-xs text-ink/45">
-                  Estimativa para orientar o atendimento — não é aprovação de financiamento.
+                  Estimativa para orientar o atendimento, não é aprovação de financiamento.
                 </p>
               </div>
             </>
@@ -464,7 +464,7 @@ export function BuyerDiagnosis({
               </button>
             </div>
             <p className="mt-5 text-center text-xs text-ink/45">
-              Sem compromisso — não pedimos CPF, renda exata nem documentos.
+              Sem compromisso, não pedimos CPF, renda exata nem documentos.
             </p>
           </div>
         </div>

@@ -1,7 +1,7 @@
 import type { HeroConfig } from "../types";
 
 /**
- * Hero do Shelby. Espelha o joao-victor por decisão do cliente — mesma imagem
+ * Hero do Shelby. Espelha o joao-victor por decisão do cliente, mesma imagem
  * de marca (atmosfera, sem afirmar um empreendimento especifico). Troque
  * quando o Shelby tiver material próprio.
  */

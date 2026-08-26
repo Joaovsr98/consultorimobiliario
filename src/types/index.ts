@@ -1,5 +1,5 @@
 /**
- * Tipos centrais do produto. Nenhum dado real vive aqui — apenas contratos.
+ * Tipos centrais do produto. Nenhum dado real vive aqui, apenas contratos.
  * Os dados concretos de cada cliente ficam em `src/tenants/<tenant>/*`.
  */
 
@@ -38,15 +38,15 @@ export type Broker = {
 
 export type ThemeConfig = {
   colors: {
-    /** Azul-marinho — cor de marca principal. */
+    /** Azul-marinho, cor de marca principal. */
     primary: string;
-    /** Dourado discreto — cor de destaque. */
+    /** Dourado discreto, cor de destaque. */
     secondary: string;
-    /** Areia clara — superficie de fundo. */
+    /** Areia clara, superficie de fundo. */
     surface: string;
-    /** Branco — cartoes e areas de leitura. */
+    /** Branco, cartoes e areas de leitura. */
     paper: string;
-    /** Grafite — texto principal. */
+    /** Grafite, texto principal. */
     ink: string;
   };
   /** Raio de borda base (ex.: "18px"). */

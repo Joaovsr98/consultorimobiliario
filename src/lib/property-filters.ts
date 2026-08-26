@@ -2,7 +2,7 @@ import type { Property } from "@/types";
 
 /**
  * Fonte ÚNICA de lógica de filtro/matching de imóveis. Usada pelo catálogo
- * (/imoveis) e pela busca guiada — nunca duplicar imóveis, preços ou regras
+ * (/imoveis) e pela busca guiada, nunca duplicar imóveis, preços ou regras
  * dentro dos componentes. Os dados vêm sempre de `tenant.properties`.
  */
 
@@ -16,7 +16,7 @@ export const DORM_OPTIONS: { id: DormOption; label: string }[] = [
 export type PriceBandId = "ate-260" | "260-300" | "acima-300";
 export const PRICE_BANDS: { id: PriceBandId; label: string; test: (p: number) => boolean }[] = [
   { id: "ate-260", label: "Até R$ 260 mil", test: (p) => p <= 260_000 },
-  { id: "260-300", label: "R$ 260–300 mil", test: (p) => p > 260_000 && p <= 300_000 },
+  { id: "260-300", label: "R$ 260 a 300 mil", test: (p) => p > 260_000 && p <= 300_000 },
   { id: "acima-300", label: "Acima de R$ 300 mil", test: (p) => p > 300_000 },
 ];
 
@@ -64,7 +64,7 @@ export function filterProperties(props: Property[], f: PropertyFilters): Propert
 }
 
 export type MatchResult = {
-  /** Imóveis a exibir (do catálogo — nunca inventados). */
+  /** Imóveis a exibir (do catálogo, nunca inventados). */
   properties: Property[];
   /** true = correspondência exata; false = alternativas próximas. */
   exact: boolean;
@@ -82,7 +82,7 @@ const RELAX_LABEL: Record<string, string> = {
   priceBand: "faixa de preço",
 };
 
-/** Afrouxa, na ordem dada, apenas as chaves indicadas — mantendo as demais (ex.: o preço). */
+/** Afrouxa, na ordem dada, apenas as chaves indicadas, mantendo as demais (ex.: o preço). */
 function relaxInOrder(
   props: Property[],
   base: PropertyFilters,
@@ -107,8 +107,8 @@ function relaxInOrder(
  *  2. mantendo a faixa de preço, procurar em regiões próximas;
  *  3. mantendo a faixa, flexibilizar dormitórios (avisando);
  *  4. se nada couber no orçamento, sinalizar que existem opções acima da faixa
- *     — que só aparecem por ação explícita do usuário (ver `expandAboveBudget`).
- * Nunca inventa imóvel — só reordena/relaxa o que existe no catálogo.
+ *, que só aparecem por ação explícita do usuário (ver `expandAboveBudget`).
+ * Nunca inventa imóvel, só reordena/relaxa o que existe no catálogo.
  */
 export function matchProperties(props: Property[], f: PropertyFilters): MatchResult {
   const exact = filterProperties(props, f);
@@ -131,7 +131,7 @@ export function matchProperties(props: Property[], f: PropertyFilters): MatchRes
 }
 
 /**
- * Expansão ACIMA da faixa — só chamada por ação explícita do usuário
+ * Expansão ACIMA da faixa, só chamada por ação explícita do usuário
  * ("Ver opções acima dessa faixa"). Ignora o preço, casa por região/dormitórios
  * (relaxando se preciso) e marca tudo como acima do orçamento informado.
  */

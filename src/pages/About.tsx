@@ -6,18 +6,18 @@ import { buildWhatsappLink, defaultWhatsappMessage } from "@/lib/whatsapp";
 import { Seo } from "@/components/shared/Seo";
 
 const DEFAULT_INTRO = [
-  "Nosso trabalho é ajudar você a entender as opções disponíveis, organizar as etapas da compra e encontrar um imóvel compatível com a sua realidade financeira. Não acreditamos em empurrar decisão antes do momento certo — acreditamos em explicar cada passo com clareza para que você decida com segurança.",
+  "Nosso trabalho é ajudar você a entender as opções disponíveis, organizar as etapas da compra e encontrar um imóvel compatível com a sua realidade financeira. Não acreditamos em empurrar decisão antes do momento certo, acreditamos em explicar cada passo com clareza para que você decida com segurança.",
 ];
 const DEFAULT_STEPS = [
   "Entendemos juntos seu objetivo, sua região de interesse e sua realidade financeira.",
-  "Selecionamos opções compatíveis com o que você nos contou — sem empurrar imóvel fora do seu perfil.",
+  "Selecionamos opções compatíveis com o que você nos contou, sem empurrar imóvel fora do seu perfil.",
   "Acompanhamos você nas visitas, na proposta e até a entrega das chaves.",
 ];
 
 /**
- * Pagina "Sobre" — comunicacao INSTITUCIONAL (equipe), nao pessoal. Fala como
+ * Pagina "Sobre", comunicacao INSTITUCIONAL (equipe), nao pessoal. Fala como
  * a marca (identity.displayName), sem foto e sem nome de pessoa fisica. So usa
- * dado que ja existe em config/tenant — nada inventado.
+ * dado que ja existe em config/tenant, nada inventado.
  */
 export function About() {
   const whatsapp = identity.contact.whatsapp;

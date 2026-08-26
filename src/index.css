@@ -22,7 +22,7 @@
   --radius-image: 12px;
 
   /*
-    Elevacao. Sombras com vies azul-marinho (nao preto puro) — escolha, nao
+    Elevacao. Sombras com vies azul-marinho (nao preto puro) , escolha, nao
     default. Sutis por principio: premium != sombra pesada. Geram `shadow-card`
     e `shadow-card-hover`.
   */
@@ -56,14 +56,14 @@
 
 /*
   Tenant britto (foco EXTO / alto padrao): titulos em serifada elegante
-  (Cormorant Garamond). Escopo por data-tenant (definido em main.tsx) — nao
+  (Cormorant Garamond). Escopo por data-tenant (definido em main.tsx) , nao
   afeta os demais tenants, que seguem em Montserrat.
 */
 :root[data-tenant="britto"] {
   --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
   /* Destaque grafite escuro -> texto claro sobre o botao secondary. */
   --brand-on-accent: var(--brand-paper);
-  /* Sobre o fundo escuro da marca, o grafite some — usar uma platina clara. */
+  /* Sobre o fundo escuro da marca, o grafite some , usar uma platina clara. */
   --brand-accent-on-brand: #b9c4cf;
 }
 :root[data-tenant="britto"] .font-display {
@@ -87,7 +87,7 @@ body {
 /*
   Tratamento base da tipografia de exibicao. Fraunces tem eixo optico (opsz):
   deixar o navegador ajustar melhora o desenho das letras em titulos grandes.
-  `text-wrap: balance` evita linhas orfas — impacto vem de equilibrio e peso,
+  `text-wrap: balance` evita linhas orfas , impacto vem de equilibrio e peso,
   nao de tamanho. Componentes ainda controlam tamanho/tracking caso a caso.
 */
 .font-display {
@@ -111,7 +111,7 @@ body {
   0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
   18% { transform: translateY(-6px) translateX(0) rotate(0deg); }
   34% { transform: translateY(0) translateX(0) rotate(0deg); }
-  /* Inclina/cutuca em direcao ao botao do WhatsApp (a direita) — como quem
+  /* Inclina/cutuca em direcao ao botao do WhatsApp (a direita) , como quem
      chama a atencao pra la, ja que o mascote nao tem braco livre para apontar. */
   48% { transform: translateY(0) translateX(4px) rotate(6deg); }
   58% { transform: translateY(0) translateX(1px) rotate(2deg); }

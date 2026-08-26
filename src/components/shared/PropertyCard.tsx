@@ -16,11 +16,11 @@ type PropertyCardProps = {
 
 /**
  * Card fotografico de empreendimento. Reutilizavel em Home, /imoveis e
- * resultados futuros, para qualquer tenant — nao contem dado de marca.
+ * resultados futuros, para qualquer tenant, nao contem dado de marca.
  *
  * Principios (Lote 1): imagem como protagonista, poucos dados essenciais (nao
  * e ficha tecnica), preco so quando existe, um unico CTA. Preco fica sem
- * ressalva no card por densidade — a ressalva "valores sujeitos a alteração"
+ * ressalva no card por densidade, a ressalva "valores sujeitos a alteração"
  * vive uma vez por secao/pagina, como ja acontece hoje.
  */
 export function PropertyCard({ property, priority = false }: PropertyCardProps) {
@@ -33,7 +33,7 @@ export function PropertyCard({ property, priority = false }: PropertyCardProps) 
   return (
     <Link
       to={`/imoveis/${property.slug}`}
-      aria-label={`${property.name} — ${property.neighborhood}, ${property.city}`}
+      aria-label={`${property.name}, ${property.neighborhood}, ${property.city}`}
       className="group flex h-full flex-col overflow-hidden rounded-card border border-brand/10 bg-paper shadow-card transition-[box-shadow,border-color] duration-300 hover:border-brand/20 hover:shadow-card-hover"
     >
       <div className="relative">

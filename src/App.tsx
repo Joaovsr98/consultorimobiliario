@@ -5,7 +5,7 @@ import { Home } from "@/pages/Home";
 
 /**
  * A Home carrega junto (primeira tela). As demais paginas entram por code-splitting
- * — cada rota vira um chunk separado, aliviando o bundle inicial.
+ *, cada rota vira um chunk separado, aliviando o bundle inicial.
  */
 const Properties = lazy(() => import("@/pages/Properties").then((m) => ({ default: m.Properties })));
 const PropertyDetails = lazy(() =>

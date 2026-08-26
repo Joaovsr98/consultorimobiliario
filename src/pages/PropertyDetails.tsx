@@ -37,7 +37,7 @@ export function PropertyDetails() {
   const heroImage = property.images[0];
   const { galeria, plantas, localizacao } = splitImages(property.images);
 
-  // Proximidade do metro — SO quando existir no dado do empreendimento (nao inventar).
+  // Proximidade do metro, SO quando existir no dado do empreendimento (nao inventar).
   const metroNearby = property.nearby?.find((n) => /metr[ôo]|esta[çc][ãa]o/i.test(n.place));
 
   /** Contexto do imovel para os eventos de analytics. */
@@ -78,7 +78,7 @@ export function PropertyDetails() {
     ? `${property.coords.lat},${property.coords.lng}`
     : propertyQuery;
   // Sem foco: mostra o empreendimento. Com foco num ponto: mostra a ROTA do
-  // empreendimento ate o ponto — assim o empreendimento continua visivel e da
+  // empreendimento ate o ponto, assim o empreendimento continua visivel e da
   // pra ter nocao da distancia.
   const mapEmbedSrc = mapFocus
     ? `https://maps.google.com/maps?saddr=${encodeURIComponent(originPoint)}&daddr=${encodeURIComponent(mapFocus)}&output=embed`
@@ -87,7 +87,7 @@ export function PropertyDetails() {
     ? `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(originPoint)}&destination=${encodeURIComponent(mapFocus)}`
     : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(originPoint)}`;
 
-  // Query dos pontos "por perto": NAO usar o bairro do empreendimento — muitos
+  // Query dos pontos "por perto": NAO usar o bairro do empreendimento, muitos
   // ficam em outro bairro (ex.: Einstein no Morumbi, nao no Jardim Guedala), e o
   // sufixo de bairro errado jogava o pin pro lugar errado. Cidade + estado basta.
   const placeQuery = (place: string) => `${place}, ${property.city}, SP`;
@@ -278,7 +278,7 @@ export function PropertyDetails() {
             <div className="mt-5">
               <PropertyGallery
                 images={plantas}
-                alt={`${property.name} — planta`}
+                alt={`${property.name}, planta`}
                 captions={plantas.map(plantaLabel)}
               />
             </div>
@@ -319,7 +319,7 @@ export function PropertyDetails() {
           {property.nearby && property.nearby.length > 0 && (
             <div className="mt-6">
               <h3 className="text-sm font-semibold uppercase tracking-wide text-ink/50">
-                O que tem por perto <span className="font-normal normal-case text-ink/40">— toque para ver no mapa</span>
+                O que tem por perto <span className="font-normal normal-case text-ink/40">, toque para ver no mapa</span>
               </h3>
               <ul className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
                 {property.nearby.map((item) => {
@@ -354,7 +354,7 @@ export function PropertyDetails() {
           )}
           {localizacao.length > 0 && (
             <div className="mt-5">
-              <PropertyGallery images={localizacao} alt={`${property.name} — localização`} />
+              <PropertyGallery images={localizacao} alt={`${property.name}, localização`} />
             </div>
           )}
         </div>

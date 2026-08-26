@@ -2,7 +2,7 @@ import type { HeroConfig } from "../types";
 
 /**
  * Hero do Britto (foco EXTO). Carrossel com renders oficiais dos empreendimentos
- * — rotaciona com crossfade (igual ao Bueno). A primeira imagem e o LCP.
+ *, rotaciona com crossfade (igual ao Bueno). A primeira imagem e o LCP.
  * Imagens reais e autorizadas dos empreendimentos EXTO (nao atmosfera generica).
  */
 export const hero: HeroConfig = {

@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 
 /**
  * Hero da primeira dobra. Conteudo (imagens, headline, subtitle) vem de
- * `tenant.hero` — este componente e compartilhado e nao contem dado de marca.
+ * `tenant.hero`, este componente e compartilhado e nao contem dado de marca.
  *
  * Suporta carrossel: quando `hero.images` tem 2+ itens, alterna entre elas com
  * crossfade e auto-avanco (respeitando prefers-reduced-motion). A PRIMEIRA

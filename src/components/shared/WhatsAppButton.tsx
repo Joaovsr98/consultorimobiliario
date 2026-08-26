@@ -8,7 +8,7 @@ import { trackEvent } from "@/lib/analytics";
  * Botao flutuante fixo de WhatsApp (global). So renderiza quando o tenant ativo
  * tem WhatsApp confirmado. Comunicacao institucional (equipe), sem retrato
  * pessoal. Fica OCULTO na pagina de detalhe do imovel (`/imoveis/:slug`), onde
- * a conversao e propria e contextual — evita mensagem generica e botao duplicado.
+ * a conversao e propria e contextual, evita mensagem generica e botao duplicado.
  */
 export function WhatsAppButton() {
   const { pathname } = useLocation();

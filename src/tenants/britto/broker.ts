@@ -1,7 +1,7 @@
 import type { Broker } from "@/types";
 
 /**
- * Configuracao do consultor Britto — site com foco nos empreendimentos da
+ * Configuracao do consultor Britto, site com foco nos empreendimentos da
  * EXTO Incorporadora (alto padrao em bairros nobres de Sao Paulo).
  *
  * Disciplina de dado real: nada de CRECI, imovel ou dado inventado. Campos
@@ -16,7 +16,7 @@ export const broker: Broker = {
   name: "Britto", // TODO: nome civil completo
   preferredName: "Britto",
   brandName: "Britto",
-  role: "Consultoria de imóveis EXTO — alto padrão em São Paulo",
+  role: "Consultoria de imóveis EXTO, alto padrão em São Paulo",
   creci: "104954",
   phone: "5511995804240",
   email: "",

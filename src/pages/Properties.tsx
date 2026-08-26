@@ -112,7 +112,7 @@ export function Properties() {
     <Section>
       <Seo
         title="Imóveis"
-        description="Empreendimentos selecionados em São Paulo — filtre por região, dormitórios e faixa de preço. Valores e disponibilidade sujeitos a alteração."
+        description="Empreendimentos selecionados em São Paulo, filtre por região, dormitórios e faixa de preço. Valores e disponibilidade sujeitos a alteração."
       />
 
       <p className="text-sm font-semibold uppercase tracking-wide text-accent">Imóveis</p>

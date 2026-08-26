@@ -33,7 +33,7 @@ type TenantSeo = {
 const OG_BY_TENANT: Record<string, TenantSeo> = {
   "joao-victor": {
     siteName: "Bueno Imóveis",
-    title: "Bueno Imóveis — Lançamentos em São Paulo com atendimento personalizado",
+    title: "Bueno Imóveis, Lançamentos em São Paulo com atendimento personalizado",
     description:
       "Encontre imóveis compatíveis com seu perfil e receba atendimento personalizado do início à entrega das chaves.",
     url: "https://consultorimobiliario.vercel.app",
@@ -45,7 +45,7 @@ const OG_BY_TENANT: Record<string, TenantSeo> = {
   },
   shelby: {
     siteName: "Shelby House",
-    title: "Shelby House — Lançamentos em São Paulo com atendimento personalizado",
+    title: "Shelby House, Lançamentos em São Paulo com atendimento personalizado",
     description:
       "Encontre imóveis compatíveis com seu perfil e receba atendimento personalizado do início à entrega das chaves.",
     url: "https://corretor-shelby.vercel.app",
@@ -57,7 +57,7 @@ const OG_BY_TENANT: Record<string, TenantSeo> = {
   },
   britto: {
     siteName: "Britto",
-    title: "Britto — Alto padrão EXTO em São Paulo",
+    title: "Britto, Alto padrão EXTO em São Paulo",
     description:
       "Empreendimentos de alto padrão da EXTO Incorporadora nos bairros mais desejados de São Paulo, com curadoria e atendimento pessoal do Britto.",
     url: "https://britto-exto.vercel.app",
@@ -141,7 +141,7 @@ function buildRobots(baseUrl: string): string {
 // Gera o conteudo SEO-critico (titulo, H1, textos, imoveis, FAQ) em HTML
 // estatico para cada rota. O SPA continua carregando por cima e assume o
 // controle no navegador (progressive enhancement). Funciona 100% na Vercel
-// porque e apenas geracao de string — nao depende de Chromium.
+// porque e apenas geracao de string, nao depende de Chromium.
 
 function esc(text: string): string {
   return text
@@ -166,7 +166,7 @@ function propItem(p: Prop): string {
   const price =
     p.priceFrom !== undefined ? `a partir de ${fmtBRL(p.priceFrom)}` : p.priceLabel ?? "";
   const bits = [p.bedrooms, fmtArea(p.area), price].filter(Boolean).join(" · ");
-  return `<li><a href="/imoveis/${p.slug}"><strong>${esc(p.name)}</strong></a> — ${esc(
+  return `<li><a href="/imoveis/${p.slug}"><strong>${esc(p.name)}</strong></a>, ${esc(
     `${p.neighborhood}, ${p.city}`
   )} · ${esc(bits)}</li>`;
 }
@@ -185,7 +185,7 @@ function buildPages(data: TenantSeo, cfg: TenantContent): Page[] {
     : "";
   const pages: Page[] = [];
 
-  // Home — conteudo em prosa suficiente para extratores de leitura (IA) e SEO.
+  // Home, conteudo em prosa suficiente para extratores de leitura (IA) e SEO.
   if (premium) {
     pages.push({
       path: "/",
@@ -194,7 +194,7 @@ function buildPages(data: TenantSeo, cfg: TenantContent): Page[] {
       body: `<h1>Alto padrão em São Paulo</h1>
 <p>Morar bem é sentir que cada detalhe foi pensado para você. A ${esc(
         S
-      )} seleciona imóveis de alto padrão da EXTO Incorporadora para quem valoriza conforto, arquitetura, privacidade, localização e qualidade de vida, nos bairros mais desejados de São Paulo — Cidade Jardim, Jardim Guedala, Pacaembu e regiões nobres.</p>
+      )} seleciona imóveis de alto padrão da EXTO Incorporadora para quem valoriza conforto, arquitetura, privacidade, localização e qualidade de vida, nos bairros mais desejados de São Paulo, Cidade Jardim, Jardim Guedala, Pacaembu e regiões nobres.</p>
 <p>O atendimento é personalizado e cuidadoso: buscamos compreender o seu estilo de vida para apresentar imóveis que realmente façam sentido para você e a sua família. Mais do que encontrar um endereço, o objetivo é encontrar um espaço onde você possa viver com tranquilidade, receber bem, criar memórias e aproveitar cada momento com mais conforto.</p>
 <h2>Empreendimentos</h2>
 <ul>${properties.map(propItem).join("")}</ul>
@@ -209,19 +209,19 @@ function buildPages(data: TenantSeo, cfg: TenantContent): Page[] {
       path: "/",
       title: t("Apartamentos em São Paulo"),
       description:
-        "Apartamentos e lançamentos em São Paulo — do Minha Casa Minha Vida ao alto padrão. Atendimento imobiliário personalizado do início à entrega das chaves.",
+        "Apartamentos e lançamentos em São Paulo, do Minha Casa Minha Vida ao alto padrão. Atendimento imobiliário personalizado do início à entrega das chaves.",
       body: `<h1>Apartamentos e lançamentos em São Paulo</h1>
 <p>A ${esc(
         S
-      )} ajuda você a encontrar um apartamento em São Paulo compatível com o seu perfil — de lançamentos do Programa Minha Casa Minha Vida a empreendimentos de alto padrão. Trabalhamos com projetos bem localizados, muitos próximos a estações de metrô e em regiões valorizadas da cidade.</p>
-<p>O atendimento é personalizado do início à entrega das chaves: entendemos o seu objetivo (morar ou investir), a região de interesse e o seu orçamento, selecionamos opções que fazem sentido para você e acompanhamos cada etapa — simulação, visita, proposta e documentação. Sem empurrar imóvel fora do seu perfil.</p>
+      )} ajuda você a encontrar um apartamento em São Paulo compatível com o seu perfil, de lançamentos do Programa Minha Casa Minha Vida a empreendimentos de alto padrão. Trabalhamos com projetos bem localizados, muitos próximos a estações de metrô e em regiões valorizadas da cidade.</p>
+<p>O atendimento é personalizado do início à entrega das chaves: entendemos o seu objetivo (morar ou investir), a região de interesse e o seu orçamento, selecionamos opções que fazem sentido para você e acompanhamos cada etapa, simulação, visita, proposta e documentação. Sem empurrar imóvel fora do seu perfil.</p>
 <h2>Empreendimentos</h2>
 <ul>${properties.map(propItem).join("")}</ul>
 <h2>Regiões atendidas</h2>
 <p>Atuamos principalmente na Zona Oeste e na Zona Sul de São Paulo, com páginas dedicadas para ${regioesTexto}. Em cada uma você encontra os empreendimentos disponíveis, o transporte da região e o que há por perto.</p>
 <ul>${neighborhoodLinks}</ul>
 <h2>Como funciona o atendimento</h2>
-<ol><li>Entendemos juntos seu objetivo, sua região de interesse e sua realidade financeira.</li><li>Selecionamos opções compatíveis com o que você nos contou — sem empurrar imóvel fora do seu perfil.</li><li>Acompanhamos você nas visitas, na proposta e até a entrega das chaves.</li></ol>
+<ol><li>Entendemos juntos seu objetivo, sua região de interesse e sua realidade financeira.</li><li>Selecionamos opções compatíveis com o que você nos contou, sem empurrar imóvel fora do seu perfil.</li><li>Acompanhamos você nas visitas, na proposta e até a entrega das chaves.</li></ol>
 <p>Veja também nossos <a href="/guias">guias sobre financiamento, FGTS e entrada</a>, conheça a <a href="/sobre">proposta de atendimento</a> ou <a href="/contato">fale pelo WhatsApp</a>.</p>`,
     });
   }
@@ -251,7 +251,7 @@ function buildPages(data: TenantSeo, cfg: TenantContent): Page[] {
         )} seleciona imóveis de alto padrão da EXTO Incorporadora para quem valoriza conforto, arquitetura, privacidade, localização e qualidade de vida.</p><p>O atendimento é personalizado e cuidadoso, buscando compreender o seu estilo de vida para apresentar imóveis que realmente façam sentido para você e a sua família. Mais do que encontrar um endereço, o objetivo é encontrar um espaço onde você possa viver com tranquilidade, receber bem, criar memórias e aproveitar cada momento com mais conforto.</p><h2>Como funciona o atendimento</h2><ol><li>Entendemos o seu estilo de vida e as suas preferências.</li><li>Apresentamos os empreendimentos EXTO que combinam com você e a sua família.</li><li>Acompanhamos você nas visitas, na proposta e até a entrega das chaves.</li></ol><p>Seu próximo lar começa com uma escolha bem feita.</p>`
       : `<h1>${esc(S)}</h1>${
           data.creci ? `<p>CRECI ${esc(data.creci)}</p>` : ""
-        }<p>Nosso trabalho é ajudar você a entender as opções disponíveis, organizar as etapas da compra e encontrar um imóvel compatível com a sua realidade financeira. Não acreditamos em empurrar decisão antes do momento certo — acreditamos em explicar cada passo com clareza para que você decida com segurança.</p><p>Atuamos com lançamentos na Zona Oeste e na Zona Sul de São Paulo, muitos próximos a estações de metrô e com unidades no Programa Minha Casa Minha Vida.</p><h2>Como funciona o atendimento</h2><ol><li>Entendemos juntos seu objetivo, sua região de interesse e sua realidade financeira.</li><li>Selecionamos opções compatíveis com o seu perfil.</li><li>Acompanhamos você nas visitas, na proposta e até a entrega das chaves.</li></ol>`,
+        }<p>Nosso trabalho é ajudar você a entender as opções disponíveis, organizar as etapas da compra e encontrar um imóvel compatível com a sua realidade financeira. Não acreditamos em empurrar decisão antes do momento certo, acreditamos em explicar cada passo com clareza para que você decida com segurança.</p><p>Atuamos com lançamentos na Zona Oeste e na Zona Sul de São Paulo, muitos próximos a estações de metrô e com unidades no Programa Minha Casa Minha Vida.</p><h2>Como funciona o atendimento</h2><ol><li>Entendemos juntos seu objetivo, sua região de interesse e sua realidade financeira.</li><li>Selecionamos opções compatíveis com o seu perfil.</li><li>Acompanhamos você nas visitas, na proposta e até a entrega das chaves.</li></ol>`,
   });
 
   // /contato
@@ -272,7 +272,7 @@ function buildPages(data: TenantSeo, cfg: TenantContent): Page[] {
     body: `<h1>Política de privacidade</h1><p>Como os dados informados no site são usados: nada é armazenado em servidor; o diagnóstico do comprador só monta uma mensagem de WhatsApp que você mesmo revisa e envia.</p>`,
   });
 
-  // Paginas de bairro (apenas tenants com atuacao por bairro — nao no premium)
+  // Paginas de bairro (apenas tenants com atuacao por bairro, nao no premium)
   if (cfg.includeNeighborhoods)
   for (const n of neighborhoods) {
     const props = properties.filter((p) => p.neighborhood === n.neighborhood);
@@ -331,7 +331,7 @@ function buildPages(data: TenantSeo, cfg: TenantContent): Page[] {
       description:
         "Conteúdos educativos sobre financiamento, FGTS, entrada, documentação e a compra do primeiro imóvel.",
       body: `<h1>Conteúdos para comprar com segurança</h1><ul>${guides
-        .map((g) => `<li><a href="/guias/${g.slug}"><strong>${esc(g.title)}</strong></a> — ${esc(g.summary)}</li>`)
+        .map((g) => `<li><a href="/guias/${g.slug}"><strong>${esc(g.title)}</strong></a>, ${esc(g.summary)}</li>`)
         .join("")}</ul>`,
     });
 
@@ -388,7 +388,7 @@ function buildJsonLd(data: TenantSeo): string {
 
 /**
  * Injeta OG/Twitter + JSON-LD no HTML, emite robots.txt e sitemap.xml, e gera
- * o HTML estatico (SSG) de cada rota a partir dos dados — sem navegador.
+ * o HTML estatico (SSG) de cada rota a partir dos dados, sem navegador.
  */
 function seoPlugin(tenantId: string): Plugin {
   const data = OG_BY_TENANT[tenantId] ?? OG_BY_TENANT["joao-victor"];
@@ -439,7 +439,7 @@ function seoPlugin(tenantId: string): Plugin {
       this.emitFile({ type: "asset", fileName: "robots.txt", source: buildRobots(data.url) });
       this.emitFile({ type: "asset", fileName: "sitemap.xml", source: buildSitemap(data.url, cfg) });
     },
-    // writeBundle roda DEPOIS do index.html ser escrito no disco — assim
+    // writeBundle roda DEPOIS do index.html ser escrito no disco, assim
     // lemos o HTML base ja pronto e geramos o de cada rota com seguranca.
     async writeBundle(options) {
       const dir = options.dir;

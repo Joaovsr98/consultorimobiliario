@@ -1,5 +1,5 @@
 /**
- * Busca guiada — perguntas mínimas e úteis, todas por card/botão (nada de
+ * Busca guiada, perguntas mínimas e úteis, todas por card/botão (nada de
  * formulário bancário). NÃO pedimos CPF, RG, renda exata, telefone ou e-mail:
  * primeiro ajudamos o usuário a ver opções; o contato acontece no WhatsApp.
  *
@@ -26,7 +26,7 @@ export const bedroomChoiceLabels: Record<BedroomChoice, string> = {
   "tanto-faz": "Tanto faz",
 };
 
-/** Como pretende pagar — contexto opcional para a equipe (não é análise de crédito). */
+/** Como pretende pagar, contexto opcional para a equipe (não é análise de crédito). */
 export type PaymentChoice = "a-vista" | "financiar" | "nao-sei";
 export const paymentLabels: Record<PaymentChoice, string> = {
   "a-vista": "À vista",

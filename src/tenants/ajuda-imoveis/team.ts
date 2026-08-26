@@ -2,7 +2,7 @@ import type { AgencyTeamMember } from "../types";
 
 /**
  * Corretores da equipe. O perfil institucional "Ajuda Imóveis" NAO entra
- * aqui — empresa e pessoa sao entidades diferentes (ver company.ts). Todos
+ * aqui, empresa e pessoa sao entidades diferentes (ver company.ts). Todos
  * comecam com `isPublished: false`; nenhum dado ausente foi completado por
  * inferencia (ex.: nao presumimos que o telefone publico de Rugiere seja
  * necessariamente o WhatsApp dele).

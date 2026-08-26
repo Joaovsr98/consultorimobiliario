@@ -1,6 +1,6 @@
 /**
  * Paginas de bairro (landing pages de SEO local). Cada entrada tem conteudo
- * UNICO e util — nunca a mesma pagina trocando so o nome do bairro. Os imoveis
+ * UNICO e util, nunca a mesma pagina trocando so o nome do bairro. Os imoveis
  * exibidos vem do tenant ativo, filtrados por `neighborhood`.
  *
  * Regra de dado real: nada de numero de venda, CRECI ou distancia inventada.
@@ -34,14 +34,14 @@ export const neighborhoods: NeighborhoodPage[] = [
     city: "São Paulo",
     metaTitle: "Apartamentos na Vila Sônia, São Paulo",
     metaDescription:
-      "Apartamentos e lançamentos na Vila Sônia, São Paulo — ao lado da Estação Vila Sônia (Linha 4-Amarela), com opções no Minha Casa Minha Vida. Atendimento imobiliário personalizado.",
+      "Apartamentos e lançamentos na Vila Sônia, São Paulo, ao lado da Estação Vila Sônia (Linha 4-Amarela), com opções no Minha Casa Minha Vida. Atendimento imobiliário personalizado.",
     h1: "Apartamentos à venda na Vila Sônia, São Paulo",
     intro: [
-      "A Vila Sônia é um bairro residencial da Zona Oeste de São Paulo que ganhou destaque com a chegada da Estação Vila Sônia, ponto final da Linha 4-Amarela do metrô. De lá, dá para chegar a Butantã, Pinheiros, Faria Lima e Paulista sem baldeação — o que tornou a região muito procurada por quem trabalha nesses polos e quer morar perto do trabalho.",
+      "A Vila Sônia é um bairro residencial da Zona Oeste de São Paulo que ganhou destaque com a chegada da Estação Vila Sônia, ponto final da Linha 4-Amarela do metrô. De lá, dá para chegar a Butantã, Pinheiros, Faria Lima e Paulista sem baldeação, o que tornou a região muito procurada por quem trabalha nesses polos e quer morar perto do trabalho.",
       "É uma área que combina o clima mais tranquilo de bairro com boa infraestrutura de comércio, escolas, hospitais e áreas verdes. Abaixo você encontra os lançamentos que atendemos na Vila Sônia, com valores e condições, além de um resumo do que a região oferece.",
     ],
     transport: [
-      "Estação Vila Sônia (Linha 4-Amarela) — terminal da linha, com ligação direta a Butantã, Pinheiros, Faria Lima e República/Paulista.",
+      "Estação Vila Sônia (Linha 4-Amarela), terminal da linha, com ligação direta a Butantã, Pinheiros, Faria Lima e República/Paulista.",
       "Terminal de ônibus Vila Sônia, integrando o bairro a diversas linhas municipais e intermunicipais.",
       "Acesso rápido à Rodovia Raposo Tavares e à Marginal Pinheiros para quem se locomove de carro.",
     ],
@@ -60,7 +60,7 @@ export const neighborhoods: NeighborhoodPage[] = [
       {
         question: "Tem apartamento no Minha Casa Minha Vida na Vila Sônia?",
         answer:
-          "Sim. Os lançamentos que atendemos na Vila Sônia têm unidades enquadradas no Programa Minha Casa Minha Vida. As condições dependem do seu perfil e das regras vigentes — avaliamos isso no diagnóstico gratuito.",
+          "Sim. Os lançamentos que atendemos na Vila Sônia têm unidades enquadradas no Programa Minha Casa Minha Vida. As condições dependem do seu perfil e das regras vigentes, avaliamos isso no diagnóstico gratuito.",
       },
       {
         question: "Qual é a estação de metrô da Vila Sônia?",
@@ -80,10 +80,10 @@ export const neighborhoods: NeighborhoodPage[] = [
     city: "São Paulo",
     metaTitle: "Apartamentos em Campo Limpo, São Paulo",
     metaDescription:
-      "Apartamentos e lançamentos em Campo Limpo, Zona Sul de São Paulo — perto das Estações Campo Limpo e Vila das Belezas (Linha 5-Lilás), com opções no Minha Casa Minha Vida.",
+      "Apartamentos e lançamentos em Campo Limpo, Zona Sul de São Paulo, perto das Estações Campo Limpo e Vila das Belezas (Linha 5-Lilás), com opções no Minha Casa Minha Vida.",
     h1: "Apartamentos à venda em Campo Limpo, São Paulo",
     intro: [
-      "Campo Limpo é uma região da Zona Sul de São Paulo atendida pela Linha 5-Lilás do metrô, com as Estações Campo Limpo e Vila das Belezas. A Linha 5 conecta a região a Santo Amaro e à Chácara Klabin, com integração a outras linhas do metrô — o que facilita bastante o dia a dia de quem depende do transporte público.",
+      "Campo Limpo é uma região da Zona Sul de São Paulo atendida pela Linha 5-Lilás do metrô, com as Estações Campo Limpo e Vila das Belezas. A Linha 5 conecta a região a Santo Amaro e à Chácara Klabin, com integração a outras linhas do metrô, o que facilita bastante o dia a dia de quem depende do transporte público.",
       "É uma área com comércio forte, shopping, hospital e opções de lazer no próprio bairro. Abaixo estão os lançamentos que atendemos em Campo Limpo, com valores e condições, além de um resumo do que a região oferece.",
     ],
     transport: [
@@ -106,7 +106,7 @@ export const neighborhoods: NeighborhoodPage[] = [
       {
         question: "Tem apartamento no Minha Casa Minha Vida em Campo Limpo?",
         answer:
-          "Sim. O lançamento que atendemos em Campo Limpo tem unidades enquadradas no Programa Minha Casa Minha Vida. As condições dependem do seu perfil e das regras vigentes — avaliamos isso no diagnóstico gratuito.",
+          "Sim. O lançamento que atendemos em Campo Limpo tem unidades enquadradas no Programa Minha Casa Minha Vida. As condições dependem do seu perfil e das regras vigentes, avaliamos isso no diagnóstico gratuito.",
       },
       {
         question: "Qual linha de metrô atende Campo Limpo?",
@@ -126,10 +126,10 @@ export const neighborhoods: NeighborhoodPage[] = [
     city: "São Paulo",
     metaTitle: "Apartamentos no Jardim Bonfiglioli, São Paulo",
     metaDescription:
-      "Apartamentos e lançamentos no Jardim Bonfiglioli, Zona Oeste de São Paulo — perto de estação da Linha 4-Amarela, com acesso rápido a Pinheiros e Paulista e opções no Minha Casa Minha Vida.",
+      "Apartamentos e lançamentos no Jardim Bonfiglioli, Zona Oeste de São Paulo, perto de estação da Linha 4-Amarela, com acesso rápido a Pinheiros e Paulista e opções no Minha Casa Minha Vida.",
     h1: "Apartamentos à venda no Jardim Bonfiglioli, São Paulo",
     intro: [
-      "O Jardim Bonfiglioli é um bairro residencial da Zona Oeste de São Paulo, na região do Butantã, próximo de uma estação da Linha 4-Amarela do metrô. Isso dá acesso rápido a Pinheiros e à Avenida Paulista sem baldeação — uma vantagem para quem trabalha nesses polos.",
+      "O Jardim Bonfiglioli é um bairro residencial da Zona Oeste de São Paulo, na região do Butantã, próximo de uma estação da Linha 4-Amarela do metrô. Isso dá acesso rápido a Pinheiros e à Avenida Paulista sem baldeação, uma vantagem para quem trabalha nesses polos.",
       "É uma área tranquila e bem localizada, perto da USP e do comércio do Butantã. Abaixo estão os lançamentos que atendemos no Jardim Bonfiglioli, com valores e condições, além de um resumo do que a região oferece.",
     ],
     transport: [
@@ -152,7 +152,7 @@ export const neighborhoods: NeighborhoodPage[] = [
       {
         question: "Tem apartamento no Minha Casa Minha Vida no Jardim Bonfiglioli?",
         answer:
-          "Sim. O lançamento que atendemos no Jardim Bonfiglioli tem unidades enquadradas no Programa Minha Casa Minha Vida. As condições dependem do seu perfil e das regras vigentes — avaliamos isso no diagnóstico gratuito.",
+          "Sim. O lançamento que atendemos no Jardim Bonfiglioli tem unidades enquadradas no Programa Minha Casa Minha Vida. As condições dependem do seu perfil e das regras vigentes, avaliamos isso no diagnóstico gratuito.",
       },
       {
         question: "Qual linha de metrô atende o Jardim Bonfiglioli?",

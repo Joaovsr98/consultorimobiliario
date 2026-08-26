@@ -1,7 +1,7 @@
 import type { ThemeConfig } from "@/types";
 
 /**
- * Paleta placeholder tecnica — reaproveita os mesmos tokens do tenant
+ * Paleta placeholder tecnica, reaproveita os mesmos tokens do tenant
  * joao-victor apenas para o site renderizar corretamente durante o
  * desenvolvimento. NAO e a identidade visual oficial da Ajuda Imoveis.
  * `themeConfirmed` (exportado abaixo, consumido por AgencyTenant) marca

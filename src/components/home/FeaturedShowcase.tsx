@@ -10,13 +10,13 @@ import { cn, formatArea, formatCurrency } from "@/lib/utils";
 import { matchFeatureImage, splitImages } from "@/lib/property-media";
 
 /**
- * Empreendimento em destaque — experiencia imersiva de produto, em fundo
+ * Empreendimento em destaque, experiencia imersiva de produto, em fundo
  * escuro, para criar um momento de impacto no ritmo da Home. Mostra o imovel
  * marcado como `featured` no tenant. So renderiza se houver um.
  *
  * Diferenciais limitados (nao e ficha tecnica). Preco com "A partir de" +
  * ressalva de valores ao pe da secao. CTAs: conhecer (produto) e agendar
- * visita (conversao) — sem competir com um terceiro botao.
+ * visita (conversao), sem competir com um terceiro botao.
  */
 export function FeaturedShowcase() {
   const property = tenant.properties.find((p) => p.featured);

@@ -6,11 +6,11 @@ import { PropertyCard } from "@/components/shared/PropertyCard";
 import { buttonClasses } from "@/lib/button-styles";
 
 /**
- * Catalogo de oportunidades na Home — o produto como protagonista. Usa o
+ * Catalogo de oportunidades na Home, o produto como protagonista. Usa o
  * PropertyCard fotografico. Nao usa `priority` porque na Home estes cards
  * ficam abaixo da dobra (a imagem critica de LCP e a da Hero).
  *
- * A ressalva de valores vive uma vez aqui, no rodape da secao — por isso o
+ * A ressalva de valores vive uma vez aqui, no rodape da secao, por isso o
  * card em si mostra o preco de forma limpa.
  */
 export function Opportunities() {

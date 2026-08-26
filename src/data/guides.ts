@@ -3,7 +3,7 @@ import type { Guide } from "@/types";
 /**
  * Conteúdo educativo. Ajuda no SEO local e na autoridade do profissional.
  * Não promete aprovação de crédito nem substitui a análise oficial das
- * instituições financeiras — sempre reforçar isso no conteúdo.
+ * instituições financeiras, sempre reforçar isso no conteúdo.
  */
 export const guides: Guide[] = [
   {

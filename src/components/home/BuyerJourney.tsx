@@ -9,7 +9,7 @@ const steps = [
   "Seguimos até as chaves",
 ];
 
-/** Jornada de compra em 6 etapas — reduz a inseguranca de quem nunca comprou imóvel. */
+/** Jornada de compra em 6 etapas, reduz a inseguranca de quem nunca comprou imóvel. */
 export function BuyerJourney() {
   return (
     <Section className="bg-paper">

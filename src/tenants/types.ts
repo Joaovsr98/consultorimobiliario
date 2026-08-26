@@ -9,7 +9,7 @@ export type TenantNavigation = {
 
 /**
  * Conteudo da Hero (primeira dobra). Vive no tenant porque imagem e copy sao
- * dados de marca — o componente Hero e compartilhado e nunca os crava.
+ * dados de marca, o componente Hero e compartilhado e nunca os crava.
  *
  * `image` ausente -> fundo solido de marca, nunca uma foto generica fingindo
  * ser um empreendimento. `imageAlt` deve descrever o que a imagem realmente e,
@@ -28,7 +28,7 @@ export type HeroConfig = {
 
 /**
  * Canais de contato, separados por proposito. `whatsapp` e o UNICO campo que
- * o botao flutuante e a mensagem do diagnostico podem usar — nunca
+ * o botao flutuante e a mensagem do diagnostico podem usar, nunca
  * inferido de `phone` (que pode ser 0800, central comercial, fixo, etc.).
  * Ausente ate o canal oficial ser confirmado.
  */
@@ -42,7 +42,7 @@ export type ContactChannels = {
 /**
  * Formato normalizado que componentes compartilhados (Header, Footer, Logo,
  * WhatsApp, SEO) realmente consomem. Nunca leem `Broker` ou `AgencyCompany`
- * diretamente — so `SiteIdentity`, produzido pelo adaptador em identity.ts.
+ * diretamente, so `SiteIdentity`, produzido pelo adaptador em identity.ts.
  * Apenas `displayName` e obrigatório; o resto e opcional para nao forcar
  * strings vazias quando o dado simplesmente nao existe.
  */
@@ -118,14 +118,14 @@ export type AgencyCompany = {
   brandName: string;
   /** Razao social. "CONFIRMAR COM O CLIENTE" ate confirmacao documental. */
   legalName: string;
-  /** CRECI da pessoa juridica — nunca usado como CRECI pessoal de um corretor. */
+  /** CRECI da pessoa juridica, nunca usado como CRECI pessoal de um corretor. */
   legalCreci: string;
   foundedAt: string;
   positioning: string;
   history: string[];
   services: string[];
   contact: ContactChannels;
-  /** Telefones institucionais publicos (0800, central etc.) — nao sao WhatsApp. */
+  /** Telefones institucionais publicos (0800, central etc.), nao sao WhatsApp. */
   institutionalPhones: string[];
   hours: string;
 };
@@ -149,7 +149,7 @@ export type AgencyOffice = {
 
 /**
  * Corretor/consultor da equipe. Perfil institucional da empresa NAO entra
- * aqui — empresa e pessoa sao entidades diferentes (ver AgencyCompany).
+ * aqui, empresa e pessoa sao entidades diferentes (ver AgencyCompany).
  */
 export type AgencyTeamMember = {
   id: string;

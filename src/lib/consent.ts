@@ -50,7 +50,7 @@ export function setConsent(prefs: ConsentPrefs): void {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs));
   } catch {
-    /* storage indisponível — segue só em memória */
+    /* storage indisponível, segue só em memória */
   }
   window.dispatchEvent(new CustomEvent<ConsentPrefs>(CHANGE_EVENT, { detail: prefs }));
 }

@@ -2,7 +2,7 @@ import type { Broker } from "@/types";
 
 /**
  * Configuracao do profissional Shelby. ESTRUTURA-PLACEHOLDER espelhando o
- * tenant joao-victor — preencha com os dados REAIS do Shelby antes de publicar.
+ * tenant joao-victor, preencha com os dados REAIS do Shelby antes de publicar.
  *
  * Disciplina de dado real (igual ao joao-victor): nada de CRECI, telefone ou
  * imovel inventado. Campos vazios sao escondidos automaticamente pelos

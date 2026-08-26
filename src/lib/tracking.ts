@@ -11,7 +11,7 @@ export type UtmData = {
 /**
  * Captura os parametros UTM da URL e guarda na sessao. Sem backend nesta fase:
  * a origem NAO vai para a mensagem do WhatsApp (dado de analytics, nao de
- * conteudo) — e consumida pela camada de analytics (lib/analytics.ts).
+ * conteudo), e consumida pela camada de analytics (lib/analytics.ts).
  */
 export function captureUtm(): void {
   const params = new URLSearchParams(window.location.search);

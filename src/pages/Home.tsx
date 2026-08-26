@@ -20,7 +20,7 @@ const DEFAULT_GUIDED = {
   eyebrow: "Busca guiada",
   title: "Encontre opções compatíveis com o seu perfil",
   description:
-    "Responda em 3 passos rápidos e receba um direcionamento inicial pelo WhatsApp — sem compromisso.",
+    "Responda em 3 passos rápidos e receba um direcionamento inicial pelo WhatsApp, sem compromisso.",
 };
 
 export function Home() {

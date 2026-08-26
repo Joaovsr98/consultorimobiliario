@@ -1,7 +1,7 @@
 import type { HeroConfig } from "../types";
 
 /**
- * Hero da primeira dobra. A imagem e usada como ATMOSFERA de marca — decisao
+ * Hero da primeira dobra. A imagem e usada como ATMOSFERA de marca, decisao
  * explicita do cliente de nao vincula-la a um empreendimento especifico. Por
  * isso o `imageAlt` descreve a cena real (edificios em SP ao entardecer) sem
  * afirmar que e um lancamento nomeado.
@@ -40,5 +40,5 @@ export const hero: HeroConfig = {
   headline: "O lugar certo para o seu novo começo",
   subtitle: "Bueno Imóveis · São Paulo",
   description:
-    "Do primeiro apartamento ao alto padrão — encontre o imóvel ideal em São Paulo com o atendimento da Bueno Imóveis.",
+    "Do primeiro apartamento ao alto padrão, encontre o imóvel ideal em São Paulo com o atendimento da Bueno Imóveis.",
 };

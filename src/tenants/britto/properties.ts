@@ -2,7 +2,7 @@ import type { Property } from "@/types";
 
 /**
  * Empreendimentos EXTO do Britto (alto padrao). Dados extraidos dos livros
- * digitais oficiais da EXTO — nada de preco inventado (todos em lancamento,
+ * digitais oficiais da EXTO, nada de preco inventado (todos em lancamento,
  * "Sob consulta"). Imagens pendentes: aguardando material oficial da EXTO
  * (os livros sao arte full-bleed, nao rendem recorte limpo). Enderecos,
  * entregas e ficha confirmados pelo cliente/material.
@@ -38,7 +38,7 @@ export const properties: Property[] = [
       { place: "Marginal Pinheiros" },
     ],
     description:
-      "Château Jardin Lumière é a fase de maior metragem do Château Jardin, no Novo Eixo Cidade Jardim — último grande terreno da região, entre as pontes Morumbi e Estaiada. Realização EXTO e Tegra, com projeto internacional (arquitetura Dina Melaragno, paisagismo by EDSA), fachada em molduras e pedra, terreno de mais de 6.100 m² e 5 a 6 vagas por apartamento. Apartamentos de 4 suítes com 355 m² e lazer estilo private club.",
+      "Château Jardin Lumière é a fase de maior metragem do Château Jardin, no Novo Eixo Cidade Jardim, último grande terreno da região, entre as pontes Morumbi e Estaiada. Realização EXTO e Tegra, com projeto internacional (arquitetura Dina Melaragno, paisagismo by EDSA), fachada em molduras e pedra, terreno de mais de 6.100 m² e 5 a 6 vagas por apartamento. Apartamentos de 4 suítes com 355 m² e lazer estilo private club.",
     features: [
       "Quadra de tênis (saibro)",
       "Quadra de padel",
@@ -115,11 +115,11 @@ export const properties: Property[] = [
       { place: "Marginal Pinheiros" },
     ],
     description:
-      "Château Jardin Harmonie é uma das duas fases do Château Jardin, novo marco residencial no Novo Eixo Cidade Jardim — o último grande terreno da região, entre as pontes Morumbi e Estaiada. Realização EXTO e Tegra, com arquitetura clássica reinterpretada com leveza contemporânea (Dina Melaragno) e paisagismo internacional by EDSA. Apartamentos de 4 suítes com 185, 215 e 248 m², em condomínio com lazer estilo private club.",
+      "Château Jardin Harmonie é uma das duas fases do Château Jardin, novo marco residencial no Novo Eixo Cidade Jardim, o último grande terreno da região, entre as pontes Morumbi e Estaiada. Realização EXTO e Tegra, com arquitetura clássica reinterpretada com leveza contemporânea (Dina Melaragno) e paisagismo internacional by EDSA. Apartamentos de 4 suítes com 185, 215 e 248 m², em condomínio com lazer estilo private club.",
     features: [
       "Quadra de tênis (saibro)",
       "Quadra de padel",
-      "Le Club — fitness center equipado",
+      "Le Club, fitness center equipado",
       "Piscina coberta de 25m com raia",
       "Piscina descoberta e infantil",
       "Wellness spa com hidromassagem",
@@ -177,7 +177,7 @@ export const properties: Property[] = [
     delivery: "2027",
     status: "lancamento",
     address: "Rua Carlos Lima Morel, 115 - Jardim Guedala, São Paulo - SP",
-    // Coordenadas reais da Rua Carlos Lima Morel (via OpenStreetMap) — fixam o
+    // Coordenadas reais da Rua Carlos Lima Morel (via OpenStreetMap), fixam o
     // pin com precisao. A rua fica em Cidade Jardim/Morumbi, por isso anexar o
     // bairro "Jardim Guedala" quebrava o mapa.
     coords: { lat: -23.58499, lng: -46.71716 },
@@ -197,7 +197,7 @@ export const properties: Property[] = [
       { place: "Marginal Pinheiros" },
     ],
     description:
-      "Legacy Guedala é o empreendimento mais alto do Jardim Guedala — uma torre puramente residencial com aproximadamente 120 metros de altura, cercada por um dos cenários mais verdes e nobres de São Paulo. Assinatura by EXTO (arquitetura de Dina Melaragno), com apartamentos de 140 m² (3 suítes / 4 dormitórios) e 173 m² (3 suítes), a 670 metros da Estação São Paulo-Morumbi do Metrô. Um marco para a região e um legado para a família.",
+      "Legacy Guedala é o empreendimento mais alto do Jardim Guedala, uma torre puramente residencial com aproximadamente 120 metros de altura, cercada por um dos cenários mais verdes e nobres de São Paulo. Assinatura by EXTO (arquitetura de Dina Melaragno), com apartamentos de 140 m² (3 suítes / 4 dormitórios) e 173 m² (3 suítes), a 670 metros da Estação São Paulo-Morumbi do Metrô. Um marco para a região e um legado para a família.",
     features: [
       "Quadra de tênis",
       "Piscina descoberta",

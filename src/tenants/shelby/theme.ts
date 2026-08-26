@@ -1,7 +1,7 @@
 import type { ThemeConfig } from "@/types";
 
 /**
- * Tema do Shelby. Comeca identico ao do joao-victor ("quase igual o meu") —
+ * Tema do Shelby. Comeca identico ao do joao-victor ("quase igual o meu"), 
  * troque as cores abaixo quando o Shelby tiver identidade visual própria.
  */
 export const theme: ThemeConfig = {

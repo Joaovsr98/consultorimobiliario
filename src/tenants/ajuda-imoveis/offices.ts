@@ -4,7 +4,7 @@ import type { AgencyOffice } from "../types";
  * Unidades publicas levantadas. `isPublished: false` em todas ate revisao
  * final dos dados e autorizacao explicita de publicacao. `isHeadquarters`
  * so e true para a unidade que a fonte publica rotula explicitamente como
- * "Matriz" — nenhuma outra classificacao foi inferida. CEP, telefone e
+ * "Matriz", nenhuma outra classificacao foi inferida. CEP, telefone e
  * e-mail por unidade nao foram informados na fonte e ficam ausentes (nao
  * inventados).
  */
