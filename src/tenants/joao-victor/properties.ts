@@ -11,7 +11,8 @@ import { properties as extoProperties } from "../britto/properties";
  * O Bueno vende Vibra (MCMV) E os empreendimentos EXTO (alto padrao) — os EXTO
  * vem da fonte unica do tenant britto (`extoProperties`), sem duplicar dados.
  */
-const vibraProperties: Property[] = [
+/** Apenas os empreendimentos Vibra (usados pelo Shelby, que não vende EXTO). */
+export const vibraProperties: Property[] = [
   {
     id: "vibra-vila-sonia",
     slug: "vibra-parque-vila-sonia",
