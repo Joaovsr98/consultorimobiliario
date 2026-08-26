@@ -27,6 +27,7 @@ export const properties: Property[] = [
       { label: "Total de unidades", value: "552" },
       { label: "Pavimentos", value: "Térreo + 1º + 21 pavimentos-tipo" },
       { label: "Elevadores", value: "6 (3 por torre)" },
+      { label: "Área do terreno", value: "2.773,36 m²" },
     ],
     nearby: [
       { place: "Metrô Vila Sônia (Linha 4-Amarela)" },
@@ -101,6 +102,7 @@ export const properties: Property[] = [
       { label: "Total de unidades", value: "623" },
       { label: "Pavimentos", value: "Térreo + 22 pavimentos" },
       { label: "Elevadores", value: "8 (4 por torre)" },
+      { label: "Área do terreno", value: "3.803,45 m²" },
     ],
     nearby: [
       { place: "Estação Vila Sônia (Linha 4-Amarela)" },
@@ -184,6 +186,7 @@ export const properties: Property[] = [
       { label: "Total de unidades", value: "482" },
       { label: "Pavimentos", value: "Térreo + 23 pavimentos" },
       { label: "Elevadores", value: "6" },
+      { label: "Área do terreno", value: "2.324,02 m²" },
     ],
     nearby: [
       { place: "Estação Campo Limpo (Linha 5-Lilás)" },
@@ -259,6 +262,7 @@ export const properties: Property[] = [
       { label: "Total de unidades", value: "465" },
       { label: "Pavimentos", value: "Térreo + 16 pavimentos-tipo" },
       { label: "Elevadores", value: "7 (Torre A: 3 · Torre B: 4)" },
+      { label: "Área do terreno", value: "2.989,41 m²" },
     ],
     nearby: [
       { place: "Estação Butantã (Linha 4-Amarela)" },
