@@ -91,9 +91,10 @@ export const properties: Property[] = [
     address: "Rua Dias Vieira, 420 - Vila Sônia, São Paulo - SP",
     specs: [
       { label: "Plantas", value: "Tipo (37–43 m²) e Garden (~50 m²)" },
-      { label: "Torres", value: "1" },
+      { label: "Torres", value: "2" },
       { label: "Total de unidades", value: "623" },
       { label: "Pavimentos", value: "Térreo + 22 pavimentos" },
+      { label: "Elevadores", value: "8 (4 por torre)" },
     ],
     nearby: [
       { place: "Estação Vila Sônia (Linha 4-Amarela)" },
