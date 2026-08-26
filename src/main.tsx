@@ -22,3 +22,14 @@ createRoot(document.getElementById("root")!).render(
     <App />
   </StrictMode>
 );
+
+// Remove o splash de carregamento assim que o app pinta o primeiro quadro,
+// com um fade suave. O conteudo pre-renderizado (SEO) ja foi substituido pelo
+// React neste ponto.
+requestAnimationFrame(() => {
+  const splash = document.getElementById("splash");
+  if (!splash) return;
+  splash.classList.add("is-hidden");
+  splash.addEventListener("transitionend", () => splash.remove(), { once: true });
+  window.setTimeout(() => splash.remove(), 700);
+});
