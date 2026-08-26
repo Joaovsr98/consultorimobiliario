@@ -83,7 +83,7 @@ export const properties: Property[] = [
     city: "São Paulo",
     bedrooms: "2 dormitórios",
     area: "37 a 49,92 m2",
-    priceFrom: 345400,
+    priceFrom: 307800,
     priceRef: "ago/2026",
     developer: "Vibra",
     delivery: "Mai/2028",
