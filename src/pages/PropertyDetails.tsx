@@ -11,7 +11,7 @@ import { Seo } from "@/components/shared/Seo";
 import { PropertyGallery, type PropertyGalleryHandle } from "@/components/shared/PropertyGallery";
 import { StatusBadge } from "@/components/ui/StatusBadge";
 import { cn, formatArea, formatCurrency } from "@/lib/utils";
-import { matchFeatureImage, splitImages } from "@/lib/property-media";
+import { matchFeatureImage, plantaLabel, splitImages } from "@/lib/property-media";
 import { NotFound } from "./NotFound";
 
 export function PropertyDetails() {
@@ -276,7 +276,11 @@ export function PropertyDetails() {
           <div className="mt-12">
             <h2 className="font-display text-2xl font-semibold text-brand">Plantas</h2>
             <div className="mt-5">
-              <PropertyGallery images={plantas} alt={`${property.name} — planta`} />
+              <PropertyGallery
+                images={plantas}
+                alt={`${property.name} — planta`}
+                captions={plantas.map(plantaLabel)}
+              />
             </div>
           </div>
         )}

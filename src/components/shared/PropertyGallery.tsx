@@ -6,6 +6,8 @@ import { cn } from "@/lib/utils";
 type PropertyGalleryProps = {
   images: string[];
   alt: string;
+  /** Legendas paralelas a `images` (ex.: metragem das plantas). null = sem legenda. */
+  captions?: (string | null)[];
 };
 
 /** Controle imperativo para abrir o lightbox de fora (ex.: clique num diferencial). */
@@ -23,7 +25,7 @@ const GRID_PREVIEW_COUNT = 6;
  * saida termina trava se a aba nao estiver compondo frames.
  */
 export const PropertyGallery = forwardRef<PropertyGalleryHandle, PropertyGalleryProps>(
-  function PropertyGallery({ images, alt }, ref) {
+  function PropertyGallery({ images, alt, captions }, ref) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   useImperativeHandle(ref, () => ({
@@ -88,6 +90,11 @@ export const PropertyGallery = forwardRef<PropertyGalleryHandle, PropertyGallery
                   Ampliar
                 </span>
               )}
+              {captions?.[index] && (
+                <span className="absolute bottom-3 left-3 rounded-full bg-brand/85 px-2.5 py-1 text-xs font-semibold text-paper backdrop-blur-sm">
+                  {captions[index]}
+                </span>
+              )}
             </button>
           );
         })}
@@ -134,6 +141,12 @@ export const PropertyGallery = forwardRef<PropertyGalleryHandle, PropertyGallery
               onClick={(e) => e.stopPropagation()}
               className="max-h-[85vh] max-w-full rounded-[var(--radius-brand)] object-contain"
             />
+
+            {captions?.[openIndex!] && (
+              <p className="absolute bottom-6 left-1/2 -translate-x-1/2 rounded-full bg-paper/10 px-4 py-1.5 text-sm font-medium text-paper backdrop-blur-sm">
+                {captions[openIndex!]}
+              </p>
+            )}
 
             <button
               type="button"

@@ -36,6 +36,24 @@ export function matchFeatureImage(feature: string, galeria: string[]): number {
   return bestScore > 0 ? best : -1;
 }
 
+/**
+ * Rotulo de uma PLANTA a partir do nome do arquivo (ex.:
+ * "planta-248m-3suites-living.jpg" -> "248 m² · 3 suítes";
+ * "planta-2-quartos-37m.jpg" -> "37 m² · 2 quartos"). Retorna null se nao houver
+ * metragem no nome. Convencao: sempre incluir a metragem no nome da planta.
+ */
+export function plantaLabel(src: string): string | null {
+  const base = src.split("/").pop() ?? "";
+  const area = base.match(/(\d+)\s*m(?:2|²)?(?=[-_.]|$)/i);
+  if (!area) return null;
+  const suites = base.match(/(\d+)\s*su[ií]tes?/i);
+  const quartos = base.match(/(\d+)[-_\s]?quartos?/i);
+  const parts = [`${area[1]} m²`];
+  if (suites) parts.push(`${suites[1]} suíte${suites[1] === "1" ? "" : "s"}`);
+  else if (quartos) parts.push(`${quartos[1]} quarto${quartos[1] === "1" ? "" : "s"}`);
+  return parts.join(" · ");
+}
+
 /** Separa as imagens por tipo pelo nome do arquivo (convencao atual dos assets). */
 export function splitImages(images: string[]) {
   const plantas = images.filter((s) => s.includes("/planta"));
