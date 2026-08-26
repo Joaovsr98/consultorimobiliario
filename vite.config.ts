@@ -69,6 +69,13 @@ const OG_BY_TENANT: Record<string, TenantSeo> = {
   },
 };
 
+/** Splash de carregamento por tenant (fundo/cor/fonte da marca). */
+const SPLASH_BY_TENANT: Record<string, { bg: string; fg: string; font: string }> = {
+  "joao-victor": { bg: "#F5F5F5", fg: "#0D1B2A", font: "'Montserrat',ui-sans-serif,system-ui,sans-serif" },
+  shelby: { bg: "#F5F1E8", fg: "#132238", font: "'Montserrat',ui-sans-serif,system-ui,sans-serif" },
+  britto: { bg: "#DBE6F0", fg: "#143240", font: "'Cormorant Garamond',Georgia,serif" },
+};
+
 /**
  * Perfil de conteudo por tenant. `premium` (alto padrao, EXTO) troca a prosa
  * MCMV por linguagem de alto padrao e NAO gera as paginas de bairro do Vibra.
@@ -404,11 +411,20 @@ function seoPlugin(tenantId: string): Plugin {
   return {
     name: "inject-seo",
     transformIndexHtml(html: string) {
+      const splash = SPLASH_BY_TENANT[tenantId] ?? SPLASH_BY_TENANT["joao-victor"];
       let out = html
         .replace(/<title>[\s\S]*?<\/title>/, `<title>${data.siteName}</title>`)
         .replace(
           /<meta\s+name="description"[\s\S]*?\/>/,
           `<meta name="description" content="${data.description}" />`
+        )
+        .replace(
+          `style="--splash-bg:#f4f4f5;--splash-fg:#132238;--splash-font:'Montserrat',ui-sans-serif,system-ui,sans-serif"`,
+          `style="--splash-bg:${splash.bg};--splash-fg:${splash.fg};--splash-font:${splash.font}"`
+        )
+        .replace(
+          `<span class="splash-name">Corretor Prime</span>`,
+          `<span class="splash-name">${data.siteName}</span>`
         )
         .replace("</head>", `    ${tags}\n  </head>`);
       if (data.favicon) {
