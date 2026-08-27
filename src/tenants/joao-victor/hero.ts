@@ -37,8 +37,8 @@ export const hero: HeroConfig = {
       alt: "Vista aérea de uma torre residencial de alto padrão no Jardim Guedala",
     },
   ],
-  headline: "O lugar certo para o seu novo começo",
+  headline: "O imóvel certo começa com uma escolha bem orientada",
   subtitle: "Bueno Imóveis · São Paulo",
   description:
-    "Do primeiro apartamento ao alto padrão, encontre o imóvel ideal em São Paulo com o atendimento da Bueno Imóveis.",
+    "Encontramos apartamentos que combinam com o seu momento, seu estilo de vida e seus objetivos, com um atendimento próximo e transparente em todas as etapas da compra.",
 };

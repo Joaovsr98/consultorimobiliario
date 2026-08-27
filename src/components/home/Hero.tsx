@@ -109,7 +109,7 @@ export function Hero() {
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link to="/imoveis" className={buttonClasses("secondary", "lg")}>
-              Ver empreendimentos
+              Conhecer imóveis
               <ArrowRight className="size-4" aria-hidden />
             </Link>
             {whatsapp && (
