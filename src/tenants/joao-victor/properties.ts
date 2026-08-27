@@ -52,7 +52,7 @@ export const vibraProperties: Property[] = [
       },
       {
         icon: "home",
-        title: "Plantas para diferentes momentos de vida",
+        title: "Espaços pensados para sua fase de vida",
         text: "Opções de 1 e 2 dormitórios, de 27 a 41 m², que se adaptam a quem mora sozinho ou a famílias pequenas.",
       },
       {
@@ -137,6 +137,28 @@ export const vibraProperties: Property[] = [
       { place: "Shopping Butantã" },
       { place: "Parque Villa-Lobos" },
       { place: "Shopping Eldorado" },
+    ],
+    highlights: [
+      {
+        icon: "train",
+        title: "Mobilidade que facilita sua rotina",
+        text: "A 8 minutos a pé da Estação Vila Sônia (Linha 4-Amarela), trazendo mais praticidade para seus deslocamentos.",
+      },
+      {
+        icon: "home",
+        title: "Espaço pensado para diferentes momentos",
+        text: "Plantas de 2 dormitórios de 37 a 50 m², incluindo unidades Garden, para adaptar o apartamento à sua rotina.",
+      },
+      {
+        icon: "leaf",
+        title: "Um lazer que vira rotina",
+        text: "Sport bar, coworking, academia, piscina e mini quadra para trabalhar, treinar e relaxar sem sair do condomínio.",
+      },
+      {
+        icon: "map",
+        title: "O Butantã ao seu redor",
+        text: "Shopping Butantã, Parque Villa-Lobos e o Assaí Francisco Morato a poucos minutos.",
+      },
     ],
     description:
       "Condomínio fechado a 8 minutos a pé da Estação Vila Sônia (Linha 4-Amarela), com área de lazer completa e unidades enquadradas no Programa Minha Casa, Minha Vida.",
@@ -223,6 +245,28 @@ export const vibraProperties: Property[] = [
       { place: "Sesc Campo Limpo" },
       { place: "Roldão Atacadista" },
     ],
+    highlights: [
+      {
+        icon: "train",
+        title: "Duas estações da Lilás por perto",
+        text: "Próximo às Estações Campo Limpo e Vila das Belezas (Linha 5-Lilás), com mais opções de acesso à cidade.",
+      },
+      {
+        icon: "home",
+        title: "Espaços pensados para a sua fase de vida",
+        text: "Apartamentos de 1 e 2 dormitórios, de 26 a 42 m², muitos com varanda para o dia a dia render melhor.",
+      },
+      {
+        icon: "leaf",
+        title: "Momentos de descanso sem sair de casa",
+        text: "Piscina, academia, espaço luau e rooftop para aproveitar melhor o tempo livre.",
+      },
+      {
+        icon: "map",
+        title: "Cultura e serviços ao redor",
+        text: "Sesc Campo Limpo, Shopping Campo Limpo, hospital e atacadista na mesma região.",
+      },
+    ],
     description:
       "Condomínio com 1 torre na Estrada de Itapecerica, na região de Campo Limpo, Zona Sul de São Paulo, próximo às Estações Campo Limpo e Vila das Belezas (Linha 5-Lilás) e ao Shopping Campo Limpo. Apartamentos de 1 e 2 quartos com opção de varanda, lazer de clube completo e unidades enquadradas no Programa Minha Casa, Minha Vida.",
     features: [
@@ -295,6 +339,28 @@ export const vibraProperties: Property[] = [
       { place: "Estação Butantã (Linha 4-Amarela)" },
       { place: "Pinheiros" },
       { place: "Avenida Paulista" },
+    ],
+    highlights: [
+      {
+        icon: "train",
+        title: "Conexão fácil com São Paulo",
+        text: "A 10 minutos a pé da Estação Butantã (Linha 4-Amarela), com acesso rápido a Pinheiros e outras regiões da cidade.",
+      },
+      {
+        icon: "home",
+        title: "Prático para a rotina urbana",
+        text: "Apartamentos de 2 dormitórios de 32 a 42 m², com opção de varanda, pensados para quem vive a cidade.",
+      },
+      {
+        icon: "leaf",
+        title: "Equilíbrio entre trabalho e descanso",
+        text: "Piscina, solário, academia, sport bar e coworking para desacelerar sem sair do prédio.",
+      },
+      {
+        icon: "map",
+        title: "Uma região com muita praticidade",
+        text: "Próximo ao Butantã, Pinheiros e importantes vias de acesso da Zona Oeste.",
+      },
     ],
     description:
       "Condomínio residencial de 2 torres no Jardim Bonfiglioli, Zona Oeste de São Paulo, a 10 minutos a pé da Estação Butantã (Linha 4-Amarela), 10 minutos de Pinheiros e 15 da Avenida Paulista. Apartamentos de 2 dormitórios com opção de varanda, area de lazer completa e unidades enquadradas no Programa Minha Casa, Minha Vida.",
@@ -373,6 +439,28 @@ export const vibraProperties: Property[] = [
       { place: "Assaí Atacadista" },
       { place: "Sam's Club" },
       { place: "Ciclovia Rio Pinheiros" },
+    ],
+    highlights: [
+      {
+        icon: "train",
+        title: "Metrô e trem no mesmo ponto",
+        text: "A 8 minutos a pé da Estação Santo Amaro, que conecta o Metrô (Linha 5-Lilás) e a CPTM (Linha 9-Esmeralda).",
+      },
+      {
+        icon: "home",
+        title: "Um espaço que acompanha sua rotina",
+        text: "Plantas de 1 e 2 dormitórios com varanda, de 27 a 44 m², pensadas para diferentes momentos de vida.",
+      },
+      {
+        icon: "leaf",
+        title: "Mais opções para aproveitar a cidade",
+        text: "Parque da Mônica, Largo Treze e ciclovia do Rio Pinheiros próximos, além das opções de lazer dentro do condomínio.",
+      },
+      {
+        icon: "map",
+        title: "Santo Amaro resolve o dia a dia",
+        text: "Shoppings SP Market e Mais, hospital, universidade e atacadistas concentrados na região.",
+      },
     ],
     description:
       "Condomínio fechado de 1 torre (térreo + 16 pavimentos, 392 unidades) na Av. das Nações Unidas, em Santo Amaro, Zona Sul de São Paulo, a 8 minutos a pé da Estação Santo Amaro (Metrô Linha 5-Lilás e CPTM Linha 9-Esmeralda) e a 5 minutos de carro da Estação Socorro (CPTM Linha 9-Esmeralda). Apartamentos de 1 e 2 dormitórios com varanda, área de lazer completa e unidades enquadradas no Programa Minha Casa, Minha Vida (Projeto HIS).",
