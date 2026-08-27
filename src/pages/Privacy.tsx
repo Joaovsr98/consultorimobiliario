@@ -48,7 +48,7 @@ export function Privacy() {
               Quais dados este site coleta
             </h2>
             <p className="mt-3 leading-relaxed">
-              O diagnóstico do comprador (formulário em 3 passos) pede:
+              O diagnóstico do comprador (formulário em 2 passos) pede:
               objetivo (morar ou investir), região de interesse, número de
               dormitórios, renda familiar aproximada, entrada disponível, se
               você possui FGTS e o prazo de compra. Não pedimos nome, CPF, RG,

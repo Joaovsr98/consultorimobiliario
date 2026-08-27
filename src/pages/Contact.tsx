@@ -44,7 +44,7 @@ export function Contact() {
       <BuyerDiagnosis
         eyebrow="Diagnóstico do comprador"
         title="Vamos entender o seu momento de compra"
-        description="Responda em 3 passos rápidos para receber um direcionamento inicial pelo WhatsApp, sem compromisso."
+        description="Responda em 2 passos rápidos para receber um direcionamento inicial pelo WhatsApp, sem compromisso."
       />
     </>
   );
