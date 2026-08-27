@@ -60,7 +60,7 @@ const OG_BY_TENANT: Record<string, TenantSeo> = {
     title: "Britto, Alto padrão EXTO em São Paulo",
     description:
       "Empreendimentos de alto padrão da EXTO Incorporadora nos bairros mais desejados de São Paulo, com curadoria e atendimento pessoal do Britto.",
-    url: "https://britto-exto.vercel.app",
+    url: "https://consultoriabritto.vercel.app",
     telephone: "+5511995804240",
     areaServed: "São Paulo, SP",
     creci: "104954",
