@@ -28,11 +28,27 @@ export function Hero() {
       : [];
 
   const [index, setIndex] = useState(0);
-  const go = (dir: number) => setIndex((i) => (i + dir + slides.length) % slides.length);
+  // Controle de carga: como todos os slides ficam sobrepostos (absolute inset-0),
+  // eles estao "na viewport" e o loading=lazy nao segura , o navegador baixaria
+  // TODAS as fotos no primeiro paint. Montamos apenas os slides ja vistos, entao
+  // o carregamento inicial pega so a primeira imagem; as demais entram conforme
+  // o carrossel avanca ou o usuario navega.
+  const [seen, setSeen] = useState<Set<number>>(() => new Set([0]));
+  const goTo = (i: number) => {
+    setIndex(i);
+    setSeen((prev) => (prev.has(i) ? prev : new Set(prev).add(i)));
+  };
+  const go = (dir: number) => goTo((index + dir + slides.length) % slides.length);
 
   useEffect(() => {
     if (reduce || slides.length < 2) return;
-    const id = setInterval(() => setIndex((i) => (i + 1) % slides.length), 5500);
+    const id = setInterval(() => {
+      setIndex((i) => {
+        const next = (i + 1) % slides.length;
+        setSeen((prev) => (prev.has(next) ? prev : new Set(prev).add(next)));
+        return next;
+      });
+    }, 5500);
     return () => clearInterval(id);
   }, [reduce, slides.length]);
 
@@ -43,21 +59,23 @@ export function Hero() {
   return (
     <section className="relative isolate flex min-h-[82vh] items-center overflow-hidden">
       {slides.length > 0 ? (
-        slides.map((slide, i) => (
-          <img
-            key={slide.src}
-            src={slide.src}
-            alt={i === index ? slide.alt : ""}
-            loading={i === 0 ? "eager" : "lazy"}
-            fetchPriority={i === 0 ? "high" : undefined}
-            aria-hidden={i !== index}
-            className={cn(
-              "absolute inset-0 size-full object-cover transition-opacity duration-1000 ease-out motion-reduce:transition-none",
-              i === index ? "opacity-100" : "opacity-0"
-            )}
-            style={{ objectPosition: "center 40%" }}
-          />
-        ))
+        slides.map((slide, i) =>
+          seen.has(i) ? (
+            <img
+              key={slide.src}
+              src={slide.src}
+              alt={i === index ? slide.alt : ""}
+              loading={i === 0 ? "eager" : "lazy"}
+              fetchPriority={i === 0 ? "high" : undefined}
+              aria-hidden={i !== index}
+              className={cn(
+                "absolute inset-0 size-full object-cover transition-opacity duration-1000 ease-out motion-reduce:transition-none",
+                i === index ? "opacity-100" : "opacity-0"
+              )}
+              style={{ objectPosition: "center 40%" }}
+            />
+          ) : null
+        )
       ) : (
         <div className="absolute inset-0 bg-brand" aria-hidden />
       )}
@@ -136,7 +154,7 @@ export function Hero() {
             <button
               key={slide.src}
               type="button"
-              onClick={() => setIndex(i)}
+              onClick={() => goTo(i)}
               aria-label={`Ver foto ${i + 1}`}
               aria-current={i === index}
               className={cn(
