@@ -61,6 +61,18 @@ export type NavItem = {
 
 export type PropertyStatus = "breve-lancamento" | "lancamento" | "em-obras" | "pronto";
 
+/** Icones permitidos na curadoria consultiva do imovel (mapeados para lucide no componente). */
+export type HighlightIcon =
+  | "train"
+  | "home"
+  | "leaf"
+  | "map"
+  | "users"
+  | "shield"
+  | "sparkles"
+  | "ruler"
+  | "building";
+
 export type Property = {
   id: string;
   /** Usado na rota /imóveis/:slug */
@@ -93,6 +105,13 @@ export type Property = {
   nearby?: { place: string; time?: string }[];
   /** Ficha técnica (dados do material oficial: torres, unidades, pavimentos, etc.). Exibida quando presente. */
   specs?: { label: string; value: string }[];
+  /**
+   * Curadoria consultiva "Por que este imóvel pode fazer sentido?": 3-4 pontos
+   * baseados em dado real (mobilidade, plantas, lazer, região), com tom de quem
+   * ajuda a avaliar, NUNCA de vendedor ("oportunidade única", "valorização
+   * garantida", "últimas unidades" sao proibidos). Exibida antes da galeria.
+   */
+  highlights?: { icon: HighlightIcon; title: string; text: string }[];
   description: string;
   features: string[];
   /** Caminhos de imagens autorizadas. */

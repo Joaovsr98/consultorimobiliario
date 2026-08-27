@@ -44,6 +44,28 @@ export const vibraProperties: Property[] = [
       { place: "Hospitais da região (Family, Leforte e outros)" },
       { place: "UniFECAF" },
     ],
+    highlights: [
+      {
+        icon: "train",
+        title: "Mobilidade para a sua rotina",
+        text: "Perto do Metrô Vila Sônia (Linha 4-Amarela) e da Av. Pirajussara, facilitando os deslocamentos pela cidade.",
+      },
+      {
+        icon: "home",
+        title: "Plantas para diferentes momentos de vida",
+        text: "Opções de 1 e 2 dormitórios, de 27 a 41 m², que se adaptam a quem mora sozinho ou a famílias pequenas.",
+      },
+      {
+        icon: "leaf",
+        title: "Lazer para aproveitar em família",
+        text: "Piscina, churrasqueira, playground, academia e salão de festas para os momentos de descanso e convivência.",
+      },
+      {
+        icon: "map",
+        title: "Uma região com infraestrutura completa",
+        text: "Shoppings, hospitais, mercados e o Parque Chácara do Jockey ao redor, com serviços e comércio à mão.",
+      },
+    ],
     description:
       "Condomínio fechado de 2 torres na Rua Caminho do Engenho, na Vila Sônia, a 5 minutos de ônibus do Metrô Vila Sônia (Linha 4-Amarela) e a 5 minutos a pé do Parque Chácara do Jockey. Área de lazer completa e unidades enquadradas no Programa Minha Casa, Minha Vida.",
     features: [

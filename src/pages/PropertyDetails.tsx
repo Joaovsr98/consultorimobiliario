@@ -9,6 +9,7 @@ import { buildWhatsappLink, propertyWhatsappMessage } from "@/lib/whatsapp";
 import { trackEvent } from "@/lib/analytics";
 import { Seo } from "@/components/shared/Seo";
 import { PropertyGallery, type PropertyGalleryHandle } from "@/components/shared/PropertyGallery";
+import { PropertyHighlights } from "@/components/property/PropertyHighlights";
 import { StatusBadge } from "@/components/ui/StatusBadge";
 import { cn, formatArea, formatCurrency } from "@/lib/utils";
 import { matchFeatureImage, plantaLabel, splitImages } from "@/lib/property-media";
@@ -213,6 +214,10 @@ export function PropertyDetails() {
         </dl>
 
         <p className="mt-10 max-w-3xl text-lg leading-relaxed text-ink/75">{property.description}</p>
+
+        {property.highlights && property.highlights.length > 0 && (
+          <PropertyHighlights items={property.highlights} />
+        )}
 
         {galeria.length > 0 && (
           <div className="mt-12">
