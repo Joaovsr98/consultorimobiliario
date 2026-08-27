@@ -5,6 +5,7 @@ import { BuyerDiagnosis } from "@/features/buyer-diagnosis/BuyerDiagnosis";
 import { Opportunities } from "@/components/home/Opportunities";
 import { FeaturedShowcase } from "@/components/home/FeaturedShowcase";
 import { BuyerJourney } from "@/components/home/BuyerJourney";
+import { WhyUs } from "@/components/home/WhyUs";
 import { AboutTeaser } from "@/components/home/AboutTeaser";
 import { GuidesTeaser } from "@/components/home/GuidesTeaser";
 import { HomeFaq } from "@/components/home/HomeFaq";
@@ -49,6 +50,7 @@ export function Home() {
       />
       <Opportunities />
       <BuyerJourney />
+      <WhyUs />
       <AboutTeaser />
       <GuidesTeaser />
       <HomeFaq />

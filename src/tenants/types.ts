@@ -90,6 +90,16 @@ export type HomeContent = {
   search?: { unit: "dormitorios" | "suites"; askPrice: boolean };
   /** Copy da pagina Sobre. Ausente -> texto padrao (econômico) do componente. */
   about?: { intro: string[]; steps: string[] };
+  /**
+   * Camada de CONFIANCA na Home ("Por que comprar com ..."): tom consultivo,
+   * sem numero inventado nem promessa comercial. Ausente -> secao nao aparece.
+   */
+  whyUs?: { title: string; intro?: string; items: { title: string; text: string }[] };
+  /**
+   * Bloco "Sobre" da Home (institucional curto). Ausente -> o AboutTeaser usa
+   * o texto padrao. So paragrafos reais e verificaveis (sem "+500 clientes").
+   */
+  aboutBlurb?: { tagline?: string; title: string; paragraphs: string[] };
 };
 
 export type IndividualTenant = {
