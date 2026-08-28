@@ -17,12 +17,16 @@ import {
 
 const { properties } = tenant;
 
-/** Faixas de metragem (pelo maior apartamento de cada empreendimento). */
+/**
+ * Faixas de metragem (pelo maior apartamento de cada empreendimento). Precisam
+ * escalar do MCMV compacto (26-50 m²) ao alto padrao (200-355 m²) sem jogar tudo
+ * num unico balde "acima de 45". Por isso 3 faixas semanticas com um teto alto.
+ */
 const BANDS: { label: string; test: (m: number) => boolean }[] = [
-  { label: "Até 35 m²", test: (m) => m > 0 && m <= 35 },
-  { label: "36 a 45 m²", test: (m) => m > 35 && m <= 45 },
-  { label: "Acima de 45 m²", test: (m) => m > 45 },
-  { label: "Outros", test: (m) => m <= 0 },
+  { label: "Compactos · até 45 m²", test: (m) => m > 0 && m <= 45 },
+  { label: "Médios · 46 a 120 m²", test: (m) => m > 45 && m <= 120 },
+  { label: "Amplos · acima de 120 m²", test: (m) => m > 120 },
+  { label: "Outras metragens", test: (m) => m <= 0 },
 ];
 
 /** Agrupa por faixa de metragem, ordenando cada grupo do menor preco para o maior. */
@@ -93,6 +97,13 @@ export function Properties() {
   const [filtersOpen, setFiltersOpen] = useState(false);
   const groups = groupByArea(filtered);
   const hasFilters = Boolean(regiao || dorm || preco);
+  // Agrupar por metragem so ajuda na visao geral com volume. Ao filtrar (ou com
+  // poucos resultados), um titulo de faixa sobre 1-2 cards parece quebrado , entao
+  // mostramos uma grade unica ordenada por preco.
+  const showGroups = !hasFilters && filtered.length > 3;
+  const flatSorted = [...filtered].sort(
+    (a, b) => (a.priceFrom ?? Infinity) - (b.priceFrom ?? Infinity)
+  );
   const clear = () => {
     setRegiao("");
     setDorm("");
@@ -207,26 +218,38 @@ export function Properties() {
         </div>
       </div>
 
-      {groups.length > 0 ? (
-        <div className="mt-10 space-y-14">
-          {groups.map((group) => (
-            <div key={group.label}>
-              <div className="flex items-baseline gap-3 border-b border-brand/10 pb-3">
-                <h2 className="font-display text-2xl font-semibold text-brand">{group.label}</h2>
-                <span className="text-sm text-ink/50">
-                  {group.items.length}{" "}
-                  {group.items.length === 1 ? "empreendimento" : "empreendimentos"}
-                </span>
-              </div>
+      {filtered.length > 0 ? (
+        showGroups ? (
+          <div className="mt-10 space-y-14">
+            {groups.map((group) => (
+              <div key={group.label}>
+                <div className="flex items-baseline gap-3 border-b border-brand/10 pb-3">
+                  <h2 className="font-display text-2xl font-semibold text-brand">{group.label}</h2>
+                  <span className="text-sm text-ink/50">
+                    {group.items.length}{" "}
+                    {group.items.length === 1 ? "empreendimento" : "empreendimentos"}
+                  </span>
+                </div>
 
-              <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {group.items.map((property) => (
-                  <PropertyCard key={property.id} property={property} priority={cardIndex++ === 0} />
-                ))}
+                <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                  {group.items.map((property) => (
+                    <PropertyCard
+                      key={property.id}
+                      property={property}
+                      priority={cardIndex++ === 0}
+                    />
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {flatSorted.map((property) => (
+              <PropertyCard key={property.id} property={property} priority={cardIndex++ === 0} />
+            ))}
+          </div>
+        )
       ) : (
         <div className="mt-10 rounded-card border border-dashed border-brand/20 bg-brand/[0.02] p-8 text-center">
           <p className="text-ink/70">Nenhum empreendimento com esses filtros.</p>
