@@ -72,12 +72,18 @@ export function PropertyDetails() {
     : null;
   const ctaLabel = identity.whatsappCta;
 
-  const propertyQuery =
-    property.address ?? `${property.name}, ${property.neighborhood}, ${property.city}`;
-  // Coordenadas exatas fixam o pin melhor que o endereco; sem elas, cai no texto.
-  const originPoint = property.coords
-    ? `${property.coords.lat},${property.coords.lng}`
-    : propertyQuery;
+  // Pin do empreendimento: usamos o ENDERECO (rua + numero) e nao a coordenada,
+  // porque o Google geocodifica o numero da casa no Brasil com precisao, enquanto
+  // nossas coords sao nivel-rua (Nominatim, sem numero) e o Google acaba encaixando
+  // na rua vizinha. Removemos o BAIRRO do texto (parte apos o primeiro " - "),
+  // porque as vezes ele diverge da rua (ex.: rua de Cidade Jardim anunciada como
+  // Jardim Guedala) e desviava o pin , rua + numero + cidade basta. As coords do
+  // empreendimento seguem existindo, mas so para o ranking de proximidade (NearYou).
+  const streetOnly = property.address ? property.address.split(" - ")[0] : null;
+  const propertyQuery = streetOnly
+    ? `${streetOnly}, ${property.city}, SP`
+    : `${property.name}, ${property.neighborhood}, ${property.city}`;
+  const originPoint = propertyQuery;
   // Sem foco: mostra o empreendimento. Com foco num ponto: mostra a ROTA do
   // empreendimento ate o ponto, assim o empreendimento continua visivel e da
   // pra ter nocao da distancia.
