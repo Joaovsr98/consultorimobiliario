@@ -38,7 +38,10 @@ export const hero: HeroConfig = {
     },
   ],
   headline: "O imóvel certo começa com uma escolha bem orientada",
+  headlineShort: "O imóvel certo começa com uma boa escolha",
   subtitle: "Bueno Imóveis · São Paulo",
   description:
     "Encontramos apartamentos que combinam com o seu momento, seu estilo de vida e seus objetivos, com um atendimento próximo e transparente em todas as etapas da compra.",
+  descriptionShort:
+    "Apartamentos selecionados para o seu momento, com orientação clara em cada etapa da compra.",
 };

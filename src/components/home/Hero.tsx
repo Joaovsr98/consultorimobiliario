@@ -57,7 +57,7 @@ export function Hero() {
   const rise = reduce ? {} : { initial: { opacity: 0, y: 18 }, animate: { opacity: 1, y: 0 } };
 
   return (
-    <section className="relative isolate flex min-h-[82vh] items-center overflow-hidden">
+    <section className="relative isolate flex min-h-[70vh] items-center overflow-hidden sm:min-h-[82vh]">
       {slides.length > 0 ? (
         slides.map((slide, i) =>
           seen.has(i) ? (
@@ -91,23 +91,41 @@ export function Hero() {
         aria-hidden
       />
 
-      <Container className="relative py-16 sm:py-20 lg:py-28">
+      <Container className="relative py-12 sm:py-20 lg:py-28">
         <motion.div {...rise} transition={{ duration: 0.6, ease: "easeOut" }} className="max-w-2xl">
           {hero.subtitle && (
             <p className="text-sm font-semibold uppercase tracking-[0.14em] text-paper/85">
               {hero.subtitle}
             </p>
           )}
-          <h1 className="mt-4 font-display text-4xl font-semibold leading-[1.08] tracking-tight text-paper sm:text-5xl lg:text-6xl">
-            {hero.headline}
+          <h1 className="mt-4 font-display text-3xl font-semibold leading-[1.1] tracking-tight text-paper sm:text-5xl sm:leading-[1.08] lg:text-6xl">
+            {hero.headlineShort ? (
+              <>
+                <span className="sm:hidden">{hero.headlineShort}</span>
+                <span className="hidden sm:inline">{hero.headline}</span>
+              </>
+            ) : (
+              hero.headline
+            )}
           </h1>
-          {hero.description && (
-            <p className="mt-5 max-w-md text-lg leading-relaxed text-paper/85">
-              {hero.description}
-            </p>
+          {hero.descriptionShort ? (
+            <>
+              <p className="mt-4 max-w-md text-base leading-relaxed text-paper/85 sm:hidden">
+                {hero.descriptionShort}
+              </p>
+              <p className="mt-5 hidden max-w-md text-lg leading-relaxed text-paper/85 sm:block">
+                {hero.description}
+              </p>
+            </>
+          ) : (
+            hero.description && (
+              <p className="mt-5 max-w-md text-lg leading-relaxed text-paper/85">
+                {hero.description}
+              </p>
+            )
           )}
 
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-6 flex flex-col items-start gap-3 sm:mt-8 sm:flex-row sm:items-stretch">
             <Link to="/imoveis" className={buttonClasses("secondary", "lg")}>
               Conhecer imóveis
               <ArrowRight className="size-4" aria-hidden />
@@ -133,7 +151,7 @@ export function Hero() {
             type="button"
             onClick={() => go(-1)}
             aria-label="Foto anterior"
-            className="absolute left-3 top-1/2 z-10 grid size-10 -translate-y-1/2 place-items-center rounded-full bg-paper/15 text-paper backdrop-blur-sm transition-colors hover:bg-paper/30 sm:left-5"
+            className="absolute left-3 top-1/2 z-10 hidden size-10 -translate-y-1/2 place-items-center rounded-full bg-paper/15 text-paper backdrop-blur-sm transition-colors hover:bg-paper/30 sm:left-5 sm:grid"
           >
             <ChevronLeft className="size-5" aria-hidden />
           </button>
@@ -141,7 +159,7 @@ export function Hero() {
             type="button"
             onClick={() => go(1)}
             aria-label="Próxima foto"
-            className="absolute right-3 top-1/2 z-10 grid size-10 -translate-y-1/2 place-items-center rounded-full bg-paper/15 text-paper backdrop-blur-sm transition-colors hover:bg-paper/30 sm:right-5"
+            className="absolute right-3 top-1/2 z-10 hidden size-10 -translate-y-1/2 place-items-center rounded-full bg-paper/15 text-paper backdrop-blur-sm transition-colors hover:bg-paper/30 sm:right-5 sm:grid"
           >
             <ChevronRight className="size-5" aria-hidden />
           </button>

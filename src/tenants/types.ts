@@ -21,9 +21,21 @@ export type HeroConfig = {
   /** Carrossel opcional. Se presente (2+ itens), o Hero rotaciona entre as imagens. */
   images?: { src: string; alt: string }[];
   headline: string;
+  /**
+   * Versao curta do headline para MOBILE (menos palavras, evita 3-4 linhas na
+   * primeira dobra). Ausente -> usa `headline` em ambos. Fica no MESMO <h1> que
+   * a versao desktop, apenas alternado por breakpoint (nao duplica H1).
+   */
+  headlineShort?: string;
   subtitle?: string;
   /** Frase de apoio abaixo do headline (opcional). */
   description?: string;
+  /**
+   * Versao curta da descricao para MOBILE (1 frase). Quando presente, o Hero
+   * mostra esta no celular e a `description` completa no desktop. Ausente ->
+   * usa `description` em ambos.
+   */
+  descriptionShort?: string;
 };
 
 /**
