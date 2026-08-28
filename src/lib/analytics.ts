@@ -45,7 +45,8 @@ export type AnalyticsEvent =
   | "property_view"
   | "whatsapp_click"
   | "simulation_start"
-  | "diagnosis_submit";
+  | "diagnosis_submit"
+  | "near_you_search";
 
 export type EventParams = {
   property_id?: string;

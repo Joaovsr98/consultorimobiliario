@@ -27,6 +27,7 @@ export const vibraProperties: Property[] = [
     delivery: "Nov/2028",
     status: "lancamento",
     address: "Rua Caminho do Engenho, 584 - Vila Sônia, São Paulo - SP",
+    coords: { lat: -23.59560, lng: -46.74679 },
     specs: [
       { label: "Torres", value: "2" },
       { label: "Total de unidades", value: "552" },
@@ -123,6 +124,7 @@ export const vibraProperties: Property[] = [
     delivery: "Mai/2028",
     status: "lancamento",
     address: "Rua Dias Vieira, 420 - Vila Sônia, São Paulo - SP",
+    coords: { lat: -23.59657, lng: -46.73253 },
     specs: [
       { label: "Plantas", value: "Tipo (37 a 43 m²) e Garden (~50 m²)" },
       { label: "Torres", value: "2" },
@@ -328,6 +330,7 @@ export const vibraProperties: Property[] = [
     delivery: "Nov/2028",
     status: "lancamento",
     address: "Rua Azem Abdalla, 571 - Jardim Bonfiglioli, São Paulo - SP",
+    coords: { lat: -23.58337, lng: -46.73532 },
     specs: [
       { label: "Torres", value: "2" },
       { label: "Total de unidades", value: "465" },

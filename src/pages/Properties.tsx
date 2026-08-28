@@ -6,6 +6,7 @@ import type { Property } from "@/types";
 import { Section } from "@/components/ui/Section";
 import { Seo } from "@/components/shared/Seo";
 import { PropertyCard } from "@/components/shared/PropertyCard";
+import { NearYou } from "@/components/home/NearYou";
 import { neighborhoods } from "@/data/neighborhoods";
 import { cn, maxAreaFromLabel } from "@/lib/utils";
 import {
@@ -120,11 +121,15 @@ export function Properties() {
   let cardIndex = 0;
 
   return (
-    <Section>
+    <>
       <Seo
         title="Imóveis"
         description="Empreendimentos selecionados em São Paulo, filtre por região, dormitórios e faixa de preço. Valores e disponibilidade sujeitos a alteração."
       />
+
+      <NearYou />
+
+      <Section>
 
       <p className="text-sm font-semibold uppercase tracking-wide text-accent">Imóveis</p>
       <h1 className="mt-3 font-display text-4xl font-semibold tracking-tight text-brand sm:text-5xl">
@@ -282,6 +287,7 @@ export function Properties() {
           </div>
         </div>
       )}
-    </Section>
+      </Section>
+    </>
   );
 }

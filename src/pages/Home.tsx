@@ -4,6 +4,7 @@ import { Differentials } from "@/components/home/Differentials";
 import { BuyerDiagnosis } from "@/features/buyer-diagnosis/BuyerDiagnosis";
 import { Opportunities } from "@/components/home/Opportunities";
 import { FeaturedShowcase } from "@/components/home/FeaturedShowcase";
+import { NearYou } from "@/components/home/NearYou";
 import { BuyerJourney } from "@/components/home/BuyerJourney";
 import { WhyUs } from "@/components/home/WhyUs";
 import { AboutTeaser } from "@/components/home/AboutTeaser";
@@ -37,6 +38,8 @@ export function Home() {
       <Seo title={meta.title} description={meta.description} />
 
       <Hero />
+
+      <NearYou />
 
       <FeaturedShowcase />
 

@@ -247,6 +247,7 @@ export const properties: Property[] = [
     delivery: "2029",
     status: "lancamento",
     address: "Rua Turiassú, 59 - Pacaembu, São Paulo - SP",
+    coords: { lat: -23.53499, lng: -46.66403 },
     tourUrl: "https://tour3d.piperz.io/CpWdX9aJPQb",
     specs: [
       { label: "Suítes", value: "3 e 4" },
