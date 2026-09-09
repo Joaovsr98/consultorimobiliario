@@ -34,4 +34,8 @@ export const broker: Broker = {
   // Mascote/figura amigavel exibida junto ao botao de WhatsApp.
   mascot: "/consultor-bueno.png",
   whatsappCta: "Fale com minha equipe",
+  // Enquanto nao houver CRECI proprio, o site tem carater academico/curricular.
+  // Aparece no rodape e omite o rotulo de CRECI (ver identity/Footer).
+  academicNotice:
+    "Bueno Imóveis é um projeto de caráter acadêmico e curricular. Ainda não possui registro CRECI próprio; o conteúdo é demonstrativo e não constitui oferta de corretagem.",
 };

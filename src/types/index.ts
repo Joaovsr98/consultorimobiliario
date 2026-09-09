@@ -34,6 +34,12 @@ export type Broker = {
    * usa o padrao "Falar pelo WhatsApp".
    */
   whatsappCta?: string;
+  /**
+   * Aviso de que o site tem carater ACADEMICO/CURRICULAR (enquanto o corretor
+   * nao tem CRECI proprio). Quando presente, aparece no rodape e o rotulo de
+   * CRECI e omitido, para nao passar a impressao de imobiliaria registrada.
+   */
+  academicNotice?: string;
 };
 
 export type ThemeConfig = {

@@ -12,6 +12,7 @@ function brokerToIdentity(broker: Broker): SiteIdentity {
     logo: broker.logo || undefined,
     mascot: broker.mascot || undefined,
     whatsappCta: broker.whatsappCta || "Falar pelo WhatsApp",
+    academicNotice: broker.academicNotice || undefined,
     contact: {
       phone: broker.phone || undefined,
       // Ate aqui, o unico telefone do corretor E o canal de WhatsApp.

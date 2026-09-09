@@ -69,10 +69,16 @@ export function Footer() {
       </Container>
 
       <div className="border-t border-paper/10">
-        <Container className="flex flex-col items-center justify-between gap-4 py-6 text-xs text-paper/60 sm:flex-row">
+        <Container className="py-6 text-xs text-paper/60">
+          {identity.academicNotice && (
+            <p className="mb-4 text-paper/50">{identity.academicNotice}</p>
+          )}
+          <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
           <p>
             &copy; {year} {identity.displayName}. Todos os direitos reservados.
-            {identity.registrationLabel ? ` ${identity.registrationLabel}.` : ""}
+            {identity.registrationLabel && !identity.academicNotice
+              ? ` ${identity.registrationLabel}.`
+              : ""}
             {" · "}
             <button
               type="button"
@@ -105,6 +111,7 @@ export function Footer() {
                 <MessageCircle className="size-5" />
               </a>
             )}
+          </div>
           </div>
         </Container>
       </div>

@@ -70,6 +70,8 @@ export type SiteIdentity = {
   mascot?: string;
   /** Rotulo do CTA de WhatsApp (institucional vs. pessoal). */
   whatsappCta: string;
+  /** Aviso de carater academico/curricular (rodape). Ausente nos tenants com CRECI proprio. */
+  academicNotice?: string;
   contact: ContactChannels;
 };
 
