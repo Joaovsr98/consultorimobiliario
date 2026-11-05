@@ -113,6 +113,25 @@ export function Footer() {
             )}
           </div>
           </div>
+          <a
+            href="https://www.instagram.com/inv.devs"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Desenvolvido por INV Devs (Instagram @inv.devs)"
+            className="group mt-4 inline-flex items-center gap-2.5 transition-colors hover:text-paper"
+          >
+            <img
+              src="/inv-devs.webp"
+              alt=""
+              width={30}
+              height={30}
+              loading="lazy"
+              className="size-[30px] rounded-full shadow-[0_0_14px_rgba(56,189,248,.3)] transition group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(168,85,247,.5)]"
+            />
+            <span>
+              Desenvolvido por <strong className="font-bold text-paper">INV Devs</strong>
+            </span>
+          </a>
         </Container>
       </div>
     </footer>
