@@ -1,4 +1,4 @@
-import { StrictMode } from "react";
+import { StrictMode, useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App";
 import { applyTheme } from "@/lib/theme";
@@ -17,19 +17,27 @@ captureUtm();
 // Inicializa GA4/Meta Pixel se os IDs estiverem configurados (senao, no-op).
 initAnalytics();
 
+// Remove o splash de carregamento com um fade suave, so DEPOIS que o React
+// montou o app. O render do createRoot e assincrono: um requestAnimationFrame
+// logo apos render() podia rodar antes do commit e mostrar, por ~0,5 s no
+// celular, o conteudo pre-renderizado (SEO) sem estilo. useEffect roda apos o
+// commit; o rAF espera o quadro com o app ja pintado.
+function RemoveSplash() {
+  useEffect(() => {
+    requestAnimationFrame(() => {
+      const splash = document.getElementById("splash");
+      if (!splash) return;
+      splash.classList.add("is-hidden");
+      splash.addEventListener("transitionend", () => splash.remove(), { once: true });
+      window.setTimeout(() => splash.remove(), 700);
+    });
+  }, []);
+  return null;
+}
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <App />
+    <RemoveSplash />
   </StrictMode>
 );
-
-// Remove o splash de carregamento assim que o app pinta o primeiro quadro,
-// com um fade suave. O conteudo pre-renderizado (SEO) ja foi substituido pelo
-// React neste ponto.
-requestAnimationFrame(() => {
-  const splash = document.getElementById("splash");
-  if (!splash) return;
-  splash.classList.add("is-hidden");
-  splash.addEventListener("transitionend", () => splash.remove(), { once: true });
-  window.setTimeout(() => splash.remove(), 700);
-});
