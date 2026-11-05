@@ -113,25 +113,31 @@ export function Footer() {
             )}
           </div>
           </div>
-          <a
-            href="https://www.instagram.com/inv.devs"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Desenvolvido por INV Devs (Instagram @inv.devs)"
-            className="group mt-4 inline-flex items-center gap-2.5 transition-colors hover:text-paper"
-          >
-            <img
-              src="/inv-devs.webp"
-              alt=""
-              width={30}
-              height={30}
-              loading="lazy"
-              className="size-[30px] rounded-full shadow-[0_0_14px_rgba(56,189,248,.3)] transition group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(168,85,247,.5)]"
-            />
-            <span>
-              Desenvolvido por <strong className="font-bold text-paper">INV Devs</strong>
-            </span>
-          </a>
+          {/* Crédito "Site feito por" — cartão no modelo do Bueno's House.
+              pb extra no celular: o botão flutuante "Fale com minha equipe" fica por cima. */}
+          <div className="mt-6 flex justify-center pb-20 sm:pb-0">
+            <a
+              href="https://www.instagram.com/inv.devs"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Site feito por INV Devs (abre o Instagram @inv.devs)"
+              className="group inline-flex items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-3 transition hover:border-cyan-400/40 hover:bg-white/[0.06]"
+            >
+              <img
+                src="/inv-devs.webp"
+                alt=""
+                width={56}
+                height={56}
+                loading="lazy"
+                className="size-14 rounded-full shadow-[0_0_24px_rgba(56,189,248,.35)] transition group-hover:scale-110 group-hover:shadow-[0_0_32px_rgba(168,85,247,.55)] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+              />
+              <span className="text-left leading-tight">
+                <span className="block text-[11px] uppercase tracking-[0.2em] text-paper/45">Site feito por</span>
+                <span className="block text-lg font-bold text-paper">INV Devs</span>
+                <span className="block text-xs text-cyan-300/80 transition-colors group-hover:text-cyan-200">@inv.devs no Instagram →</span>
+              </span>
+            </a>
+          </div>
         </Container>
       </div>
     </footer>
