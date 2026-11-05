@@ -55,14 +55,21 @@ export function ConsentBanner() {
           : "bottom-0 pb-[calc(1rem+env(safe-area-inset-bottom))]"
       )}
     >
-      <div className="mx-auto max-w-3xl rounded-card border border-brand/15 bg-paper p-4 shadow-[0_-8px_40px_-12px_rgba(13,27,42,0.35)] sm:p-6">
+      <div className="mx-auto max-w-3xl rounded-card border border-brand/15 bg-paper p-3 shadow-[0_-8px_40px_-12px_rgba(13,27,42,0.35)] sm:p-6">
         <div className="flex items-start gap-3">
-          <ShieldCheck className="mt-0.5 size-5 shrink-0 text-accent" aria-hidden />
+          <ShieldCheck className="mt-0.5 hidden size-5 shrink-0 text-accent sm:block" aria-hidden />
           <div className="min-w-0">
-            <h2 className="font-display text-base font-semibold text-brand">
+            <h2 className="hidden font-display text-base font-semibold text-brand sm:block">
               Sua privacidade
             </h2>
-            <p className="mt-1 text-sm leading-relaxed text-ink/70">
+            {/* Celular: versão curta para o aviso não cobrir o título e os botões da página. */}
+            <p className="text-xs leading-relaxed text-ink/75 sm:hidden">
+              Usamos cookies de medição e marketing só com a sua autorização.{" "}
+              <Link to="/privacidade" className="font-medium text-brand underline">
+                Saiba mais
+              </Link>
+            </p>
+            <p className="mt-1 hidden text-sm leading-relaxed text-ink/70 sm:block">
               Usamos cookies necessários ao funcionamento do site e, com a sua
               autorização, ferramentas de medição (Google Analytics) e de
               marketing (Meta Pixel). Você escolhe. Saiba mais na{" "}
@@ -91,7 +98,7 @@ export function ConsentBanner() {
           </div>
         )}
 
-        <div className="mt-4">
+        <div className="mt-3 sm:mt-4">
           {managing ? (
             <div className="flex justify-end">
               <button
@@ -103,8 +110,8 @@ export function ConsentBanner() {
               </button>
             </div>
           ) : (
-            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-end">
-              <div className="flex gap-2 sm:order-2">
+            <div className="flex flex-row-reverse items-center gap-2 sm:flex-row sm:justify-end">
+              <div className="flex flex-1 gap-2 sm:flex-none sm:order-2">
                 <button
                   type="button"
                   onClick={() => decide(DENIED)}
@@ -123,9 +130,10 @@ export function ConsentBanner() {
               <button
                 type="button"
                 onClick={() => setManaging(true)}
-                className={cn(buttonClasses("ghost", "sm"), "sm:order-1 sm:mr-auto")}
+                className={cn(buttonClasses("ghost", "sm"), "shrink-0 px-2 sm:order-1 sm:mr-auto sm:px-3")}
               >
-                Gerenciar preferências
+                <span className="sm:hidden">Opções</span>
+                <span className="hidden sm:inline">Gerenciar preferências</span>
               </button>
             </div>
           )}
