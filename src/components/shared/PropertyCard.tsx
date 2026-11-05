@@ -57,7 +57,7 @@ export function PropertyCard({ property, priority = false }: PropertyCardProps) 
       </div>
 
       <div className="flex flex-1 flex-col p-5">
-        <p className="flex items-center gap-1.5 text-sm text-ink/55">
+        <p className="flex items-center gap-1.5 text-sm text-ink/70">
           <MapPin className="size-3.5 shrink-0 text-accent" aria-hidden />
           {property.neighborhood} · {property.city}
         </p>
@@ -72,7 +72,7 @@ export function PropertyCard({ property, priority = false }: PropertyCardProps) 
 
         <div className="mt-4 flex flex-1 flex-col justify-end gap-3">
           {property.priceFrom !== undefined ? (
-            <p className="text-sm text-ink/60">
+            <p className="text-sm text-ink/70">
               A partir de{" "}
               <span className="font-display text-lg font-semibold text-brand">
                 {formatCurrency(property.priceFrom)}

@@ -36,7 +36,7 @@ export function PagePlaceholder({
         <p className="mt-5 text-lg leading-relaxed text-ink/70">{description}</p>
         {children}
         {phaseNote && (
-          <p className="mt-8 inline-block rounded-[var(--radius-brand)] border border-brand/10 bg-paper px-4 py-3 text-sm text-ink/60">
+          <p className="mt-8 inline-block rounded-[var(--radius-brand)] border border-brand/10 bg-paper px-4 py-3 text-sm text-ink/70">
             {phaseNote}
           </p>
         )}

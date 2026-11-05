@@ -153,7 +153,7 @@ export function Properties() {
             <SlidersHorizontal className="size-4 text-accent" aria-hidden />
             Filtrar imóveis
           </span>
-          <span className="flex items-center gap-2 text-sm text-ink/55">
+          <span className="flex items-center gap-2 text-sm text-ink/70">
             {filtered.length}
             <ChevronDown
               className={cn("size-4 transition-transform", filtersOpen && "rotate-180")}
@@ -162,7 +162,7 @@ export function Properties() {
           </span>
         </button>
         {!filtersOpen && (
-          <p className="mt-2 px-1 text-sm text-ink/60 sm:hidden">{activeSummary}</p>
+          <p className="mt-2 px-1 text-sm text-ink/70 sm:hidden">{activeSummary}</p>
         )}
 
         {/* Controles: sempre no desktop; no mobile só quando aberto */}
@@ -206,7 +206,7 @@ export function Properties() {
         </FilterRow>
 
         <div className="flex items-center justify-between border-t border-brand/10 pt-3">
-          <span className="text-sm text-ink/60">
+          <span className="text-sm text-ink/70">
             {filtered.length}{" "}
             {filtered.length === 1 ? "empreendimento" : "empreendimentos"}
           </span>
@@ -271,7 +271,7 @@ export function Properties() {
       {neighborhoods.length > 0 && (
         <div className="mt-16 border-t border-brand/10 pt-8">
           <h2 className="font-display text-xl font-semibold text-brand">Busca por região</h2>
-          <p className="mt-2 text-sm text-ink/60">
+          <p className="mt-2 text-sm text-ink/70">
             Veja apartamentos e o que a região oferece, bairro a bairro.
           </p>
           <div className="mt-4 flex flex-wrap gap-2.5">

@@ -109,7 +109,7 @@ function GoalCards({
               <Icon className="size-5" aria-hidden />
             </span>
             <span className="font-display text-base font-semibold text-brand">{goalLabels[goal]}</span>
-            <span className="text-sm leading-snug text-ink/60">{goalDescriptions[goal]}</span>
+            <span className="text-sm leading-snug text-ink/70">{goalDescriptions[goal]}</span>
           </button>
         );
       })}

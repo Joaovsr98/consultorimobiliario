@@ -119,7 +119,7 @@ export function NearYou({ id }: { id?: string }) {
           type="button"
           onClick={handleGeo}
           disabled={locating}
-          className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-ink/60 transition-colors hover:text-brand disabled:opacity-60"
+          className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-ink/70 transition-colors hover:text-brand disabled:opacity-60"
         >
           <LocateFixed className="size-4 text-accent" aria-hidden />
           {locating ? "Localizando..." : "Usar minha localização"}

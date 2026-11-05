@@ -20,7 +20,7 @@ export function GuideDetails() {
 
       <Link
         to="/guias"
-        className="inline-flex items-center gap-1.5 text-sm font-medium text-ink/60 transition-colors hover:text-brand"
+        className="inline-flex items-center gap-1.5 text-sm font-medium text-ink/70 transition-colors hover:text-brand"
       >
         <ArrowLeft className="size-4" aria-hidden />
         Voltar para guias

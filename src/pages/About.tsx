@@ -42,7 +42,7 @@ export function About() {
           {identity.displayName}
         </h1>
         {identity.registrationLabel && (
-          <p className="mt-2 text-sm font-medium text-ink/60">{identity.registrationLabel}</p>
+          <p className="mt-2 text-sm font-medium text-ink/70">{identity.registrationLabel}</p>
         )}
 
         <div className="mt-8 space-y-4 text-lg leading-relaxed text-ink/80">

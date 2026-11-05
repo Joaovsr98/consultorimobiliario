@@ -120,7 +120,7 @@ export function FeaturedShowcase() {
                   );
                 })}
               </ul>
-              <p className="mt-2 text-xs text-paper/40">Toque em um item para ver a imagem.</p>
+              <p className="mt-2 text-xs text-paper/60">Toque em um item para ver a imagem.</p>
             </>
           )}
 

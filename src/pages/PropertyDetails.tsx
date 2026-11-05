@@ -307,7 +307,7 @@ export function PropertyDetails() {
             <MapPin className="size-4 text-accent" aria-hidden />
             {mapFocus ? "Ver rota no Google Maps" : "Ver no Google Maps"}
           </a>
-          {property.address && <p className="mt-3 text-sm text-ink/60">{property.address}</p>}
+          {property.address && <p className="mt-3 text-sm text-ink/70">{property.address}</p>}
           <div ref={mapRef} className="mt-5 overflow-hidden rounded-card border border-brand/10 shadow-card">
             <iframe
               title={`Mapa de ${property.name}`}
@@ -377,7 +377,7 @@ export function PropertyDetails() {
         </p>
 
         {property.images.length === 0 && (
-          <p className="mt-8 inline-block rounded-card border border-brand/10 bg-paper px-4 py-3 text-sm text-ink/60">
+          <p className="mt-8 inline-block rounded-card border border-brand/10 bg-paper px-4 py-3 text-sm text-ink/70">
             Fotos, plantas e localização detalhada deste empreendimento chegam em breve.
           </p>
         )}

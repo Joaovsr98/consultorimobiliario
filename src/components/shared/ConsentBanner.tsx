@@ -164,7 +164,7 @@ function ToggleRow({
       />
       <span>
         <span className="block text-sm font-medium text-brand">{label}</span>
-        <span className="block text-xs text-ink/60">{desc}</span>
+        <span className="block text-xs text-ink/70">{desc}</span>
       </span>
     </label>
   );

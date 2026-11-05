@@ -59,7 +59,7 @@ export function Neighborhood() {
           <h2 className="font-display text-2xl font-semibold text-brand sm:text-3xl">
             Empreendimentos em {data.neighborhood}
           </h2>
-          <p className="mt-2 text-ink/60">
+          <p className="mt-2 text-ink/70">
             Valores e disponibilidade sujeitos a alteração.
           </p>
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
